@@ -17,25 +17,19 @@ val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = pretendard,
         fontSize = 18.sp,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.W600,
         lineHeight = 25.sp
     ),
     bodyMedium = TextStyle(
         fontFamily = pretendard,
-        fontSize = 18.sp,
-        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.W500,
         lineHeight = 25.sp
     ),
     bodySmall = TextStyle(
         fontFamily = pretendard,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W500,
         lineHeight = 22.sp
-    ),
-    labelMedium = TextStyle( //Caption
-        fontFamily = pretendard,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Normal,
-        lineHeight = 20.sp
     )
 )

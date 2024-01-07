@@ -7,4 +7,6 @@ abstract class ColorTheme {
     // Greyscale
     abstract val BLACK: Color
     abstract val G1: Color
+    abstract val G2: Color
+    abstract val WHITE: Color
 }
