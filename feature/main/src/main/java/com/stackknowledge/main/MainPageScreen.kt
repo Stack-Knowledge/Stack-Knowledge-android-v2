@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,8 +20,6 @@ import com.stackknowledge.main.component.StackKnowledgePager
 fun MainPageScreen(
     modifier: Modifier = Modifier
 ) {
-    val scrollState = rememberScrollState()
-
     StackKnowledgeAndroidTheme { colors, _ ->
         Surface(
             modifier = modifier
@@ -31,7 +27,6 @@ fun MainPageScreen(
         ) {
             Column(
                 modifier = modifier
-                    .verticalScroll(scrollState)
                     .background(color = colors.WHITE)
             ) {
                 LogoutTopBar()
