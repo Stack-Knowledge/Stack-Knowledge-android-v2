@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notice_resolve_mission_time">* 문제는 12:30 ~ 19:30분까지 풀 수 있습니다.</string>
+    <string name="mission">문제 풀기</string>
+    <string name="mileage">M</string>
+    <string name="ranking_first">1</string>
+    <string name="ranking_second">2</string>
+    <string name="ranking_third">3</string>
+    <string name="time_over">시간종료!</string>
+    <string name="mission_time_over">문제풀이 시간이 끝났습니다.</string>
+    <string name="cancel">취소</string>
+    <string name="check">확인</string>
+    <string name="accept">수락</string>
+    <string name="refusal">거절</string>
+</resources>
