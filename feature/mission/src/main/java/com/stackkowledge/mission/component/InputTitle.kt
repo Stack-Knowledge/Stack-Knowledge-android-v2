@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.textfield.InputTitleTextField
 import com.stackknowledge.design_system.component.textfield.StackKnowledgeTextField
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
@@ -44,11 +45,11 @@ fun InputTitle(
                     modifier = modifier.padding(bottom = 8.dp)
                 )
 
-                StackKnowledgeTextField(
-                    label = "문제를 작성해 주시기 바랍니다.",
+                InputTitleTextField(
                     modifier = modifier.fillMaxWidth()
                 )
 
+                Spacer(modifier = modifier.height(28.dp))
 
             }
         }

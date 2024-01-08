@@ -1,6 +1,7 @@
 package com.stackknowledge.design_system.component.textfield
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -15,11 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.design_system.theme.color.StackKnowledgeColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,15 +32,9 @@ fun StackKnowledgeTextField(
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
             value = text, onValueChange = { it },
-            modifier = modifier.background(
-                color = colors.G5,
-                shape = RoundedCornerShape(
-                    topStart = 10.dp,
-                    topEnd = 10.dp,
-                    bottomStart = 10.dp,
-                    bottomEnd = 10.dp
-                )
-            ),
+            modifier = modifier
+                .clip(shape = RoundedCornerShape(10.dp))
+                .background(color = colors.G5),
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = colors.G5,
                 focusedIndicatorColor = Color.Transparent,
@@ -71,15 +66,9 @@ fun InputTitleTextField(
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
             value = text, onValueChange = { it },
-            modifier = modifier.background(
-                color = colors.G5,
-                shape = RoundedCornerShape(
-                    topStart = 10.dp,
-                    topEnd = 10.dp,
-                    bottomStart = 10.dp,
-                    bottomEnd = 10.dp
-                )
-            ),
+            modifier = modifier
+                .clip(shape = RoundedCornerShape(10.dp))
+                .background(color = colors.G5),
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = colors.G5,
                 focusedIndicatorColor = Color.Transparent,
