@@ -31,5 +31,11 @@ val Typography = Typography(
         fontSize = 12.sp,
         fontWeight = FontWeight.W500,
         lineHeight = 22.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = pretendard,
+        fontSize = 40.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 48.sp
     )
 )
