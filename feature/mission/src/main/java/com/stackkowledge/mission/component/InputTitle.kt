@@ -52,7 +52,8 @@ fun InputTitle(
                 )
 
                 InputTitleTextField(
-                    modifier = modifier.fillMaxWidth()
+                    modifier = modifier.fillMaxWidth(),
+                    onValueChange = {}
                 )
 
                 Spacer(modifier = modifier.height(28.dp))

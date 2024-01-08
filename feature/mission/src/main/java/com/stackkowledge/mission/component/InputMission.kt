@@ -36,11 +36,12 @@ fun InputMission(
                 )
 
                 StackKnowledgeTextField(
-                    label = "문제를 작성해 주시기 바랍니다.",
+                    placeholder = "문제를 작성해 주시기 바랍니다.",
                     modifier = modifier
                         .fillMaxWidth()
                         .height(180.dp)
-                        .padding(bottom = 32.dp)
+                        .padding(bottom = 32.dp),
+                    onValueChange = {}
                 )
 
                 StackKnowledgeButton(

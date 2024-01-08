@@ -26,12 +26,14 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun StackKnowledgeTextField(
     modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit,
     placeholder: String,
 ) {
     var text by remember { mutableStateOf("") }
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
-            value = text, onValueChange = { it },
+            value = text,
+            onValueChange = { text = it; onValueChange(it)},
             modifier = modifier
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(color = colors.G5),
@@ -58,6 +60,7 @@ fun StackKnowledgeTextField(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputTitleTextField(
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var textCount by remember { mutableStateOf("0") }
@@ -65,7 +68,8 @@ fun InputTitleTextField(
 
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
-            value = text, onValueChange = { it },
+            value = text,
+            onValueChange = { text = it; onValueChange(it) },
             modifier = modifier
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(color = colors.G5),
@@ -103,5 +107,5 @@ fun InputTitleTextField(
 @Preview
 @Composable
 fun StackKnowledgeTextFieldPre() {
-    InputTitleTextField()
+  //  InputTitleTextField()
 }
