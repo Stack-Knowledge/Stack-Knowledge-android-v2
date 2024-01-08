@@ -26,7 +26,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun StackKnowledgeTextField(
     modifier: Modifier = Modifier,
-    label: String,
+    placeholder: String,
 ) {
     var text by remember { mutableStateOf("") }
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -44,9 +44,9 @@ fun StackKnowledgeTextField(
                 focusedLabelColor = colors.G5,
                 unfocusedLabelColor = colors.G5
             ),
-            label = {
+            placeholder = {
                 Text(
-                    text = label,
+                    text = placeholder,
                     color = colors.G6,
                     style = typography.bodyMedium,
                 )
@@ -79,7 +79,7 @@ fun InputTitleTextField(
                 unfocusedLabelColor = colors.G5
             ),
 
-            label = {
+            placeholder = {
                 Row {
                     Text(
                         text = "제목을 작성해 주시기 바랍니다.",

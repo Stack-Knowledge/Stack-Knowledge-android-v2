@@ -19,6 +19,7 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.CreateMissionTimer
+import com.stackkowledge.mission.component.InputMission
 import com.stackkowledge.mission.component.InputTitle
 
 @Composable
@@ -47,7 +48,8 @@ fun CreateMissionScreen(
                 }
 
                 InputTitle()
-                
+
+                InputMission()
             }
         }
     }
