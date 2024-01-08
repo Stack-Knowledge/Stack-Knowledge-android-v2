@@ -42,7 +42,9 @@ fun CreateMissionScreen(
                 Row {
                     Spacer(modifier = modifier.weight(1f))
 
-                    CreateMissionTimer()
+                    CreateMissionTimer(
+                        onValueChange = {}
+                    )
 
                     Spacer(modifier = modifier.weight(1f))
                 }

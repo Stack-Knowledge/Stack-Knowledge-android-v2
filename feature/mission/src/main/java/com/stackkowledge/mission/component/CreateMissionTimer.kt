@@ -37,6 +37,7 @@ import com.stackknowledge.design_system.R
 @Composable
 fun CreateMissionTimer(
     modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit,
 ) {
     var minute by remember { mutableStateOf("") }
     var second by remember { mutableStateOf("") }
@@ -57,7 +58,10 @@ fun CreateMissionTimer(
             TextField(
                 value = minute,
                 onValueChange = {
-                    it
+                    if (minute.length <= 2) {
+                        minute = it
+                        onValueChange(it)
+                    }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
@@ -89,7 +93,10 @@ fun CreateMissionTimer(
             TextField(
                 value = second,
                 onValueChange = {
-                    it
+                    if (second.length <= 2) {
+                        second = it
+                        onValueChange(it)
+                    }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
@@ -117,5 +124,5 @@ fun CreateMissionTimer(
 @Preview
 @Composable
 fun CreateMissionTimerPre() {
-    CreateMissionTimer()
+//    CreateMissionTimer()
 }

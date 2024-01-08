@@ -33,7 +33,7 @@ fun StackKnowledgeTextField(
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
             value = text,
-            onValueChange = { text = it; onValueChange(it)},
+            onValueChange = { text = it; onValueChange(it) },
             modifier = modifier
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(color = colors.G5),
@@ -69,7 +69,12 @@ fun InputTitleTextField(
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
             value = text,
-            onValueChange = { text = it; onValueChange(it) },
+            onValueChange = {
+                if (text.length <= 20) {
+                    text = it
+                    onValueChange(it)
+                }
+            },
             modifier = modifier
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(color = colors.G5),
@@ -82,6 +87,7 @@ fun InputTitleTextField(
                 focusedLabelColor = colors.G5,
                 unfocusedLabelColor = colors.G5
             ),
+            textStyle = typography.bodyMedium,
 
             placeholder = {
                 Row {
@@ -107,5 +113,5 @@ fun InputTitleTextField(
 @Preview
 @Composable
 fun StackKnowledgeTextFieldPre() {
-  //  InputTitleTextField()
+    //  InputTitleTextField()
 }
