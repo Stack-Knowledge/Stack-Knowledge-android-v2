@@ -1,6 +1,7 @@
 package com.stackkowledge.mission.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 import com.stackknowledge.design_system.component.textfield.StackKnowledgeTextField
 
 @Composable
@@ -38,8 +40,16 @@ fun InputMission(
                     modifier = modifier
                         .fillMaxWidth()
                         .height(180.dp)
+                        .padding(bottom = 32.dp)
                 )
 
+                StackKnowledgeButton(
+                    text = stringResource(id = R.string.submit),
+                    modifier = modifier
+                        .height(60.dp)
+                )
+
+                Spacer(modifier.height(28.dp))
             }
         }
     }

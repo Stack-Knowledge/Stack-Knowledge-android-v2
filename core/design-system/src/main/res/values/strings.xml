@@ -13,4 +13,5 @@
     <string name="accept">수락</string>
     <string name="refusal">거절</string>
     <string name="mission">문제</string>
+    <string name="submit">제출하기</string>
 </resources>

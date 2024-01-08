@@ -34,7 +34,6 @@ fun StackKnowledgeButton(
                 text = text,
                 color = colors.WHITE,
                 style = typography.headlineSmall,
-                modifier = modifier.padding(vertical = 17.dp)
             )
         }
     }
