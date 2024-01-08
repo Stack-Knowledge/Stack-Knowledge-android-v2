@@ -1,6 +1,7 @@
 package com.stackkowledge.mission.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,12 +30,17 @@ fun InputTitle(
                     .padding(horizontal = 16.dp)
             ) {
 
-                Text(
-                    text = stringResource(R.string.notice_resolve_mission_time),
-                    style = typography.bodySmall,
-                    color = colors.G2,
-                    modifier = modifier.padding(horizontal = 53.dp)
-                )
+                Row {
+                    Spacer(modifier = modifier.weight(1f))
+                    Text(
+                        text = stringResource(R.string.notice_resolve_mission_time),
+                        style = typography.bodySmall,
+                        color = colors.G2,
+                        modifier = modifier.padding(top = 8.dp)
+                    )
+                    Spacer(modifier = modifier.weight(1f))
+                }
+
 
                 Spacer(modifier = modifier.height(18.dp))
 
