@@ -11,5 +11,6 @@ object StackKnowledgeColor : ColorTheme() {
     override val G3 = Color(0x6B151515)
     override val G4 = Color(0xFFF7F9FB)
     override val G5 = Color(0xFFEBEBEB)
+    override val G6: Color = Color(0xFF6C6C6C)
     override val WHITE = Color(0xFFFFFFFF)
 }
