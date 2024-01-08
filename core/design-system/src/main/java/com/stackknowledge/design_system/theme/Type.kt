@@ -37,5 +37,11 @@ val Typography = Typography(
         fontSize = 40.sp,
         fontWeight = FontWeight.W700,
         lineHeight = 48.sp
+    ),
+    headlineMedium = TextStyle( //button_medium
+        fontFamily = pretendard,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W500,
+        lineHeight = 24.sp
     )
 )

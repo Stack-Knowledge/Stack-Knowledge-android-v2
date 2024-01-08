@@ -30,7 +30,7 @@ fun MissionList(
                 .padding(start = 16.dp, end = 16.dp)
         ) {
             Text(
-                text = stringResource(R.string.mission),
+                text = stringResource(R.string.solve_mission),
                 style = typography.bodyLarge,
                 color = colors.BLACK
             )
