@@ -74,7 +74,7 @@ fun CreateMissionTimer(
                     focusedTextColor = colors.BLACK,
                     unfocusedTextColor = colors.BLACK
                 ),
-                label = {
+                placeholder = {
                     Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
                 },
             )
@@ -106,7 +106,7 @@ fun CreateMissionTimer(
                     focusedTextColor = colors.BLACK,
                     unfocusedTextColor = colors.BLACK
                 ),
-                label = {
+                placeholder = {
                     Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
                 },
             )
