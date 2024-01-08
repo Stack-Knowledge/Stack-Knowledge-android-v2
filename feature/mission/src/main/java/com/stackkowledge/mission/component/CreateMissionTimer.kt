@@ -81,6 +81,8 @@ fun CreateMissionTimer(
                 placeholder = {
                     Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
                 },
+                textStyle = typography.headlineLarge,
+                singleLine = true
             )
 
             Text(
@@ -104,7 +106,7 @@ fun CreateMissionTimer(
                 modifier = modifier
                     .align(Alignment.CenterEnd)
                     .width(80.dp)
-                    .height(90.dp)
+                    .height(95.dp)
                     .background(color = Color.Transparent),
                 colors = TextFieldDefaults.textFieldColors(
                     containerColor = Color.Transparent,
@@ -116,6 +118,8 @@ fun CreateMissionTimer(
                 placeholder = {
                     Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
                 },
+                textStyle = typography.headlineLarge,
+                singleLine = true
             )
         }
     }

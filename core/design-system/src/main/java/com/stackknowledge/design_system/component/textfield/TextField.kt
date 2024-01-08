@@ -105,7 +105,9 @@ fun InputTitleTextField(
                         style = typography.bodyMedium,
                     )
                 }
-            }
+            },
+            singleLine = true
+
         )
     }
 }
