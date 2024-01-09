@@ -1,5 +1,6 @@
 package com.stackkowledge.mission.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -53,40 +54,57 @@ fun CreateMissionTimer(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Icon(
+            Image(
+                modifier = modifier
+                    .width(170.dp)
+                    .height(170.dp),
                 painter = painterResource(id = R.drawable.bg_limit_timer),
-                contentDescription = "타이머 주황 원"
+                contentDescription = "타이머 주황 원",
             )
             Row {
+                Box {
+                    if (minute.isNullOrEmpty()) {
+                        Text(
+                            modifier = modifier.align(Alignment.Center),
+                            text = "00",
+                            style = typography.headlineLarge,
+                            color = colors.BLACK
+                        )
+                    } else {
+                        Text(
+                            modifier = modifier.align(Alignment.Center),
+                            text = "00",
+                            style = typography.headlineLarge,
+                            color = colors.WHITE
+                        )
+                    }
 
-                TextField(
-                    value = minute,
-                    onValueChange = {
-                        if (minute.length <= 2) {
-                            minute = it
-                            onValueChange(it)
-                        }
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Done
-                    ),
-                    modifier = modifier
-                        .width(80.dp)
-                        .height(95.dp)
-                        .background(color = Color.Transparent),
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        focusedTextColor = colors.BLACK,
-                        unfocusedTextColor = colors.BLACK
-                    ),
-                    placeholder = {
-                        Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
-                    },
-                    textStyle = typography.headlineLarge,
-                    singleLine = true
-                )
+                    TextField(
+                        value = minute,
+                        onValueChange = {
+                            if (minute.length <= 2) {
+                                minute = it
+                                onValueChange(it)
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = ImeAction.Done
+                        ),
+                        modifier = modifier
+                            .width(50.dp)
+                            .height(95.dp)
+                            .background(color = Color.Transparent),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedTextColor = colors.BLACK,
+                            unfocusedTextColor = colors.BLACK
+                        ),
+                        textStyle = typography.headlineLarge,
+                        singleLine = true
+                    )
+                }
 
                 Text(
                     modifier = modifier.align(Alignment.CenterVertically),
@@ -94,35 +112,49 @@ fun CreateMissionTimer(
                     style = typography.headlineLarge,
                     color = colors.BLACK
                 )
+                Box {
+                    if (second.isNullOrEmpty()) {
+                        Text(
+                            modifier = modifier.align(Alignment.Center),
+                            text = "00",
+                            style = typography.headlineLarge,
+                            color = colors.BLACK
+                        )
+                    } else {
+                        Text(
+                            modifier = modifier.align(Alignment.Center),
+                            text = "00",
+                            style = typography.headlineLarge,
+                            color = colors.WHITE
+                        )
+                    }
+                    TextField(
+                        value = second,
+                        onValueChange = {
+                            if (second.length <= 2) {
+                                second = it
+                                onValueChange(it)
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = ImeAction.Done
+                        ),
+                        modifier = modifier
+                            .width(50.dp)
+                            .height(95.dp)
+                            .background(color = Color.Transparent),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedTextColor = colors.BLACK,
+                            unfocusedTextColor = colors.BLACK
+                        ),
+                        textStyle = typography.headlineLarge,
+                        singleLine = true
+                    )
+                }
 
-                TextField(
-                    value = second,
-                    onValueChange = {
-                        if (second.length <= 2) {
-                            second = it
-                            onValueChange(it)
-                        }
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        imeAction = ImeAction.Done
-                    ),
-                    modifier = modifier
-                        .width(80.dp)
-                        .height(95.dp)
-                        .background(color = Color.Transparent),
-                    colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        focusedTextColor = colors.BLACK,
-                        unfocusedTextColor = colors.BLACK
-                    ),
-                    placeholder = {
-                        Text(text = "00", style = typography.headlineLarge, color = colors.BLACK)
-                    },
-                    textStyle = typography.headlineLarge,
-                    singleLine = true
-                )
             }
         }
     }
