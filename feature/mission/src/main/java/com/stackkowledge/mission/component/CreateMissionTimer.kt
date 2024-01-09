@@ -29,11 +29,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.theme.pretendard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +73,7 @@ fun CreateMissionTimer(
                             modifier = modifier.align(Alignment.Center),
                             text = "00",
                             style = typography.headlineLarge,
-                            color = colors.BLACK
+                            color = colors.BLACK,
                         )
                     } else {
                         Text(
@@ -91,9 +96,11 @@ fun CreateMissionTimer(
                             imeAction = ImeAction.Done
                         ),
                         modifier = modifier
-                            .width(50.dp)
+                            .width(80.dp)
                             .height(95.dp)
-                            .background(color = Color.Transparent),
+                            .background(color = Color.Transparent)
+                            .align(Alignment.Center)
+                        ,
                         colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
@@ -101,8 +108,14 @@ fun CreateMissionTimer(
                             focusedTextColor = colors.BLACK,
                             unfocusedTextColor = colors.BLACK
                         ),
-                        textStyle = typography.headlineLarge,
-                        singleLine = true
+                        textStyle = TextStyle(
+                            fontFamily = pretendard,
+                            fontSize = 40.sp,
+                            fontWeight = FontWeight.W700,
+                            lineHeight = 48.sp,
+                            textAlign = TextAlign.Center
+                        ),
+                        singleLine = true,
                     )
                 }
 
@@ -140,9 +153,10 @@ fun CreateMissionTimer(
                             imeAction = ImeAction.Done
                         ),
                         modifier = modifier
-                            .width(50.dp)
+                            .width(80.dp)
                             .height(95.dp)
-                            .background(color = Color.Transparent),
+                            .background(color = Color.Transparent)
+                            .align(Alignment.Center),
                         colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
@@ -150,11 +164,16 @@ fun CreateMissionTimer(
                             focusedTextColor = colors.BLACK,
                             unfocusedTextColor = colors.BLACK
                         ),
-                        textStyle = typography.headlineLarge,
-                        singleLine = true
+                        textStyle = TextStyle(
+                            fontFamily = pretendard,
+                            fontSize = 40.sp,
+                            fontWeight = FontWeight.W700,
+                            lineHeight = 48.sp,
+                            textAlign = TextAlign.Center
+                        ),
+                        singleLine = true,
                     )
                 }
-
             }
         }
     }
