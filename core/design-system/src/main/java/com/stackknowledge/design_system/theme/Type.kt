@@ -13,7 +13,23 @@ val pretendard = FontFamily(
     Font(R.font.pretendard_semibold)
 )
 
+val roboto = FontFamily(
+    Font(R.font.roboto_semibold)
+)
+
 val Typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = roboto,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 28.sp
+    ),
+    titleMedium = TextStyle(
+      fontFamily = roboto,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 21.sp
+    ),
     bodyLarge = TextStyle(
         fontFamily = pretendard,
         fontSize = 18.sp,
