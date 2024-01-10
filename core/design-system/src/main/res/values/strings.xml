@@ -16,4 +16,5 @@
     <string name="refusal">거절</string>
     <string name="mission">문제</string>
     <string name="submit">제출하기</string>
+    <string name="input_answer">답안작성</string>
 </resources>
