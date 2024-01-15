@@ -24,6 +24,8 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 fun RankingList(
     modifier: Modifier = Modifier,
 ) {
+    val itemCount = 10
+    
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
             modifier = modifier
@@ -38,7 +40,7 @@ fun RankingList(
             )
             Spacer(modifier = modifier.height(19.dp))
             LazyColumn() {
-                items(10) { index ->
+                items(itemCount) { index ->
                     when(index) {
                         0 -> {
                             Box(
@@ -78,12 +80,14 @@ fun RankingList(
                                     rankingNum = "${index + 1}"
                                 )
                                 Spacer(modifier = modifier.height(5.dp))
-                                Spacer(
-                                    modifier = modifier
-                                        .height(1.dp)
-                                        .fillMaxWidth()
-                                        .background(color = colors.G1)
-                                )
+                                if(index < itemCount - 1) {
+                                    Spacer(
+                                        modifier = modifier
+                                            .height(1.dp)
+                                            .fillMaxWidth()
+                                            .background(color = colors.G1)
+                                    )
+                                }
                             }
                         }
                     }
