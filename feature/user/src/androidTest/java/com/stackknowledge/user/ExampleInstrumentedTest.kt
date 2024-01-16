@@ -1,4 +1,4 @@
-package com.stackknowledge.mylibrary
+package com.stackknowledge.user
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

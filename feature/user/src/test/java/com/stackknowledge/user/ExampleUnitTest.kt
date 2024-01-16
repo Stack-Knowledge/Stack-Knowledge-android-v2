@@ -1,4 +1,4 @@
-package com.stackknowledge.mylibrary
+package com.stackknowledge.user
 
 import org.junit.Test
 
