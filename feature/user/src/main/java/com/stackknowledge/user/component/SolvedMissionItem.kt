@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,19 +28,21 @@ fun SolvedMissionItem(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
-        Box(
+        Surface(
             modifier = modifier
+                .clip(shape = RoundedCornerShape(20.dp))
                 .background(
                     color = colors.WHITE,
-                    shape = RoundedCornerShape(20.dp)
                 )
                 .width(156.dp)
                 .height(180.dp),
-            contentAlignment = Alignment.Center
+            shadowElevation = 8.dp
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Spacer(modifier = modifier.height(28.dp))
+
                 Text(
                     text = "정영운",
                     color = colors.BLACK,
