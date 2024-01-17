@@ -27,7 +27,6 @@ fun SolvedMissionScreen(
             ) {
                 StackKnowledgeTopBar()
                 SolvedMissionList()
-            Spacer(modifier = modifier.height(116.dp))
             }
         }
     }
