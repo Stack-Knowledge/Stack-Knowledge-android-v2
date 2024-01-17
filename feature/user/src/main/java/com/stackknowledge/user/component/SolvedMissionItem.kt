@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.design_system.utils.shadow
 
 @Composable
 fun SolvedMissionItem(
@@ -100,38 +101,6 @@ fun SolvedMissionItem(
         }
     }
 }
-
-fun Modifier.shadow(
-    color: Color = Color.Black,
-    offsetX: Dp = 0.dp,
-    offsetY: Dp = 0.dp,
-    blurRadius: Dp = 0.dp,
-) = then(
-    drawBehind {
-        drawIntoCanvas { canvas ->
-            val paint = Paint()
-            val frameworkPaint = paint.asFrameworkPaint()
-            if (blurRadius != 0.dp) {
-                frameworkPaint.maskFilter =
-                    (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
-            }
-            frameworkPaint.color = color.toArgb()
-
-            val leftPixel = offsetX.toPx()
-            val topPixel = offsetY.toPx()
-            val rightPixel = size.width + topPixel
-            val bottomPixel = size.height + leftPixel
-
-            canvas.drawRect(
-                left = 0f,
-                top = 0f,
-                right = rightPixel,
-                bottom = bottomPixel,
-                paint = paint,
-            )
-        }
-    }
-)
 
 @Preview
 @Composable
