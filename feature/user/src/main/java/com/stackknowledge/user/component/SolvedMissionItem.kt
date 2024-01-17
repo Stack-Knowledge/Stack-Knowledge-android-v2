@@ -36,31 +36,22 @@ fun SolvedMissionItem(
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier
-
                 .shadow(
                     color = colors.G1,
                     offsetX = (-4).dp,
                     offsetY = (-4).dp,
                     blurRadius = 20.dp,
                 )
-                .shadow(
-                    color = colors.G1,
-                    offsetX = (4).dp,
-                    offsetY = (4).dp,
-                    blurRadius = 20.dp,
-                )
                 .zIndex(-1f)
-        )
-        {
-
+        ) {
             Box(
                 modifier = modifier
+                    .padding(bottom = 16.dp, end = 16.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(color = colors.WHITE)
                     .wrapContentWidth()
                     .height(180.dp)
                     .zIndex(1f),
-
                 contentAlignment = Alignment.Center
             ) {
 
@@ -101,6 +92,7 @@ fun SolvedMissionItem(
                             color = colors.BLACK
                         )
                     }
+                    Spacer(modifier = modifier.height(16.dp))
                 }
             }
         }
@@ -129,8 +121,8 @@ fun Modifier.shadow(
             val bottomPixel = size.height + leftPixel
 
             canvas.drawRect(
-                left = leftPixel,
-                top = topPixel,
+                left = 0f,
+                top = 0f,
                 right = rightPixel,
                 bottom = bottomPixel,
                 paint = paint,
