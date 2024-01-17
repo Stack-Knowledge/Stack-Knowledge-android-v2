@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.user.component.SolvedMissionList
 
 @Composable
 fun SolvedMissionScreen(
@@ -22,7 +23,7 @@ fun SolvedMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-
+                SolvedMissionList()
             }
         }
     }

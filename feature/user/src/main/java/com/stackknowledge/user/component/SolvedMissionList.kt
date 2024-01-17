@@ -26,9 +26,6 @@ fun SolvedMissionList(
                 .background(color = colors.WHITE)
                 .fillMaxWidth()
         ) {
-
-            Spacer(modifier = modifier.height(36.dp))
-
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
                 columns = GridCells.Fixed(2),
