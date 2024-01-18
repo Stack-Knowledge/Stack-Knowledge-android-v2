@@ -26,22 +26,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
-
 @Composable
 fun GradingRadioButton(
     isSelected: Boolean,
-    modifier: Modifier = Modifier,
     onClick: (() -> Unit)?,
 ) {
     val interactionSource = remember { mutableStateOf(MutableInteractionSource()) }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .background(color = colors.WHITE)
         ) {
-            Spacer(modifier = modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -50,20 +48,18 @@ fun GradingRadioButton(
                     text = stringResource(id = R.string.correct),
                     style = typography.bodyMedium,
                     color = colors.BLACK,
-                    modifier = modifier.padding(end = 6.dp)
+                    modifier = Modifier.padding(end = 6.dp)
                 )
 
                 Canvas(
-                    modifier = modifier
-                        .width(16.dp)
-                        .height(16.dp)
+                    modifier = Modifier
+                        .width(24.dp)
+                        .height(24.dp)
                         .clickable(
                             interactionSource = interactionSource.value,
                             indication = rememberRipple(bounded = false)
                         ) {
-                            if (onClick != null) {
-                                onClick()
-                            }
+                            onClick?.invoke()
                         }
                         .padding(end = 12.dp),
                 ) {
@@ -77,32 +73,31 @@ fun GradingRadioButton(
                     text = stringResource(id = R.string.incorrect),
                     style = typography.bodyMedium,
                     color = colors.BLACK,
-                    modifier = modifier.padding(end = 6.dp)
+                    modifier = Modifier.padding(end = 6.dp)
                 )
 
                 Canvas(
-                    modifier = modifier
-                        .width(16.dp)
-                        .height(16.dp)
+                    modifier = Modifier
+                        .width(24.dp)
+                        .height(24.dp)
                         .clickable(
                             interactionSource = interactionSource.value,
                             indication = rememberRipple(bounded = false)
                         ) {
-                            if (onClick != null) {
-                                onClick()
-                            }
+                            onClick?.invoke()
                         }
                         .padding(end = 12.dp),
                 ) {
                     drawCircle(
-                        color = if (isSelected) colors.P1 else colors.G8,
-                        style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
+                        color = if (isSelected) colors.G8 else colors.P1,
+                        style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
                     )
                 }
             }
         }
     }
 }
+
 
 @Preview
 @Composable
