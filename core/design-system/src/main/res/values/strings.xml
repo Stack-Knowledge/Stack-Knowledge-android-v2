@@ -21,4 +21,9 @@
     <string name="answer">답안</string>
     <string name="correct">정답</string>
     <string name="incorrect">오답</string>
+    <string name="current_mileage">현재 마일리지</string>
+    <string name="goods">상품</string>
+    <string name="select">선택하기</string>
+    <string name="total_amount">총금액 :</string>
+    <string name="purchase">구매하기</string>
 </resources>

@@ -60,6 +60,12 @@ val Typography = Typography(
         fontWeight = FontWeight.W500,
         lineHeight = 24.sp
     ),
+    headlineSmall = TextStyle(
+        fontFamily = pretendard,
+        fontSize = 24.sp,
+        fontWeight = FontWeight.W500,
+        lineHeight = 29.sp
+    ),
     displayMedium = TextStyle(
         fontFamily = pretendard,
         fontSize = 14.sp,
