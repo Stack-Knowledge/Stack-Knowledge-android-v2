@@ -26,74 +26,92 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+
 @Composable
 fun GradingRadioButton(
     isSelected: Boolean,
     onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier
 ) {
     val interactionSource = remember { mutableStateOf(MutableInteractionSource()) }
 
     StackKnowledgeAndroidTheme { colors, typography ->
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = colors.WHITE)
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-
+        Column(
+            modifier = modifier.padding(horizontal = 16.dp)
+        ){
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(color = colors.WHITE)
             ) {
-                Text(
-                    text = stringResource(id = R.string.correct),
-                    style = typography.bodyMedium,
-                    color = colors.BLACK,
-                    modifier = Modifier.padding(end = 6.dp)
-                )
+                Spacer(modifier = modifier.weight(1f))
 
-                Canvas(
-                    modifier = Modifier
-                        .width(24.dp)
-                        .height(24.dp)
-                        .clickable(
-                            interactionSource = interactionSource.value,
-                            indication = rememberRipple(bounded = false)
-                        ) {
-                            onClick?.invoke()
-                        }
-                        .padding(end = 12.dp),
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    drawCircle(
-                        color = if (isSelected) colors.P1 else colors.G8,
-                        style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
+                    Text(
+                        text = stringResource(id = R.string.correct),
+                        style = typography.bodyMedium,
+                        color = colors.BLACK,
+                        modifier = modifier.padding(end = 6.dp)
                     )
-                }
 
-                Text(
-                    text = stringResource(id = R.string.incorrect),
-                    style = typography.bodyMedium,
-                    color = colors.BLACK,
-                    modifier = Modifier.padding(end = 6.dp)
-                )
+                    Canvas(
+                        modifier = modifier
+                            .width(24.dp)
+                            .height(24.dp)
+                            .clickable(
+                                interactionSource = interactionSource.value,
+                                indication = rememberRipple(bounded = false)
+                            ) {
+                                onClick?.invoke()
+                            }
+                            .padding(end = 12.dp),
+                    ) {
+                        drawCircle(
+                            color = if (isSelected) colors.P1 else colors.G8,
+                            style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
+                        )
+                    }
 
-                Canvas(
-                    modifier = Modifier
-                        .width(24.dp)
-                        .height(24.dp)
-                        .clickable(
-                            interactionSource = interactionSource.value,
-                            indication = rememberRipple(bounded = false)
-                        ) {
-                            onClick?.invoke()
-                        }
-                        .padding(end = 12.dp),
-                ) {
-                    drawCircle(
-                        color = if (isSelected) colors.G8 else colors.P1,
-                        style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
+                    Text(
+                        text = stringResource(id = R.string.incorrect),
+                        style = typography.bodyMedium,
+                        color = colors.BLACK,
+                        modifier = Modifier.padding(end = 6.dp)
                     )
+
+                    Canvas(
+                        modifier = modifier
+                            .width(24.dp)
+                            .height(24.dp)
+                            .clickable(
+                                interactionSource = interactionSource.value,
+                                indication = rememberRipple(bounded = false)
+                            ) {
+                                onClick?.invoke()
+                            }
+                            .padding(end = 12.dp),
+                    ) {
+                        drawCircle(
+                            color = if (isSelected) colors.G8 else colors.P1,
+                            style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
+                        )
+                    }
                 }
             }
+
+            Spacer(modifier = modifier.weight(1f))
+
+            StackKnowledgeButton(
+                text = stringResource(id = R.string.submit),
+                modifier = modifier
+                    .height(60.dp)
+            )
+
+            Spacer(modifier = modifier.height(16.dp))
+
         }
     }
 }
