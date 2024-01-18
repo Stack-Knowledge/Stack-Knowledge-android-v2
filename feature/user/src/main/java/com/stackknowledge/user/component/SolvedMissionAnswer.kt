@@ -27,7 +27,7 @@ fun SolvedMissionAnswer(
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = stringResource(id = R.string.input_answer),
+                    text = stringResource(id = R.string.answer),
                     color = colors.BLACK,
                     style = typography.bodyLarge,
                     modifier = modifier.padding(bottom = 8.dp)
