@@ -33,7 +33,7 @@ fun SolvedMissionAnswer(
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "답안",
+                    text = stringResource(id = R.string.answer),
                     color = colors.BLACK,
                     style = typography.bodyLarge,
                     modifier = modifier.padding(bottom = 8.dp)
