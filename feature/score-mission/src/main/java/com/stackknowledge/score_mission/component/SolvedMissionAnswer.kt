@@ -1,4 +1,4 @@
-package com.stackknowledge.user.component
+package com.stackknowledge.score_mission.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
