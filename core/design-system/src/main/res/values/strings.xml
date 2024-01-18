@@ -19,4 +19,6 @@
     <string name="input_answer">답안작성</string>
     <string name="ranking">랭킹</string>
     <string name="answer">답안</string>
+    <string name="correct">정답</string>
+    <string name="incorrect">오답</string>
 </resources>

@@ -55,7 +55,8 @@ fun SolvedMissionAnswer(
                             )
                             .fillMaxWidth(),
                         text = "북학파에 대한 배경을 적고 일이 일어난 순서를 알맞게 서술하시오.",
-                        style = typography.bodyMedium, color = colors.BLACK
+                        style = typography.bodyMedium,
+                        color = colors.BLACK
                     )
                 }
                 
