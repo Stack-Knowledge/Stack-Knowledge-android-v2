@@ -18,4 +18,9 @@
     <string name="submit">제출하기</string>
     <string name="input_answer">답안작성</string>
     <string name="ranking">랭킹</string>
+    <string name="current_mileage">현재 마일리지</string>
+    <string name="goods">상품</string>
+    <string name="select">선택하기</string>
+    <string name="total_amount">총금액 :</string>
+    <string name="purchase">구매하기</string>
 </resources>
