@@ -52,7 +52,8 @@ fun StackKnowledgeTextField(
                     color = colors.G6,
                     style = typography.bodyMedium,
                 )
-            }
+            },
+            textStyle = typography.bodyMedium
         )
     }
 }
