@@ -1,4 +1,4 @@
-package com.stackknowledge.user.component
+package com.stackknowledge.score_mission.component
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.background

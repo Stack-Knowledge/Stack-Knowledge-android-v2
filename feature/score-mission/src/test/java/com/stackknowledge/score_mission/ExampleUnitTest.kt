@@ -1,4 +1,4 @@
-package com.stackknowledge.user
+package com.stackknowledge.score_mission
 
 import org.junit.Test
 
