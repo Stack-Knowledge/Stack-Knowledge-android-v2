@@ -11,7 +11,7 @@ import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
-fun TeacherShoScreen(
+fun TeacherShopScreen(
     modifier: Modifier = Modifier
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -33,5 +33,5 @@ fun TeacherShoScreen(
 @Preview
 @Composable
 fun TeacherShoScreenPre() {
-    TeacherShoScreen()
+    TeacherShopScreen()
 }

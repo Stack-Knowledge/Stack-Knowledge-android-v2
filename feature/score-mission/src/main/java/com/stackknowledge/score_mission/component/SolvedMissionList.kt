@@ -31,11 +31,10 @@ fun SolvedMissionList(
                 .padding(bottom = 116.dp)
         ) {
             LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize(),
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(
                     start = 16.dp,
-                    end = 16.dp,
                     top = 16.dp,
                 ),
             ) {
