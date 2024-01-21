@@ -26,4 +26,8 @@
     <string name="select">선택하기</string>
     <string name="total_amount">총금액 :</string>
     <string name="purchase">구매하기</string>
+    <string name="home">홈</string>
+    <string name="evaluation">채점</string>
+    <string name="create_mission">만들기</string>
+    <string name="shop">상점</string>
 </resources>
