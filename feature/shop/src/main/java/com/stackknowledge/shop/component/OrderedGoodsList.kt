@@ -1,15 +1,10 @@
-package com.stackknowledge.score_mission.component
+package com.stackknowledge.shop.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
@@ -19,16 +14,14 @@ import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
-fun SolvedMissionList(
+fun OrderedGoodsList(
     modifier: Modifier = Modifier,
 ) {
-    StackKnowledgeAndroidTheme { colors, typography ->
+    StackKnowledgeAndroidTheme { colors, _ ->
         Column(
             modifier = modifier
                 .background(color = colors.WHITE)
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .padding(bottom = 116.dp)
+                .fillMaxSize()
         ) {
             LazyVerticalGrid(
                 modifier = modifier.fillMaxSize(),
@@ -40,7 +33,7 @@ fun SolvedMissionList(
             ) {
                 items(10) {
                     Box {
-                        SolvedMissionItem()
+                        OrderedGoodsItem()
                     }
                 }
             }
@@ -50,6 +43,6 @@ fun SolvedMissionList(
 
 @Preview
 @Composable
-fun SolvedMissionListPre() {
-    SolvedMissionList()
+fun OrderedGoodsListPre() {
+    OrderedGoodsList()
 }
