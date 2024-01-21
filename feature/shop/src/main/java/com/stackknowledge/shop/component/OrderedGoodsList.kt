@@ -33,7 +33,7 @@ fun OrderedGoodsList(
             ) {
                 items(10) {
                     Box {
-
+                        OrderedGoodsItem()
                     }
                 }
             }
