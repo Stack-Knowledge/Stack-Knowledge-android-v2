@@ -24,4 +24,6 @@ dependencies {
     implementation(project(":feature:ranking"))
     implementation(project(":feature:score-mission"))
     implementation(project(":feature:shop"))
+    implementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext)
 }
