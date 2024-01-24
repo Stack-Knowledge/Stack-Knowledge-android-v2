@@ -29,8 +29,6 @@ fun TeacherShopScreen(
             ) {
                 StackKnowledgeTopBar()
 
-                Spacer(modifier = modifier.height(44.dp))
-
                 OrderedGoodsList()
             }
         }
