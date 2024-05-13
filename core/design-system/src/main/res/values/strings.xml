@@ -30,4 +30,5 @@
     <string name="evaluation">채점</string>
     <string name="create_mission">만들기</string>
     <string name="shop">상점</string>
+    <string name="check_role">사용자가 학생인지\n선생님인지 선택해주세요.</string>
 </resources>
