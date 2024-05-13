@@ -8,4 +8,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/res/
+/app/src/main/res/*
