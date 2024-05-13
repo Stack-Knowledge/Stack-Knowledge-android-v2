@@ -8,4 +8,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/res/mipmap/
+/app/src/main/res
