@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Stack Knowledge</string>
+    <string name="google_login">Google계정으로 로그인하기</string>
+    <string name="notice_resolve_mission_time">* 문제는 12:30 ~ 19:30분까지 풀 수 있습니다.</string>
+    <string name="solve_mission">문제 풀기</string>
+    <string name="mileage">M</string>
+    <string name="ranking_first">1</string>
+    <string name="ranking_second">2</string>
+    <string name="ranking_third">3</string>
+    <string name="time_over">시간종료!</string>
+    <string name="mission_time_over">문제풀이 시간이 끝났습니다.</string>
+    <string name="cancel">취소</string>
+    <string name="check">확인</string>
+    <string name="accept">수락</string>
+    <string name="refusal">거절</string>
+    <string name="mission">문제</string>
+    <string name="submit">제출하기</string>
+    <string name="input_answer">답안작성</string>
+    <string name="ranking">랭킹</string>
+    <string name="answer">답안</string>
+    <string name="correct">정답</string>
+    <string name="incorrect">오답</string>
+    <string name="current_mileage">현재 마일리지</string>
+    <string name="goods">상품</string>
+    <string name="select">선택하기</string>
+    <string name="total_amount">총금액 :</string>
+    <string name="purchase">구매하기</string>
+    <string name="home">홈</string>
+    <string name="evaluation">채점</string>
+    <string name="create_mission">만들기</string>
+    <string name="shop">상점</string>
+</resources>
