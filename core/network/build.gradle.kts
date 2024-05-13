@@ -14,9 +14,12 @@ android {
 
     defaultConfig {
         buildConfigField("String", "BASE_URL",  getApiKey("BASE_URL"))
+        buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("GOOGLE_CLIENT_ID"))
+        buildConfigField("String", "REDIRECT_URI", getApiKey("REDIRECT_URI"))
+        buildConfigField("String", "SCOPE", getApiKey("SCOPE"))
     }
 
-    namespace = "com.msg.network"
+    namespace = "com.stackknowledge.network"
 }
 
 dependencies {
