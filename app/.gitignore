@@ -1,2 +1,7 @@
 /build
-/app/src/res/*
+/app/src/res/mipmap-anydpi/*
+/app/src/res/mipmap-hdpi/*
+/app/src/res/mipmap-mdpi/*
+/app/src/res/mipmap-xdpi/*
+/app/src/res/mipmap-xxdpi/*
+/app/src/res/mipmap-xxxdpi/*
