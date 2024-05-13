@@ -18,14 +18,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.GoogleButton
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.login.background.LoginBackground
+import com.stackknowledge.login.background.StackKnowledgeBackground
+import com.stackknowledge.login.navigation.loginRoute
+import com.stackknowledge.login.viewmodel.AuthViewModel
+
+@Composable
+fun LoginRoute(
+    // googleLogin: () -> Unit,
+    viewModel: AuthViewModel = hiltViewModel()
+) {
+    LoginScreen()
+}
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    googleLogin: () -> Unit = {}
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -33,7 +45,7 @@ fun LoginScreen(
                 modifier = modifier.fillMaxSize()
             ) {
                 Box() {
-                    LoginBackground()
+                    StackKnowledgeBackground()
                     Column(
                         modifier = modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -59,7 +71,8 @@ fun LoginScreen(
                                 .padding(horizontal = 16.dp)
                         ) {
                             GoogleButton(
-                                modifier = modifier.height(60.dp)
+                                modifier = modifier.height(60.dp),
+                                onClick = googleLogin
                             )
                         }
                     }
