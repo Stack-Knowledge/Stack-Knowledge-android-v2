@@ -8,8 +8,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.stackknowledge.login.navigation.loginRoute
 import com.stackknowledge.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
 
@@ -17,7 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 fun rememberStackKnowledgeAppState(
     windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-    navController: NavController = rememberNavController(),
+    navController: NavHostController = rememberNavController(),
 ): StackKnowledgeAppState {
     return remember(
         navController,
@@ -34,7 +36,7 @@ fun rememberStackKnowledgeAppState(
 
 @Stable
 class StackKnowledgeAppState(
-    val navController: NavController,
+    val navController: NavHostController,
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass
 ) {
@@ -44,7 +46,7 @@ class StackKnowledgeAppState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when(currentDestination?.route) {
-            // loginRoute 작성
+            loginRoute -> TopLevelDestination.LOGIN
             else -> null
         }
 
