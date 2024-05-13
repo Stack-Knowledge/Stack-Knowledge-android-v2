@@ -24,11 +24,12 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun GoogleButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Button(
-            onClick = {},
+            onClick = onClick,
             modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(10.dp))
