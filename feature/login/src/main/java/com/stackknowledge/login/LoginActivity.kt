@@ -37,7 +37,7 @@ class LoginActivity : ComponentActivity() {
 
     private fun googleSignIn() {
         //val url = "https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?ei5r49r2ou9pflsn9bas5hvj4c13uroq.apps.googleusercontent.com&response_type=code&redirect_uri=http://localhost:3001/auth/login&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&client_id=853689307201-a3q5ep5c2ld77rqblsg3svk78i7sr2oa.apps.googleusercontent.com"
-        val url = "https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?ei5r49r2ou9pflsn9bas5hvj4c13uroq.apps.googleusercontent.com&response_type=code&redirect_uri=${BuildConfig.REDIRECT_URI}&scope=${BuildConfig.FIRST_SCOPE}&client_id=${BuildConfig.GOOGLE_CLIENT_ID}"
+        val url = "https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?ei5r49r2ou9pflsn9bas5hvj4c13uroq.apps.googleusercontent.com&response_type=code&redirect_uri=${BuildConfig.REDIRECT_URI}&scope=${BuildConfig.SCOPE}&client_id=${BuildConfig.GOOGLE_CLIENT_ID}"
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
         Log.d("google_login",url)
