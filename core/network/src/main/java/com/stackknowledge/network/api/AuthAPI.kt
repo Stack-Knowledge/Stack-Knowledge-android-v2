@@ -27,7 +27,7 @@ interface AuthAPI {
         @Url url: String = "https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount",
         @Query("response_type") code: String,
         @Query("redirect_uri") redirectUri: String = BuildConfig.REDIRECT_URI,
-        @Query("scope") scope: String = BuildConfig.FIREST_SCOPE + BuildConfig.SECOND_SCOPE,
+        @Query("scope") scope: String = BuildConfig.SCOPE,
         @Query("client_id") clientId: String = BuildConfig.GOOGLE_CLIENT_ID
     ): AuthCodeResponse
 }
