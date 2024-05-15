@@ -15,7 +15,7 @@ import javax.inject.Inject
 class StudentDataSourceImpl @Inject constructor(
     private val studentAPI: StudentAPI,
 ) : StudentDataSource {
-    override suspend fun getStudentPointRanking(): Flow<List<GetStudentPointRankingResponse>> =
+    override fun getStudentPointRanking(): Flow<List<GetStudentPointRankingResponse>> =
         flow {
             emit(
                 StackKnowledgeApiHandler<List<GetStudentPointRankingResponse>>()
@@ -24,7 +24,7 @@ class StudentDataSourceImpl @Inject constructor(
             )
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun getMyInformation(): Flow<GetMyInformationResponse> = flow {
+    override fun getMyInformation(): Flow<GetMyInformationResponse> = flow {
         emit(
             StackKnowledgeApiHandler<GetMyInformationResponse>()
                 .httpRequest { studentAPI.getMyInformation() }
@@ -32,7 +32,7 @@ class StudentDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> = flow {
+    override fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> = flow {
         emit(
             StackKnowledgeApiHandler<UploadProfileImageResponse>()
                 .httpRequest { studentAPI.uploadProfileImage(body = body) }

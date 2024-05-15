@@ -7,7 +7,7 @@ import remote.response.student.GetStudentPointRankingResponse
 import remote.response.student.UploadProfileImageResponse
 
 interface StudentRepository {
-    suspend fun getStudentPointRaking(): Flow<List<GetStudentPointRankingResponse>>
-    suspend fun getMyInformation(): Flow<GetMyInformationResponse>
-    suspend fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse>
+    fun getStudentPointRaking(): Flow<List<GetStudentPointRankingResponse>>
+    fun getMyInformation(): Flow<GetMyInformationResponse>
+    fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse>
 }

@@ -11,15 +11,15 @@ import javax.inject.Inject
 class StudentRepositoryImpl @Inject constructor(
     private val studentDataSource: StudentDataSource,
 ) : StudentRepository {
-    override suspend fun getStudentPointRaking(): Flow<List<GetStudentPointRankingResponse>> {
+    override fun getStudentPointRaking(): Flow<List<GetStudentPointRankingResponse>> {
         return studentDataSource.getStudentPointRanking()
     }
 
-    override suspend fun getMyInformation(): Flow<GetMyInformationResponse> {
+    override fun getMyInformation(): Flow<GetMyInformationResponse> {
         return studentDataSource.getMyInformation()
     }
 
-    override suspend fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> {
+    override fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> {
         return studentDataSource.uploadProfileImage(
             body = body
         )
