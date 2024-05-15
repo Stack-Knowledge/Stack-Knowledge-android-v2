@@ -7,7 +7,7 @@ import javax.inject.Inject
 class UploadProfileImageUseCase @Inject constructor(
     private val studentRepository: StudentRepository
 ) {
-    suspend operator fun invoke(body: UploadProfileImageRequest) = runCatching {
+    operator fun invoke(body: UploadProfileImageRequest) {
         studentRepository.uploadProfileImage(
             body = body
         )

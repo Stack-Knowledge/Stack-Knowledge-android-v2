@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetMyInformationUseCase @Inject constructor(
     private val studentRepository: StudentRepository
 ) {
-    suspend operator fun invoke() = runCatching {
+    operator fun invoke() {
         studentRepository.getMyInformation()
     }
 }

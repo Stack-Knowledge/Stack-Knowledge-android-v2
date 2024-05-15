@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetStudentPointRankingUseCase @Inject constructor(
     private val studentRepository: StudentRepository
 ) {
-    suspend operator fun invoke() = runCatching {
+    operator fun invoke() {
         studentRepository.getStudentPointRaking()
     }
 }
