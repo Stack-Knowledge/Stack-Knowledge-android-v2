@@ -8,5 +8,5 @@ import java.util.UUID
 data class User(
     @Json(name = "id") val id: UUID,
     @Json(name = "name") val name: String,
-    @Json(name = "profileImage") val profileImage: String,
+    @Json(name = "profileImage") val profileImage: String?,
 )
