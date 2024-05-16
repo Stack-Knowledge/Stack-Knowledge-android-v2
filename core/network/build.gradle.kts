@@ -30,7 +30,6 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
-    //implementation(libs.retrofit.gson.converter) Gson 사용 여부 협의후 삭제
     implementation(libs.retrofit.moshi.converter)
     implementation(libs.moshi)
     ksp(libs.retrofit.moshi.codegen)
