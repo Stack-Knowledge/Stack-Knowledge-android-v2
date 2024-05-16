@@ -21,4 +21,10 @@ interface UserAPI {
 
     @GET("/user/teacher")
     suspend fun getRequestSignUpTeacher(): List<GetRequestSignUpTeacherResponse>
+
+    @POST("/user/scoring/{solve_id}")
+    suspend fun scoreSolveMission(
+        @Path("solve_id") solveId: UUID,
+        @Body body: ScoreRequest,
+    )
 }
