@@ -12,4 +12,9 @@ import java.util.UUID
 interface UserAPI {
     @GET("/user/scoring")
     suspend fun getSolvedMission(): List<GetSolveMissionResponse>
+
+    @GET("/user/scoring/{solve_id}")
+    suspend fun getDetailSolveMission(
+        @Path("solve_id") solveId: UUID,
+    ): DetailSolveMissionResponse
 }
