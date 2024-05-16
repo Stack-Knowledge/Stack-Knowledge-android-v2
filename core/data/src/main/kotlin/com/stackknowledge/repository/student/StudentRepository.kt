@@ -1,4 +1,4 @@
-package com.stackknowledge.repository
+package com.stackknowledge.repository.student
 
 import kotlinx.coroutines.flow.Flow
 import remote.request.student.UploadProfileImageRequest

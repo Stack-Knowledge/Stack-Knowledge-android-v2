@@ -1,7 +1,7 @@
 package com.stackknowledge.di
 
-import com.stackknowledge.repository.StudentRepository
-import com.stackknowledge.repository.StudentRepositoryImpl
+import com.stackknowledge.repository.student.StudentRepository
+import com.stackknowledge.repository.student.StudentRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

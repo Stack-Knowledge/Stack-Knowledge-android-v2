@@ -1,4 +1,4 @@
-package com.stackknowledge.repository
+package com.stackknowledge.repository.student
 
 import com.stackknowledge.datasource.student.StudentDataSource
 import kotlinx.coroutines.flow.Flow
