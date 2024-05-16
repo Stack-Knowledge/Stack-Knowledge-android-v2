@@ -7,5 +7,5 @@ fun GetRequestSignUpTeacherResponse.toModel(): GetRequestSignUpTeacherResponseMo
     GetRequestSignUpTeacherResponseModel(
         userId = this.userId,
         name = this.name,
-        createdAt = this.createdAt
+        createdAt = this.createdAt,
     )

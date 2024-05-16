@@ -36,14 +36,14 @@ class UserRepositoryImpl @Inject constructor(
     override fun scoreSolveMission(solveId: UUID, body: ScoreRequestModel): Flow<Unit> {
         return userDataSource.scoreSolveMission(
             solveId = solveId,
-            body = body.toDto()
+            body = body.toDto(),
         )
     }
 
     override fun signUpApprove(userId: UUID, body: ApproveRequestModel): Flow<Unit> {
         return userDataSource.signUpApprove(
             userId = userId,
-            body = body.toDto()
+            body = body.toDto(),
         )
     }
 }

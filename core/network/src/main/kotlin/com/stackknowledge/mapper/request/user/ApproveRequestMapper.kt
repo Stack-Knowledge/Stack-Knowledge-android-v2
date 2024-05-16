@@ -5,5 +5,5 @@ import remote.request.user.ApproveRequestModel
 
 fun ApproveRequestModel.toDto(): ApproveRequest =
     ApproveRequest(
-        approveStatus = this.approveStatus
+        approveStatus = this.approveStatus,
     )

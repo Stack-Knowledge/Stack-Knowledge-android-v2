@@ -9,5 +9,5 @@ import java.util.UUID
 data class DetailSolveMissionResponse(
     @Json(name = "solveId") val solveId: UUID,
     @Json(name = "title") val title: String,
-    @Json(name = "solution") val solution: String
+    @Json(name = "solution") val solution: String,
 )

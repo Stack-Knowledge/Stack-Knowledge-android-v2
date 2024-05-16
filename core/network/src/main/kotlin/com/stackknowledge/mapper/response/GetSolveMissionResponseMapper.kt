@@ -10,5 +10,5 @@ fun GetSolveMissionResponse.toModel(): GetSolveMissionResponseModel =
         solveStatus = this.solveStatus,
         title = this.title,
         point = this.point,
-        user = this.user.toModel()
+        user = this.user.toModel(),
     )

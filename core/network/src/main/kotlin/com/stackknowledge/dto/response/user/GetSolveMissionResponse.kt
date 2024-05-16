@@ -11,5 +11,5 @@ data class GetSolveMissionResponse(
     @Json(name = "solveStatus") val solveStatus: String,
     @Json(name = "title") val title: String,
     @Json(name = "point") val point: Int,
-    @Json(name = "user") val user: User
+    @Json(name = "user") val user: User,
 )

@@ -5,5 +5,5 @@ import remote.request.user.ScoreRequestModel
 
 fun ScoreRequestModel.toDto(): ScoreRequest =
     ScoreRequest(
-        solveStatus = this.solveStatus
+        solveStatus = this.solveStatus,
     )

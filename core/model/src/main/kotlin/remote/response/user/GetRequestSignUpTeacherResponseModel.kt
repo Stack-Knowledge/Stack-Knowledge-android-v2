@@ -6,5 +6,5 @@ import java.util.UUID
 data class GetRequestSignUpTeacherResponseModel(
     val userId: UUID,
     val name: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 )

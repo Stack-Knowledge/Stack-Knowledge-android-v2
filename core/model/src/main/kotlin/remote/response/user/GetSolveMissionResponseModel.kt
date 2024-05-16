@@ -8,5 +8,5 @@ data class GetSolveMissionResponseModel(
     val solveStatus: String,
     val title: String,
     val point: Int,
-    val user: UserModel
+    val user: UserModel,
 )

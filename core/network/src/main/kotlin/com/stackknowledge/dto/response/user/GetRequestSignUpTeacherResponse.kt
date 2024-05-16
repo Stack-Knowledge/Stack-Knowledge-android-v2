@@ -9,5 +9,5 @@ import java.util.UUID
 data class GetRequestSignUpTeacherResponse(
     @Json(name = "userId") val userId: UUID,
     @Json(name = "name") val name: String,
-    @Json(name = "createdAt") val createdAt: LocalDateTime
+    @Json(name = "createdAt") val createdAt: LocalDateTime,
 )

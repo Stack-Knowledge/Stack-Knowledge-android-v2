@@ -4,5 +4,5 @@ import java.util.UUID
 data class DetailSolveMissionResponseModel(
     val solveId: UUID,
     val title: String,
-    val solution: String
+    val solution: String,
 )

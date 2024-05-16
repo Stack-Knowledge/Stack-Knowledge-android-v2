@@ -7,5 +7,5 @@ fun User.toModel(): UserModel =
     UserModel(
         id = this.id,
         name = this.name,
-        profileImage = this.profileImage
+        profileImage = this.profileImage,
     )

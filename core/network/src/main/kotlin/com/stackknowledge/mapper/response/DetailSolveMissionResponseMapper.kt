@@ -7,5 +7,5 @@ fun DetailSolveMissionResponse.toModel(): DetailSolveMissionResponseModel =
     DetailSolveMissionResponseModel(
         solveId = this.solveId,
         title = this.title,
-        solution = this.solution
+        solution = this.solution,
     )
