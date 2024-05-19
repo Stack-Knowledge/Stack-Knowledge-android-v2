@@ -1,4 +1,4 @@
-package com.stackknowledge.exception
+package com.example.common.exception
 
 import java.io.IOException
 

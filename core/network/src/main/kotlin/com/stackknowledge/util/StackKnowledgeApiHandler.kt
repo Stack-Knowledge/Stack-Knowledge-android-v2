@@ -3,7 +3,7 @@ package com.stackknowledge.util
 import android.net.http.NetworkException
 import android.os.Build
 import androidx.annotation.RequiresExtension
-import com.stackknowledge.exception.*
+import com.example.common.exception.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

@@ -1,4 +1,4 @@
-package com.stackknowledge.exception
+package com.example.common.exception
 
 class BadRequestException(
     override val message: String?
