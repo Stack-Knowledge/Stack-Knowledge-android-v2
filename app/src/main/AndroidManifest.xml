@@ -34,8 +34,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="com.stackknowledge_android"
-                    android:scheme="https" />
+                    android:scheme="http"
+                    android:host="localhost"
+                    android:port="3001"
+                    android:pathPrefix="/auth/login"/>
             </intent-filter>
         </activity>
 
