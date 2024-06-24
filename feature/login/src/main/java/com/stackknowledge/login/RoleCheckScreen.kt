@@ -1,7 +1,7 @@
 package com.stackknowledge.login
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import com.stackknowledge.design_system.R
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ fun RoleCheckScreen(
                 Spacer(modifier = modifier.height(260.dp))
 
                 Text(
-                    text = "사용자가 학생인지 \n" + "선생님인지 선택해주세요.",
+                    text = stringResource(id = R.string.select_role_text),
                     style = typography.titleMedium,
                     color = colors.BLACK,
                     textAlign = TextAlign.Center
@@ -52,7 +53,7 @@ fun RoleCheckScreen(
                     modifier = modifier.fillMaxWidth()
                 ) {
                     StackKnowledgeButton(
-                        text = "학생",
+                        text = stringResource(id = R.string.student),
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f)
@@ -61,7 +62,7 @@ fun RoleCheckScreen(
                     Spacer(modifier = modifier.width(8.dp))
 
                     StackKnowledgeButton(
-                        text = "선생님",
+                        text = stringResource(id = R.string.teacher),
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f)
