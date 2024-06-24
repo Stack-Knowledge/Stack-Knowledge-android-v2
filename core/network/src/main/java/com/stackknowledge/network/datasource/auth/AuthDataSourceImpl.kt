@@ -2,7 +2,6 @@ package com.stackknowledge.network.datasource.auth
 
 import com.stackknowledge.model.remote.enumdatatype.Authority
 import com.stackknowledge.model.remote.request.auth.LoginRequest
-import com.stackknowledge.model.remote.response.auth.AuthCodeResponse
 import com.stackknowledge.model.remote.response.auth.LoginResponse
 import com.stackknowledge.network.api.AuthAPI
 import com.stackknowledge.network.util.StackKnowledgeApiHandler
@@ -17,7 +16,7 @@ class AuthDataSourceImpl @Inject constructor(
 ) : AuthDataSource {
     override suspend fun login(
         body: LoginRequest,
-        role: Authority
+        role: String
     ): Flow<LoginResponse> = flow {
         emit(
             StackKnowledgeApiHandler<LoginResponse>()
@@ -35,14 +34,6 @@ class AuthDataSourceImpl @Inject constructor(
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { authAPI.logout() }
-                .sendRequest()
-        )
-    }.flowOn(Dispatchers.IO)
-
-    override suspend fun requestAuthCode(code: String): Flow<AuthCodeResponse> = flow {
-        emit(
-            StackKnowledgeApiHandler<AuthCodeResponse>()
-                .httpRequest { authAPI.requestAuthCode(code = code) }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)

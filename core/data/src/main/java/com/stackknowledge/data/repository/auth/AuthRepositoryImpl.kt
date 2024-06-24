@@ -3,7 +3,6 @@ package com.stackknowledge.data.repository.auth
 import com.stackknowledge.datastore.LocalAuthDataSource
 import com.stackknowledge.model.remote.enumdatatype.Authority
 import com.stackknowledge.model.remote.request.auth.LoginRequest
-import com.stackknowledge.model.remote.response.auth.AuthCodeResponse
 import com.stackknowledge.model.remote.response.auth.LoginResponse
 import com.stackknowledge.network.datasource.auth.AuthDataSource
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +14,7 @@ class AuthRepositoryImpl @Inject constructor(
 ): AuthRepository {
     override suspend fun login(
         body: LoginRequest,
-        role: Authority
+        role: String
     ): Flow<LoginResponse> {
         return authDataSource.login(
             body = body,
@@ -35,9 +34,5 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun logout(): Flow<Unit> {
         return authDataSource.logout()
-    }
-
-    override suspend fun requestAuthCode(code: String): Flow<AuthCodeResponse> {
-        return authDataSource.requestAuthCode(code = code)
     }
 }

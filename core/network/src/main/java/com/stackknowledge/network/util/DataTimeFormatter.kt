@@ -1,21 +1,18 @@
 package com.stackknowledge.network.util
 
-import android.annotation.SuppressLint
-import com.stackknowledge.network.exception.NeedLoginException
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
-@SuppressLint("SimpleDateFormat")
-fun String.toDate(): Date {
-    kotlin.runCatching {
-        SimpleDateFormat("yyyy-MM-dd`T`HH:mm:ss").parse(this)!!
-    }.onSuccess {
-        return it
+fun Any?.toLocalDateTime(): LocalDateTime? {
+    val dateString = this?.toString()
+    if (dateString != null) {
+        return try {
+            LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm:ss"))
+        } catch (e: DateTimeParseException) {
+            e.printStackTrace()
+            null
+        }
     }
-    throw NeedLoginException()
-}
-
-@SuppressLint("SimpleDateFormat")
-fun Long.toLocalDateTime(): Date {
-    return SimpleDateFormat("yyyy-MM-dd`T`HH:mm:ss").format(this).toDate()
+    return null
 }

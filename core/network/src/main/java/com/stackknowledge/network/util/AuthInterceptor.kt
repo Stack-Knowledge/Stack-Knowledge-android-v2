@@ -39,30 +39,34 @@ class AuthInterceptor @Inject constructor(
                 return@runBlocking
             }
 
-            if (currentTime.after(refreshTime.toDate())) {
-                throw NeedLoginException()
+            if (currentTime != null) {
+                if (currentTime.isAfter(refreshTime.toLocalDateTime())) {
+                    throw NeedLoginException()
+                }
             }
 
             // access 토큰 재 발급
-            if (currentTime.after(accessTime.toDate())) {
-                val client = OkHttpClient()
-                val refreshRequest = Request.Builder()
-                    .url(BuildConfig.BASE_URL + "/auth")
-                    .patch(chain.request().body ?: RequestBody.create(null, byteArrayOf()))
-                    .addHeader(
-                        "Refresh-Token",
-                        dataSource.getRefreshToken().first().replace("\"", "")
-                    )
-                    .build()
-                val jsonParser = JsonParser()
-                val response = client.newCall(refreshRequest).execute()
-                if (response.isSuccessful) {
-                    val token = jsonParser.parse(response.body!!.string()) as JsonObject
-                    dataSource.setAccessToken(token["accessToken"].toString())
-                    dataSource.setRefreshToken(token["refreshToken"].toString())
-                    dataSource.setAccessTime(token["expiredAt"].toString())
-                    dataSource.setRefreshTime(token["expiredAt"].toString())
-                } else throw NeedLoginException()
+            if (currentTime != null) {
+                if (currentTime.isAfter(accessTime.toLocalDateTime())) {
+                    val client = OkHttpClient()
+                    val refreshRequest = Request.Builder()
+                        .url(BuildConfig.BASE_URL + "/auth")
+                        .patch(chain.request().body ?: RequestBody.create(null, byteArrayOf()))
+                        .addHeader(
+                            "Refresh-Token",
+                            dataSource.getRefreshToken().first().replace("\"", "")
+                        )
+                        .build()
+                    val jsonParser = JsonParser()
+                    val response = client.newCall(refreshRequest).execute()
+                    if (response.isSuccessful) {
+                        val token = jsonParser.parse(response.body!!.string()) as JsonObject
+                        dataSource.setAccessToken(token["accessToken"].toString())
+                        dataSource.setRefreshToken(token["refreshToken"].toString())
+                        dataSource.setAccessTime(token["expiredAt"].toString())
+                        dataSource.setRefreshTime(token["expiredAt"].toString())
+                    } else throw NeedLoginException()
+                }
             }
             val accessToken = dataSource.getAccessToken().first().replace("\"", "")
             builder.addHeader("Authorization", "Bearer $accessToken")
