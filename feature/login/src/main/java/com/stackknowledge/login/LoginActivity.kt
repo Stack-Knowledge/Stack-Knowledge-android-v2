@@ -17,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.login.navigation.roleCheckRoute
 import com.stackknowledge.login.viewmodel.AuthViewModel
 import com.stackknowledge.model.remote.enumdatatype.Authority
 import com.stackknowledge.model.remote.request.auth.LoginRequest
