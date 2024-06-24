@@ -10,7 +10,7 @@ class LoginUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         body: LoginRequest,
-        role: Authority
+        role: String
     ) = runCatching {
         authRepository.login(
             body = body,
