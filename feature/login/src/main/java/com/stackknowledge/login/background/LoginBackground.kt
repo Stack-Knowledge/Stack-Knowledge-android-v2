@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.stackknowledge.design_system.R
 
 @Composable
-fun StackKnowledgeBackground(
+fun LoginBackground(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -43,6 +43,6 @@ fun StackKnowledgeBackground(
 
 @Preview
 @Composable
-fun StackKnowledgeBackgroundPre() {
-    StackKnowledgeBackground()
+fun LoginBackgroundPre() {
+    LoginBackground()
 }
