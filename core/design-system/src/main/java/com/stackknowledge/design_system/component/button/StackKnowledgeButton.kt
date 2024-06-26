@@ -17,11 +17,12 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun StackKnowledgeButton(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
     text: String,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Button(
-            onClick = {},
+            onClick = { onClick() },
             modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(10.dp))
