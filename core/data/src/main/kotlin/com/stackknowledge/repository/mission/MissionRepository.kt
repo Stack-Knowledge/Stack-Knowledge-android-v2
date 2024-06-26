@@ -4,10 +4,10 @@ import kotlinx.coroutines.flow.Flow
 import remote.request.mission.CreateMissionRequestModel
 import remote.request.mission.DetailMissionRequestModel
 import remote.response.mission.DetailMissionResponseModel
-import remote.response.mission.MissionResponse
+import remote.response.mission.MissionResponseModel
 
 interface MissionRepository {
-    suspend fun getMission(): Flow<MissionResponse>
+    suspend fun getMission(): Flow<MissionResponseModel>
 
     suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel>
 

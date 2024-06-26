@@ -5,13 +5,13 @@ import kotlinx.coroutines.flow.Flow
 import remote.request.mission.CreateMissionRequestModel
 import remote.request.mission.DetailMissionRequestModel
 import remote.response.mission.DetailMissionResponseModel
-import remote.response.mission.MissionResponse
+import remote.response.mission.MissionResponseModel
 import javax.inject.Inject
 
 class MissionRepositoryImpl @Inject constructor(
     private val missionDataSource: MissionDataSource
 ): MissionRepository {
-    override suspend fun getMission(): Flow<MissionResponse> {
+    override suspend fun getMission(): Flow<MissionResponseModel> {
         return missionDataSource.getMission()
     }
 

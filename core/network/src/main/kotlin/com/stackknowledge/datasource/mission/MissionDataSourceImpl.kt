@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.flowOn
 import remote.request.mission.CreateMissionRequestModel
 import remote.request.mission.DetailMissionRequestModel
 import remote.response.mission.DetailMissionResponseModel
-import remote.response.mission.MissionResponse
+import remote.response.mission.MissionResponseModel
 import javax.inject.Inject
 
 class MissionDataSourceImpl @Inject constructor(
     private val missionAPI: MissionAPI
 ) : MissionDataSource {
-    override suspend fun getMission(): Flow<MissionResponse> = flow {
+    override suspend fun getMission(): Flow<MissionResponseModel> = flow {
         emit(
-            StackKnowledgeApiHandler<MissionResponse>()
+            StackKnowledgeApiHandler<MissionResponseModel>()
                 .httpRequest { missionAPI.getMission() }
                 .sendRequest()
         )
