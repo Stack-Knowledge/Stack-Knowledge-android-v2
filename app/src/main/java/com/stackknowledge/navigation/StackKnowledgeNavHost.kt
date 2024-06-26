@@ -9,6 +9,8 @@ import com.stackknowledge.login.LoginActivity
 import com.stackknowledge.login.navigation.loginRoute
 import com.stackknowledge.login.navigation.loginScreen
 import com.stackknowledge.login.navigation.navigateToLogin
+import com.stackknowledge.login.navigation.roleCheckRoute
+import com.stackknowledge.login.navigation.roleCheckScreen
 import com.stackknowledge.ui.StackKnowledgeAppState
 
 @Composable
@@ -16,7 +18,9 @@ fun StackKnowledgeNavHost(
     appState: StackKnowledgeAppState,
     startLogin: () -> Unit,
     modifier: Modifier = Modifier,
-    startDestination: String,
+    startDestination: String = roleCheckRoute,
+    isStudent: (Boolean) -> Unit,
+    isTeacher: (Boolean) -> Unit,
 ) {
     val navController = appState.navController
 
@@ -26,6 +30,11 @@ fun StackKnowledgeNavHost(
         startDestination = startDestination,
         modifier = modifier
      ) {
+         roleCheckScreen(
+             navigateToLogin = startLogin,
+             isStudent = isStudent,
+             isTeacher = isTeacher,
+         )
          loginScreen(
 
          )
