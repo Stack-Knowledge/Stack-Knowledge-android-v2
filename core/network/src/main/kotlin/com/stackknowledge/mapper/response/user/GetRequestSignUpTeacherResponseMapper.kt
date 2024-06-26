@@ -1,4 +1,4 @@
-package com.stackknowledge.mapper.response
+package com.stackknowledge.mapper.response.user
 
 import com.stackknowledge.dto.response.user.GetRequestSignUpTeacherResponse
 import remote.response.user.GetRequestSignUpTeacherResponseModel

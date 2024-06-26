@@ -6,4 +6,5 @@ plugins {
 dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.retrofit.core)
+    implementation(libs.moshi)
 }

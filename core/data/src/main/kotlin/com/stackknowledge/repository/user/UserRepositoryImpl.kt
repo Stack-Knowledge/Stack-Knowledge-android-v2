@@ -1,13 +1,8 @@
 package com.stackknowledge.repository.user
 
 import com.stackknowledge.datasource.user.UserDataSource
-import com.stackknowledge.dto.request.user.ApproveRequest
-import com.stackknowledge.dto.request.user.ScoreRequest
-import com.stackknowledge.dto.response.user.DetailSolveMissionResponse
-import com.stackknowledge.dto.response.user.GetRequestSignUpTeacherResponse
-import com.stackknowledge.dto.response.user.GetSolveMissionResponse
 import com.stackknowledge.mapper.request.user.toDto
-import com.stackknowledge.mapper.response.toModel
+import com.stackknowledge.mapper.response.user.toModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import remote.request.user.ApproveRequestModel

@@ -1,4 +1,4 @@
-package com.stackknowledge.mapper.response
+package com.stackknowledge.mapper.response.user
 
 import com.stackknowledge.dto.response.user.DetailSolveMissionResponse
 import remote.response.user.DetailSolveMissionResponseModel
