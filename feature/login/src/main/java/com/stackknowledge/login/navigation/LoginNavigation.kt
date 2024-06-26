@@ -10,8 +10,11 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.login.LoginActivity
 import com.stackknowledge.login.LoginRoute
+import com.stackknowledge.login.RoleCheckRoute
+import com.stackknowledge.login.RoleCheckScreen
 
 const val loginRoute = "login_route"
+const val roleCheckRoute = "role_check_route"
 
 fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
     this.navigate(loginRoute, navOptions)
@@ -20,5 +23,23 @@ fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.loginScreen() {
     composable(route = loginRoute) {
         LoginRoute()
+    }
+}
+
+fun NavController.navigateToRoleCheck(navOptions: NavOptions? = null) {
+    this.navigate(roleCheckRoute, navOptions)
+}
+
+fun NavGraphBuilder.roleCheckScreen(
+    navigateToLogin: () -> Unit,
+    isStudent: (Boolean) -> Unit,
+    isTeacher: (Boolean) -> Unit,
+) {
+    composable(route = roleCheckRoute) {
+        RoleCheckRoute(
+            navigateToLogin = navigateToLogin,
+            isStudent = isStudent,
+            isTeacher = isTeacher
+        )
     }
 }

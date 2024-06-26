@@ -1,12 +1,12 @@
 package com.stackknowledge.login.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stackknowledge.domain.auth.LogoutUseCase
 import com.stackknowledge.domain.auth.SaveTokenUseCase
-import com.stackknowledge.domain.auth.LoginUseCase
+import com.stackknowledge.domain.auth.LoginStudentUseCase
+import com.stackknowledge.domain.auth.LoginTeacherUseCase
 import com.stackknowledge.login.viewmodel.util.Event
 import com.stackknowledge.login.viewmodel.util.errorHandling
 import com.stackknowledge.model.remote.request.auth.LoginRequest
@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase,
+    private val loginStudentUseCase: LoginStudentUseCase,
+    private val loginTeacherUseCase: LoginTeacherUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val saveTokenUseCase: SaveTokenUseCase,
 ) : ViewModel() {
@@ -30,13 +31,17 @@ class AuthViewModel @Inject constructor(
     private val _loginRequest = MutableStateFlow<Event<LoginResponse>>(Event.Loading)
     val loginRequest = _loginRequest.asStateFlow()
 
-    fun login(
+    private val _isStudent = MutableStateFlow(false)
+    val isStudent = _isStudent.asStateFlow()
+
+//    private val _isTeacher = MutableStateFlow(false)
+//    val isTeacher = _isTeacher.asStateFlow()
+
+    fun loginStudent(
         body: LoginRequest,
-        role: String
     ) = viewModelScope.launch {
-        loginUseCase(
+        loginStudentUseCase(
             body = body,
-            role = role
         ).onSuccess {
             it.catch { remoteError ->
                 _loginRequest.value = remoteError.errorHandling()
@@ -47,4 +52,33 @@ class AuthViewModel @Inject constructor(
             _loginRequest.value = it.errorHandling()
         }
     }
+
+    fun loginTeacher(
+        body: LoginRequest,
+    ) = viewModelScope.launch {
+        loginTeacherUseCase(
+            body = body,
+        ).onSuccess {
+            it.catch { remoteError ->
+                _loginRequest.value = remoteError.errorHandling()
+            }.collect { response ->
+                _loginRequest.value = Event.Success(data = response)
+            }
+        }.onFailure {
+            _loginRequest.value = it.errorHandling()
+        }
+    }
+
+    fun roleCheck(role: Boolean) {
+        viewModelScope.launch {
+            _isStudent.value = role
+            Log.d("isStudent", isStudent.value.toString())
+        }
+    }
+
+//    fun roleTeacher(role: Boolean) {
+//        viewModelScope.launch {
+//            _isUser.value = role
+//        }
+//    }
 }

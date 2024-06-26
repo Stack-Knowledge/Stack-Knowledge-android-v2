@@ -1,5 +1,7 @@
 package com.stackknowledge.login
 
+import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,40 +14,69 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.GoogleButton
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.login.background.StackKnowledgeBackground
+import com.stackknowledge.login.background.LoginBackground
 import com.stackknowledge.login.navigation.loginRoute
 import com.stackknowledge.login.viewmodel.AuthViewModel
 
 @Composable
 fun LoginRoute(
-    // googleLogin: () -> Unit,
-    viewModel: AuthViewModel = hiltViewModel()
+    googleLogin: () -> Unit = {},
+    isStudent: (Boolean) -> Unit = {},
+    isTeacher: (Boolean) -> Unit = {},
+    viewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
 ) {
-    LoginScreen()
+    val roleCheck by viewModel.isStudent.collectAsStateWithLifecycle()
+
+    LoginScreen(
+        googleLogin = googleLogin,
+        isStudent = isStudent,
+        // isTeacher = isTeacher,
+        viewModel = viewModel,
+        roleCheck = roleCheck,
+        // student = student,
+        // teacher = teacher,
+    )
 }
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    googleLogin: () -> Unit = {}
+    viewModel: AuthViewModel,
+    googleLogin: () -> Unit = {},
+    isStudent: (Boolean) -> Unit = {},
+    // isTeacher: (Boolean) -> Unit = {},
+    roleCheck: Boolean,
+    // student: Boolean,
+    // teacher: Boolean,
 ) {
+    LaunchedEffect(roleCheck) {
+        isStudent(roleCheck)
+        Log.d("student", roleCheck.toString())
+        // isTeacher(!roleCheck)
+    }
+
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
             Column(
                 modifier = modifier.fillMaxSize()
             ) {
                 Box() {
-                    StackKnowledgeBackground()
+                    LoginBackground()
                     Column(
                         modifier = modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -85,5 +116,5 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPre() {
-    LoginScreen()
+    //LoginScreen()
 }
