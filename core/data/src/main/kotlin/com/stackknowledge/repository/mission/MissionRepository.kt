@@ -7,9 +7,9 @@ import remote.response.mission.DetailMissionResponseModel
 import remote.response.mission.MissionResponseModel
 
 interface MissionRepository {
-    suspend fun getMission(): Flow<MissionResponseModel>
+    fun getMission(): Flow<MissionResponseModel>
 
-    suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel>
+    fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel>
 
-    suspend fun createMission(body: CreateMissionRequestModel): Flow<Unit>
+    fun createMission(body: CreateMissionRequestModel): Flow<Unit>
 }
