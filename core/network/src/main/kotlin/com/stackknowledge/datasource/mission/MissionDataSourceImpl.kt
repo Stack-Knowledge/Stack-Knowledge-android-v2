@@ -15,7 +15,7 @@ import javax.inject.Inject
 class MissionDataSourceImpl @Inject constructor(
     private val missionAPI: MissionAPI
 ) : MissionDataSource {
-    override suspend fun getMission(): Flow<MissionResponseModel> = flow {
+    override fun getMission(): Flow<MissionResponseModel> = flow {
         emit(
             StackKnowledgeApiHandler<MissionResponseModel>()
                 .httpRequest { missionAPI.getMission() }
@@ -23,7 +23,7 @@ class MissionDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> = flow {
+    override fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> = flow {
         emit(
             StackKnowledgeApiHandler<DetailMissionResponseModel>()
                 .httpRequest { missionAPI.getDetailMission(missionId = missionId) }
@@ -31,7 +31,7 @@ class MissionDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun createMission(body: CreateMissionRequestModel): Flow<Unit> = flow {
+    override fun createMission(body: CreateMissionRequestModel): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { missionAPI.createMission(body = body) }
