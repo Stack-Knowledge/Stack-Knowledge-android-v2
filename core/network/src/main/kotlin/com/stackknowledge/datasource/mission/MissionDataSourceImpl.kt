@@ -6,10 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import request.mission.CreateMissionRequest
-import request.mission.DetailMissionRequest
-import response.mission.DetailMissionResponse
-import response.mission.MissionResponse
+import remote.request.mission.CreateMissionRequestModel
+import remote.request.mission.DetailMissionRequestModel
+import remote.response.mission.DetailMissionResponseModel
+import remote.response.mission.MissionResponse
 import javax.inject.Inject
 
 class MissionDataSourceImpl @Inject constructor(
@@ -23,15 +23,15 @@ class MissionDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun detailMission(missionId: DetailMissionRequest): Flow<DetailMissionResponse> = flow {
+    override suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> = flow {
         emit(
-            StackKnowledgeApiHandler<DetailMissionResponse>()
+            StackKnowledgeApiHandler<DetailMissionResponseModel>()
                 .httpRequest { missionAPI.getDetailMission(missionId = missionId) }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun createMission(body: CreateMissionRequest): Flow<Unit> = flow {
+    override suspend fun createMission(body: CreateMissionRequestModel): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { missionAPI.createMission(body = body) }

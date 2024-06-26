@@ -1,18 +1,66 @@
 package com.stackkowledge.mission.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.stackknowledge.misson.CreateMissionUseCase
-import com.stackknowledge.misson.DetailMissionUseCase
-import com.stackknowledge.misson.GetMissionUseCase
+import androidx.lifecycle.viewModelScope
+import com.stackknowledge.usecase.misson.CreateMissionUseCase
+import com.stackknowledge.usecase.misson.DetailMissionUseCase
+import com.stackknowledge.usecase.misson.GetMissionUseCase
+import com.stackkowledge.mission.viewmodel.util.Event
+import com.stackkowledge.mission.viewmodel.util.errorHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
+import remote.request.mission.CreateMissionRequestModel
+import remote.request.mission.DetailMissionRequestModel
+import remote.response.mission.DetailMissionResponseModel
+import remote.response.mission.MissionResponseModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MissionViewModel @Inject constructor(
-    private val getMissionRequest: GetMissionUseCase,
+    private val getMissionUseCase: GetMissionUseCase,
     private val detailMissionUseCase: DetailMissionUseCase,
     private val createMissionUseCase: CreateMissionUseCase,
-): ViewModel() {
-    
+) : ViewModel() {
+    private val _missionRequest = MutableStateFlow<Event<MissionResponseModel>>(Event.Loading)
+    val missionRequest = _missionRequest.asStateFlow()
+
+    private val _detailMissionRequest =
+        MutableStateFlow<Event<DetailMissionResponseModel>>(Event.Loading)
+    val detailMissionRequest = _detailMissionRequest.asStateFlow()
+
+    private val _createMissionRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
+    val createMissionRequest = _createMissionRequest.asStateFlow()
+
+    fun getMission() = viewModelScope.launch {
+        getMissionUseCase()
+            .onSuccess {
+                _missionRequest.value = Event.Success()
+            }
+            .onFailure {
+                _missionRequest.value = it.errorHandling()
+            }
+    }
+
+    fun detailMission(missionId: DetailMissionRequestModel) = viewModelScope.launch {
+        detailMissionUseCase(missionId = missionId)
+            .onSuccess {
+                _detailMissionRequest.value = Event.Success()
+            }
+            .onFailure {
+                _detailMissionRequest.value = it.errorHandling()
+            }
+    }
+
+    fun createMission(body: CreateMissionRequestModel) = viewModelScope.launch {
+        createMissionUseCase(body = body)
+            .onSuccess {
+                _createMissionRequest.value = Event.Success()
+            }
+            .onFailure {
+                _createMissionRequest.value = it.errorHandling()
+            }
+    }
 }

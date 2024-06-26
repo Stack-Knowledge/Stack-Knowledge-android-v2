@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "StackKnowledge"
 include(":app")
 
+include(":core:common")
 include(":core:data")
 include(":core:datastore")
 include(":core:design-system")

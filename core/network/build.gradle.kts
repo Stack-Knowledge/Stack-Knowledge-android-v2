@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
     implementation(project(":core:model"))
     implementation(project(":core:datastore"))
 
@@ -30,7 +31,9 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
-    implementation(libs.retrofit.gson.converter)
+    implementation(libs.retrofit.moshi.converter)
+    implementation(libs.moshi)
+    ksp(libs.retrofit.moshi.codegen)
 }
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")

@@ -2,10 +2,10 @@ package com.stackknowledge.repository.mission
 
 import com.stackknowledge.datasource.mission.MissionDataSource
 import kotlinx.coroutines.flow.Flow
-import request.mission.CreateMissionRequest
-import request.mission.DetailMissionRequest
-import response.mission.DetailMissionResponse
-import response.mission.MissionResponse
+import remote.request.mission.CreateMissionRequestModel
+import remote.request.mission.DetailMissionRequestModel
+import remote.response.mission.DetailMissionResponseModel
+import remote.response.mission.MissionResponse
 import javax.inject.Inject
 
 class MissionRepositoryImpl @Inject constructor(
@@ -15,11 +15,11 @@ class MissionRepositoryImpl @Inject constructor(
         return missionDataSource.getMission()
     }
 
-    override suspend fun detailMission(missionId: DetailMissionRequest): Flow<DetailMissionResponse> {
+    override suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> {
         return missionDataSource.detailMission(missionId = missionId)
     }
 
-    override suspend fun createMission(body: CreateMissionRequest): Flow<Unit> {
+    override suspend fun createMission(body: CreateMissionRequestModel): Flow<Unit> {
         return missionDataSource.createMission(body = body)
     }
 }

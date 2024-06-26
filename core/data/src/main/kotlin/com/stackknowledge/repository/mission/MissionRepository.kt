@@ -1,15 +1,15 @@
 package com.stackknowledge.repository.mission
 
 import kotlinx.coroutines.flow.Flow
-import request.mission.CreateMissionRequest
-import request.mission.DetailMissionRequest
-import response.mission.DetailMissionResponse
-import response.mission.MissionResponse
+import remote.request.mission.CreateMissionRequestModel
+import remote.request.mission.DetailMissionRequestModel
+import remote.response.mission.DetailMissionResponseModel
+import remote.response.mission.MissionResponse
 
 interface MissionRepository {
     suspend fun getMission(): Flow<MissionResponse>
 
-    suspend fun detailMission(missionId: DetailMissionRequest): Flow<DetailMissionResponse>
+    suspend fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel>
 
-    suspend fun createMission(body: CreateMissionRequest): Flow<Unit>
+    suspend fun createMission(body: CreateMissionRequestModel): Flow<Unit>
 }
