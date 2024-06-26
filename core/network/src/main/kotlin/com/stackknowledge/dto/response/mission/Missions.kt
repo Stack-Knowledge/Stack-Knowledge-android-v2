@@ -8,9 +8,9 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class Missions(
-    @Json(name = "id") val id : UUID,
-    @Json(name = "title") val title : String,
-    @Json(name = "point") val point : Int,
-    @Json(name = "missionStatus") val missionStatus : MissionStatus,
-    @Json(name = "user") val user : UserModel,
+    @Json(name = "id") val id: UUID,
+    @Json(name = "title") val title: String,
+    @Json(name = "point") val point: Int,
+    @Json(name = "missionStatus") val missionStatus: MissionStatus,
+    @Json(name = "user") val user: UserModel,
 )

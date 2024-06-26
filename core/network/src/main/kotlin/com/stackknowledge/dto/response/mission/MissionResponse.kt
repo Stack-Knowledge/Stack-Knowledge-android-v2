@@ -5,5 +5,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class MissionResponse(
-    @Json(name = "body") val missions : Missions,
+    @Json(name = "body") val missions: Missions,
 )

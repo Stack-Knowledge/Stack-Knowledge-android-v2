@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class DetailMissionResponseModel(
-    @Json(name = "title") val title : String,
-    @Json(name = "content") val content : String,
+    @Json(name = "title") val title: String,
+    @Json(name = "content") val content: String,
     @Json(name = "timeLimit") val timeLimit: Int,
 )

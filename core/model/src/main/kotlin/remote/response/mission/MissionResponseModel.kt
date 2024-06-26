@@ -8,5 +8,5 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class MissionResponseModel(
-    @Json(name = "body") val missions : MissionsModel,
+    @Json(name = "body") val missions: MissionsModel,
 )
