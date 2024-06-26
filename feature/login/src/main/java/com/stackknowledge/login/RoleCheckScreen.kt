@@ -63,13 +63,14 @@ fun RoleCheckScreen(
     // val teacher by viewModel.isTeacher.collectAsStateWithLifecycle()
 
     LaunchedEffect(student) {
-        Log.d("testt", student.toString())
-        isStudent(student)
-        navigateToLogin()
-        /*else {
-           isStudent(!student)
-           navigateToLogin()
-       }*/
+        if (student) {
+            Log.d("testt",student.toString())
+            isStudent(student)
+            navigateToLogin()
+        } /*else {
+            isStudent(!student)
+            navigateToLogin()
+        }*/
     }
 
     StackKnowledgeAndroidTheme { colors, typography ->

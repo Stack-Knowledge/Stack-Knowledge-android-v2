@@ -48,8 +48,8 @@ fun LoginRoute(
         // isTeacher = isTeacher,
         viewModel = viewModel,
         roleCheck = roleCheck,
-        // student = student,
-        // teacher = teacher,
+//        student = student,
+//        teacher = teacher,
     )
 }
 
@@ -59,16 +59,21 @@ fun LoginScreen(
     viewModel: AuthViewModel,
     googleLogin: () -> Unit = {},
     isStudent: (Boolean) -> Unit = {},
-    // isTeacher: (Boolean) -> Unit = {},
+    //isTeacher: (Boolean) -> Unit = {},
     roleCheck: Boolean,
-    // student: Boolean,
-    // teacher: Boolean,
+//    student: Boolean,
+//    teacher: Boolean,
 ) {
-    LaunchedEffect(roleCheck) {
-        isStudent(roleCheck)
-        Log.d("student", roleCheck.toString())
-        // isTeacher(!roleCheck)
-    }
+
+   /* LaunchedEffect(student, teacher) {
+        isStudent(student)
+        Log.d("student", student.toString())
+        isTeacher(teacher)
+    }*/
+
+    isStudent(roleCheck)
+    Log.d("student", roleCheck.toString())
+    // isTeacher(!roleCheck)
 
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {

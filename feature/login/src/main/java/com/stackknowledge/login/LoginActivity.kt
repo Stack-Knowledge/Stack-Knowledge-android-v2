@@ -31,7 +31,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
     private val viewModel: AuthViewModel by viewModels()
     private var isStudent = false
-    private var isTeacher = false
+    private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
+    private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+
+        try {
+            val account = task.getResult(ApiException::class.java)
+            Log.e("try launch", account.toString())
+            account.serverAuthCode?.let { viewModel.loginStudent(LoginRequest(it)) } // 서버에 idToken 보내기
+        } catch (e: ApiException) {
+            Log.e(LoginActivity::class.java.simpleName, e.stackTraceToString())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +58,11 @@ class LoginActivity : ComponentActivity() {
 
             LoginRoute(
                 viewModel = viewModel,
-                googleLogin = { googleSignIn() },
+                googleLogin = {
+                    googleSignIn(
+                        isStudent = isStudent
+                    )
+                },
                 isStudent = { isStudentState.value = it },
                 // isTeacher = { isTeacher = it }
             )
@@ -56,14 +71,34 @@ class LoginActivity : ComponentActivity() {
         viewModel.roleCheck(role = isStudent)
 
         Log.d("LoginActivity", "Intent data: ${intent.data}")
-        intentData(intent.data, isStudent)
+//        intentData(intent.data, isStudent)
     }
 
-    private fun googleSignIn() {
-        val url =
-            "https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?ei5r49r2ou9pflsn9bas5hvj4c13uroq.apps.googleusercontent.com&response_type=code&redirect_uri=${BuildConfig.REDIRECT_URI}&scope=${BuildConfig.SCOPE}&client_id=${BuildConfig.GOOGLE_CLIENT_ID}&prompt=select_account"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
+    private fun googleSignIn(
+        isStudent: Boolean
+    ) {
+        googleSignInClient.signOut()
+        val signInIntent = googleSignInClient.signInIntent
+        googleAuthLauncher.launch(signInIntent)
+        if (isStudent) {
+            intentData(intent.data, isStudent)
+        }
+    }
+
+    private fun getGoogleClient(): GoogleSignInClient {
+        val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestServerAuthCode(BuildConfig.GOOGLE_CLIENT_ID)
+            .build()
+
+        return GoogleSignIn.getClient(this, googleSignInOption)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        Log.d("LoginActivity", "onNewIntent called")
+        intent.data?.let {
+            intentData(it, isStudent)
+        }
     }
 
     private fun intentData(
@@ -73,10 +108,10 @@ class LoginActivity : ComponentActivity() {
         val code = uri?.getQueryParameter("code")
         Log.d("LoginActivity", "Extracted code: $code")
         if (!code.isNullOrBlank()) {
-            Log.d("isStudent", isStudent.toString())
-            when (isStudent) {
-                true -> viewModel.loginStudent(body = LoginRequest(code))
-                false -> viewModel.loginTeacher(body = LoginRequest(code))
+            if(isStudent) {
+                viewModel.loginStudent(body = LoginRequest(code))
+            } else {
+                viewModel.loginTeacher(body = LoginRequest(code))
             }
         } else {
             Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
