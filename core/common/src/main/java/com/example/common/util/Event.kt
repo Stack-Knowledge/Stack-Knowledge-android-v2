@@ -1,4 +1,4 @@
-package com.stackkowledge.mission.viewmodel.util
+package com.example.common.util
 
 sealed class Event<out T>(
     val data: T? = null

@@ -1,4 +1,4 @@
-package com.stackkowledge.mission.viewmodel.util
+package com.example.common.util
 
 import android.util.Log
 import com.example.common.exception.*
