@@ -9,21 +9,30 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.util.Stack
 import javax.inject.Inject
 
 class AuthDataSourceImpl @Inject constructor(
     private val authAPI: AuthAPI
 ) : AuthDataSource {
-    override suspend fun login(
-        body: LoginRequest,
-        role: String
-    ): Flow<LoginResponse> = flow {
+    override suspend fun loginStudent(body: LoginRequest): Flow<LoginResponse> = flow {
         emit(
             StackKnowledgeApiHandler<LoginResponse>()
                 .httpRequest {
-                    authAPI.login(
+                    authAPI.loginStudent(
                         body = body,
-                        role = role
+                    )
+                }
+                .sendRequest()
+        )
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun loginTeacher(body: LoginRequest): Flow<LoginResponse> = flow {
+        emit(
+            StackKnowledgeApiHandler<LoginResponse>()
+                .httpRequest {
+                    authAPI.loginTeacher(
+                        body = body,
                     )
                 }
                 .sendRequest()

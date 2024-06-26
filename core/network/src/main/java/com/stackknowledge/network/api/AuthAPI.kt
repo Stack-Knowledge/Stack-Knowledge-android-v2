@@ -11,10 +11,14 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface AuthAPI {
-    @POST("/auth/{role}")
-    suspend fun login(
+    @POST("/auth/student")
+    suspend fun loginStudent(
         @Body body: LoginRequest,
-        @Path("role") role: String
+    ): LoginResponse
+
+    @POST("/auth/teacher")
+    suspend fun loginTeacher(
+        @Body body: LoginRequest,
     ): LoginResponse
 
     @DELETE("/auth")

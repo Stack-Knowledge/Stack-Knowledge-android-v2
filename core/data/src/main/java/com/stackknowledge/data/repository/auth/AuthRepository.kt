@@ -6,9 +6,12 @@ import com.stackknowledge.model.remote.response.auth.LoginResponse
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun login(
+    suspend fun loginStudent(
         body: LoginRequest,
-        role: String
+    ): Flow<LoginResponse>
+
+    suspend fun loginTeacher(
+        body: LoginRequest,
     ): Flow<LoginResponse>
 
     suspend fun saveToken(token: LoginResponse)

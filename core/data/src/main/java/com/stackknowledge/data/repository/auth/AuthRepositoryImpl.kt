@@ -12,13 +12,15 @@ class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
     private val localDataSource: LocalAuthDataSource
 ): AuthRepository {
-    override suspend fun login(
-        body: LoginRequest,
-        role: String
-    ): Flow<LoginResponse> {
-        return authDataSource.login(
+    override suspend fun loginStudent(body: LoginRequest): Flow<LoginResponse> {
+        return authDataSource.loginStudent(
             body = body,
-            role = role
+        )
+    }
+
+    override suspend fun loginTeacher(body: LoginRequest): Flow<LoginResponse> {
+        return authDataSource.loginTeacher(
+            body = body,
         )
     }
 

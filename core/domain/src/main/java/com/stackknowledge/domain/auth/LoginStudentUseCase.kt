@@ -1,20 +1,17 @@
 package com.stackknowledge.domain.auth
 
 import com.stackknowledge.data.repository.auth.AuthRepository
-import com.stackknowledge.model.remote.enumdatatype.Authority
 import com.stackknowledge.model.remote.request.auth.LoginRequest
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class LoginStudentUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
     suspend operator fun invoke(
         body: LoginRequest,
-        role: String
     ) = runCatching {
-        authRepository.login(
+        authRepository.loginStudent(
             body = body,
-            role = role
         )
     }
 }
