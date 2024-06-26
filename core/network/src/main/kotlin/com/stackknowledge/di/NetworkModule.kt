@@ -1,10 +1,9 @@
 package com.stackknowledge.di
 
+import com.msg.network.BuildConfig
 import com.squareup.moshi.Moshi
 import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.api.StudentAPI
-import com.stackknowledge.network.BuildConfig
-import com.stackknowledge.util.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +24,6 @@ object NetworkModule {
     @Singleton
     fun provideOkhttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        authInterceptor: AuthInterceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .cookieJar(CookieJar.NO_COOKIES)
@@ -33,8 +31,15 @@ object NetworkModule {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(authInterceptor)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        }
     }
 
     @Provides
