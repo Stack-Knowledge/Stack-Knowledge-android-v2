@@ -11,15 +11,15 @@ import javax.inject.Inject
 class MissionRepositoryImpl @Inject constructor(
     private val missionDataSource: MissionDataSource
 ): MissionRepository {
-    override  fun getMission(): Flow<MissionResponseModel> {
+    override fun getMission(): Flow<MissionResponseModel> {
         return missionDataSource.getMission()
     }
 
-    override  fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> {
+    override fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> {
         return missionDataSource.detailMission(missionId = missionId)
     }
 
-    override  fun createMission(body: CreateMissionRequestModel): Flow<Unit> {
+    override fun createMission(body: CreateMissionRequestModel): Flow<Unit> {
         return missionDataSource.createMission(body = body)
     }
 }
