@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import com.stackknowledge.api.ItemAPI
 import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.api.OrderAPI
+import com.stackknowledge.api.SolveAPI
 import com.stackknowledge.api.StudentAPI
 import dagger.Module
 import dagger.Provides
@@ -87,4 +88,9 @@ object NetworkModule {
     @Singleton
     fun providesItemAPI(retrofit: Retrofit): ItemAPI =
         retrofit.create(ItemAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providesSolveAPI(retrofit: Retrofit): SolveAPI =
+        retrofit.create(SolveAPI::class.java)
 }
