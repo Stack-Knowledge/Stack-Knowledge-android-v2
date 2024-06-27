@@ -26,10 +26,21 @@ import com.stackknowledge.main.component.StackKnowledgePager
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
-internal fun MainPageRoute() {
+internal fun MainPageRoute(
+    onHomeClick: (String) -> Unit,
+    onMissionClick: (String) -> Unit,
+    onMakeMissionClick: (String) -> Unit,
+    onShopClick: (String) -> Unit,
+    onRankingClick: (String) -> Unit,
+) {
     var role by remember { mutableStateOf(true) } //로그인 로직 적용후 변경
     MainPageScreen(
-        role = role
+        role = role,
+        onHomeClick = onHomeClick,
+        onMissionClick = onMissionClick,
+        onMakeMissionClick = onMakeMissionClick,
+        onShopClick = onShopClick,
+        onRankingClick = onRankingClick,
     )
 }
 
@@ -37,6 +48,11 @@ internal fun MainPageRoute() {
 private fun MainPageScreen(
     modifier: Modifier = Modifier,
     role: Boolean,
+    onHomeClick: (String) -> Unit,
+    onMissionClick: (String) -> Unit,
+    onMakeMissionClick: (String) -> Unit,
+    onShopClick: (String) -> Unit,
+    onRankingClick: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Box(
@@ -44,7 +60,7 @@ private fun MainPageScreen(
                 .fillMaxSize()
                 .background(color = colors.WHITE)
         ) {
-            Column{
+            Column {
                 LogoutTopBar()
                 StackKnowledgePager()
                 Spacer(modifier = modifier.height(28.dp))
@@ -75,12 +91,4 @@ private fun MainPageScreen(
         }
     }
 
-}
-
-@Preview
-@Composable
-fun MainPageScreenPre() {
-    MainPageScreen(
-        role = false
-    )
 }

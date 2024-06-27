@@ -12,8 +12,20 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) {
     this.navigate(mainPageRoute, navOptions)
 }
 
-fun NavGraphBuilder.mainScreen() {
+fun NavGraphBuilder.mainScreen(
+    onHomeClick: (String) -> Unit,
+    onMissionClick: (String) -> Unit,
+    onMakeMissionClick: (String) -> Unit,
+    onShopClick: (String) -> Unit,
+    onRankingClick: (String) -> Unit,
+) {
     composable(route = mainPageRoute) {
-        MainPageRoute()
+        MainPageRoute(
+            onHomeClick = onHomeClick,
+            onMissionClick = onMissionClick,
+            onMakeMissionClick = onMakeMissionClick,
+            onShopClick = onShopClick,
+            onRankingClick = onRankingClick,
+        )
     }
 }

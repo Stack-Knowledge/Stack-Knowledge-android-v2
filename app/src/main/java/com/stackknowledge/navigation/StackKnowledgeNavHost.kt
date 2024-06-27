@@ -34,7 +34,13 @@ fun StackKnowledgeNavHost(
     ) {
         loginScreen()
         roleCheckScreen()
-        mainScreen()
+        mainScreen(
+            onHomeClick = {},
+            onMissionClick = {},
+            onMakeMissionClick = {},
+            onShopClick = {},
+            onRankingClick = {},
+        )
         createMissionScreen()
         entireMissionScreen()
         rankingScreen()
