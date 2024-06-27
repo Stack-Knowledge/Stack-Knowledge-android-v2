@@ -2,6 +2,7 @@ package com.stackknowledge.design_system.component.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +22,11 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun StudentBottomNavigation(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onHomeClick: () -> Unit,
+    onMissionClick: () -> Unit,
+    onShopClick: () -> Unit,
+    onRankingClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -36,7 +41,8 @@ fun StudentBottomNavigation(
             ) {
                 Column(
                     modifier = modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable(onClick = onHomeClick),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
@@ -52,7 +58,8 @@ fun StudentBottomNavigation(
                 }
                 Column(
                     modifier = modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable(onClick = onMissionClick),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
@@ -68,7 +75,8 @@ fun StudentBottomNavigation(
                 }
                 Column(
                     modifier = modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable(onClick = onShopClick),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
@@ -84,7 +92,8 @@ fun StudentBottomNavigation(
                 }
                 Column(
                     modifier = modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .clickable(onClick = onRankingClick),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
@@ -106,5 +115,10 @@ fun StudentBottomNavigation(
 @Preview
 @Composable
 fun StudentBottomNavigationPre() {
-    StudentBottomNavigation()
+    StudentBottomNavigation(
+        onHomeClick = {},
+        onMissionClick = {},
+        onShopClick = {},
+        onRankingClick = {}
+    )
 }
