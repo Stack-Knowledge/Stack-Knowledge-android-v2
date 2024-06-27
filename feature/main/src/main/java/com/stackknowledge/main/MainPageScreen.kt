@@ -32,6 +32,7 @@ internal fun MainPageRoute() {
         role = role
     )
 }
+
 @Composable
 private fun MainPageScreen(
     modifier: Modifier = Modifier,

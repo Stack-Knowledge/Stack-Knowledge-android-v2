@@ -19,6 +19,7 @@ import com.stackknowledge.ranking.component.RankingProfile
 internal fun RankingRoute() {
     RankingScreen()
 }
+
 @Composable
 private fun RankingScreen(
     modifier: Modifier = Modifier

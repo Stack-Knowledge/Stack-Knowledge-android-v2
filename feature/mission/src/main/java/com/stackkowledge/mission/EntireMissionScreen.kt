@@ -15,6 +15,7 @@ import com.stackkowledge.mission.component.EntireMissionList
 internal fun EntireMissionRoute() {
     EntireMissionScreen()
 }
+
 @Composable
 private fun EntireMissionScreen(
     modifier: Modifier = Modifier,

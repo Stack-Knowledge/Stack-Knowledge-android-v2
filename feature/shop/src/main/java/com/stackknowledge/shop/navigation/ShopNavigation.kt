@@ -7,25 +7,25 @@ import androidx.navigation.compose.composable
 import com.stackknowledge.shop.ShopRoute
 import com.stackknowledge.shop.TeacherShopRoute
 
-const val shop = "shop_route"
-const val teacherShop = "teacher_shop_route"
+const val shopRoute = "shop_route"
+const val teacherShopRoute = "teacher_shop_route"
 
 fun NavController.navigateToShop(navOptions: NavOptions? = null) {
-    this.navigate(shop, navOptions)
+    this.navigate(shopRoute, navOptions)
 }
 
 fun NavGraphBuilder.shopScreen() {
-    composable(route = shop) {
+    composable(route = shopRoute) {
         ShopRoute()
     }
 }
 
 fun NavController.navigateToTeacherShop(navOptions: NavOptions? = null) {
-    this.navigate(teacherShop, navOptions)
+    this.navigate(teacherShopRoute, navOptions)
 }
 
 fun NavGraphBuilder.teacherShopScreen() {
-    composable(route = teacherShop) {
+    composable(route = teacherShopRoute) {
         TeacherShopRoute()
     }
 }

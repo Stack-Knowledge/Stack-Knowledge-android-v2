@@ -7,25 +7,25 @@ import androidx.navigation.compose.composable
 import com.stackknowledge.score_mission.GradingAnswerRoute
 import com.stackknowledge.score_mission.SolvedMissionRoute
 
-const val gradingAnswer = "grading_answer_route"
-const val solvedMission = "solved_mission"
+const val gradingAnswerRoute = "grading_answer_route"
+const val solvedMissionRoute = "solved_mission_route"
 
 fun NavController.navigateToGradingAnswer(navOptions: NavOptions? = null) {
-    this.navigate(gradingAnswer, navOptions)
+    this.navigate(gradingAnswerRoute, navOptions)
 }
 
 fun NavGraphBuilder.gradingAnswerScreen() {
-    composable(route = gradingAnswer) {
+    composable(route = gradingAnswerRoute) {
         GradingAnswerRoute()
     }
 }
 
 fun NavController.navigateToSolvedMission(navOptions: NavOptions? = null) {
-    this.navigate(solvedMission, navOptions)
+    this.navigate(solvedMissionRoute, navOptions)
 }
 
 fun NavGraphBuilder.solvedMissionScreen() {
-    composable(route = solvedMission) {
+    composable(route = solvedMissionRoute) {
         SolvedMissionRoute()
     }
 }

@@ -7,25 +7,25 @@ import androidx.navigation.compose.composable
 import com.stackknowledge.ranking.RankingRoute
 import com.stackknowledge.ranking.TeacherRankingRoute
 
-const val Ranking = "ranking_route"
-const val TeacherRanking = "teacher_ranking_route"
+const val rankingRoute = "ranking_route"
+const val teacherRankingRoute = "teacher_ranking_route"
 
-fun NavController.navigateToCreateMission(navOptions: NavOptions? = null) {
-    this.navigate(Ranking, navOptions)
+fun NavController.navigateToRanking(navOptions: NavOptions? = null) {
+    this.navigate(rankingRoute, navOptions)
 }
 
-fun NavGraphBuilder.loginScreen() {
-    composable(route = Ranking) {
+fun NavGraphBuilder.rankingScreen() {
+    composable(route = rankingRoute) {
         RankingRoute()
     }
 }
 
-fun NavController.navigateToEntireMission(navOptions: NavOptions? = null) {
-    this.navigate(TeacherRanking, navOptions)
+fun NavController.navigateToTeacherRanking(navOptions: NavOptions? = null) {
+    this.navigate(teacherRankingRoute, navOptions)
 }
 
-fun NavGraphBuilder.roleCheckScreen() {
-    composable(route = TeacherRanking) {
+fun NavGraphBuilder.teacherRankingScreen() {
+    composable(route = teacherRankingRoute) {
         TeacherRankingRoute()
     }
 }

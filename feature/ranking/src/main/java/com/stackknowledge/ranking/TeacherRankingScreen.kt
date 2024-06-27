@@ -18,6 +18,7 @@ import com.stackknowledge.ranking.component.RankingList
 internal fun TeacherRankingRoute() {
     TeacherRankingScreen()
 }
+
 @Composable
 private fun TeacherRankingScreen(
     modifier: Modifier = Modifier,

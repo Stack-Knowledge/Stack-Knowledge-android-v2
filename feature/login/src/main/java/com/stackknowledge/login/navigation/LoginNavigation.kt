@@ -7,25 +7,25 @@ import androidx.navigation.compose.composable
 import com.stackknowledge.login.LoginScreenRoute
 import com.stackknowledge.login.RoleCheckScreenRoute
 
-const val LoginRoute = "login_route"
-const val RoleCheckRoute = "role_check_route"
+const val loginRoute = "login_route"
+const val roleCheckRoute = "role_check_route"
 
 fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
-    this.navigate(LoginRoute, navOptions)
+    this.navigate(loginRoute, navOptions)
 }
 
 fun NavGraphBuilder.loginScreen() {
-    composable(route = LoginRoute) {
+    composable(route = loginRoute) {
         LoginScreenRoute()
     }
 }
 
 fun NavController.navigateToRoleCheck(navOptions: NavOptions? = null) {
-    this.navigate(RoleCheckRoute, navOptions)
+    this.navigate(roleCheckRoute, navOptions)
 }
 
 fun NavGraphBuilder.roleCheckScreen() {
-    composable(route = RoleCheckRoute) {
+    composable(route = roleCheckRoute) {
         RoleCheckScreenRoute()
     }
 }

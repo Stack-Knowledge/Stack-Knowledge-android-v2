@@ -7,25 +7,25 @@ import androidx.navigation.compose.composable
 import com.stackkowledge.mission.CreateMissionRoute
 import com.stackkowledge.mission.EntireMissionRoute
 
-const val CreateMission = "create_mission_route"
-const val EntireMission = "entire_mission_route"
+const val createMissionRoute = "create_mission_route"
+const val entireMissionRoute = "entire_mission_route"
 
 fun NavController.navigateToCreateMission(navOptions: NavOptions? = null) {
-    this.navigate(CreateMission, navOptions)
+    this.navigate(createMissionRoute, navOptions)
 }
 
-fun NavGraphBuilder.loginScreen() {
-    composable(route = CreateMission) {
+fun NavGraphBuilder.createMissionScreen() {
+    composable(route = createMissionRoute) {
         CreateMissionRoute()
     }
 }
 
 fun NavController.navigateToEntireMission(navOptions: NavOptions? = null) {
-    this.navigate(EntireMission, navOptions)
+    this.navigate(entireMissionRoute, navOptions)
 }
 
-fun NavGraphBuilder.roleCheckScreen() {
-    composable(route = EntireMission) {
+fun NavGraphBuilder.entireMissionScreen() {
+    composable(route = entireMissionRoute) {
         EntireMissionRoute()
     }
 }

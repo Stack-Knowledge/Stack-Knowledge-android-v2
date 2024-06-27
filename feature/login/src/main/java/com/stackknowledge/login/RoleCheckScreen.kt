@@ -27,6 +27,7 @@ import com.stackknowledge.login.background.LoginBackground
 internal fun RoleCheckScreenRoute() {
     RoleCheckScreen()
 }
+
 @Composable
 private fun RoleCheckScreen(
     modifier: Modifier = Modifier,

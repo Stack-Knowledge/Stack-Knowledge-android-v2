@@ -27,6 +27,7 @@ import com.stackknowledge.login.background.LoginBackground
 internal fun LoginScreenRoute() {
     LoginScreen()
 }
+
 @Composable
 private fun LoginScreen(
     modifier: Modifier = Modifier

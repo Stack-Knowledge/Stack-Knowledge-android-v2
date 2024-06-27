@@ -26,6 +26,7 @@ import com.stackkowledge.mission.component.InputTitle
 internal fun CreateMissionRoute() {
     CreateMissionScreen()
 }
+
 @Composable
 private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
