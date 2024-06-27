@@ -1,7 +1,6 @@
 package com.stackknowledge.dto.response.mission
 
-import com.stackknowledge.dto.user.User
-import enumdata.MissionStatus
+import enumdatatype.MissionStatus
 import java.util.UUID
 
 data class GetMissionListResponse(
