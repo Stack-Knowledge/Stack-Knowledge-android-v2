@@ -1,5 +1,7 @@
 package com.stackknowledge.di
 
+import com.stackknowledge.datasource.item.ItemDataSource
+import com.stackknowledge.datasource.item.ItemDataSourceImpl
 import com.stackknowledge.datasource.mission.MissionDataSource
 import com.stackknowledge.datasource.mission.MissionDataSourceImpl
 import com.stackknowledge.datasource.order.OrderDataSource
@@ -32,4 +34,10 @@ abstract class RemoteDataSourceModule {
     abstract fun bindOrderDataSource(
         orderDataSourceImpl: OrderDataSourceImpl
     ): OrderDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindItemDataSource(
+        itemDataSourceImpl: ItemDataSourceImpl
+    ): ItemDataSource
 }
