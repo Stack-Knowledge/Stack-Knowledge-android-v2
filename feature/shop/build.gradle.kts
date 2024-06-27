@@ -7,3 +7,6 @@ plugins {
 android {
     namespace = "com.stackknowledge.shop"
 }
+dependencies {
+    implementation(project(":core:common"))
+}
