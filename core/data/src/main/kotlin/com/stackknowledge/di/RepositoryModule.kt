@@ -6,6 +6,8 @@ import com.stackknowledge.repository.mission.MissionRepository
 import com.stackknowledge.repository.mission.MissionRepositoryImpl
 import com.stackknowledge.repository.order.OrderRepository
 import com.stackknowledge.repository.order.OrderRepositoryImpl
+import com.stackknowledge.repository.solve.SolveRepository
+import com.stackknowledge.repository.solve.SolveRepositoryImpl
 import com.stackknowledge.repository.student.StudentRepository
 import com.stackknowledge.repository.student.StudentRepositoryImpl
 import dagger.Binds
@@ -35,4 +37,9 @@ abstract class RepositoryModule {
     abstract fun bindItemRepository(
         itemRepositoryImpl: ItemRepositoryImpl
     ): ItemRepository
+
+    @Binds
+    abstract fun bindSolveRepository(
+        solveRepositoryImpl: SolveRepositoryImpl
+    ): SolveRepository
 }
