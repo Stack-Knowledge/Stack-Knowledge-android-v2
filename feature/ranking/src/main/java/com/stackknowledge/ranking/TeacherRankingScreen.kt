@@ -15,7 +15,11 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.ranking.component.RankingList
 
 @Composable
-fun TeacherRankingScreen(
+internal fun TeacherRankingRoute() {
+    TeacherRankingScreen()
+}
+@Composable
+private fun TeacherRankingScreen(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
