@@ -16,7 +16,12 @@ import com.stackknowledge.shop.component.CurrentMileage
 import com.stackknowledge.shop.component.GoodsList
 
 @Composable
-fun ShopScreen(
+internal fun ShopRoute() {
+    ShopScreen()
+}
+
+@Composable
+private fun ShopScreen(
     modifier: Modifier = Modifier
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
