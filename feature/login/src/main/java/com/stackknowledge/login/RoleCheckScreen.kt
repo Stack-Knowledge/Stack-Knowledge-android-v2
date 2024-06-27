@@ -24,7 +24,11 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
 
 @Composable
-fun RoleCheckScreen(
+internal fun RoleCheckScreenRoute() {
+    RoleCheckScreen()
+}
+@Composable
+private fun RoleCheckScreen(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
