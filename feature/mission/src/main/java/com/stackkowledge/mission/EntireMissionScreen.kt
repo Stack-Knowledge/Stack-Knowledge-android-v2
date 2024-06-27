@@ -12,7 +12,11 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.EntireMissionList
 
 @Composable
-fun EntireMissionScreen(
+internal fun EntireMissionRoute() {
+    EntireMissionScreen()
+}
+@Composable
+private fun EntireMissionScreen(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
