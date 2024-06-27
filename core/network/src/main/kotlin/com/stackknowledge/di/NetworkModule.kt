@@ -2,6 +2,7 @@ package com.stackknowledge.di
 
 import com.msg.network.BuildConfig
 import com.squareup.moshi.Moshi
+import com.stackknowledge.api.ItemAPI
 import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.api.OrderAPI
 import com.stackknowledge.api.StudentAPI
@@ -14,7 +15,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -82,4 +82,9 @@ object NetworkModule {
     @Singleton
     fun providesOrderAPI(retrofit: Retrofit): OrderAPI =
         retrofit.create(OrderAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providesItemAPI(retrofit: Retrofit): ItemAPI =
+        retrofit.create(ItemAPI::class.java)
 }
