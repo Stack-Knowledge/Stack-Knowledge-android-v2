@@ -1,6 +1,5 @@
 package com.stackknowledge.login
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import com.stackknowledge.design_system.R
@@ -15,8 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+<<<<<<< Updated upstream
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+=======
+>>>>>>> Stashed changes
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
@@ -33,27 +34,33 @@ import com.stackknowledge.login.viewmodel.AuthViewModel
 
 @Composable
 fun RoleCheckRoute(
-    navigateToLogin: () -> Unit,
-    isStudent: (Boolean) -> Unit,
-    isTeacher: (Boolean) -> Unit,
+    onRoleButtonClick: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
 ) {
     RoleCheckScreen(
+<<<<<<< Updated upstream
         navigateToLogin = navigateToLogin,
         isStudent = isStudent,
         isTeacher = isTeacher,
         viewModel = viewModel
+=======
+        onTeacherButtonClick = { isTeacher ->
+            viewModel.isTeacher.value = isTeacher
+        },
+        onStudentButtonClick = { isStudent ->
+            viewModel.isStudent.value = isStudent
+        }
+>>>>>>> Stashed changes
     )
 }
 
 @Composable
 fun RoleCheckScreen(
     modifier: Modifier = Modifier,
-    viewModel: AuthViewModel,
-    isStudent: (Boolean) -> Unit = {},
-    isTeacher: (Boolean) -> Unit = {},
-    navigateToLogin: () -> Unit,
+    onTeacherButtonClick: (Boolean) -> Unit,
+    onStudentButtonClick: (Boolean) -> Unit,
 ) {
+<<<<<<< Updated upstream
     val student by viewModel.isStudent.collectAsStateWithLifecycle()
     // val teacher by viewModel.isTeacher.collectAsStateWithLifecycle()
 
@@ -67,6 +74,8 @@ fun RoleCheckScreen(
             navigateToLogin()
         }*/
     }
+=======
+>>>>>>> Stashed changes
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier.background(color = colors.WHITE),
@@ -98,7 +107,7 @@ fun RoleCheckScreen(
                             .height(60.dp)
                             .weight(1f),
                         onClick = {
-                            viewModel.roleCheck(role = true)
+                            onStudentButtonClick(true)
                         }
 
                     )
@@ -111,7 +120,7 @@ fun RoleCheckScreen(
                             .height(60.dp)
                             .weight(1f),
                         onClick = {
-                            viewModel.roleCheck(role = false)
+                            onTeacherButtonClick(true)
                         }
 
                     )
@@ -126,4 +135,11 @@ fun RoleCheckScreen(
 @Preview
 @Composable
 fun RoleCheckScreenPre() {
+<<<<<<< Updated upstream
+=======
+    RoleCheckScreen(
+        onTeacherButtonClick = {},
+        onStudentButtonClick = {},
+    )
+>>>>>>> Stashed changes
 }

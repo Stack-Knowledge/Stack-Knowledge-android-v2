@@ -16,9 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private var isStudent = false
-    private var isTeacher = false
-
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +24,9 @@ class MainActivity : ComponentActivity() {
                 StackKnowledgeAndroidTheme { _, _ ->
                     StackKnowledgeApp(
                         windowSizeClass = calculateWindowSizeClass(this@MainActivity),
-                        startLogin = { startLogin() },
-                        isStudent = { isStudent = it },
-                        isTeacher = { isTeacher = it },
                     )
                 }
             }
         }
-    }
-
-    private fun startLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.putExtra("isStudent", isStudent)
-        startActivity(intent)
     }
 }

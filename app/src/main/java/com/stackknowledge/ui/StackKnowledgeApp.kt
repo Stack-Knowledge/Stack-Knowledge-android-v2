@@ -11,16 +11,10 @@ fun StackKnowledgeApp(
     appState: StackKnowledgeAppState = rememberStackKnowledgeAppState(
         windowSizeClass = windowSizeClass
     ),
-    startLogin:() -> Unit,
-    isStudent: (Boolean) -> Unit,
-    isTeacher: (Boolean) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { _, _ ->
         StackKnowledgeNavHost(
             appState = appState,
-            startLogin = { startLogin() },
-            isStudent = isStudent,
-            isTeacher = isTeacher,
-        ) //startDestination = ) // <- 이부분도 startDestination 스크린 작업 후 추가
+        )
     }
 }

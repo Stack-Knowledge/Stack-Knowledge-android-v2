@@ -22,8 +22,6 @@ android {
 
 dependencies {
     implementation(libs.google.services)
-//    implementation(libs.firebase.auth)
-//    implementation(libs.firebase.bom)
     implementation(libs.play.services.auth)
 }
 fun getApiKey(propertyKey: String): String {
