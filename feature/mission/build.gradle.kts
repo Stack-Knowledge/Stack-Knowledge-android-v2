@@ -7,6 +7,3 @@ plugins {
 android {
     namespace = "com.stackknowledge.mission"
 }
-dependencies {
-    implementation(project(":core:common"))
-}
