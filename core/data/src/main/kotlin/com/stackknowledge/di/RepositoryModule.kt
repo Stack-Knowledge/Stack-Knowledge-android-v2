@@ -1,5 +1,7 @@
 package com.stackknowledge.di
 
+import com.stackknowledge.repository.item.ItemRepository
+import com.stackknowledge.repository.item.ItemRepositoryImpl
 import com.stackknowledge.repository.mission.MissionRepository
 import com.stackknowledge.repository.mission.MissionRepositoryImpl
 import com.stackknowledge.repository.order.OrderRepository
@@ -28,4 +30,9 @@ abstract class RepositoryModule {
     abstract fun bindOrderRepository(
         orderRepositoryImpl: OrderRepositoryImpl
     ): OrderRepository
+
+    @Binds
+    abstract fun bindItemRepository(
+        itemRepositoryImpl: ItemRepositoryImpl
+    ): ItemRepository
 }
