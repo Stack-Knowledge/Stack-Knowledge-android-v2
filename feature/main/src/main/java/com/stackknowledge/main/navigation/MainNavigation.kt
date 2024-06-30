@@ -13,19 +13,11 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.mainScreen(
-    onHomeClick: (String) -> Unit,
-    onMissionClick: (String) -> Unit,
-    onMakeMissionClick: (String) -> Unit,
-    onShopClick: (String) -> Unit,
-    onRankingClick: (String) -> Unit,
+    onNavigate: (String, Boolean) -> Unit,
 ) {
     composable(route = mainPageRoute) {
         MainPageRoute(
-            onHomeClick = onHomeClick,
-            onMissionClick = onMissionClick,
-            onMakeMissionClick = onMakeMissionClick,
-            onShopClick = onShopClick,
-            onRankingClick = onRankingClick,
+            onNavigate = onNavigate
         )
     }
 }

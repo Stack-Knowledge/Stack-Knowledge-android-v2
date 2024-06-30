@@ -26,20 +26,12 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 internal fun MainPageRoute(
-    onHomeClick: (String) -> Unit,
-    onMissionClick: (String) -> Unit,
-    onMakeMissionClick: (String) -> Unit,
-    onShopClick: (String) -> Unit,
-    onRankingClick: (String) -> Unit,
+    onNavigate: (String, Boolean) -> Unit,
 ) {
     var role by remember { mutableStateOf(false) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
-        onHomeClick = onHomeClick,
-        onMissionClick = onMissionClick,
-        onMakeMissionClick = onMakeMissionClick,
-        onShopClick = onShopClick,
-        onRankingClick = onRankingClick,
+        onNavigate = { onNavigate(it, role) }
     )
 }
 
@@ -47,11 +39,7 @@ internal fun MainPageRoute(
 private fun MainPageScreen(
     modifier: Modifier = Modifier,
     role: Boolean, // 로그인 로직 병합후 변경
-    onHomeClick: (String) -> Unit,
-    onMissionClick: (String) -> Unit,
-    onMakeMissionClick: (String) -> Unit,
-    onShopClick: (String) -> Unit,
-    onRankingClick: (String) -> Unit,
+    onNavigate: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Box(
@@ -74,6 +62,7 @@ private fun MainPageScreen(
                     modifier = Modifier,
                     role = role
                 ) {
+                    onNavigate(it)
                 }
             }
         }
