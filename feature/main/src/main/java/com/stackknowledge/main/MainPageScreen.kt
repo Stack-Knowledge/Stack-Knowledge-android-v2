@@ -16,8 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.stackknowledge.design_system.component.navigation.StudentBottomNavigation
-import com.stackknowledge.design_system.component.navigation.TeacherBottomNavigation
+import com.stackknowledge.design_system.component.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.main.component.MissionList
@@ -33,7 +32,7 @@ internal fun MainPageRoute(
     onShopClick: (String) -> Unit,
     onRankingClick: (String) -> Unit,
 ) {
-    var role by remember { mutableStateOf(true) } //로그인 로직 적용후 변경
+    var role by remember { mutableStateOf(false) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
         onHomeClick = onHomeClick,
@@ -47,7 +46,7 @@ internal fun MainPageRoute(
 @Composable
 private fun MainPageScreen(
     modifier: Modifier = Modifier,
-    role: Boolean,
+    role: Boolean, // 로그인 로직 병합후 변경
     onHomeClick: (String) -> Unit,
     onMissionClick: (String) -> Unit,
     onMakeMissionClick: (String) -> Unit,
@@ -71,24 +70,12 @@ private fun MainPageScreen(
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
             ) {
-                if (role) {
-                    StudentBottomNavigation(
-                        onHomeClick = { /*TODO*/ },
-                        onMissionClick = { /*TODO*/ },
-                        onShopClick = { /*TODO*/ },
-                        onRankingClick = {}
-                    )
-                } else {
-                    TeacherBottomNavigation(
-                        onHomeClick = { /*TODO*/ },
-                        onMissionClick = { /*TODO*/ },
-                        onMakeMissionClick = { /*TODO*/ },
-                        onShopClick = { /*TODO*/ },
-                        onRankingClick = {}
-                    )
+                StackKnowledgeBottomNavigation(
+                    modifier = Modifier,
+                    role = role
+                ) {
                 }
             }
         }
     }
-
 }
