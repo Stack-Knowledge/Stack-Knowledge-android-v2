@@ -13,7 +13,7 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.mainScreen(
-    onNavigate: (String, Boolean) -> Unit,
+    onNavigate: (String) -> Unit,
 ) {
     composable(route = mainPageRoute) {
         MainPageRoute(

@@ -7,6 +7,7 @@ import com.stackknowledge.login.navigation.loginScreen
 import com.stackknowledge.login.navigation.roleCheckScreen
 import com.stackknowledge.main.navigation.mainPageRoute
 import com.stackknowledge.main.navigation.mainScreen
+import com.stackknowledge.navigation.util.bottomNavigationNavigate
 import com.stackknowledge.ranking.navigation.rankingScreen
 import com.stackknowledge.ranking.navigation.teacherRankingScreen
 import com.stackknowledge.resolve_mission.navigation.resolveMissionScreen
@@ -26,7 +27,6 @@ fun StackKnowledgeNavHost(
 ) {
     val navController = appState.navController
 
-    // 아래의 NavHost의 startDestination은 GoogleOAuth작업 이후 학생 or 선생여부 묻는 스크린을 띄워주면 될 거 같아요
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -35,7 +35,7 @@ fun StackKnowledgeNavHost(
         loginScreen()
         roleCheckScreen()
         mainScreen(
-            onNavigate = { navType, role -> }
+            onNavigate = { navType -> bottomNavigationNavigate(navController, navType) }
         )
         createMissionScreen()
         entireMissionScreen()

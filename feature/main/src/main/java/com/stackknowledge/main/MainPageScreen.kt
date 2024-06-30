@@ -26,12 +26,12 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 internal fun MainPageRoute(
-    onNavigate: (String, Boolean) -> Unit,
+    onNavigate: (String) -> Unit,
 ) {
     var role by remember { mutableStateOf(false) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
-        onNavigate = { onNavigate(it, role) }
+        onNavigate = onNavigate
     )
 }
 
