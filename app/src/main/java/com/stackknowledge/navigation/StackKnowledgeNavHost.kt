@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.stackknowledge.login.navigation.loginScreen
+import com.stackknowledge.login.navigation.roleCheckRoute
 import com.stackknowledge.login.navigation.roleCheckScreen
 import com.stackknowledge.main.navigation.mainPageRoute
 import com.stackknowledge.main.navigation.mainScreen
@@ -35,7 +36,7 @@ fun StackKnowledgeNavHost(
         loginScreen()
         roleCheckScreen()
         mainScreen(
-            onNavigate = { navType -> bottomNavigationNavigate(navController, navType) }
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )
         createMissionScreen()
         entireMissionScreen()

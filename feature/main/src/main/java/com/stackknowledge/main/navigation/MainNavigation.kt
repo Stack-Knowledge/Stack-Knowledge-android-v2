@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.main.MainPageRoute
+import enumdatatype.Authority
 
 const val mainPageRoute = "main_page_route"
 
@@ -13,7 +14,7 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.mainScreen(
-    onNavigate: (String) -> Unit,
+    onNavigate: (Authority, String) -> Unit,
 ) {
     composable(route = mainPageRoute) {
         MainPageRoute(

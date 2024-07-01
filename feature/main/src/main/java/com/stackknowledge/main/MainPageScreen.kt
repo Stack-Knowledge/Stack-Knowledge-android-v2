@@ -16,29 +16,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.stackknowledge.design_system.component.navigation.StackKnowledgeBottomNavigation
+import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.main.component.MissionList
 import com.stackknowledge.main.component.RankingList
 import com.stackknowledge.main.component.StackKnowledgePager
+import enumdatatype.Authority
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 internal fun MainPageRoute(
-    onNavigate: (String) -> Unit,
+    onNavigate: (Authority, String) -> Unit,
 ) {
-    var role by remember { mutableStateOf(false) } //로그인 로직 적용후 변경
+    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
-        onNavigate = onNavigate
+        onNavigate = { navType -> onNavigate(role, navType)}
     )
 }
 
 @Composable
 private fun MainPageScreen(
     modifier: Modifier = Modifier,
-    role: Boolean, // 로그인 로직 병합후 변경
+    role: Authority,
     onNavigate: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
