@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.retrofit.moshi.converter)
     implementation(libs.moshi)
-    ksp(libs.retrofit.moshi.codegen)
+    implementation(libs.retrofit.moshi.codegen)
 }
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")
