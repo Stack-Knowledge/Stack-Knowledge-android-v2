@@ -1,4 +1,4 @@
-package com.stackknowledge.design_system.component.navigation
+package com.minstone.ui.navigation
 
 import android.icu.text.TimeZoneNames.NameType
 import androidx.annotation.StringRes
@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import enumdatatype.Authority
 
 enum class NavigateType(val value: String, val stringResId: Int) {
     HOME("home", R.string.home),
@@ -32,7 +33,7 @@ enum class NavigateType(val value: String, val stringResId: Int) {
 @Composable
 fun StackKnowledgeBottomNavigation(
     modifier: Modifier,
-    role: Boolean, // 로그인 로직 적용후 변경
+    role: Authority,
     onNavigate: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -55,7 +56,7 @@ fun StackKnowledgeBottomNavigation(
                 )
 
                 navItems.forEachIndexed { index, (iconRes, navigateType, stringResId) ->
-                    if (index != 2 || !role) { // 로그인 로직 적용후 변경
+                    if (index != 2 || role == Authority.ROLE_TEACHER) { // 로그인 로직 적용후 변경
                         BottomNavigationComponent(
                             modifier = modifier
                                 .weight(1f)
