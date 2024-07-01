@@ -22,12 +22,12 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import enumdatatype.Authority
 
-enum class NavigateType(val value: String, val stringResId: Int) {
-    HOME("home", R.string.home),
-    MISSION("mission", R.string.mission),
-    CREATE_MISSION("create_mission", R.string.create_mission),
-    SHOP("shop", R.string.shop),
-    RANKING("ranking", R.string.ranking)
+enum class NavigateType(val value: String) {
+    HOME("home"),
+    MISSION("mission"),
+    CREATE_MISSION("create_mission"),
+    SHOP("shop"),
+    RANKING("ranking")
 }
 
 @Composable
@@ -48,11 +48,11 @@ fun StackKnowledgeBottomNavigation(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val navItems = listOf(
-                    Triple(R.drawable.home_icon, NavigateType.HOME.value, NavigateType.HOME.stringResId),
-                    Triple(R.drawable.mission_icon, NavigateType.MISSION.value, NavigateType.MISSION.stringResId),
-                    Triple(R.drawable.create_mission_icon, NavigateType.CREATE_MISSION.value, NavigateType.CREATE_MISSION.stringResId),
-                    Triple(R.drawable.shop_icon, NavigateType.SHOP.value, NavigateType.SHOP.stringResId),
-                    Triple(R.drawable.ranking_icon, NavigateType.RANKING.value, NavigateType.RANKING.stringResId)
+                    Triple(R.drawable.home_icon, NavigateType.HOME.value, R.string.home),
+                    Triple(R.drawable.mission_icon, NavigateType.MISSION.value, if(role == Authority.ROLE_STUDENT) R.string.mission else R.string.solved_mission),
+                    Triple(R.drawable.create_mission_icon, NavigateType.CREATE_MISSION.value, R.string.create_mission),
+                    Triple(R.drawable.shop_icon, NavigateType.SHOP.value, R.string.shop),
+                    Triple(R.drawable.ranking_icon, NavigateType.RANKING.value, R.string.ranking)
                 )
 
                 navItems.forEachIndexed { index, (iconRes, navigateType, stringResId) ->
