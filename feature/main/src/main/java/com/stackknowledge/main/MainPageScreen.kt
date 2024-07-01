@@ -29,7 +29,7 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 internal fun MainPageRoute(
     onNavigate: (Authority, String) -> Unit,
 ) {
-    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
         onNavigate = { navType -> onNavigate(role, navType)}
