@@ -15,7 +15,12 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.component.OrderedGoodsList
 
 @Composable
-fun TeacherShopScreen(
+internal fun TeacherShopRoute() {
+    TeacherShopScreen()
+}
+
+@Composable
+private fun TeacherShopScreen(
     modifier: Modifier = Modifier
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->

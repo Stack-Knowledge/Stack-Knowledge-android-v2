@@ -23,7 +23,12 @@ import com.stackkowledge.mission.component.InputMission
 import com.stackkowledge.mission.component.InputTitle
 
 @Composable
-fun CreateMissionScreen(
+internal fun CreateMissionRoute() {
+    CreateMissionScreen()
+}
+
+@Composable
+private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->

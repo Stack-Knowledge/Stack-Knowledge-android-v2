@@ -12,7 +12,12 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.score_mission.component.SolvedMissionList
 
 @Composable
-fun SolvedMissionScreen(
+internal fun SolvedMissionRoute() {
+    SolvedMissionScreen()
+}
+
+@Composable
+private fun SolvedMissionScreen(
     modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
