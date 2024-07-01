@@ -107,7 +107,8 @@ fun GradingRadioButton(
             StackKnowledgeButton(
                 text = stringResource(id = R.string.submit),
                 modifier = modifier
-                    .height(60.dp)
+                    .height(60.dp),
+                onClick = {}
             )
 
             Spacer(modifier = modifier.height(16.dp))

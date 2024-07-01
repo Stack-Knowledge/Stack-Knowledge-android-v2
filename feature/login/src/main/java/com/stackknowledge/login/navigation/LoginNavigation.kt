@@ -24,8 +24,12 @@ fun NavController.navigateToRoleCheck(navOptions: NavOptions? = null) {
     this.navigate(roleCheckRoute, navOptions)
 }
 
-fun NavGraphBuilder.roleCheckScreen() {
+fun NavGraphBuilder.roleCheckScreen(
+    onRoleClick: () -> Unit,
+) {
     composable(route = roleCheckRoute) {
-        RoleCheckScreenRoute()
+        RoleCheckScreenRoute(
+            onRoleClick = onRoleClick
+        )
     }
 }

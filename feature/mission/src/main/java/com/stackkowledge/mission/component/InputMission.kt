@@ -47,7 +47,8 @@ fun InputMission(
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.submit),
                     modifier = modifier
-                        .height(60.dp)
+                        .height(60.dp),
+                    onClick = {},
                 )
 
                 Spacer(modifier.height(28.dp))
