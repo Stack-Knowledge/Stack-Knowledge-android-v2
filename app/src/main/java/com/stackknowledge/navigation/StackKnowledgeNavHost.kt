@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.stackknowledge.login.navigation.loginScreen
+import com.stackknowledge.login.navigation.navigateToLogin
 import com.stackknowledge.login.navigation.roleCheckRoute
 import com.stackknowledge.login.navigation.roleCheckScreen
-import com.stackknowledge.main.navigation.mainPageRoute
 import com.stackknowledge.main.navigation.mainScreen
 import com.stackknowledge.navigation.util.bottomNavigationNavigate
 import com.stackknowledge.ranking.navigation.rankingScreen
@@ -24,7 +24,7 @@ import com.stackkowledge.mission.navigation.entireMissionScreen
 fun StackKnowledgeNavHost(
     appState: StackKnowledgeAppState,
     modifier: Modifier = Modifier,
-    startDestination: String = mainPageRoute, // = 선생여부 묻는 스크린 Route <- 루트 추가
+    startDestination: String = roleCheckRoute,
 ) {
     val navController = appState.navController
 
@@ -34,7 +34,9 @@ fun StackKnowledgeNavHost(
         modifier = modifier
     ) {
         loginScreen()
-        roleCheckScreen()
+        roleCheckScreen(
+            onRoleClick = navController::navigateToLogin
+        )
         mainScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )

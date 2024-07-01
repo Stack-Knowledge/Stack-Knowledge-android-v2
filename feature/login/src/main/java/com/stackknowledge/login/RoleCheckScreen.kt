@@ -24,13 +24,18 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
 
 @Composable
-internal fun RoleCheckScreenRoute() {
-    RoleCheckScreen()
+internal fun RoleCheckScreenRoute(
+    onRoleClick: () -> Unit,
+) {
+    RoleCheckScreen(
+        onRoleClick = onRoleClick
+    )
 }
 
 @Composable
 private fun RoleCheckScreen(
     modifier: Modifier = Modifier,
+    onRoleClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -61,7 +66,8 @@ private fun RoleCheckScreen(
                         text = stringResource(id = R.string.student),
                         modifier = modifier
                             .height(60.dp)
-                            .weight(1f)
+                            .weight(1f),
+                        onClick = onRoleClick
                     )
 
                     Spacer(modifier = modifier.width(8.dp))
@@ -70,7 +76,8 @@ private fun RoleCheckScreen(
                         text = stringResource(id = R.string.teacher),
                         modifier = modifier
                             .height(60.dp)
-                            .weight(1f)
+                            .weight(1f),
+                        onClick = onRoleClick
                     )
                 }
 
@@ -83,5 +90,7 @@ private fun RoleCheckScreen(
 @Preview
 @Composable
 fun RoleCheckScreenPre() {
-    RoleCheckScreen()
+    RoleCheckScreen(
+        onRoleClick = {}
+    )
 }
