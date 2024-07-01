@@ -1,7 +1,15 @@
 package com.stackknowledge.login.viewmodel.util
 
 import android.util.Log
-import com.stackknowledge.domain.exception.*
+import com.stackknowledge.usecase.exception.BadRequestException
+import com.stackknowledge.usecase.exception.ConflictException
+import com.stackknowledge.usecase.exception.ForBiddenException
+import com.stackknowledge.usecase.exception.NeedLoginException
+import com.stackknowledge.usecase.exception.NotAcceptableException
+import com.stackknowledge.usecase.exception.NotFoundException
+import com.stackknowledge.usecase.exception.ServerException
+import com.stackknowledge.usecase.exception.TimeOutException
+import com.stackknowledge.usecase.exception.UnauthorizedException
 
 suspend fun <T> Throwable.errorHandling(
     badRequestAction: suspend () -> Unit = {},

@@ -1,6 +1,6 @@
 package com.stackknowledge.login
 
-import androidx.activity.ComponentActivity
+
 import androidx.compose.foundation.background
 import com.stackknowledge.design_system.R
 import androidx.compose.foundation.layout.Box
@@ -14,11 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-<<<<<<< Updated upstream
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-=======
->>>>>>> Stashed changes
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,49 +28,26 @@ import com.stackknowledge.login.background.LoginBackground
 import com.stackknowledge.login.viewmodel.AuthViewModel
 
 @Composable
-fun RoleCheckRoute(
-    onRoleButtonClick: () -> Unit,
-    viewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
+internal fun RoleCheckRoute(
+    onTeacherButtonClick: (Boolean) -> Unit = {},
+    onStudentButtonClick: (Boolean) -> Unit = {},
 ) {
     RoleCheckScreen(
-<<<<<<< Updated upstream
-        navigateToLogin = navigateToLogin,
-        isStudent = isStudent,
-        isTeacher = isTeacher,
-        viewModel = viewModel
-=======
         onTeacherButtonClick = { isTeacher ->
-            viewModel.isTeacher.value = isTeacher
+            onTeacherButtonClick(isTeacher)
         },
         onStudentButtonClick = { isStudent ->
-            viewModel.isStudent.value = isStudent
+            onStudentButtonClick(isStudent)
         }
->>>>>>> Stashed changes
     )
 }
 
 @Composable
-fun RoleCheckScreen(
+internal fun RoleCheckScreen(
     modifier: Modifier = Modifier,
     onTeacherButtonClick: (Boolean) -> Unit,
     onStudentButtonClick: (Boolean) -> Unit,
 ) {
-<<<<<<< Updated upstream
-    val student by viewModel.isStudent.collectAsStateWithLifecycle()
-    // val teacher by viewModel.isTeacher.collectAsStateWithLifecycle()
-
-    LaunchedEffect(student) {
-        if (student) {
-            Log.d("testt",student.toString())
-            isStudent(student)
-            navigateToLogin()
-        } /*else {
-            isStudent(!student)
-            navigateToLogin()
-        }*/
-    }
-=======
->>>>>>> Stashed changes
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier.background(color = colors.WHITE),
@@ -135,11 +107,8 @@ fun RoleCheckScreen(
 @Preview
 @Composable
 fun RoleCheckScreenPre() {
-<<<<<<< Updated upstream
-=======
     RoleCheckScreen(
         onTeacherButtonClick = {},
         onStudentButtonClick = {},
     )
->>>>>>> Stashed changes
 }

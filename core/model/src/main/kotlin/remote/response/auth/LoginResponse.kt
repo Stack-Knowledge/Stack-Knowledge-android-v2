@@ -1,6 +1,6 @@
-package com.stackknowledge.model.remote.response.auth
+package remote.response.auth
 
-import com.stackknowledge.model.remote.enumdatatype.Authority
+import enumdata.Authority
 
 data class LoginResponse(
     val accessToken: String,

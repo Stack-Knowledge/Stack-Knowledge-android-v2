@@ -1,16 +1,13 @@
 package com.stackknowledge
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.login.LoginActivity
-import com.stackknowledge.login.viewmodel.AuthViewModel
 import com.stackknowledge.ui.StackKnowledgeApp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CompositionLocalProvider {
+            CompositionLocalProvider(LocalViewModelStoreOwner provides this) {
                 StackKnowledgeAndroidTheme { _, _ ->
                     StackKnowledgeApp(
                         windowSizeClass = calculateWindowSizeClass(this@MainActivity),

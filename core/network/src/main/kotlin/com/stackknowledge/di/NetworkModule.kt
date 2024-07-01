@@ -1,14 +1,17 @@
 package com.stackknowledge.di
 
-import com.msg.network.BuildConfig
+import android.util.Log
 import com.squareup.moshi.Moshi
+import com.stackknowledge.api.AuthAPI
 import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.api.StudentAPI
+import com.stackknowledge.api.UserAPI
+import com.stackknowledge.network.BuildConfig
+import com.stackknowledge.util.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.CookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,38 +22,35 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+    @Provides
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor { message -> Log.v("HTTP", message) }
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
     @Singleton
     fun provideOkhttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .cookieJar(CookieJar.NO_COOKIES)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(authInterceptor)
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        }
-    }
-
-    @Provides
-    @Singleton
-    fun provideMoshiInstance(): Moshi {
+    fun provideMoshi(): Moshi {
         return Moshi.Builder().build()
     }
 
     @Provides
     @Singleton
-    fun provideConverterFactory(moshi: Moshi): MoshiConverterFactory {
+    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
         return MoshiConverterFactory.create(moshi)
     }
 
@@ -66,6 +66,12 @@ object NetworkModule {
             .addConverterFactory(moshiConverterFactory)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthAPI(retrofit: Retrofit): AuthAPI =
+        retrofit.create(AuthAPI::class.java)
+
     @Provides
     @Singleton
     fun provideMissionAPI(retrofit: Retrofit): MissionAPI =
@@ -75,4 +81,9 @@ object NetworkModule {
     @Singleton
     fun provideStudentAPI(retrofit: Retrofit): StudentAPI =
         retrofit.create(StudentAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserAPI(retrofit: Retrofit): UserAPI =
+        retrofit.create(UserAPI::class.java)
 }

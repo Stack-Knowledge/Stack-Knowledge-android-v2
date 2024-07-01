@@ -1,4 +1,4 @@
-package com.stackknowledge.domain.exception
+package com.stackknowledge.usecase.exception
 
 class BadRequestException(
     override val message: String?

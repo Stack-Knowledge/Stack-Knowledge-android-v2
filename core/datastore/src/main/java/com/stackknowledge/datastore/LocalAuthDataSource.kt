@@ -1,6 +1,5 @@
 package com.stackknowledge.datastore
 
-import com.stackknowledge.model.remote.enumdatatype.Authority
 import kotlinx.coroutines.flow.Flow
 
 interface LocalAuthDataSource {

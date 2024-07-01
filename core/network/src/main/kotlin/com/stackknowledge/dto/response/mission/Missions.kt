@@ -2,7 +2,7 @@ package com.stackknowledge.dto.response.mission
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import enumdatatype.MissionStatus
+import enumdata.MissionStatus
 import remote.user.UserModel
 import java.util.UUID
 

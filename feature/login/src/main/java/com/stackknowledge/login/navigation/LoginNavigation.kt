@@ -16,7 +16,9 @@ fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.loginScreen() {
     composable(route = loginRoute) {
-        LoginRoute()
+        LoginRoute(
+
+        )
     }
 }
 
@@ -29,7 +31,6 @@ fun NavGraphBuilder.roleCheckScreen(
 ) {
     composable(route = roleCheckRoute) {
         RoleCheckRoute(
-            onRoleButtonClick = onRoleButtonClick
         )
     }
 }

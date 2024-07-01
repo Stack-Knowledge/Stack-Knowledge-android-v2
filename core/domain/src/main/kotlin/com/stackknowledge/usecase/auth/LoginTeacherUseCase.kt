@@ -1,7 +1,7 @@
-package com.stackknowledge.domain.auth
+package com.stackknowledge.usecase.auth
 
-import com.stackknowledge.data.repository.auth.AuthRepository
-import com.stackknowledge.model.remote.request.auth.LoginRequest
+import com.stackknowledge.repository.auth.AuthRepository
+import remote.request.auth.LoginRequest
 import javax.inject.Inject
 
 class LoginTeacherUseCase @Inject constructor(

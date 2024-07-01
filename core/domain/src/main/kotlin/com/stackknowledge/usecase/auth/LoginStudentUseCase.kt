@@ -1,7 +1,8 @@
-package com.stackknowledge.domain.auth
+package com.stackknowledge.usecase.auth
 
-import com.stackknowledge.data.repository.auth.AuthRepository
-import com.stackknowledge.model.remote.request.auth.LoginRequest
+import android.util.Log
+import com.stackknowledge.repository.auth.AuthRepository
+import remote.request.auth.LoginRequest
 import javax.inject.Inject
 
 class LoginStudentUseCase @Inject constructor(
@@ -10,6 +11,7 @@ class LoginStudentUseCase @Inject constructor(
     suspend operator fun invoke(
         body: LoginRequest,
     ) = runCatching {
+        Log.e("useCase loginStudent", "loginStudent")
         authRepository.loginStudent(
             body = body,
         )

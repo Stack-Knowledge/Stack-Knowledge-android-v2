@@ -1,4 +1,4 @@
-package com.stackknowledge.domain.exception
+package com.stackknowledge.usecase.exception
 
 import java.io.IOException
 

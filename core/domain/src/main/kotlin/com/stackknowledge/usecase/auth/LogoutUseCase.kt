@@ -1,6 +1,6 @@
-package com.stackknowledge.domain.auth
+package com.stackknowledge.usecase.auth
 
-import com.stackknowledge.data.repository.auth.AuthRepository
+import com.stackknowledge.repository.auth.AuthRepository
 import javax.inject.Inject
 
 class LogoutUseCase @Inject constructor(

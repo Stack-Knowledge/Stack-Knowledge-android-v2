@@ -1,4 +1,4 @@
-package com.stackknowledge.model.remote.enumdatatype
+package enumdata
 
 enum class Authority {
     ROLE_TEACHER,
