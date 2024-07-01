@@ -32,7 +32,7 @@ internal fun MainPageRoute(
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     MainPageScreen(
         role = role,
-        onNavigate = { navType -> onNavigate(role, navType)}
+        onNavigate = { navType -> onNavigate(role, navType) }
     )
 }
 

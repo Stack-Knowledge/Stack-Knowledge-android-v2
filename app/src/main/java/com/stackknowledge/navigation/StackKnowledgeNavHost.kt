@@ -43,7 +43,9 @@ fun StackKnowledgeNavHost(
         )
         createMissionScreen()
         entireMissionScreen()
-        rankingScreen()
+        rankingScreen(
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+        )
         teacherRankingScreen()
         resolveMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
