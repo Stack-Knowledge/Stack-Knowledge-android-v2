@@ -23,7 +23,12 @@ import com.stackkowledge.mission.uistate.GetMissionUiState
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 
 @Composable
-fun EntireMissionScreen(
+internal fun EntireMissionRoute() {
+    EntireMissionScreen()
+}
+
+@Composable
+private fun EntireMissionScreen(
     modifier: Modifier = Modifier,
     viewModel: MissionViewModel = hiltViewModel(),
 ) {

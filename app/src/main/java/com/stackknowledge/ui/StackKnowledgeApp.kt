@@ -13,6 +13,9 @@ fun StackKnowledgeApp(
     ),
 ) {
     StackKnowledgeAndroidTheme { _, _ ->
-        // StackKnowledgeNavHost(appState = appState, startDestination = ) <- 이부분도 startDestination 스크린 작업 후 추가
+         StackKnowledgeNavHost(
+             appState = appState,
+             //startDestination = "" <- auth 작업후에 추가
+         )
     }
 }

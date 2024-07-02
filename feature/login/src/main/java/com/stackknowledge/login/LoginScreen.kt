@@ -24,7 +24,12 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
 
 @Composable
-fun LoginScreen(
+internal fun LoginScreenRoute() {
+    LoginScreen()
+}
+
+@Composable
+private fun LoginScreen(
     modifier: Modifier = Modifier
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->

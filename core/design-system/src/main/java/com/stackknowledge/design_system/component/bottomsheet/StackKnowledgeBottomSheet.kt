@@ -86,7 +86,8 @@ fun StackKnowledgeBottomSheet(
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.purchase),
                     modifier = modifier
-                        .height(60.dp)
+                        .height(60.dp),
+                    onClick = {},
                 )
 
                 Spacer(modifier = modifier.height(24.dp))

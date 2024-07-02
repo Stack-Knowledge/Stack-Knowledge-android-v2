@@ -19,7 +19,12 @@ import com.stackknowledge.score_mission.component.SolvedMissionAnswer
 import com.stackknowledge.score_mission.component.SolvedMissionTitle
 
 @Composable
-fun GradingAnswerScreen(
+internal fun GradingAnswerRoute() {
+    GradingAnswerScreen()
+}
+
+@Composable
+private fun GradingAnswerScreen(
     modifier: Modifier = Modifier,
 ) {
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }

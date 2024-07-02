@@ -31,7 +31,12 @@ import com.stackkowledge.mission.viewmodel.MissionViewModel
 import remote.request.mission.CreateMissionRequestModel
 
 @Composable
-fun CreateMissionScreen(
+internal fun CreateMissionRoute() {
+    CreateMissionScreen()
+}
+
+@Composable
+private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
     viewModel: MissionViewModel = hiltViewModel(),
 ) {

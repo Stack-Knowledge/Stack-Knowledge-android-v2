@@ -18,7 +18,12 @@ import com.stackknowledge.resolve_mission.component.Mission
 import com.stackknowledge.resolve_mission.component.MissionTimer
 
 @Composable
-fun ResolveMissionScreen(
+internal fun ResolveMissionRoute() {
+    ResolveMissionScreen()
+}
+
+@Composable
+private fun ResolveMissionScreen(
     modifier: Modifier = Modifier
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
