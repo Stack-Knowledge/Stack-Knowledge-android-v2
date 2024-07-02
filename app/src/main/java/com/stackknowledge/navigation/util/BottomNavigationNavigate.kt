@@ -29,7 +29,7 @@ fun bottomNavigationNavigate(
     } else {
         when(navType) {
             NavigateType.HOME.value -> navController.navigateToMain()
-            NavigateType.MISSION.value ->  navController.navigateToResolveMission()
+            NavigateType.MISSION.value ->  navController.navigateToEntireMission()
             NavigateType.SHOP.value -> navController.navigateToShop()
             NavigateType.RANKING.value -> navController.navigateToRanking()
         }
