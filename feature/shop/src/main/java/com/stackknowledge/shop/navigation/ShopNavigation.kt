@@ -29,8 +29,12 @@ fun NavController.navigateToTeacherShop(navOptions: NavOptions? = null) {
     this.navigate(teacherShopRoute, navOptions)
 }
 
-fun NavGraphBuilder.teacherShopScreen() {
+fun NavGraphBuilder.teacherShopScreen(
+    onNavigate: (Authority, String) -> Unit,
+) {
     composable(route = teacherShopRoute) {
-        TeacherShopRoute()
+        TeacherShopRoute(
+            onNavigate = onNavigate
+        )
     }
 }

@@ -61,6 +61,8 @@ fun StackKnowledgeNavHost(
         shopScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )
-        teacherShopScreen()
+        teacherShopScreen(
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+        )
     }
 }
