@@ -51,7 +51,9 @@ fun StackKnowledgeNavHost(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )
         gradingAnswerScreen()
-        solvedMissionScreen()
+        solvedMissionScreen(
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+        )
         shopScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )

@@ -1,27 +1,43 @@
 package com.stackknowledge.score_mission
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.score_mission.component.SolvedMissionList
+import enumdatatype.Authority
 
 @Composable
-internal fun SolvedMissionRoute() {
-    SolvedMissionScreen()
+internal fun SolvedMissionRoute(
+    onNavigate: (Authority, String) -> Unit,
+) {
+    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    SolvedMissionScreen(
+        role = role,
+        onNavigate = { navType -> onNavigate(role, navType) }
+    )
 }
 
 @Composable
 private fun SolvedMissionScreen(
     modifier: Modifier = Modifier,
+    role: Authority,
+    onNavigate: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
-        Surface {
+        Box {
             Column(
                 modifier = modifier
                     .background(color = colors.WHITE)
@@ -30,12 +46,16 @@ private fun SolvedMissionScreen(
                 StackKnowledgeTopBar()
                 SolvedMissionList()
             }
+            Box(
+                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+            ) {
+                StackKnowledgeBottomNavigation(
+                    modifier = Modifier,
+                    role = role
+                ) {
+                    onNavigate(it)
+                }
+            }
         }
     }
-}
-
-@Preview
-@Composable
-fun SolvedMissionScreenPre() {
-    SolvedMissionScreen()
 }
