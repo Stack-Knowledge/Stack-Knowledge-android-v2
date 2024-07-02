@@ -1,6 +1,11 @@
 package com.stackknowledge.datasource.mission
 
+import android.util.Log
 import com.stackknowledge.api.MissionAPI
+import com.stackknowledge.dto.request.mission.CreateMissionRequest
+import com.stackknowledge.dto.request.mission.DetailMissionRequest
+import com.stackknowledge.dto.response.mission.DetailMissionResponse
+import com.stackknowledge.dto.response.mission.MissionResponse
 import com.stackknowledge.util.StackKnowledgeApiHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -15,23 +20,25 @@ import javax.inject.Inject
 class MissionDataSourceImpl @Inject constructor(
     private val missionAPI: MissionAPI
 ) : MissionDataSource {
-    override fun getMission(): Flow<MissionResponseModel> = flow {
+    override fun getMission(): Flow<List<MissionResponse>> = flow {
+        Log.e("getMissionDataSource", "Success")
         emit(
-            StackKnowledgeApiHandler<MissionResponseModel>()
+            StackKnowledgeApiHandler<List<MissionResponse>>()
                 .httpRequest { missionAPI.getMission() }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel> = flow {
+    override fun detailMission(missionId: DetailMissionRequest): Flow<DetailMissionResponse> = flow {
         emit(
-            StackKnowledgeApiHandler<DetailMissionResponseModel>()
+            StackKnowledgeApiHandler<DetailMissionResponse>()
                 .httpRequest { missionAPI.getDetailMission(missionId = missionId) }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun createMission(body: CreateMissionRequestModel): Flow<Unit> = flow {
+    override fun createMission(body: CreateMissionRequest): Flow<Unit> = flow {
+        Log.e("createMissionDataSource", "Success")
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { missionAPI.createMission(body = body) }

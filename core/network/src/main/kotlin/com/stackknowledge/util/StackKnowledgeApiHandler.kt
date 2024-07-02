@@ -1,8 +1,6 @@
 package com.stackknowledge.util
 
-import android.net.http.NetworkException
-import android.os.Build
-import androidx.annotation.RequiresExtension
+import android.util.Log
 import com.example.common.exception.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -18,9 +16,7 @@ class StackKnowledgeApiHandler<T> {
 
     suspend fun sendRequest(): T {
         return try {
-            withContext(Dispatchers.IO) {
-                httpRequest.invoke()
-            }
+            httpRequest.invoke()
         } catch (e: HttpException) {
             val message = e.message
             throw when(e.code()) {
@@ -49,6 +45,8 @@ class StackKnowledgeApiHandler<T> {
             }
         } catch (e: SocketTimeoutException) {
             throw TimeOutException(message = e.message)
+        } catch (e: UnknownHostException) {
+            throw NetworkException()
         } catch (e: NeedLoginException) {
             throw NeedLoginException()
         } catch (e: Exception) {
