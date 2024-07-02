@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +25,8 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun InputTitle(
     modifier: Modifier = Modifier,
+    title: String,
+    onTitleValueChange: (String) -> Unit
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -53,7 +59,10 @@ fun InputTitle(
 
                 InputTitleTextField(
                     modifier = modifier.fillMaxWidth(),
-                    onValueChange = {}
+                    value = title,
+                    onValueChange = {
+                        onTitleValueChange(it)
+                    }
                 )
 
                 Spacer(modifier = modifier.height(28.dp))
@@ -66,5 +75,5 @@ fun InputTitle(
 @Preview
 @Composable
 fun InputTitlePre() {
-    InputTitle()
+    // InputTitle()
 }

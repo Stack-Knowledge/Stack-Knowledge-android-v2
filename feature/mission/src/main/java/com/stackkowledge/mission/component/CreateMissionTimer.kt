@@ -45,11 +45,11 @@ import com.stackknowledge.design_system.theme.pretendard
 @Composable
 fun CreateMissionTimer(
     modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit,
+    onMinute: Int,
+    onSecond: Int,
+    onMinuteValueChange: (String) -> Unit,
+    onSecondValueChange: (String) -> Unit,
 ) {
-    var minute by remember { mutableStateOf("") }
-    var second by remember { mutableStateOf("") }
-
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier
@@ -68,7 +68,7 @@ fun CreateMissionTimer(
             )
             Row {
                 Box {
-                    if (minute.isNullOrEmpty()) {
+                    if (onMinute.toString().isNullOrEmpty()) {
                         Text(
                             modifier = modifier.align(Alignment.Center),
                             text = "00",
@@ -85,11 +85,10 @@ fun CreateMissionTimer(
                     }
 
                     TextField(
-                        value = minute,
+                        value = "$onMinute",
                         onValueChange = {
-                            if (minute.length <= 2) {
-                                minute = it
-                                onValueChange(it)
+                            if (onMinute.toString().length <= 2) {
+                                onMinuteValueChange(it)
                             }
                         },
                         keyboardOptions = KeyboardOptions.Default.copy(
@@ -126,7 +125,7 @@ fun CreateMissionTimer(
                     color = colors.BLACK
                 )
                 Box {
-                    if (second.isNullOrEmpty()) {
+                    if (onSecond.toString().isNullOrEmpty()) {
                         Text(
                             modifier = modifier.align(Alignment.Center),
                             text = "00",
@@ -142,11 +141,10 @@ fun CreateMissionTimer(
                         )
                     }
                     TextField(
-                        value = second,
+                        value = "$onSecond",
                         onValueChange = {
-                            if (second.length <= 2) {
-                                second = it
-                                onValueChange(it)
+                            if (onSecond.toString().length <= 2) {
+                                onSecondValueChange(it)
                             }
                         },
                         keyboardOptions = KeyboardOptions.Default.copy(
@@ -182,7 +180,7 @@ fun CreateMissionTimer(
 @Preview
 @Composable
 fun CreateMissionTimerPre() {
-    CreateMissionTimer(
+    /*CreateMissionTimer(
         onValueChange = {}
-    )
+    )*/
 }

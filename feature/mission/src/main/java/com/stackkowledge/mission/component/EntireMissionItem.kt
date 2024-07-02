@@ -1,5 +1,6 @@
 package com.stackkowledge.mission.component
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,20 +14,29 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.utils.shadow
+import com.stackkowledge.mission.viewmodel.MissionViewModel
+import java.util.UUID
 
 @Composable
 fun EntireMissionItem(
     modifier: Modifier = Modifier,
+    name: String,
+    title: String,
+    point: Int,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -56,7 +66,7 @@ fun EntireMissionItem(
                     Spacer(modifier = modifier.height(28.dp))
 
                     Text(
-                        text = "미소쌤",
+                        text = name,
                         color = colors.BLACK,
                         style = typography.bodyLarge
                     )
@@ -64,7 +74,7 @@ fun EntireMissionItem(
 
                     Text(
                         modifier = modifier.padding(horizontal = 16.dp),
-                        text = "여기에 한줄설명 적을거임",
+                        text = title,
                         color = colors.G2,
                         style = typography.displayMedium
                     )
@@ -75,7 +85,7 @@ fun EntireMissionItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "1,000",
+                            text = "$point",
                             style = typography.bodyMedium,
                             color = colors.BLACK
                         )
@@ -99,5 +109,5 @@ fun EntireMissionItem(
 fun EntireMissionItemPre(
     modifier: Modifier = Modifier,
 ) {
-    EntireMissionItem()
+    // EntireMissionItem()
 }
