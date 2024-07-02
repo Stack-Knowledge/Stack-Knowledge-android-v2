@@ -22,11 +22,13 @@ import enumdatatype.Authority
 @Composable
 internal fun SolvedMissionRoute(
     onNavigate: (Authority, String) -> Unit,
+    onItemClick: () -> Unit
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     SolvedMissionScreen(
         role = role,
-        onNavigate = { navType -> onNavigate(role, navType) }
+        onNavigate = { navType -> onNavigate(role, navType) },
+        onItemClick = onItemClick
     )
 }
 
@@ -35,6 +37,7 @@ private fun SolvedMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
+    onItemClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box {
@@ -44,7 +47,9 @@ private fun SolvedMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-                SolvedMissionList()
+                SolvedMissionList(
+                    onClick = { onItemClick() }
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),

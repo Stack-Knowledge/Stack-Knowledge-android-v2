@@ -2,6 +2,7 @@ package com.stackknowledge.score_mission.component
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,7 @@ import com.stackknowledge.design_system.utils.shadow
 @Composable
 fun SolvedMissionItem(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -45,6 +47,7 @@ fun SolvedMissionItem(
                     blurRadius = 20.dp,
                 )
                 .zIndex(-1f)
+                .clickable { onClick() }
         ) {
             Box(
                 modifier = modifier
@@ -107,5 +110,7 @@ fun SolvedMissionItem(
 fun SolvedMissionItemPre(
     modifier: Modifier = Modifier,
 ) {
-    SolvedMissionItem()
+    SolvedMissionItem(
+        onClick = {}
+    )
 }

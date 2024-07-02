@@ -14,6 +14,7 @@ import com.stackknowledge.ranking.navigation.rankingScreen
 import com.stackknowledge.ranking.navigation.teacherRankingScreen
 import com.stackknowledge.resolve_mission.navigation.resolveMissionScreen
 import com.stackknowledge.score_mission.navigation.gradingAnswerScreen
+import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
 import com.stackknowledge.score_mission.navigation.solvedMissionScreen
 import com.stackknowledge.shop.navigation.shopScreen
 import com.stackknowledge.shop.navigation.teacherShopScreen
@@ -52,7 +53,8 @@ fun StackKnowledgeNavHost(
         )
         gradingAnswerScreen()
         solvedMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onItemClick = navController::navigateToGradingAnswer
         )
         shopScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }

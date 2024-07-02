@@ -27,10 +27,12 @@ fun NavController.navigateToSolvedMission(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.solvedMissionScreen(
     onNavigate: (Authority, String) -> Unit,
+    onItemClick: () -> Unit,
 ) {
     composable(route = solvedMissionRoute) {
         SolvedMissionRoute(
-            onNavigate = onNavigate
+            onNavigate = onNavigate,
+            onItemClick = onItemClick
         )
     }
 }
