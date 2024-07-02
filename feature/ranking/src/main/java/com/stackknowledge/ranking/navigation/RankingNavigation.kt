@@ -29,8 +29,12 @@ fun NavController.navigateToTeacherRanking(navOptions: NavOptions? = null) {
     this.navigate(teacherRankingRoute, navOptions)
 }
 
-fun NavGraphBuilder.teacherRankingScreen() {
+fun NavGraphBuilder.teacherRankingScreen(
+    onNavigate: (Authority, String) -> Unit,
+) {
     composable(route = teacherRankingRoute) {
-        TeacherRankingRoute()
+        TeacherRankingRoute(
+            onNavigate = onNavigate
+        )
     }
 }
