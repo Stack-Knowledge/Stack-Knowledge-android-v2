@@ -22,11 +22,13 @@ import enumdatatype.Authority
 @Composable
 internal fun EntireMissionRoute(
     onNavigate: (Authority, String) -> Unit,
+    onItemClick: () -> Unit
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     EntireMissionScreen(
         role = role,
-        onNavigate = { navType -> onNavigate(role, navType) }
+        onNavigate = { navType -> onNavigate(role, navType) },
+        onItemClick = onItemClick
     )
 }
 
@@ -35,6 +37,7 @@ private fun EntireMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
+    onItemClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Box {
@@ -44,7 +47,7 @@ private fun EntireMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-                EntireMissionList()
+                EntireMissionList( onClick = { onItemClick() } )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),

@@ -1,6 +1,7 @@
 package com.stackkowledge.mission.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import com.stackknowledge.design_system.utils.shadow
 @Composable
 fun EntireMissionItem(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -38,6 +40,7 @@ fun EntireMissionItem(
                     blurRadius = 20.dp,
                 )
                 .zIndex(-1f)
+                .clickable { onClick() }
         ) {
             Box(
                 modifier = modifier
@@ -92,12 +95,4 @@ fun EntireMissionItem(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun EntireMissionItemPre(
-    modifier: Modifier = Modifier,
-) {
-    EntireMissionItem()
 }

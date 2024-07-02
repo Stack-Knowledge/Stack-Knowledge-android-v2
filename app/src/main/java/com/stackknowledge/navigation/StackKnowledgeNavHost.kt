@@ -12,6 +12,7 @@ import com.stackknowledge.main.navigation.mainScreen
 import com.stackknowledge.navigation.util.bottomNavigationNavigate
 import com.stackknowledge.ranking.navigation.rankingScreen
 import com.stackknowledge.ranking.navigation.teacherRankingScreen
+import com.stackknowledge.resolve_mission.navigation.navigateToResolveMission
 import com.stackknowledge.resolve_mission.navigation.resolveMissionScreen
 import com.stackknowledge.score_mission.navigation.gradingAnswerScreen
 import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
@@ -46,7 +47,8 @@ fun StackKnowledgeNavHost(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )
         entireMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onItemClick = navController::navigateToResolveMission
         )
         rankingScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }

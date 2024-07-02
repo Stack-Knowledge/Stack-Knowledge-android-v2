@@ -31,10 +31,12 @@ fun NavController.navigateToEntireMission(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.entireMissionScreen(
     onNavigate: (Authority, String) -> Unit,
+    onItemClick: () -> Unit,
 ) {
     composable(route = entireMissionRoute) {
         EntireMissionRoute(
-            onNavigate = onNavigate
+            onNavigate = onNavigate,
+            onItemClick = onItemClick
         )
     }
 }
