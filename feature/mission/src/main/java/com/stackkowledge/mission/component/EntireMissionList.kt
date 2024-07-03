@@ -50,9 +50,9 @@ fun EntireMissionList(
                         contentAlignment = Alignment.Center
                     ) {
                         EntireMissionItem(
-                            name = item.missions.user.name,
-                            title = item.missions.title,
-                            point = item.missions.point,
+                            name = item.user.name,
+                            title = item.title,
+                            point = item.point,
                         )
                     }
                 }
