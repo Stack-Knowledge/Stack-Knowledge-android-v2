@@ -10,6 +10,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.ui.StackKnowledgeApp
+import com.stackknowledge.user.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
         } else {
             doubleBackToExitPressedOnce = true
             backPressedTimestamp = currentTime
-            Toast.makeText(this, "\'뒤로\' 버튼 한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.close_app),Toast.LENGTH_SHORT).show()
         }
     }
 }
