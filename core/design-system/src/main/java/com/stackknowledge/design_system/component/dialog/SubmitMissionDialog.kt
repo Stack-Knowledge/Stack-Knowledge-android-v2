@@ -22,13 +22,13 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
-fun SubmitMissionDialog(
+fun SubmitDialog(
     modifier: Modifier = Modifier,
     content: String,
-    onQuit: () -> Unit,
+    onDismiss: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
-        Dialog(onDismissRequest = { onQuit() }) {
+        Dialog(onDismissRequest = { onDismiss() }) {
             Row(
                 modifier = modifier
                     .width(328.dp)
@@ -73,8 +73,8 @@ fun SubmitMissionDialog(
 
 @Preview
 @Composable
-fun SubmitMissionDialogPre() {
-    SubmitMissionDialog(
+fun SubmitDialogPre() {
+    SubmitDialog(
         content = "문제가 제출되었습니다!"
     ) {}
 }

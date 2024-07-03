@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,13 +24,14 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
-fun LogoutDialog(
+fun StackKnowledgeDialog(
     modifier: Modifier = Modifier,
     content: String,
-    onQuit: () -> Unit,
+    onConfirm: () -> Unit,
+    onDismiss:() -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
-        Dialog(onDismissRequest = { onQuit() } )  {
+        Dialog(onDismissRequest = { onDismiss() } )  {
             Column(
                 modifier = modifier
                     .width(280.dp)
@@ -44,7 +46,7 @@ fun LogoutDialog(
                 Text(
                     text = content,
                     style = typography.bodyMedium,
-                    color = colors.BLACK
+                    color = colors.BLACK,
                 )
                 Spacer(modifier = modifier.height(35.dp))
                 Row() {
@@ -52,7 +54,7 @@ fun LogoutDialog(
                         modifier = modifier
                             .width(116.dp)
                             .height(40.dp),
-                        onClick = {},
+                        onClick = onDismiss,
                         shape = RoundedCornerShape(10.dp),
                         colors = ButtonDefaults.buttonColors(
                             colors.P1
@@ -69,7 +71,7 @@ fun LogoutDialog(
                         modifier = modifier
                             .width(116.dp)
                             .height(40.dp),
-                        onClick = {},
+                        onClick = onConfirm,
                         shape = RoundedCornerShape(10.dp),
                         border = BorderStroke(1.dp, colors.P1),
                         colors = ButtonDefaults.buttonColors(
@@ -90,8 +92,10 @@ fun LogoutDialog(
 
 @Preview
 @Composable
-fun LogoutDialogPre() {
-    LogoutDialog(
-        content = "로그아웃 하시겠습니까?"
-    ) {}
+fun StackKnowledgeDialogPre() {
+    StackKnowledgeDialog(
+        content = "로그아웃 하시겠습니까?",
+        onConfirm = {},
+        onDismiss = {},
+    )
 }
