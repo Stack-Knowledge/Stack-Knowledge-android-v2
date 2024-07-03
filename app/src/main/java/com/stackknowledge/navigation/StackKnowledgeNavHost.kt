@@ -27,7 +27,7 @@ import com.stackkowledge.mission.navigation.entireMissionScreen
 fun StackKnowledgeNavHost(
     appState: StackKnowledgeAppState,
     modifier: Modifier = Modifier,
-    startDestination: String = mainPageRoute,
+    startDestination: String = roleCheckRoute,
 ) {
     val navController = appState.navController
 
