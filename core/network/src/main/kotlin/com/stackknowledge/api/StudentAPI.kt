@@ -1,6 +1,6 @@
 package com.stackknowledge.api
 
-import remote.request.student.UploadProfileImageRequest
+import okhttp3.MultipartBody
 import remote.response.student.GetMyInformationResponse
 import remote.response.student.GetStudentPointRankingResponse
 import remote.response.student.UploadProfileImageResponse
@@ -17,6 +17,6 @@ interface StudentAPI {
 
     @POST("student/image")
     suspend fun uploadProfileImage(
-        @Body body: UploadProfileImageRequest
+        @Body image: MultipartBody.Part
     ): UploadProfileImageResponse
 }

@@ -2,7 +2,7 @@ package com.stackknowledge.repository.student
 
 import com.stackknowledge.datasource.student.StudentDataSource
 import kotlinx.coroutines.flow.Flow
-import remote.request.student.UploadProfileImageRequest
+import okhttp3.MultipartBody
 import remote.response.student.GetMyInformationResponse
 import remote.response.student.GetStudentPointRankingResponse
 import remote.response.student.UploadProfileImageResponse
@@ -19,9 +19,9 @@ class StudentRepositoryImpl @Inject constructor(
         return studentDataSource.getMyInformation()
     }
 
-    override fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> {
+    override fun uploadProfileImage(image: MultipartBody.Part): Flow<UploadProfileImageResponse> {
         return studentDataSource.uploadProfileImage(
-            body = body
+            image = image
         )
     }
 }
