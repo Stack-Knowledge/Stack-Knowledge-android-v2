@@ -1,4 +1,4 @@
-package com.stackknowledge.usecase.misson
+package com.stackknowledge.usecase.mission
 
 import com.stackknowledge.repository.mission.MissionRepository
 import remote.request.mission.DetailMissionRequestModel

@@ -4,14 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.util.Event
 import com.example.common.util.errorHandling
-import com.stackknowledge.usecase.misson.CreateMissionUseCase
-import com.stackknowledge.usecase.misson.DetailMissionUseCase
-import com.stackknowledge.usecase.misson.GetMissionUseCase
+import com.stackknowledge.usecase.mission.CreateMissionUseCase
+import com.stackknowledge.usecase.mission.DetailMissionUseCase
+import com.stackknowledge.usecase.mission.GetMissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import remote.request.mission.CreateMissionRequestModel
 import remote.request.mission.DetailMissionRequestModel
