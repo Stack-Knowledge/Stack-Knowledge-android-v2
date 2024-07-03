@@ -1,7 +1,9 @@
 package com.stackknowledge
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -12,15 +14,33 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private var doubleBackToExitPressedOnce = false
+    private var backPressedTimestamp = 0L
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            controlTheStackWhenBackPressed()
+        }
+    }
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         setContent {
             CompositionLocalProvider {
                 StackKnowledgeAndroidTheme { _, _ ->
                     StackKnowledgeApp(windowSizeClass = calculateWindowSizeClass(this@MainActivity))
                 }
             }
+        }
+    }
+    private fun controlTheStackWhenBackPressed() {
+        val currentTime = System.currentTimeMillis()
+        if (doubleBackToExitPressedOnce && currentTime - backPressedTimestamp <= 2000) {
+            finishAffinity()
+        } else {
+            doubleBackToExitPressedOnce = true
+            backPressedTimestamp = currentTime
+            Toast.makeText(this, "\'뒤로\' 버튼 한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show()
         }
     }
 }
