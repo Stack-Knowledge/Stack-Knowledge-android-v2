@@ -21,6 +21,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun SolvedMissionList(
     modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
@@ -38,9 +39,11 @@ fun SolvedMissionList(
                     top = 16.dp,
                 ),
             ) {
-                items(10) {
+                items(10) {index ->
                     Box {
-                        SolvedMissionItem()
+                        SolvedMissionItem(
+                            onClick = { onClick(index) }
+                        )
                     }
                 }
             }
@@ -51,5 +54,7 @@ fun SolvedMissionList(
 @Preview
 @Composable
 fun SolvedMissionListPre() {
-    SolvedMissionList()
+    SolvedMissionList(
+        onClick = {}
+    )
 }

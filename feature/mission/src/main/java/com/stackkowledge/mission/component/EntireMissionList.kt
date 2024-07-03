@@ -18,6 +18,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun EntireMissionList(
     modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -36,20 +37,16 @@ fun EntireMissionList(
                     top = 16.dp,
                 ),
             ) {
-                items(10) {
+                items(10) { index ->
                     Box(
                         contentAlignment = Alignment.Center
                     ) {
-                        EntireMissionItem()
+                        EntireMissionItem(
+                            onClick = { onClick(index) }
+                        )
                     }
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun EntireMissionListPre() {
-    EntireMissionList()
 }
