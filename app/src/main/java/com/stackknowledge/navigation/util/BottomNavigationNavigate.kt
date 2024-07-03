@@ -1,6 +1,8 @@
 package com.stackknowledge.navigation.util
 
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.navOptions
 import com.minstone.ui.navigation.NavigateType
 import com.stackknowledge.main.navigation.navigateToMain
 import com.stackknowledge.ranking.navigation.navigateToRanking
@@ -18,20 +20,28 @@ fun bottomNavigationNavigate(
     navController: NavController,
     navType: String
 ) {
+    val topLevelNavOptions = navOptions {
+        popUpTo(navController.graph.findStartDestination().id) {
+            inclusive = false
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+
     if (role == Authority.ROLE_TEACHER) {
         when(navType) {
-            NavigateType.HOME.value -> navController.navigateToMain()
-            NavigateType.MISSION.value ->  navController.navigateToSolvedMission()
-            NavigateType.CREATE_MISSION.value ->  navController.navigateToCreateMission()
-            NavigateType.SHOP.value -> navController.navigateToTeacherShop()
-            NavigateType.RANKING.value -> navController.navigateToTeacherRanking()
+            NavigateType.HOME.value -> navController.navigateToMain(topLevelNavOptions)
+            NavigateType.MISSION.value ->  navController.navigateToSolvedMission(topLevelNavOptions)
+            NavigateType.CREATE_MISSION.value ->  navController.navigateToCreateMission(topLevelNavOptions)
+            NavigateType.SHOP.value -> navController.navigateToTeacherShop(topLevelNavOptions)
+            NavigateType.RANKING.value -> navController.navigateToTeacherRanking(topLevelNavOptions)
         }
     } else {
         when(navType) {
-            NavigateType.HOME.value -> navController.navigateToMain()
-            NavigateType.MISSION.value ->  navController.navigateToEntireMission()
-            NavigateType.SHOP.value -> navController.navigateToShop()
-            NavigateType.RANKING.value -> navController.navigateToRanking()
+            NavigateType.HOME.value -> navController.navigateToMain(topLevelNavOptions)
+            NavigateType.MISSION.value ->  navController.navigateToEntireMission(topLevelNavOptions)
+            NavigateType.SHOP.value -> navController.navigateToShop(topLevelNavOptions)
+            NavigateType.RANKING.value -> navController.navigateToRanking(topLevelNavOptions)
         }
     }
 }
