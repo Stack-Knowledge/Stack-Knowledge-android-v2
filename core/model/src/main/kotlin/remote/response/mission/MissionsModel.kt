@@ -4,7 +4,7 @@ import enumdatatype.MissionStatus
 import remote.user.UserModel
 import java.util.UUID
 
-data class MissionResponseModel(
+data class MissionsModel(
     val id: UUID,
     val title: String,
     val point: Int,

@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import remote.request.student.UploadProfileImageRequest
+import okhttp3.MultipartBody
 import remote.response.student.GetMyInformationResponse
 import remote.response.student.GetStudentPointRankingResponse
 import remote.response.student.UploadProfileImageResponse
@@ -32,10 +32,10 @@ class StudentDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse> = flow {
+    override fun uploadProfileImage(image: MultipartBody.Part): Flow<UploadProfileImageResponse> = flow {
         emit(
             StackKnowledgeApiHandler<UploadProfileImageResponse>()
-                .httpRequest { studentAPI.uploadProfileImage(body = body) }
+                .httpRequest { studentAPI.uploadProfileImage(image = image) }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)

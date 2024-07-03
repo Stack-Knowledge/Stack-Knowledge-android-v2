@@ -27,6 +27,7 @@ import remote.response.mission.MissionResponseModel
 fun EntireMissionList(
     modifier: Modifier = Modifier,
     missionList: List<MissionResponseModel>,
+    onClick: (Int) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -45,7 +46,8 @@ fun EntireMissionList(
                     top = 16.dp,
                 ),
             ) {
-                itemsIndexed(missionList) { _, item ->
+                itemsIndexed(missionList) { index, item ->
+
                     Box(
                         contentAlignment = Alignment.Center
                     ) {
@@ -53,8 +55,10 @@ fun EntireMissionList(
                             name = item.user.name,
                             title = item.title,
                             point = item.point,
+                            onClick = { onClick(index) }
                         )
                     }
+
                 }
             }
         }

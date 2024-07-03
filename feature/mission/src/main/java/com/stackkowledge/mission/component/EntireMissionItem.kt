@@ -2,6 +2,7 @@ package com.stackkowledge.mission.component
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,7 @@ fun EntireMissionItem(
     name: String,
     title: String,
     point: Int,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -48,6 +50,7 @@ fun EntireMissionItem(
                     blurRadius = 20.dp,
                 )
                 .zIndex(-1f)
+                .clickable { onClick() }
         ) {
             Box(
                 modifier = modifier

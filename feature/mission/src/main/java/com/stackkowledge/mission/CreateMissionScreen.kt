@@ -3,6 +3,7 @@ package com.stackkowledge.mission
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.dialog.SubmitDialog
@@ -42,16 +47,25 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import remote.request.mission.CreateMissionRequestModel
+import enumdatatype.Authority
 
 @Composable
-internal fun CreateMissionRoute() {
-    CreateMissionScreen()
+internal fun CreateMissionRoute(
+    onNavigate: (Authority, String) -> Unit,
+) {
+    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    CreateMissionScreen(
+        role = role,
+        onNavigate = { navType -> onNavigate(role, navType) }
+    )
 }
 
 @Composable
 private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
-    viewModel: MissionViewModel = hiltViewModel(),
+    role: Authority,
+    onNavigate: (String) -> Unit,
+    viewModel: MissionViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val uiState by viewModel.createMissionUiState.collectAsState()
@@ -112,7 +126,7 @@ private fun CreateMissionScreen(
     }
 
     StackKnowledgeAndroidTheme { colors, _ ->
-        Surface(
+        Box(
             modifier = modifier
                 .fillMaxSize()
         ) {
@@ -135,7 +149,8 @@ private fun CreateMissionScreen(
                                 val number = it.toInt()
                                 viewModel.onMinute(number)
                             } else {
-                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         },
                         onSecondValueChange = {
@@ -143,7 +158,8 @@ private fun CreateMissionScreen(
                                 val number = it.toInt()
                                 viewModel.onSecond(number)
                             } else {
-                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     )
@@ -165,12 +181,17 @@ private fun CreateMissionScreen(
                     }
                 )
             }
+            Box(
+                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+            ) {
+                StackKnowledgeBottomNavigation(
+                    modifier = Modifier,
+                    role = role
+                ) {
+                    onNavigate(it)
+                }
+            }
         }
     }
 }
 
-@Preview
-@Composable
-fun CreateMissionScreenPre() {
-    CreateMissionScreen()
-}

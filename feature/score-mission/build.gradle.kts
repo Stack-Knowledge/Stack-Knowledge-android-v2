@@ -5,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "com.stackknowledge.user"
+    namespace = "com.stackknowledge.score_mission"
 }
