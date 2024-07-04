@@ -7,7 +7,7 @@ import remote.response.mission.DetailMissionResponseModel
 import remote.response.mission.MissionResponseModel
 
 interface MissionRepository {
-    fun getMission(): Flow<MissionResponseModel>
+    fun getMission(): Flow<List<MissionResponseModel>>
 
     fun detailMission(missionId: DetailMissionRequestModel): Flow<DetailMissionResponseModel>
 

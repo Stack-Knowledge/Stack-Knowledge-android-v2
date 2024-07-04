@@ -34,7 +34,7 @@ class MissionViewModel @Inject constructor(
     private val _createMissionRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
     val createMissionRequest = _createMissionRequest.asStateFlow()
 
-    internal fun getMission() = viewModelScope.launch {
+    /*internal fun getMission() = viewModelScope.launch {
         getMissionUseCase()
             .onSuccess {
                 it.catch { remoteError ->
@@ -46,7 +46,7 @@ class MissionViewModel @Inject constructor(
             .onFailure {
                 _missionRequest.value = it.errorHandling()
             }
-    }
+    }*/
 
     internal fun detailMission(missionId: DetailMissionRequestModel) = viewModelScope.launch {
         detailMissionUseCase(missionId = missionId)

@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetMissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository
 ) {
-    operator fun invoke(): Flow<MissionResponseModel> =
+    operator fun invoke(): Flow<List<MissionResponseModel>> =
         missionRepository.getMission()
 }
