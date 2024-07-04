@@ -91,13 +91,14 @@ private fun CreateMissionScreen(
     resetTimeLimit: (Int) -> Unit,
 ) {
     val context = LocalContext.current
-    var createMissionDialog by remember { mutableStateOf(false) }
-    var cancelCreateMissionDialog by remember { mutableStateOf(false) }
+    var createMissionOpenDialog by remember { mutableStateOf(false) }
+    var cancelCreateMissionOpenDialog by remember { mutableStateOf(false) }
     var successCreateMissionToast by remember { mutableStateOf(false) }
 
-    if (createMissionDialog) {
+    if (createMissionOpenDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.select_create_mission),
+            openDialog = createMissionOpenDialog,
             onConfirm = {
                 createMission(
                     CreateMissionRequestModel(
@@ -106,26 +107,27 @@ private fun CreateMissionScreen(
                         timeLimit,
                     )
                 )
-                createMissionDialog = false
+                createMissionOpenDialog = false
             },
             onDismiss = {
-                createMissionDialog = false
-                cancelCreateMissionDialog = true
+                createMissionOpenDialog = false
+                cancelCreateMissionOpenDialog = true
             },
         )
     }
-    if (cancelCreateMissionDialog) {
+    if (cancelCreateMissionOpenDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.cancel_select_create_mission),
+            openDialog = cancelCreateMissionOpenDialog,
             onConfirm = {
                 resetTitle("")
                 resetContent("")
                 resetMinute(0)
                 resetSecond(0)
                 resetTimeLimit(0)
-                cancelCreateMissionDialog = false
+                cancelCreateMissionOpenDialog = false
             },
-            onDismiss = { cancelCreateMissionDialog = false }
+            onDismiss = { cancelCreateMissionOpenDialog = false }
         )
     }
 
@@ -191,7 +193,7 @@ private fun CreateMissionScreen(
                     onContentValueChange = { onContent(it) },
                     onClick = {
                         onTimeLimit()
-                        createMissionDialog = true
+                        createMissionOpenDialog = true
                     }
                 )
             }

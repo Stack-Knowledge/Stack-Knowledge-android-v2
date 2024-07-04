@@ -18,6 +18,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -34,9 +38,12 @@ fun StackKnowledgeDialog(
     content: String,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
+    openDialog: Boolean,
 ) {
+    var openDialog by remember { mutableStateOf(openDialog) }
+
     StackKnowledgeAndroidTheme { colors, typography ->
-        Dialog(onDismissRequest = { onDismiss() } )  {
+        Dialog(onDismissRequest = { openDialog = false } )  {
             Column(
                 modifier = modifier
                     .width(280.dp)
@@ -107,5 +114,6 @@ fun StackKnowledgeDialogPre() {
         content = "로그아웃 하시겠습니까?",
         onConfirm = {},
         onDismiss = {},
+        openDialog = false,
     )
 }
