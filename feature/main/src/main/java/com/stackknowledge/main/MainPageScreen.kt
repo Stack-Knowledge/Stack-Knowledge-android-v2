@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,23 +15,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
+import com.stackknowledge.design_system.component.dialog.JoinWaitingDialog
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.main.component.JoinWaitingButton
 import com.stackknowledge.main.component.MissionList
 import com.stackknowledge.main.component.RankingList
 import com.stackknowledge.main.component.StackKnowledgePager
 import com.stackknowledge.main.viewModel.MainViewModel
 import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
 import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import enumdatatype.Authority
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 internal fun MainPageRoute(
@@ -66,6 +64,7 @@ private fun MainPageScreen(
     initMain: () -> Unit,
 ) {
     var openDialog by remember { mutableStateOf(false) }
+    var openLogoutDialog by remember { mutableStateOf(false) }
     LaunchedEffect("initMain") {
         initMain()
     }
@@ -78,7 +77,7 @@ private fun MainPageScreen(
         ) {
             Column {
                 LogoutTopBar(
-                    onLogout = { openDialog = true }
+                    onLogout = { openLogoutDialog = true }
                 )
                 StackKnowledgePager()
                 Spacer(modifier = modifier.height(28.dp))
@@ -89,6 +88,12 @@ private fun MainPageScreen(
                 RankingList(
                     getRankingUiState = getRankingUiState
                 )
+                Box(modifier = Modifier.align(alignment = Alignment.End)) {
+                    JoinWaitingButton(
+                        modifier = modifier.padding(top = 80.dp, end = 8.dp),
+                        onClick = { openDialog = true }
+                    )
+                }
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
@@ -102,7 +107,12 @@ private fun MainPageScreen(
             }
         }
         if (openDialog) {
-
+            JoinWaitingDialog(
+                openDialog = openDialog,
+                onStateChange = { openDialog = it },
+                onAccept = {},
+                onRefuse = {}
+            )
         }
     }
 }

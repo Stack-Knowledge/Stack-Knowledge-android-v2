@@ -88,15 +88,6 @@ fun RankingList(
                     }
                 }
             }
-            Column(
-                modifier = modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.End
-            ) {
-                JoinWaitingButton(
-                    modifier = modifier
-                        .padding(top = 80.dp, end = 2.dp)
-                )
-            }
         }
     }
 }
