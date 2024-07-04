@@ -7,7 +7,7 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class DetailSolveMissionResponse(
-    @Json(name = "solveId") val solveId: UUID,
+    @Json(name = "solveId") val solveId: String,
     @Json(name = "title") val title: String,
     @Json(name = "solution") val solution: String,
 )

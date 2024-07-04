@@ -18,7 +18,7 @@ interface UserAPI {
 
     @GET("/user/scoring/{solve_id}")
     suspend fun getDetailSolveMission(
-        @Path("solve_id") solveId: UUID
+        @Path("solve_id") solveId: String
     ): DetailSolveMissionResponse
 
     @GET("/user/teacher")
@@ -26,7 +26,7 @@ interface UserAPI {
 
     @POST("/user/scoring/{solve_id}")
     suspend fun scoreSolveMission(
-        @Path("solve_id") solveId: UUID,
+        @Path("solve_id") solveId: String,
         @Body body: ScoreRequest
     )
 

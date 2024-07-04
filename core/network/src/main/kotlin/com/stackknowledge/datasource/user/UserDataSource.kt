@@ -11,11 +11,11 @@ import java.util.UUID
 interface UserDataSource {
     fun getSolvedMission(): Flow<List<GetSolveMissionResponse>>
 
-    fun getDetailSolveMission(solveId: UUID): Flow<DetailSolveMissionResponse>
+    fun getDetailSolveMission(solveId: String): Flow<DetailSolveMissionResponse>
 
     fun getRequestSignUpTeacher(): Flow<List<GetRequestSignUpTeacherResponse>>
 
-    fun scoreSolveMission(solveId: UUID, body: ScoreRequest): Flow<Unit>
+    fun scoreSolveMission(solveId: String, body: ScoreRequest): Flow<Unit>
 
     fun signUpApprove(userId: UUID, body: ApproveRequest): Flow<Unit>
 }

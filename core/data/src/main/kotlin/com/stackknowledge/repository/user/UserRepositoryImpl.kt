@@ -20,7 +20,7 @@ class UserRepositoryImpl @Inject constructor(
         return userDataSource.getSolvedMission().map { list -> list.map { it.toModel() } }
     }
 
-    override fun getDetailSolveMission(solveId: UUID): Flow<DetailSolveMissionResponseModel> {
+    override fun getDetailSolveMission(solveId: String): Flow<DetailSolveMissionResponseModel> {
         return userDataSource.getDetailSolveMission(solveId = solveId).map { it.toModel() }
     }
 
@@ -28,7 +28,7 @@ class UserRepositoryImpl @Inject constructor(
         return userDataSource.getRequestSignUpTeacher().map { list -> list.map { it.toModel() } }
     }
 
-    override fun scoreSolveMission(solveId: UUID, body: ScoreRequestModel): Flow<Unit> {
+    override fun scoreSolveMission(solveId: String, body: ScoreRequestModel): Flow<Unit> {
         return userDataSource.scoreSolveMission(
             solveId = solveId,
             body = body.toDto(),

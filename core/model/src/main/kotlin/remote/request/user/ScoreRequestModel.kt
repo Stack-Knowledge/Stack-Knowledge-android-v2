@@ -1,5 +1,7 @@
 package remote.request.user
 
+import enumdatatype.SolveStatus
+
 data class ScoreRequestModel(
-    val solveStatus: String,
+    val solveStatus: SolveStatus,
 )

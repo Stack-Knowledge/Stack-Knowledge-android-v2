@@ -8,6 +8,6 @@ import javax.inject.Inject
 class ScoreMissionUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(solveId: UUID, body: ScoreRequestModel) =
+    operator fun invoke(solveId: String, body: ScoreRequestModel) =
         userRepository.scoreSolveMission(solveId = solveId, body = body)
 }

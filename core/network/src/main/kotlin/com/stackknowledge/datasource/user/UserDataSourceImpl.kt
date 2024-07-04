@@ -25,7 +25,7 @@ class UserDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun getDetailSolveMission(solveId: UUID): Flow<DetailSolveMissionResponse> = flow {
+    override fun getDetailSolveMission(solveId: String): Flow<DetailSolveMissionResponse> = flow {
         emit(
             StackKnowledgeApiHandler<DetailSolveMissionResponse>()
                 .httpRequest { userAPI.getDetailSolveMission(solveId = solveId) }
@@ -41,7 +41,7 @@ class UserDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun scoreSolveMission(solveId: UUID, body: ScoreRequest): Flow<Unit> = flow {
+    override fun scoreSolveMission(solveId: String, body: ScoreRequest): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { userAPI.scoreSolveMission(solveId = solveId, body = body) }

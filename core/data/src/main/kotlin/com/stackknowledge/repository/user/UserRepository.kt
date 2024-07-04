@@ -16,11 +16,11 @@ import java.util.UUID
 interface UserRepository {
     fun getSolvedMission(): Flow<List<GetSolveMissionResponseModel>>
 
-    fun getDetailSolveMission(solveId: UUID): Flow<DetailSolveMissionResponseModel>
+    fun getDetailSolveMission(solveId: String): Flow<DetailSolveMissionResponseModel>
 
     fun getRequestSignUpTeacher(): Flow<List<GetRequestSignUpTeacherResponseModel>>
 
-    fun scoreSolveMission(solveId: UUID, body: ScoreRequestModel): Flow<Unit>
+    fun scoreSolveMission(solveId: String, body: ScoreRequestModel): Flow<Unit>
 
     fun signUpApprove(userId: UUID, body: ApproveRequestModel): Flow<Unit>
 }

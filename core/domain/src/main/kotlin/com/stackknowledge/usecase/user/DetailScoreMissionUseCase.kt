@@ -7,6 +7,6 @@ import javax.inject.Inject
 class DetailScoreMissionUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(solveId: UUID) =
+    operator fun invoke(solveId: String) =
         userRepository.getDetailSolveMission(solveId = solveId)
 }
