@@ -33,7 +33,7 @@ fun StackKnowledgeDialog(
     modifier: Modifier = Modifier,
     content: String,
     onConfirm: () -> Unit,
-    onDismiss:() -> Unit,
+    onDismiss: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Dialog(onDismissRequest = { onDismiss() } )  {
