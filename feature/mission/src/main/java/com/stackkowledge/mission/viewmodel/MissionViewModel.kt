@@ -31,29 +31,29 @@ class MissionViewModel @Inject constructor(
     private val createMissionUseCase: CreateMissionUseCase,
 ) : ViewModel() {
     private val _missionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
-    val missionUiState = _missionUiState.asStateFlow()
+    internal val missionUiState = _missionUiState.asStateFlow()
 
     private val _detailMissionRequest =
         MutableStateFlow<Event<DetailMissionResponseModel>>(Event.Loading)
-    val detailMissionRequest = _detailMissionRequest.asStateFlow()
+    internal val detailMissionRequest = _detailMissionRequest.asStateFlow()
 
     private val _createMissionUiState = MutableStateFlow<CreateMissionUiState>(CreateMissionUiState.Loading)
-    val createMissionUiState = _createMissionUiState.asStateFlow()
+    internal val createMissionUiState = _createMissionUiState.asStateFlow()
 
     private val _title = mutableStateOf("")
-    val title = _title
+    internal val title = _title
 
     private val _content = mutableStateOf("")
-    val content = _content
+    internal val content = _content
 
     private val _minute = mutableIntStateOf(0)
-    val minute = _minute
+    internal val minute = _minute
 
     private val _second = mutableIntStateOf(0)
-    val second = _second
+    internal val second = _second
 
     private val _timeLimit = mutableIntStateOf(0)
-    val timeLimit = _timeLimit
+    internal val timeLimit = _timeLimit
 
     internal fun getMission() = viewModelScope.launch {
         getMissionUseCase()
