@@ -28,6 +28,7 @@ import com.stackknowledge.main.component.RankingList
 import com.stackknowledge.main.component.StackKnowledgePager
 import com.stackknowledge.main.viewModel.MainViewModel
 import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
+import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import enumdatatype.Authority
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
@@ -39,12 +40,19 @@ internal fun MainPageRoute(
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
+    val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
 
     MainPageScreen(
         role = role,
         getMissionUiState = getMissionUiState,
+        getRankingUiState = getRankingUiState,
         onNavigate = { navType -> onNavigate(role, navType) },
-        initMain = { viewModel.getMission() }
+        initMain = {
+            with(viewModel) {
+                getMission()
+                getRanking()
+            }
+        }
     )
 }
 
@@ -53,6 +61,7 @@ private fun MainPageScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     getMissionUiState: GetMissionUiState,
+    getRankingUiState: GetRankingUiState,
     onNavigate: (String) -> Unit,
     initMain: () -> Unit,
 ) {
@@ -74,7 +83,9 @@ private fun MainPageScreen(
                     getMissionUiState = getMissionUiState
                 )
                 Spacer(modifier = modifier.height(20.dp))
-                RankingList()
+                RankingList(
+                    getRankingUiState = getRankingUiState
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),

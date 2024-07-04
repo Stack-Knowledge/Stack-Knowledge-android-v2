@@ -16,10 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
+import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
+import enumdatatype.Authority
 
 @Composable
 fun RankingList(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    getRankingUiState: GetRankingUiState,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -35,71 +39,72 @@ fun RankingList(
                         shape = RoundedCornerShape(20.dp)
                     )
             ) {
-                LazyRow(
-                    modifier = modifier.padding(12.dp)
-                ) {
-                    items(10) { index ->
-                        when(index) {
-                            0 -> {
-                                Box {
-                                    Box(
-                                        modifier = modifier.padding(4.dp)
-                                    ) {
-                                        RankingListItem()
+                when (getRankingUiState) {
+                    is GetRankingUiState.Loading -> Unit
+                    is GetRankingUiState.Success -> {
+                        val list = getRankingUiState.getItemResponseModel
+                        LazyRow(
+                            modifier = modifier.padding(12.dp)
+                        ) {
+                            items(list.size) { index ->
+                                when (index) {
+                                    0 -> {
+                                        Box {
+                                            Box(
+                                                modifier = modifier.padding(4.dp)
+                                            ) {
+                                                RankingListItem()
+                                            }
+                                            RankingNumFirst()
+                                        }
                                     }
-                                    RankingNumFirst()
-                                }
-                            }
 
-                            1 -> {
-                                Box {
-                                    Box(
-                                        modifier = modifier.padding(4.dp)
-                                    ) {
-                                        RankingListItem()
+                                    1 -> {
+                                        Box {
+                                            Box(
+                                                modifier = modifier.padding(4.dp)
+                                            ) {
+                                                RankingListItem()
+                                            }
+                                            RankingNumSecond()
+                                        }
                                     }
-                                    RankingNumSecond()
-                                }
-                            }
 
-                            2 -> {
-                                Box {
-                                    Box(
-                                        modifier = modifier.padding(4.dp)
-                                    ) {
-                                        RankingListItem()
+                                    2 -> {
+                                        Box {
+                                            Box(
+                                                modifier = modifier.padding(4.dp)
+                                            ) {
+                                                RankingListItem()
+                                            }
+                                            RankingNumThird()
+                                        }
                                     }
-                                    RankingNumThird()
-                                }
-                            }
 
-                            else -> {
-                                Box(
-                                    modifier = modifier.padding(4.dp)
-                                ) {
-                                    RankingListItem()
+                                    else -> {
+                                        Box(
+                                            modifier = modifier.padding(4.dp)
+                                        ) {
+                                            RankingListItem()
+                                        }
+                                    }
                                 }
+                                Spacer(modifier = modifier.width(16.dp))
                             }
                         }
-                        Spacer(modifier = modifier.width(16.dp))
                     }
+                    is GetRankingUiState.Error -> Unit
                 }
-                Column(
-                    modifier = modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.End
-                ) {
-                    JoinWaitingButton(
-                        modifier = modifier
-                            .padding(top = 80.dp, end = 2.dp)
-                    )
-                }
+            }
+            Column(
+                modifier = modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.End
+            ) {
+                JoinWaitingButton(
+                    modifier = modifier
+                        .padding(top = 80.dp, end = 2.dp)
+                )
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun RankingListPre() {
-    RankingList()
 }
