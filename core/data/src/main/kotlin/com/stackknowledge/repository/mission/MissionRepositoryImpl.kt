@@ -16,7 +16,6 @@ class MissionRepositoryImpl @Inject constructor(
     private val missionDataSource: MissionDataSource
 ) : MissionRepository {
     override fun getMission(): Flow<List<MissionResponseModel>> {
-        Log.e("getMissionRepository", "Success")
         return missionDataSource.getMission().map { list -> list.map { it.toModel() } }
     }
 
@@ -25,7 +24,6 @@ class MissionRepositoryImpl @Inject constructor(
     }
 
     override fun createMission(body: CreateMissionRequestModel): Flow<Unit> {
-        Log.e("createMissionRepository", "Success")
         return missionDataSource.createMission(body = body.toDto())
     }
 }
