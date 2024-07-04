@@ -1,4 +1,4 @@
-package com.stackknowledge.design_system.component.dialog
+package com.stackknowledge.design_system.component.toast
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,14 +21,13 @@ import androidx.compose.ui.window.Dialog
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
-@Composable
-fun SubmitDialog(
-    modifier: Modifier = Modifier,
-    content: String,
-    onDismiss: () -> Unit,
-) {
-    StackKnowledgeAndroidTheme { colors, typography ->
-        Dialog(onDismissRequest = { onDismiss() }) {
+object SuccessToastMessageUtil {
+    @Composable
+    fun SetView(
+        modifier: Modifier = Modifier,
+        message: String,
+    ) {
+        StackKnowledgeAndroidTheme { colors, typography ->
             Row(
                 modifier = modifier
                     .width(328.dp)
@@ -49,7 +48,7 @@ fun SubmitDialog(
                     )
                     Spacer(modifier = modifier.width(8.dp))
                     Text(
-                        text = content,
+                        text = message,
                         style = typography.bodyLarge,
                         color = colors.BLACK
                     )
@@ -73,8 +72,8 @@ fun SubmitDialog(
 
 @Preview
 @Composable
-fun SubmitDialogPre() {
-    SubmitDialog(
-        content = "문제가 제출되었습니다!"
-    ) {}
+fun SuccessDialog() {
+//    SuccessDialog(
+//        content = "문제가 제출되었습니다!"
+//    ) {}
 }
