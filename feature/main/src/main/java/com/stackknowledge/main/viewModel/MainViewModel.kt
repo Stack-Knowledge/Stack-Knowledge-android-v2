@@ -1,5 +1,6 @@
 package com.stackknowledge.main.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.result.Result
@@ -28,8 +29,14 @@ class MainViewModel @Inject constructor(
             .collectLatest { result ->
                 when(result) {
                     is Result.Loading -> _getMissionUiState.value = GetMissionUiState.Loading
-                    is Result.Success -> _getMissionUiState.value = GetMissionUiState.Success(result.data)
-                    is Result.Error -> _getMissionUiState.value = GetMissionUiState.Error(result.exception)
+                    is Result.Success -> {
+                        Log.d("testt","suc")
+                        _getMissionUiState.value = GetMissionUiState.Success(result.data)
+                    }
+                    is Result.Error -> {
+                        Log.d("testt",result.exception.toString())
+                        _getMissionUiState.value = GetMissionUiState.Error(result.exception)
+                    }
                 }
             }
     }

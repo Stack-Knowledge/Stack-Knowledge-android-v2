@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,23 +17,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.main.component.MissionList
 import com.stackknowledge.main.component.RankingList
 import com.stackknowledge.main.component.StackKnowledgePager
+import com.stackknowledge.main.viewModel.MainViewModel
+import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import enumdatatype.Authority
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 internal fun MainPageRoute(
     onNavigate: (Authority, String) -> Unit,
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
+    val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
+
     MainPageScreen(
         role = role,
-        onNavigate = { navType -> onNavigate(role, navType) }
+        getMissionUiState = getMissionUiState,
+        onNavigate = { navType -> onNavigate(role, navType) },
+        initMain = { viewModel.getMission() }
     )
 }
 
@@ -40,8 +52,14 @@ internal fun MainPageRoute(
 private fun MainPageScreen(
     modifier: Modifier = Modifier,
     role: Authority,
+    getMissionUiState: GetMissionUiState,
     onNavigate: (String) -> Unit,
+    initMain: () -> Unit,
 ) {
+    LaunchedEffect("initMain") {
+        initMain()
+    }
+
     StackKnowledgeAndroidTheme { colors, _ ->
         Box(
             modifier = modifier
@@ -52,7 +70,9 @@ private fun MainPageScreen(
                 LogoutTopBar()
                 StackKnowledgePager()
                 Spacer(modifier = modifier.height(28.dp))
-                MissionList()
+                MissionList(
+                    getMissionUiState = getMissionUiState
+                )
                 Spacer(modifier = modifier.height(20.dp))
                 RankingList()
             }
