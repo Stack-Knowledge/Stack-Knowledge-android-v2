@@ -1,6 +1,5 @@
 package com.stackknowledge.repository.mission
 
-import android.util.Log
 import com.stackknowledge.datasource.mission.MissionDataSource
 import com.stackknowledge.mapper.request.mission.toDto
 import com.stackknowledge.mapper.response.mission.toModel
