@@ -5,7 +5,7 @@ import remote.user.UserModel
 import java.util.UUID
 
 data class MissionResponseModel(
-    val id: UUID,
+    val id: String,
     val title: String,
     val point: Int,
     val missionStatus: MissionStatus,

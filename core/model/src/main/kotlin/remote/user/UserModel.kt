@@ -3,7 +3,7 @@ package remote.user
 import java.util.UUID
 
 data class UserModel (
-    val id: UUID,
+    val id: String,
     val name: String,
     val profileImage: String?,
 )
