@@ -1,12 +1,13 @@
-package com.stackknowledge.usecase.misson
+package com.stackknowledge.usecase.mission
 
 import com.stackknowledge.repository.mission.MissionRepository
+import kotlinx.coroutines.flow.Flow
+import remote.response.mission.MissionResponseModel
 import javax.inject.Inject
 
 class GetMissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository
 ) {
-    suspend operator fun invoke() = runCatching {
+    operator fun invoke(): Flow<List<MissionResponseModel>> =
         missionRepository.getMission()
-    }
 }

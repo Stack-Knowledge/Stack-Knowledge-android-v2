@@ -52,9 +52,7 @@ fun StackKnowledgePager(
     }
 
     StackKnowledgeAndroidTheme { colors, typography ->
-        Column(
-            modifier = modifier.fillMaxWidth()
-        ) {
+        Column {
             Box(
                 contentAlignment = Alignment.BottomCenter
             ) {
@@ -67,7 +65,9 @@ fun StackKnowledgePager(
                             Image(
                                 painter = painterResource(R.drawable.first_banner),
                                 contentDescription = "First Banner",
-                                modifier = modifier.fillMaxWidth(),
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .height(181.dp),
                                 contentScale = ContentScale.FillBounds
                             )
                         }
@@ -76,7 +76,9 @@ fun StackKnowledgePager(
                             Image(
                                 painter = painterResource(R.drawable.second_banner),
                                 contentDescription = "Second Banner",
-                                modifier = modifier.fillMaxWidth(),
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .height(181.dp),
                                 contentScale = ContentScale.FillBounds
                             )
                         }
@@ -85,7 +87,9 @@ fun StackKnowledgePager(
                             Image(
                                 painter = painterResource(R.drawable.third_banner),
                                 contentDescription = "Third Banner",
-                                modifier = modifier.fillMaxWidth(),
+                                modifier = modifier
+                                    .fillMaxWidth()
+                                    .height(181.dp),
                                 contentScale = ContentScale.FillBounds
                             )
                         }
