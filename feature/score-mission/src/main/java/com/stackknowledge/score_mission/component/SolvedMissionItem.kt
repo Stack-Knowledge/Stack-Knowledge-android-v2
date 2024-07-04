@@ -1,6 +1,7 @@
 package com.stackknowledge.score_mission.component
 
 import android.graphics.BlurMaskFilter
+import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -35,6 +36,9 @@ import com.stackknowledge.design_system.utils.shadow
 @Composable
 fun SolvedMissionItem(
     modifier: Modifier = Modifier,
+    name: String,
+    title: String,
+    point: Int,
     onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -54,8 +58,8 @@ fun SolvedMissionItem(
                     .padding(bottom = 16.dp, end = 16.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(color = colors.WHITE)
-                    .wrapContentWidth()
-                    .wrapContentHeight()
+                    .width(156.dp)
+                    .height(180.dp)
                     .zIndex(1f),
                 contentAlignment = Alignment.Center
             ) {
@@ -67,7 +71,7 @@ fun SolvedMissionItem(
                     Spacer(modifier = modifier.height(28.dp))
 
                     Text(
-                        text = "박준호",
+                        text = name,
                         color = colors.BLACK,
                         style = typography.bodyLarge
                     )
@@ -75,7 +79,7 @@ fun SolvedMissionItem(
 
                     Text(
                         modifier = modifier.padding(horizontal = 16.dp),
-                        text = "여기에 한줄설명 적을거임",
+                        text = title,
                         color = colors.G2,
                         style = typography.displayMedium
                     )
@@ -86,7 +90,7 @@ fun SolvedMissionItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "1,000",
+                            text = "$point",
                             style = typography.bodyMedium,
                             color = colors.BLACK
                         )
@@ -110,7 +114,7 @@ fun SolvedMissionItem(
 fun SolvedMissionItemPre(
     modifier: Modifier = Modifier,
 ) {
-    SolvedMissionItem(
-        onClick = {}
-    )
+//    SolvedMissionItem(
+//        onClick = {}
+//    )
 }

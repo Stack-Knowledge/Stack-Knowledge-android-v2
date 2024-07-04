@@ -27,11 +27,14 @@ import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+import enumdatatype.SolveStatus
 
 @Composable
 fun GradingRadioButton(
     isSelected: Boolean,
     onClick: (() -> Unit)?,
+    onAnswer: () -> Unit,
+    onWrongAnswer: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val interactionSource = remember { mutableStateOf(MutableInteractionSource()) }
@@ -66,6 +69,7 @@ fun GradingRadioButton(
                                 indication = rememberRipple(bounded = false)
                             ) {
                                 onClick?.invoke()
+                                onAnswer()
                             }
                             .padding(end = 12.dp),
                     ) {
@@ -91,6 +95,7 @@ fun GradingRadioButton(
                                 indication = rememberRipple(bounded = false)
                             ) {
                                 onClick?.invoke()
+                                onWrongAnswer()
                             }
                             .padding(end = 12.dp),
                     ) {
@@ -118,17 +123,17 @@ fun GradingRadioButton(
 }
 
 
-@Preview
-@Composable
-fun GradingRadioButtonPre() {
-    val selected = remember{ mutableStateOf("0") }
-    Column(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
-    ) {
-        GradingRadioButton(isSelected = selected.value == "0", onClick = { selected.value = "0" })
-        Spacer(modifier = Modifier.height(15.dp))
-        GradingRadioButton(isSelected = selected.value == "1", onClick = { selected.value = "1" })
-    }
-}
+//@Preview
+//@Composable
+//fun GradingRadioButtonPre() {
+//    val selected = remember{ mutableStateOf("0") }
+//    Column(
+//        modifier = Modifier
+//            .background(Color.White)
+//            .fillMaxSize()
+//    ) {
+//        GradingRadioButton(isSelected = selected.value == "0", onClick = { selected.value = "0" })
+//        Spacer(modifier = Modifier.height(15.dp))
+//        GradingRadioButton(isSelected = selected.value == "1", onClick = { selected.value = "1" })
+//    }
+//}

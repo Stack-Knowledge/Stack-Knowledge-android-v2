@@ -1,5 +1,7 @@
 package com.stackknowledge.score_mission.viewmodel
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.result.Result
@@ -27,15 +29,18 @@ class ScoreMissionViewModel @Inject constructor(
 ) : ViewModel() {
     private val _getScoreMissionUiState =
         MutableStateFlow<GetScoreMissionListUiState>(GetScoreMissionListUiState.Loading)
-    val getScoreMissionListUiState = _getScoreMissionUiState.asStateFlow()
+    internal val getScoreMissionListUiState = _getScoreMissionUiState.asStateFlow()
 
     private val _detailScoreMissionUiState =
         MutableStateFlow<DetailScoreMissionUiState>(DetailScoreMissionUiState.Loading)
-    val detailScoreMissionUiState = _detailScoreMissionUiState.asStateFlow()
+    internal val detailScoreMissionUiState = _detailScoreMissionUiState.asStateFlow()
 
     private val _scoreMissionUiState =
         MutableStateFlow<ScoreMissionUiState>(ScoreMissionUiState.Loading)
-    val scoreMissionUiState = _scoreMissionUiState.asStateFlow()
+    internal val scoreMissionUiState = _scoreMissionUiState.asStateFlow()
+
+    private var _solveId = ""
+    val solveId = _solveId
 
     internal fun getScoreMissionList() = viewModelScope.launch {
         getScoreMissionUseCase()
@@ -49,7 +54,7 @@ class ScoreMissionViewModel @Inject constructor(
             }
     }
 
-    internal fun detailScoreMission(solveId: UUID) = viewModelScope.launch {
+    internal fun detailScoreMission(solveId: String) = viewModelScope.launch {
         detailScoreMissionUseCase(solveId = solveId)
             .asResult()
             .collectLatest { result ->
@@ -67,7 +72,7 @@ class ScoreMissionViewModel @Inject constructor(
     }
 
     internal fun scoreMission(
-        solveId: UUID,
+        solveId: String,
         body: ScoreRequestModel
     ) = viewModelScope.launch {
         scoreMissionUseCase(
@@ -82,5 +87,9 @@ class ScoreMissionViewModel @Inject constructor(
                     is Result.Error -> _scoreMissionUiState.value = ScoreMissionUiState.Error(it.exception)
                 }
             }
+    }
+
+    internal fun onSolveId(value: String) {
+        _solveId = value
     }
 }
