@@ -123,6 +123,7 @@ private fun CreateMissionScreen(
                 resetMinute(0)
                 resetSecond(0)
                 resetTimeLimit(0)
+                cancelCreateMissionDialog = false
             },
             onDismiss = { cancelCreateMissionDialog = false }
         )

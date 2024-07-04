@@ -2,12 +2,16 @@ package com.stackknowledge.design_system.component.dialog
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -17,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -39,16 +44,21 @@ fun StackKnowledgeDialog(
                     .background(
                         color = colors.WHITE,
                         shape = RoundedCornerShape(20.dp)
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    .padding(vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Spacer(modifier = modifier.height(44.dp))
+                Spacer(modifier = modifier.height(4.dp))
                 Text(
                     text = content,
                     style = typography.bodyMedium,
                     color = colors.BLACK,
+                    modifier = modifier
+                        .wrapContentWidth()
+                        .wrapContentHeight(),
+                    textAlign = TextAlign.Center
                 )
-                Spacer(modifier = modifier.height(35.dp))
                 Row() {
                     Button(
                         modifier = modifier
