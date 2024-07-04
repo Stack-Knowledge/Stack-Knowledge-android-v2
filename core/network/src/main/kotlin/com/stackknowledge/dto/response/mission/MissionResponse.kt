@@ -12,6 +12,6 @@ data class MissionResponse(
     @Json(name = "id") val id: String,
     @Json(name = "title") val title: String,
     @Json(name = "point") val point: Int,
-    @Json(name = "missionStatus") val missionStatus: MissionStatus,
+    @Json(name = "missionStatus") val missionStatus: String,
     @Json(name = "user") val user: User,
 )

@@ -8,6 +8,6 @@ data class MissionResponseModel(
     val id: String,
     val title: String,
     val point: Int,
-    val missionStatus: MissionStatus,
+    val missionStatus: String,
     val user: UserModel,
 )
