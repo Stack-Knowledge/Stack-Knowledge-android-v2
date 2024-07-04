@@ -46,47 +46,19 @@ fun RankingList(
                         LazyRow(
                             modifier = modifier.padding(12.dp)
                         ) {
+                            val rankingNumbers = listOf<@Composable () -> Unit>(
+                                { RankingNumFirst() },
+                                { RankingNumSecond() },
+                                { RankingNumThird() }
+                            )
+
                             items(list.size) { index ->
-                                when (index) {
-                                    0 -> {
-                                        Box {
-                                            Box(
-                                                modifier = modifier.padding(4.dp)
-                                            ) {
-                                                RankingListItem()
-                                            }
-                                            RankingNumFirst()
-                                        }
+                                Box {
+                                    Box(modifier = modifier.padding(4.dp)) {
+                                        RankingListItem()
                                     }
-
-                                    1 -> {
-                                        Box {
-                                            Box(
-                                                modifier = modifier.padding(4.dp)
-                                            ) {
-                                                RankingListItem()
-                                            }
-                                            RankingNumSecond()
-                                        }
-                                    }
-
-                                    2 -> {
-                                        Box {
-                                            Box(
-                                                modifier = modifier.padding(4.dp)
-                                            ) {
-                                                RankingListItem()
-                                            }
-                                            RankingNumThird()
-                                        }
-                                    }
-
-                                    else -> {
-                                        Box(
-                                            modifier = modifier.padding(4.dp)
-                                        ) {
-                                            RankingListItem()
-                                        }
+                                    if (index < 3) {
+                                        rankingNumbers[index]()
                                     }
                                 }
                                 Spacer(modifier = modifier.width(16.dp))
