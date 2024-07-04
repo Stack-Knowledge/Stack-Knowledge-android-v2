@@ -1,6 +1,7 @@
 package com.stackkowledge.mission
 
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
@@ -32,35 +34,37 @@ import enumdatatype.Authority
 
 @Composable
 internal fun EntireMissionRoute(
+    viewModel: MissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
     onNavigate: (Authority, String) -> Unit,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
+    val missionUiState by viewModel.missionUiState.collectAsStateWithLifecycle()
+
     EntireMissionScreen(
         role = role,
         onNavigate = { navType -> onNavigate(role, navType) },
-        onItemClick = onItemClick
+        onItemClick = onItemClick,
+        getMission = { viewModel.getMission() },
+        uiState = missionUiState
     )
 }
 
 @Composable
 private fun EntireMissionScreen(
     modifier: Modifier = Modifier,
-    viewModel: MissionViewModel = hiltViewModel(),
     role: Authority,
     onNavigate: (String) -> Unit,
     onItemClick: () -> Unit,
+    getMission: () -> Unit,
+    uiState: GetMissionUiState,
 ) {
-    val uiState by viewModel.missionUiState.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.getMission()
+    LaunchedEffect(true) {
+        getMission()
     }
 
-    Log.e("EntireMissionScreen", "UI State: $uiState")
-
     if (uiState is GetMissionUiState.Success) {
-        val mission = (uiState as GetMissionUiState.Success).missionResponseModel
+        val mission = uiState.missionResponseModel
 
         StackKnowledgeAndroidTheme { colors, _ ->
             Box {

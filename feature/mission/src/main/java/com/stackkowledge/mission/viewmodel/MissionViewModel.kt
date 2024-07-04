@@ -86,13 +86,13 @@ class MissionViewModel @Inject constructor(
 
     internal fun createMission(body: CreateMissionRequestModel) = viewModelScope.launch {
         createMissionUseCase(body = body)
-            .onSuccess {
-                _createMissionUiState.value = CreateMissionUiState.Success
-                Log.e("Mission_Success", _createMissionUiState.value.toString())
-            }
-            .onFailure {
-                _createMissionUiState.value = CreateMissionUiState.Error(it)
-                Log.e("Mission_Failure", _createMissionUiState.value.toString())
+            .asResult()
+            .collectLatest {
+                when(it) {
+                    is Result.Loading -> _createMissionUiState.value = CreateMissionUiState.Loading
+                    is Result.Success -> _createMissionUiState.value = CreateMissionUiState.Success
+                    is Result.Error -> _createMissionUiState.value = CreateMissionUiState.Error(it.exception)
+                }
             }
     }
 

@@ -57,8 +57,8 @@ fun EntireMissionItem(
                     .padding(bottom = 16.dp, end = 16.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(color = colors.WHITE)
-                    .wrapContentWidth()
-                    .wrapContentHeight()
+                    .width(156.dp)
+                    .height(180.dp)
                     .zIndex(1f),
                 contentAlignment = Alignment.Center
             ) {

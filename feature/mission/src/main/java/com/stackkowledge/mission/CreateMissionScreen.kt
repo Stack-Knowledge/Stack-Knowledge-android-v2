@@ -9,16 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,14 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
-import com.stackknowledge.design_system.component.dialog.SubmitDialog
+import com.stackknowledge.design_system.component.toast.SuccessToastMessage
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.CreateMissionTimer
@@ -43,20 +33,37 @@ import com.stackkowledge.mission.component.InputTitle
 import com.stackkowledge.mission.uistate.CreateMissionUiState
 import com.stackkowledge.mission.util.isValidNumber
 import com.stackkowledge.mission.viewmodel.MissionViewModel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import remote.request.mission.CreateMissionRequestModel
 import enumdatatype.Authority
+import remote.request.mission.CreateMissionRequestModel
 
 @Composable
 internal fun CreateMissionRoute(
+    viewModel: MissionViewModel = hiltViewModel(),
     onNavigate: (Authority, String) -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    val uiState by viewModel.createMissionUiState.collectAsStateWithLifecycle()
+
     CreateMissionScreen(
         role = role,
-        onNavigate = { navType -> onNavigate(role, navType) }
+        onNavigate = { navType -> onNavigate(role, navType) },
+        uiState = uiState,
+        createMission = { viewModel.createMission(it) },
+        title = viewModel.title.value,
+        content = viewModel.content.value,
+        minute = viewModel.minute.intValue,
+        second = viewModel.second.intValue,
+        timeLimit = viewModel.timeLimit.intValue,
+        onTitle = { viewModel.onTitle(it) },
+        onContent = { viewModel.onContent(it) },
+        onMinute = { viewModel.onMinute(it) },
+        onSecond = { viewModel.onSecond(it) },
+        onTimeLimit = { viewModel.onTimeLimit() },
+        resetTitle = { viewModel.title.value = it },
+        resetContent = { viewModel.content.value = it },
+        resetMinute = { viewModel.minute.intValue = it },
+        resetSecond = { viewModel.second.intValue = it },
+        resetTimeLimit = { viewModel.timeLimit.intValue = it },
     )
 }
 
@@ -65,28 +72,41 @@ private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    viewModel: MissionViewModel = hiltViewModel()
+    uiState: CreateMissionUiState,
+    createMission: (CreateMissionRequestModel) -> Unit,
+    title: String,
+    content: String,
+    minute: Int,
+    second: Int,
+    timeLimit: Int,
+    onTitle: (String) -> Unit,
+    onContent: (String) -> Unit,
+    onMinute: (Int) -> Unit,
+    onSecond: (Int) -> Unit,
+    onTimeLimit: () -> Unit,
+    resetTitle: (String) -> Unit,
+    resetContent: (String) -> Unit,
+    resetMinute: (Int) -> Unit,
+    resetSecond: (Int) -> Unit,
+    resetTimeLimit: (Int) -> Unit,
 ) {
     val context = LocalContext.current
-    val uiState by viewModel.createMissionUiState.collectAsState()
-    val coroutineScope = rememberCoroutineScope()
     var createMissionDialog by remember { mutableStateOf(false) }
     var cancelCreateMissionDialog by remember { mutableStateOf(false) }
-    var successCreateMissionDialog by remember { mutableStateOf(false) }
+    var successCreateMissionToast by remember { mutableStateOf(false) }
 
     if (createMissionDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.select_create_mission),
             onConfirm = {
-                viewModel.createMission(
+                createMission(
                     CreateMissionRequestModel(
-                        viewModel.title.value,
-                        viewModel.content.value,
-                        viewModel.timeLimit.intValue,
+                        title,
+                        content,
+                        timeLimit,
                     )
                 )
                 createMissionDialog = false
-                Log.e("CreateMissionScreen", "Ui State : $uiState")
             },
             onDismiss = {
                 createMissionDialog = false
@@ -98,31 +118,24 @@ private fun CreateMissionScreen(
         StackKnowledgeDialog(
             content = stringResource(id = R.string.cancel_select_create_mission),
             onConfirm = {
-                viewModel.title.value = ""
-                viewModel.content.value = ""
-                viewModel.minute.intValue = 0
-                viewModel.second.intValue = 0
-                viewModel.timeLimit.intValue = 0
+                resetTitle("")
+                resetContent("")
+                resetMinute(0)
+                resetSecond(0)
+                resetTimeLimit(0)
             },
             onDismiss = { cancelCreateMissionDialog = false }
         )
     }
 
     if (uiState is CreateMissionUiState.Success) {
-//        LaunchedEffect(uiState is CreateMissionUiState.Success) {
-//            delay(2000)
-//            successCreateMissionDialog = true
-//        }
-        SubmitDialog(
-            content = stringResource(id = R.string.success_create_mission),
-            onDismiss = {
-                coroutineScope.launch {
-                    successCreateMissionDialog = true
-                    delay(2000)
-                    successCreateMissionDialog = false
-                }
-            }
-        )
+        successCreateMissionToast = true
+    }
+
+    if (successCreateMissionToast) {
+        val toastMessage = SuccessToastMessage(context)
+        toastMessage.MakeText(message = stringResource(id = R.string.success_create_mission))
+        successCreateMissionToast = false
     }
 
     StackKnowledgeAndroidTheme { colors, _ ->
@@ -142,12 +155,12 @@ private fun CreateMissionScreen(
                     Spacer(modifier = modifier.weight(1f))
 
                     CreateMissionTimer(
-                        onMinute = viewModel.minute.intValue,
-                        onSecond = viewModel.second.intValue,
+                        onMinute = minute,
+                        onSecond = second,
                         onMinuteValueChange = {
                             if (it.isValidNumber()) {
                                 val number = it.toInt()
-                                viewModel.onMinute(number)
+                                onMinute(number)
                             } else {
                                 Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
                                     .show()
@@ -156,7 +169,7 @@ private fun CreateMissionScreen(
                         onSecondValueChange = {
                             if (it.isValidNumber()) {
                                 val number = it.toInt()
-                                viewModel.onSecond(number)
+                                onSecond(number)
                             } else {
                                 Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
                                     .show()
@@ -168,15 +181,15 @@ private fun CreateMissionScreen(
                 }
 
                 InputTitle(
-                    title = viewModel.title.value,
-                    onTitleValueChange = { viewModel.onTitle(it) },
+                    title = title,
+                    onTitleValueChange = { onTitle(it) },
                 )
 
                 InputMission(
-                    content = viewModel.content.value,
-                    onContentValueChange = { viewModel.onContent(it) },
+                    content = content,
+                    onContentValueChange = { onContent(it) },
                     onClick = {
-                        viewModel.onTimeLimit()
+                        onTimeLimit()
                         createMissionDialog = true
                     }
                 )
