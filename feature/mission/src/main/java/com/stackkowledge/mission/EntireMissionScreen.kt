@@ -38,7 +38,7 @@ internal fun EntireMissionRoute(
         onNavigate = { navType -> onNavigate(role, navType) },
         onItemClick = onItemClick,
         getMission = { viewModel.getMission() },
-        uiState = missionUiState
+        missionUiState = missionUiState
     )
 }
 
@@ -49,14 +49,14 @@ private fun EntireMissionScreen(
     onNavigate: (String) -> Unit,
     onItemClick: () -> Unit,
     getMission: () -> Unit,
-    uiState: GetMissionUiState,
+    missionUiState: GetMissionUiState,
 ) {
     LaunchedEffect(true) {
         getMission()
     }
 
-    if (uiState is GetMissionUiState.Success) {
-        val mission = uiState.missionResponseModel
+    if (missionUiState is GetMissionUiState.Success) {
+        val mission = missionUiState.missionResponseModel
 
         StackKnowledgeAndroidTheme { colors, _ ->
             Box {

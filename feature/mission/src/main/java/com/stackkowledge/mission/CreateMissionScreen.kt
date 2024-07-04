@@ -42,12 +42,12 @@ internal fun CreateMissionRoute(
     onNavigate: (Authority, String) -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
-    val uiState by viewModel.createMissionUiState.collectAsStateWithLifecycle()
+    val createMissionUiState by viewModel.createMissionUiState.collectAsStateWithLifecycle()
 
     CreateMissionScreen(
         role = role,
         onNavigate = { navType -> onNavigate(role, navType) },
-        uiState = uiState,
+        createMissionUiState = createMissionUiState,
         createMission = { viewModel.createMission(it) },
         title = viewModel.title.value,
         content = viewModel.content.value,
@@ -72,7 +72,7 @@ private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    uiState: CreateMissionUiState,
+    createMissionUiState: CreateMissionUiState,
     createMission: (CreateMissionRequestModel) -> Unit,
     title: String,
     content: String,
@@ -129,7 +129,7 @@ private fun CreateMissionScreen(
         )
     }
 
-    if (uiState is CreateMissionUiState.Success) {
+    if (createMissionUiState is CreateMissionUiState.Success) {
         successCreateMissionToast = true
     }
 
@@ -156,8 +156,8 @@ private fun CreateMissionScreen(
                     Spacer(modifier = modifier.weight(1f))
 
                     CreateMissionTimer(
-                        onMinute = minute,
-                        onSecond = second,
+                        minute = minute,
+                        second = second,
                         onMinuteValueChange = {
                             if (it.isValidNumber()) {
                                 val number = it.toInt()
