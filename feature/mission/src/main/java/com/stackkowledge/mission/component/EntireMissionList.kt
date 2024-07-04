@@ -64,9 +64,3 @@ fun EntireMissionList(
         }
     }
 }
-
-@Preview
-@Composable
-fun EntireMissionListPre() {
-    //EntireMissionList()
-}

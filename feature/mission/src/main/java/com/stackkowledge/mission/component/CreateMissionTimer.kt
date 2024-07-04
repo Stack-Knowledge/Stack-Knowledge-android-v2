@@ -45,8 +45,8 @@ import com.stackknowledge.design_system.theme.pretendard
 @Composable
 fun CreateMissionTimer(
     modifier: Modifier = Modifier,
-    onMinute: Int,
-    onSecond: Int,
+    minute: Int,
+    second: Int,
     onMinuteValueChange: (String) -> Unit,
     onSecondValueChange: (String) -> Unit,
 ) {
@@ -68,7 +68,7 @@ fun CreateMissionTimer(
             )
             Row {
                 Box {
-                    if (onMinute.toString().isNullOrEmpty()) {
+                    if (minute.toString().isNullOrEmpty()) {
                         Text(
                             modifier = modifier.align(Alignment.Center),
                             text = "00",
@@ -85,9 +85,9 @@ fun CreateMissionTimer(
                     }
 
                     TextField(
-                        value = "$onMinute",
+                        value = "$minute",
                         onValueChange = {
-                            if (onMinute.toString().length <= 2) {
+                            if (minute.toString().length <= 2) {
                                 onMinuteValueChange(it)
                             }
                         },
@@ -125,7 +125,7 @@ fun CreateMissionTimer(
                     color = colors.BLACK
                 )
                 Box {
-                    if (onSecond.toString().isNullOrEmpty()) {
+                    if (second.toString().isNullOrEmpty()) {
                         Text(
                             modifier = modifier.align(Alignment.Center),
                             text = "00",
@@ -141,9 +141,9 @@ fun CreateMissionTimer(
                         )
                     }
                     TextField(
-                        value = "$onSecond",
+                        value = "$second",
                         onValueChange = {
-                            if (onSecond.toString().length <= 2) {
+                            if (second.toString().length <= 2) {
                                 onSecondValueChange(it)
                             }
                         },
@@ -175,12 +175,4 @@ fun CreateMissionTimer(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun CreateMissionTimerPre() {
-    /*CreateMissionTimer(
-        onValueChange = {}
-    )*/
 }

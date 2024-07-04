@@ -106,11 +106,3 @@ fun EntireMissionItem(
         }
     }
 }
-
-@Preview
-@Composable
-fun EntireMissionItemPre(
-    modifier: Modifier = Modifier,
-) {
-    // EntireMissionItem()
-}

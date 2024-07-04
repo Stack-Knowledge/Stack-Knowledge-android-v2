@@ -71,9 +71,3 @@ fun InputTitle(
         }
     }
 }
-
-@Preview
-@Composable
-fun InputTitlePre() {
-    // InputTitle()
-}

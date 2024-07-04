@@ -67,9 +67,3 @@ fun InputMission(
         }
     }
 }
-
-@Preview
-@Composable
-fun InputMissionPre() {
-    // InputMission()
-}
