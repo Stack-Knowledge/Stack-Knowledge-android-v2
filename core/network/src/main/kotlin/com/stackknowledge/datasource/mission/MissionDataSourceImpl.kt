@@ -11,17 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import remote.request.mission.CreateMissionRequestModel
-import remote.request.mission.DetailMissionRequestModel
-import remote.response.mission.DetailMissionResponseModel
-import remote.response.mission.MissionResponseModel
 import javax.inject.Inject
 
 class MissionDataSourceImpl @Inject constructor(
     private val missionAPI: MissionAPI
 ) : MissionDataSource {
     override fun getMission(): Flow<List<MissionResponse>> = flow {
-        Log.e("getMissionDataSource", "Success")
         emit(
             StackKnowledgeApiHandler<List<MissionResponse>>()
                 .httpRequest { missionAPI.getMission() }
@@ -38,7 +33,6 @@ class MissionDataSourceImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun createMission(body: CreateMissionRequest): Flow<Unit> = flow {
-        Log.e("createMissionDataSource", "Success")
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { missionAPI.createMission(body = body) }
