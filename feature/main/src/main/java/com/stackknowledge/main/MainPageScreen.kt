@@ -65,6 +65,7 @@ private fun MainPageScreen(
     onNavigate: (String) -> Unit,
     initMain: () -> Unit,
 ) {
+    var openDialog by remember { mutableStateOf(false) }
     LaunchedEffect("initMain") {
         initMain()
     }
@@ -76,7 +77,9 @@ private fun MainPageScreen(
                 .background(color = colors.WHITE)
         ) {
             Column {
-                LogoutTopBar()
+                LogoutTopBar(
+                    onLogout = { openDialog = true }
+                )
                 StackKnowledgePager()
                 Spacer(modifier = modifier.height(28.dp))
                 MissionList(
@@ -97,6 +100,9 @@ private fun MainPageScreen(
                     onNavigate(it)
                 }
             }
+        }
+        if (openDialog) {
+
         }
     }
 }
