@@ -39,71 +39,76 @@ fun StackKnowledgeDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     openDialog: Boolean,
+    onStateChange: (Boolean) -> Unit,
 ) {
     var openDialog by remember { mutableStateOf(openDialog) }
 
-    StackKnowledgeAndroidTheme { colors, typography ->
-        Dialog(onDismissRequest = { openDialog = false } )  {
-            Column(
-                modifier = modifier
-                    .width(280.dp)
-                    .height(150.dp)
-                    .background(
-                        color = colors.WHITE,
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(vertical = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                Spacer(modifier = modifier.height(4.dp))
-                Text(
-                    text = content,
-                    style = typography.bodyMedium,
-                    color = colors.BLACK,
+    if (openDialog) {
+        StackKnowledgeAndroidTheme { colors, typography ->
+            Dialog(onDismissRequest = { openDialog = false } )  {
+                Column(
                     modifier = modifier
-                        .wrapContentWidth()
-                        .wrapContentHeight(),
-                    textAlign = TextAlign.Center
-                )
-                Row() {
-                    Button(
+                        .width(280.dp)
+                        .height(150.dp)
+                        .background(
+                            color = colors.WHITE,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(vertical = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Spacer(modifier = modifier.height(4.dp))
+                    Text(
+                        text = content,
+                        style = typography.bodyMedium,
+                        color = colors.BLACK,
                         modifier = modifier
-                            .width(116.dp)
-                            .height(40.dp),
-                        onClick = onDismiss,
-                        shape = RoundedCornerShape(10.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            colors.P1
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.cancel),
-                            style = typography.bodyMedium,
-                            color = colors.WHITE
-                        )
-                    }
-                    Spacer(modifier = modifier.width(16.dp))
-                    OutlinedButton(
-                        modifier = modifier
-                            .width(116.dp)
-                            .height(40.dp),
-                        onClick = onConfirm,
-                        shape = RoundedCornerShape(10.dp),
-                        border = BorderStroke(1.dp, colors.P1),
-                        colors = ButtonDefaults.buttonColors(
-                            colors.WHITE
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.check),
-                            style = typography.bodyMedium,
-                            color = colors.P1
-                        )
+                            .wrapContentWidth()
+                            .wrapContentHeight(),
+                        textAlign = TextAlign.Center
+                    )
+                    Row() {
+                        Button(
+                            modifier = modifier
+                                .width(116.dp)
+                                .height(40.dp),
+                            onClick = onDismiss,
+                            shape = RoundedCornerShape(10.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                colors.P1
+                            )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.cancel),
+                                style = typography.bodyMedium,
+                                color = colors.WHITE
+                            )
+                        }
+                        Spacer(modifier = modifier.width(16.dp))
+                        OutlinedButton(
+                            modifier = modifier
+                                .width(116.dp)
+                                .height(40.dp),
+                            onClick = onConfirm,
+                            shape = RoundedCornerShape(10.dp),
+                            border = BorderStroke(1.dp, colors.P1),
+                            colors = ButtonDefaults.buttonColors(
+                                colors.WHITE
+                            )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.check),
+                                style = typography.bodyMedium,
+                                color = colors.P1
+                            )
+                        }
                     }
                 }
             }
         }
+    } else {
+        onStateChange(openDialog)
     }
 }
 
@@ -115,5 +120,6 @@ fun StackKnowledgeDialogPre() {
         onConfirm = {},
         onDismiss = {},
         openDialog = false,
+        onStateChange = {}
     )
 }

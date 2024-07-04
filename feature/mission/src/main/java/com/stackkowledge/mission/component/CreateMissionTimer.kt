@@ -68,21 +68,12 @@ fun CreateMissionTimer(
             )
             Row {
                 Box {
-                    if (minute.toString().isNullOrEmpty()) {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.BLACK,
-                        )
-                    } else {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.WHITE
-                        )
-                    }
+                    Text(
+                        modifier = modifier.align(Alignment.Center),
+                        text = "00",
+                        style = typography.headlineLarge,
+                        color = if (minute.toString().isEmpty()) colors.BLACK else colors.WHITE
+                    )
 
                     TextField(
                         value = "$minute",
@@ -98,8 +89,7 @@ fun CreateMissionTimer(
                             .width(80.dp)
                             .height(95.dp)
                             .background(color = Color.Transparent)
-                            .align(Alignment.Center)
-                        ,
+                            .align(Alignment.Center),
                         colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
@@ -125,21 +115,13 @@ fun CreateMissionTimer(
                     color = colors.BLACK
                 )
                 Box {
-                    if (second.toString().isNullOrEmpty()) {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.BLACK
-                        )
-                    } else {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.WHITE
-                        )
-                    }
+                    Text(
+                        modifier = modifier.align(Alignment.Center),
+                        text = "00",
+                        style = typography.headlineLarge,
+                        color = if (second.toString().isEmpty()) colors.BLACK else colors.WHITE
+                    )
+
                     TextField(
                         value = "$second",
                         onValueChange = {
