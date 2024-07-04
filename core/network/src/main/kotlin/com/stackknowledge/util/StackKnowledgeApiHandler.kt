@@ -45,8 +45,6 @@ class StackKnowledgeApiHandler<T> {
             }
         } catch (e: SocketTimeoutException) {
             throw TimeOutException(message = e.message)
-        } catch (e: UnknownHostException) {
-            throw NetworkException()
         } catch (e: NeedLoginException) {
             throw NeedLoginException()
         } catch (e: Exception) {
