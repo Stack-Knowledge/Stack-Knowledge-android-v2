@@ -9,7 +9,7 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class MissionResponse(
-    @Json(name = "id") val id: UUID,
+    @Json(name = "id") val id: String,
     @Json(name = "title") val title: String,
     @Json(name = "point") val point: Int,
     @Json(name = "missionStatus") val missionStatus: MissionStatus,
