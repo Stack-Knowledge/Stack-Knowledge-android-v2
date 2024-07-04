@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.toast.makeToast
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -99,6 +100,7 @@ private fun CreateMissionScreen(
         StackKnowledgeDialog(
             content = stringResource(id = R.string.select_create_mission),
             openDialog = createMissionOpenDialog,
+            onStateChange = { createMissionOpenDialog = it },
             onConfirm = {
                 createMission(
                     CreateMissionRequestModel(
@@ -119,6 +121,7 @@ private fun CreateMissionScreen(
         StackKnowledgeDialog(
             content = stringResource(id = R.string.cancel_select_create_mission),
             openDialog = cancelCreateMissionOpenDialog,
+            onStateChange = { cancelCreateMissionOpenDialog = it },
             onConfirm = {
                 resetTitle("")
                 resetContent("")
@@ -165,8 +168,7 @@ private fun CreateMissionScreen(
                                 val number = it.toInt()
                                 onMinute(number)
                             } else {
-                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
-                                    .show()
+                                makeToast(context, "숫자를 입력 해 주세요.")
                             }
                         },
                         onSecondValueChange = {
@@ -174,8 +176,7 @@ private fun CreateMissionScreen(
                                 val number = it.toInt()
                                 onSecond(number)
                             } else {
-                                Toast.makeText(context, "숫자를 입력 해 주세요.", Toast.LENGTH_SHORT)
-                                    .show()
+                                makeToast(context, "숫자를 입력 해 주세요.")
                             }
                         }
                     )
