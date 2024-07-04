@@ -18,15 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    val getMissionUseCase: GetMissionUseCase,
-    val getStudentPointRankingUseCase: GetStudentPointRankingUseCase,
+    private val getMissionUseCase: GetMissionUseCase,
+    private val getStudentPointRankingUseCase: GetStudentPointRankingUseCase,
 ): ViewModel() {
     private val _getMissionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
-    val getMissionUiState = _getMissionUiState.asStateFlow()
+    internal val getMissionUiState = _getMissionUiState.asStateFlow()
 
     private val _getRankingUiState = MutableStateFlow<GetRankingUiState>(GetRankingUiState.Loading)
-    val getRankingUiState = _getRankingUiState.asStateFlow()
-    fun getMission() = viewModelScope.launch {
+    internal val getRankingUiState = _getRankingUiState.asStateFlow()
+    internal fun getMission() = viewModelScope.launch {
         getMissionUseCase()
             .asResult()
             .collectLatest { result ->
@@ -38,20 +38,14 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    fun getRanking() = viewModelScope.launch {
+    internal fun getRanking() = viewModelScope.launch {
         getStudentPointRankingUseCase()
             .asResult()
             .collectLatest { result ->
                 when(result) {
                     is Result.Loading -> _getRankingUiState.value = GetRankingUiState.Loading
-                    is Result.Success -> {
-                        Log.d("testt","suc")
-                        _getRankingUiState.value = GetRankingUiState.Success(result.data)
-                    }
-                    is Result.Error -> {
-                        Log.d("testt",result.exception.toString())
-                        _getRankingUiState.value = GetRankingUiState.Error(result.exception)
-                    }
+                    is Result.Success -> _getRankingUiState.value = GetRankingUiState.Success(result.data)
+                    is Result.Error -> _getRankingUiState.value = GetRankingUiState.Error(result.exception)
                 }
             }
     }
