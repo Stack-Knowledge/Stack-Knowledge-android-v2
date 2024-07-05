@@ -1,5 +1,9 @@
 package remote.request.order
 
-data class OrderRequestModel(
-    val orders: OrdersModel,
+import java.util.UUID
+
+
+data class OrderRequestModel (
+    val itemId: UUID,
+    val count: Int,
 )

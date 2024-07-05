@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ItemRepositoryImpl @Inject constructor(
     private val itemDataSource: ItemDataSource
 ): ItemRepository {
-    override fun getItem(): Flow<GetItemResponseModel> {
+    override fun getItem(): Flow<List<GetItemResponseModel>> {
         return itemDataSource.getItem()
     }
 }

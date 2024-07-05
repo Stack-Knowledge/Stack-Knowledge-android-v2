@@ -88,6 +88,81 @@ fun LogoutDialog(
     }
 }
 
+@Composable
+fun OrderDialog(
+    modifier: Modifier = Modifier,
+    content: String,
+    isVisible: Boolean,
+    onQuit: (Boolean) -> Unit,
+    onOrderDialogButtonClick: () -> Unit,
+) {
+    if (isVisible) {
+        StackKnowledgeAndroidTheme { colors, typography ->
+            Dialog(onDismissRequest = { onQuit(false) }) {
+                Column(
+                    modifier = modifier
+                        .width(280.dp)
+                        .height(150.dp)
+                        .background(
+                            color = colors.WHITE,
+                            shape = RoundedCornerShape(20.dp)
+                        ),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = modifier.height(44.dp))
+                    Text(
+                        text = content,
+                        style = typography.bodyMedium,
+                        color = colors.BLACK
+                    )
+                    Spacer(modifier = modifier.height(35.dp))
+                    Row {
+                        Button(
+                            modifier = modifier
+                                .width(116.dp)
+                                .height(40.dp),
+                            onClick = {
+                                onQuit(false)
+                            },
+                            shape = RoundedCornerShape(10.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                colors.P1
+                            )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.cancel),
+                                style = typography.bodyMedium,
+                                color = colors.WHITE
+                            )
+                        }
+                        Spacer(modifier = modifier.width(16.dp))
+                        OutlinedButton(
+                            modifier = modifier
+                                .width(116.dp)
+                                .height(40.dp),
+                            onClick = {
+                                onQuit(false)
+                                onOrderDialogButtonClick()
+                            },
+                            shape = RoundedCornerShape(10.dp),
+                            border = BorderStroke(1.dp, colors.P1),
+                            colors = ButtonDefaults.buttonColors(
+                                colors.WHITE
+                            )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.check),
+                                style = typography.bodyMedium,
+                                color = colors.P1
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun LogoutDialogPre() {

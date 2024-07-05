@@ -6,7 +6,7 @@ import remote.request.order.OrderRequestModel
 import remote.response.order.ViewAllOrderResponseModel
 
 interface OrderRepository {
-    fun order(body: OrderRequestModel): Flow<Unit>
+    fun order(body: List<OrderRequestModel>): Flow<Unit>
 
     fun viewAllOrder(): Flow<ViewAllOrderResponseModel>
 

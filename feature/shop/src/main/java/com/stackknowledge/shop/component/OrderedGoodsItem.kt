@@ -24,6 +24,7 @@ import androidx.compose.ui.zIndex
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.utils.shadow
+import remote.item.ItemModel
 
 @Composable
 fun OrderedGoodsItem(

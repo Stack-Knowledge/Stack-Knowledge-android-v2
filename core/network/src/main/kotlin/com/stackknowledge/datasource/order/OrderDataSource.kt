@@ -9,7 +9,7 @@ import remote.request.order.OrderRequestModel
 import remote.response.order.ViewAllOrderResponseModel
 
 interface OrderDataSource {
-    fun order(body: OrderRequest): Flow<Unit>
+    fun order(body: List<OrderRequest>): Flow<Unit>
 
     fun viewAllOrder(): Flow<ViewAllOrderResponse>
 

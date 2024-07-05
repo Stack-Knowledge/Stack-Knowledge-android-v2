@@ -1,7 +1,10 @@
 package remote.response.item
 
-import remote.item.ItemModel
+import java.util.UUID
 
 data class GetItemResponseModel(
-    val items: ItemModel
-)
+    val id: UUID,
+    val name: String,
+    val price: Int,
+    val image: String,
+    )

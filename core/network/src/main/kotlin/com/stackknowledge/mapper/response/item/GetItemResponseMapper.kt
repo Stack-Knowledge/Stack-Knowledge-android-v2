@@ -6,5 +6,8 @@ import remote.response.item.GetItemResponseModel
 
 fun GetItemResponse.toModel(): GetItemResponseModel =
     GetItemResponseModel(
-        items = items.toModel()
+        id = id,
+        name = name,
+        price = price,
+        image = image,
     )

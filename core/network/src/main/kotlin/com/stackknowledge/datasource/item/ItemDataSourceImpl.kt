@@ -10,9 +10,9 @@ import javax.inject.Inject
 class ItemDataSourceImpl @Inject constructor(
     private val itemAPI: ItemAPI
 ): ItemDataSource {
-    override fun getItem(): Flow<GetItemResponseModel> = flow {
+    override fun getItem(): Flow<List<GetItemResponseModel>> = flow {
         emit(
-            StackKnowledgeApiHandler<GetItemResponseModel>()
+            StackKnowledgeApiHandler<List<GetItemResponseModel>>()
                 .httpRequest { itemAPI.getItem() }
                 .sendRequest()
         )

@@ -15,7 +15,7 @@ import javax.inject.Inject
 class OrderDataSourceImpl @Inject constructor(
     private val orderAPI: OrderAPI
 ): OrderDataSource {
-    override fun order(body: OrderRequest): Flow<Unit> = flow {
+    override fun order(body: List<OrderRequest>): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { orderAPI.order(body = body) }

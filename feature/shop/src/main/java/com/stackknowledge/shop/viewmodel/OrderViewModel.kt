@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.util.Event
 import com.example.common.util.errorHandling
+import com.stackknowledge.shop.data.SelectedItemData
 import com.stackknowledge.usecase.order.ChangeOrderStatusUseCase
 import com.stackknowledge.usecase.order.OrderUseCase
 import com.stackknowledge.usecase.order.ViewAllOrderUseCase
@@ -12,9 +13,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import remote.item.ItemModel
 import remote.request.order.ChangeOrderStatusRequestModel
 import remote.request.order.OrderRequestModel
+import remote.request.order.OrdersModel
+import remote.response.item.GetItemResponseModel
 import remote.response.order.ViewAllOrderResponseModel
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,24 +28,46 @@ class OrderViewModel @Inject constructor(
     private val viewAllOrderUseCase: ViewAllOrderUseCase,
     private val changeOrderStatusUseCase: ChangeOrderStatusUseCase,
 ) : ViewModel() {
-    private val _orderRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
-    val orderRequest = _orderRequest.asStateFlow()
+    private val _orderResponse = MutableStateFlow<Event<Nothing>>(Event.Loading)
+    internal val orderResponse = _orderResponse.asStateFlow()
 
     private val _viewAllOrderRequest =
         MutableStateFlow<Event<ViewAllOrderResponseModel>>(Event.Loading)
-    val viewAllOrderRequest = _viewAllOrderRequest.asStateFlow()
+    internal val viewAllOrderRequest = _viewAllOrderRequest.asStateFlow()
 
     private val _changeOrderStatusRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
-    val changeOrderStatusRequest = _changeOrderStatusRequest.asStateFlow()
+    internal val changeOrderStatusRequest = _changeOrderStatusRequest.asStateFlow()
 
-    fun order(body: OrderRequestModel) = viewModelScope.launch {
-        orderUseCase(body = body)
-            .onSuccess {
-                _orderRequest.value = Event.Success()
-            }
-            .onFailure {
-                _orderRequest.value = it.errorHandling()
-            }
+    val selectedItemList: MutableList<SelectedItemData> = mutableListOf()
+
+    private val orderRequest = selectedItemList.map { selectedItemData ->
+        OrderRequestModel(
+            itemId = selectedItemData.id,
+            count = selectedItemData.count,
+        )
+    }
+
+    fun setOrderDataList(selectedItemList: List<GetItemResponseModel>) {
+        this.selectedItemList.clear()
+        selectedItemList.forEach { itemModel ->
+            val selectedItem = SelectedItemData(
+                id = itemModel.id,
+                name = itemModel.name,
+                count = 1,
+                price = itemModel.price,
+            )
+            this.selectedItemList.add(selectedItem)
+        }
+    }
+
+    fun order() = viewModelScope.launch {
+        orderUseCase(
+            body = orderRequest
+        ).onSuccess {
+            _orderResponse.value = Event.Success()
+        }.onFailure {
+            _orderResponse.value = it.errorHandling()
+        }
     }
 
     fun viewAllOrder() = viewModelScope.launch {

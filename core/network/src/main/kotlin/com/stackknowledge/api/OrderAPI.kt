@@ -15,7 +15,7 @@ import retrofit2.http.POST
 interface OrderAPI {
     @POST("/order")
     suspend fun order(
-        @Body body: OrderRequest,
+        @Body body: List<OrderRequest>,
     )
 
     @GET("/order")

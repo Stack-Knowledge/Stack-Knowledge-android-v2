@@ -21,7 +21,7 @@ fun StackKnowledgeButton(
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Button(
-            onClick = onClick,
+            onClick = { onClick() },
             modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(10.dp))

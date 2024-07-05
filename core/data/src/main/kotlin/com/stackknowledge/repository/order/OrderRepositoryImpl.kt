@@ -11,17 +11,17 @@ import remote.response.order.ViewAllOrderResponseModel
 import javax.inject.Inject
 
 class OrderRepositoryImpl @Inject constructor(
-    private val orderDataSource: OrderDataSource
-): OrderRepository {
-    override fun order(body: OrderRequestModel): Flow<Unit> {
-        return orderDataSource.order(body = body.toDto())
+    private val orderDataSource: OrderDataSource,
+) : OrderRepository {
+    override fun order(body: List<OrderRequestModel>): Flow<Unit> {
+        return orderDataSource.order(body = body.map { it.toDto() })
     }
 
     override fun viewAllOrder(): Flow<ViewAllOrderResponseModel> {
         return orderDataSource.viewAllOrder().map { it.toModel() }
     }
 
-    override fun changeOrderStatus(body: ChangeOrderStatusRequestModel): Flow<Unit> {
+    override fun  changeOrderStatus(body: ChangeOrderStatusRequestModel): Flow<Unit> {
         return orderDataSource.changeOrderStatus(body = body.toDto())
     }
 }

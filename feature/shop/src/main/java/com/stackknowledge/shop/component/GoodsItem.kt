@@ -23,16 +23,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import remote.item.ItemModel
+import remote.response.item.GetItemResponseModel
+import java.util.UUID
 
 @Composable
 fun GoodsItem(
     modifier: Modifier = Modifier,
+    itemData: GetItemResponseModel,
+    onItemCheckButtonClick: (GetItemResponseModel) -> Unit,
 ) {
     var checked by remember { mutableStateOf(true) }
-    
-    val imageResource = if(checked) {
+
+    val imageResource = if (checked) {
         painterResource(R.drawable.uncheck_image)
     } else {
         painterResource(R.drawable.check_image)
@@ -43,10 +49,15 @@ fun GoodsItem(
             modifier = modifier
                 .background(color = colors.WHITE)
         ) {
-            Box() {
+            Box {
                 Image(
-                    painter = painterResource(R.drawable.goods_image),
-                    contentDescription = "Goods Image"
+                    painter = rememberAsyncImagePainter(model = itemData.image.ifEmpty {
+                        painterResource(
+                            id = R.drawable.goods_image
+                        )
+                    }),
+                    contentDescription = "Goods Image",
+                    contentScale = ContentScale.Crop
                 )
                 Box(
                     modifier = modifier
@@ -60,8 +71,15 @@ fun GoodsItem(
                             .height(16.dp)
                             .clickable {
                                 checked = !checked
-                            }
-                        ,
+                                onItemCheckButtonClick(
+                                    GetItemResponseModel(
+                                        itemData.id,
+                                        itemData.name,
+                                        itemData.price,
+                                        itemData.image,
+                                    )
+                                )
+                            },
                         contentScale = ContentScale.Crop
                     )
                 }
@@ -69,7 +87,7 @@ fun GoodsItem(
 
             Spacer(modifier = modifier.height(4.dp))
             Text(
-                text = "외출권",
+                text = itemData.name,
                 style = typography.bodyMedium,
                 color = colors.BLACK
             )
@@ -79,7 +97,7 @@ fun GoodsItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "1,000",
+                    text = "${itemData.price}",
                     style = typography.bodyMedium,
                     color = colors.BLACK
                 )
@@ -100,5 +118,13 @@ fun GoodsItem(
 @Preview
 @Composable
 fun GoodsItemPre() {
-    GoodsItem()
+    GoodsItem(
+        onItemCheckButtonClick = {},
+        itemData = GetItemResponseModel(
+            id = UUID.randomUUID(),
+            price = 1000,
+            name = "정영운 글러브",
+            image = ""
+        )
+    )
 }
