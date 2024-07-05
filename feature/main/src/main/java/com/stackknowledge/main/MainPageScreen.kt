@@ -1,12 +1,15 @@
 package com.stackknowledge.main
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -63,6 +66,8 @@ private fun MainPageScreen(
     onNavigate: (String) -> Unit,
     initMain: () -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+
     var openDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     LaunchedEffect("initMain") {
@@ -79,21 +84,25 @@ private fun MainPageScreen(
                 LogoutTopBar(
                     onLogout = { openLogoutDialog = true }
                 )
-                StackKnowledgePager()
-                Spacer(modifier = modifier.height(28.dp))
-                MissionList(
-                    getMissionUiState = getMissionUiState
-                )
-                Spacer(modifier = modifier.height(20.dp))
-                RankingList(
-                    getRankingUiState = getRankingUiState
-                )
-                Box(modifier = Modifier.align(alignment = Alignment.End)) {
-                    JoinWaitingButton(
-                        modifier = modifier.padding(top = 80.dp, end = 8.dp),
-                        onClick = { openDialog = true }
+                Column(
+                    modifier = modifier.verticalScroll(scrollState)
+                ) {
+                    StackKnowledgePager()
+                    Spacer(modifier = modifier.height(28.dp))
+                    MissionList(
+                        getMissionUiState = getMissionUiState
+                    )
+                    Spacer(modifier = modifier.height(20.dp))
+                    RankingList(
+                        getRankingUiState = getRankingUiState
                     )
                 }
+            }
+            Box(modifier = Modifier.align(alignment = Alignment.BottomEnd)) {
+                JoinWaitingButton(
+                    modifier = modifier.padding(bottom = 96.dp, end = 8.dp),
+                    onClick = { openDialog = true }
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
