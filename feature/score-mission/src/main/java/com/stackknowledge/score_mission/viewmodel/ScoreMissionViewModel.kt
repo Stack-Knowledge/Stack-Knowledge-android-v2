@@ -40,7 +40,7 @@ class ScoreMissionViewModel @Inject constructor(
     internal val scoreMissionUiState = _scoreMissionUiState.asStateFlow()
 
     private var _solveId = ""
-    val solveId = _solveId
+    internal val solveId = _solveId
 
     internal fun getScoreMissionList() = viewModelScope.launch {
         getScoreMissionUseCase()
