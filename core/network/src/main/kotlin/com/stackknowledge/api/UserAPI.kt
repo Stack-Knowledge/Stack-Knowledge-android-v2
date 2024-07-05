@@ -4,6 +4,7 @@ import com.stackknowledge.dto.request.user.ApproveRequest
 import com.stackknowledge.dto.request.user.ScoreRequest
 import com.stackknowledge.dto.response.user.DetailSolveMissionResponse
 import com.stackknowledge.dto.response.user.GetRequestSignUpTeacherResponse
+import com.stackknowledge.dto.response.user.GetSolveMissionList
 import com.stackknowledge.dto.response.user.GetSolveMissionResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,7 +15,7 @@ import java.util.UUID
 
 interface UserAPI {
     @GET("/user/scoring")
-    suspend fun getSolvedMission(): List<GetSolveMissionResponse>
+    suspend fun getSolvedMission(): GetSolveMissionResponse
 
     @GET("/user/scoring/{solve_id}")
     suspend fun getDetailSolveMission(
