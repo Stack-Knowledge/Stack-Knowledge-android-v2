@@ -1,5 +1,5 @@
 package remote.response.student
 
-data class UploadProfileImageResponse(
+data class UploadProfileImageResponseModel(
     val fileName: String,
 )

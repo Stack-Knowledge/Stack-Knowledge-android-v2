@@ -1,15 +1,15 @@
 package com.stackknowledge.datasource.student
 
 import com.stackknowledge.api.StudentAPI
+import com.stackknowledge.dto.response.student.GetMyInformationResponse
+import com.stackknowledge.dto.response.student.GetStudentPointRankingResponse
+import com.stackknowledge.dto.response.student.UploadProfileImageResponse
 import com.stackknowledge.util.StackKnowledgeApiHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
-import remote.response.student.GetMyInformationResponse
-import remote.response.student.GetStudentPointRankingResponse
-import remote.response.student.UploadProfileImageResponse
 import javax.inject.Inject
 
 class StudentDataSourceImpl @Inject constructor(
