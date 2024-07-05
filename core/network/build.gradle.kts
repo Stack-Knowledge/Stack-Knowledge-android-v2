@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.moshi)
     ksp(libs.retrofit.moshi.codegen)
 }
+
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")
     val properties = Properties()

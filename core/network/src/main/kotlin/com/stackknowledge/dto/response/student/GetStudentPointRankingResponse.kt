@@ -1,17 +1,14 @@
-package com.stackknowledge.dto.response.mission
+package com.stackknowledge.dto.response.student
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.stackknowledge.dto.user.User
-import enumdatatype.MissionStatus
 import remote.user.UserModel
 import java.util.UUID
 
 @JsonClass(generateAdapter = true)
-data class MissionResponse(
+data class GetStudentPointRankingResponse(
     @Json(name = "id") val id: String,
-    @Json(name = "title") val title: String,
-    @Json(name = "point") val point: Int,
-    @Json(name = "missionStatus") val missionStatus: String,
+    @Json(name = "cumulatePoint") val cumulatePoint: Int,
     @Json(name = "user") val user: User,
 )

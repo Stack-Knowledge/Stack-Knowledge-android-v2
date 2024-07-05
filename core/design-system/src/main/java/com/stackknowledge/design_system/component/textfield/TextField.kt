@@ -26,14 +26,14 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun StackKnowledgeTextField(
     modifier: Modifier = Modifier,
+    value: String = "",
     onValueChange: (String) -> Unit,
     placeholder: String,
 ) {
-    var text by remember { mutableStateOf("") }
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
-            value = text,
-            onValueChange = { text = it; onValueChange(it) },
+            value = value,
+            onValueChange = { onValueChange(it) },
             modifier = modifier
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(color = colors.G5),
@@ -63,16 +63,15 @@ fun StackKnowledgeTextField(
 fun InputTitleTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    value: String,
 ) {
     var textCount by remember { mutableStateOf("0") }
-    var text by remember { mutableStateOf("") }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         TextField(
-            value = text,
+            value = value,
             onValueChange = {
-                if (text.length <= 20) {
-                    text = it
+                if (value.length <= 20) {
                     onValueChange(it)
                 }
             },

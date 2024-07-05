@@ -13,6 +13,7 @@ import com.stackknowledge.navigation.util.bottomNavigationNavigate
 import com.stackknowledge.ranking.navigation.rankingScreen
 import com.stackknowledge.ranking.navigation.teacherRankingScreen
 import com.stackknowledge.resolve_mission.navigation.navigateToResolveMission
+import com.stackknowledge.resolve_mission.navigation.resolveMissionRoute
 import com.stackknowledge.resolve_mission.navigation.resolveMissionScreen
 import com.stackknowledge.score_mission.navigation.gradingAnswerScreen
 import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
@@ -21,7 +22,9 @@ import com.stackknowledge.shop.navigation.shopRoute
 import com.stackknowledge.shop.navigation.shopScreen
 import com.stackknowledge.shop.navigation.teacherShopScreen
 import com.stackknowledge.ui.StackKnowledgeAppState
+import com.stackkowledge.mission.navigation.createMissionRoute
 import com.stackkowledge.mission.navigation.createMissionScreen
+import com.stackkowledge.mission.navigation.entireMissionRoute
 import com.stackkowledge.mission.navigation.entireMissionScreen
 
 @Composable

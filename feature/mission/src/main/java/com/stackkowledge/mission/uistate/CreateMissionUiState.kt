@@ -1,0 +1,7 @@
+package com.stackkowledge.mission.uistate
+
+sealed interface CreateMissionUiState {
+    object Loading : CreateMissionUiState
+    object Success : CreateMissionUiState
+    data class Error(val exception: Throwable) : CreateMissionUiState
+}

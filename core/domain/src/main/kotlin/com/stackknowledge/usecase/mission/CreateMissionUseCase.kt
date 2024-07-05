@@ -1,4 +1,4 @@
-package com.stackknowledge.usecase.misson
+package com.stackknowledge.usecase.mission
 
 import com.stackknowledge.repository.mission.MissionRepository
 import remote.request.mission.CreateMissionRequestModel
@@ -7,7 +7,6 @@ import javax.inject.Inject
 class CreateMissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository
 ) {
-    suspend operator fun invoke(body: CreateMissionRequestModel) = runCatching {
+    operator fun invoke(body: CreateMissionRequestModel) =
         missionRepository.createMission(body = body)
-    }
 }
