@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,23 +33,35 @@ internal fun GradingAnswerRoute(
     viewModel: ScoreMissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
 ) {
     val detailSolveMissionUiState by viewModel.detailScoreMissionUiState.collectAsStateWithLifecycle()
+    lateinit var solveStatus: SolveStatus
 
     GradingAnswerScreen(
         onAnswer = {
-            viewModel.scoreMission(
-                viewModel.solveId,
-                ScoreRequestModel(
-                    SolveStatus.CORRECT_ANSWER
-                )
-            )
+            solveStatus = SolveStatus.CORRECT_ANSWER
         },
         onWrongAnswer = {
-            viewModel.scoreMission(
-                viewModel.solveId,
-                ScoreRequestModel(
-                    SolveStatus.WRONG_ANSWER
-                )
-            )
+            solveStatus = SolveStatus.WRONG_ANSWER
+        },
+        onSolveMission = {
+            when (solveStatus) {
+                SolveStatus.CORRECT_ANSWER -> {
+                    viewModel.scoreMission(
+                        solveId = viewModel.solveId,
+                        body = ScoreRequestModel(
+                            SolveStatus.CORRECT_ANSWER
+                        )
+                    )
+                }
+
+                SolveStatus.WRONG_ANSWER -> {
+                    viewModel.scoreMission(
+                        solveId = viewModel.solveId,
+                        body = ScoreRequestModel(
+                            SolveStatus.WRONG_ANSWER
+                        )
+                    )
+                }
+            }
         },
         getDetailSolveMission = { viewModel.detailScoreMission(viewModel.solveId) },
         detailSolveMissionUiState = detailSolveMissionUiState,
@@ -60,13 +73,18 @@ private fun GradingAnswerScreen(
     modifier: Modifier = Modifier,
     onAnswer: () -> Unit,
     onWrongAnswer: () -> Unit,
+    onSolveMission: () -> Unit,
     getDetailSolveMission: () -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
 ) {
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
     val (selectedIncorrect, setSelectedIncorrect) = remember { mutableStateOf(false) }
 
-    StackKnowledgeAndroidTheme { colors, typography ->
+    LaunchedEffect(true) {
+        getDetailSolveMission()
+    }
+
+    StackKnowledgeAndroidTheme { colors, _ ->
         Surface {
             Column(
                 modifier = modifier
@@ -78,19 +96,14 @@ private fun GradingAnswerScreen(
                 Spacer(modifier = modifier.height(90.dp))
 
                 if (detailSolveMissionUiState is DetailScoreMissionUiState.Success) {
-                    val solveMissionTitle =
+                    val solveMission =
                         detailSolveMissionUiState.detailSolveMissionResponseModel
 
                     SolvedMissionTitle(
-                        solveMissionTitle = solveMissionTitle.title,
+                        solveMissionTitle = solveMission.title,
                     )
-                }
-
-                if (detailSolveMissionUiState is DetailScoreMissionUiState.Success) {
-                    val solveMissionSolution =
-                        detailSolveMissionUiState.detailSolveMissionResponseModel
                     SolvedMissionAnswer(
-                        solveMissionSolution = solveMissionSolution.solution
+                        solveMissionSolution = solveMission.solution
                     )
                 }
 
@@ -102,6 +115,7 @@ private fun GradingAnswerScreen(
                     },
                     onAnswer = onAnswer,
                     onWrongAnswer = onWrongAnswer,
+                    onScoreMission = onSolveMission,
                 )
             }
         }
