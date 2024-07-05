@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.JoinWaitingDialog
+import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.main.component.JoinWaitingButton
@@ -114,6 +115,15 @@ private fun MainPageScreen(
                     onNavigate(it)
                 }
             }
+        }
+        if (openLogoutDialog) {
+            StackKnowledgeDialog(
+                content = "로그아웃 하시겠습니까?",
+                onConfirm = {},
+                onDismiss = {},
+                onStateChange = { openLogoutDialog = it },
+                openDialog = openLogoutDialog,
+            )
         }
         if (openDialog) {
             JoinWaitingDialog(
