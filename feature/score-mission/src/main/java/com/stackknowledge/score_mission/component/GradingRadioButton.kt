@@ -35,7 +35,7 @@ fun GradingRadioButton(
     onClick: (() -> Unit)?,
     onAnswer: () -> Unit,
     onWrongAnswer: () -> Unit,
-    onScoreMission: () -> Unit,
+    openDialog: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val interactionSource = remember { mutableStateOf(MutableInteractionSource()) }
@@ -115,7 +115,7 @@ fun GradingRadioButton(
                 text = stringResource(id = R.string.submit),
                 modifier = modifier
                     .height(60.dp),
-                onClick = onScoreMission
+                onClick = openDialog
             )
 
             Spacer(modifier = modifier.height(72.dp))

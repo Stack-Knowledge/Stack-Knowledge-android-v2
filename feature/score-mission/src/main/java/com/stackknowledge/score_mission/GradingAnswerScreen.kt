@@ -18,11 +18,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
+import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
+import com.stackknowledge.design_system.component.toast.SuccessToastMessage
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.score_mission.component.GradingRadioButton
@@ -30,6 +34,7 @@ import com.stackknowledge.score_mission.component.SolvedMissionAnswer
 import com.stackknowledge.score_mission.component.SolvedMissionTitle
 import com.stackknowledge.score_mission.viewmodel.ScoreMissionViewModel
 import com.stackknowledge.score_mission.viewmodel.uistate.DetailScoreMissionUiState
+import com.stackknowledge.score_mission.viewmodel.uistate.ScoreMissionUiState
 import enumdatatype.Authority
 import remote.request.user.ScoreRequestModel
 
@@ -40,6 +45,7 @@ internal fun GradingAnswerRoute(
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val detailSolveMissionUiState by viewModel.detailScoreMissionUiState.collectAsStateWithLifecycle()
+    val scoreMissionUiState by viewModel.scoreMissionUiState.collectAsStateWithLifecycle()
 
     GradingAnswerScreen(
         role = role,
@@ -55,6 +61,7 @@ internal fun GradingAnswerRoute(
         },
         getDetailSolveMission = viewModel::detailScoreMission,
         detailSolveMissionUiState = detailSolveMissionUiState,
+        scoreMissionUiState = scoreMissionUiState,
     )
 }
 
@@ -69,12 +76,39 @@ private fun GradingAnswerScreen(
     onSolveMission: () -> Unit,
     getDetailSolveMission: (String) -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
+    scoreMissionUiState: ScoreMissionUiState,
 ) {
+    val context = LocalContext.current
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
     val (selectedIncorrect, setSelectedIncorrect) = remember { mutableStateOf(false) }
+    var openDialog by remember { mutableStateOf(false) }
+    var successScoreMissionToast by remember { mutableStateOf(false) }
 
     LaunchedEffect(true) {
         getDetailSolveMission(solveId)
+    }
+
+    if (openDialog) {
+        StackKnowledgeDialog(
+            content = stringResource(id = com.stackknowledge.design_system.R.string.finish_score_mission),
+            onConfirm = {
+                onSolveMission()
+                openDialog = false
+            },
+            onDismiss = { openDialog = false },
+            openDialog = openDialog,
+            onStateChange = { openDialog = it },
+        )
+    }
+
+    if (scoreMissionUiState is ScoreMissionUiState.Success) {
+        successScoreMissionToast = true
+    }
+
+    if (successScoreMissionToast) {
+        val toastMessage = SuccessToastMessage(context)
+        toastMessage.MakeText(message = stringResource(id = R.string.success_score_mission))
+        successScoreMissionToast = false
     }
 
     Log.e("DetailSolveMission", detailSolveMissionUiState.toString())
@@ -110,7 +144,7 @@ private fun GradingAnswerScreen(
                     },
                     onAnswer = { onAnswer("CORRECT_ANSWER") },
                     onWrongAnswer = { onWrongAnswer("WRONG_ANSWER") },
-                    onScoreMission = onSolveMission,
+                    openDialog = { openDialog = true },
                 )
             }
             Box(
