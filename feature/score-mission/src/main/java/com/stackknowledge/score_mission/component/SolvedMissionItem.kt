@@ -40,6 +40,7 @@ fun SolvedMissionItem(
     title: String,
     point: Int,
     onClick: () -> Unit,
+    intentId: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -51,7 +52,10 @@ fun SolvedMissionItem(
                     blurRadius = 20.dp,
                 )
                 .zIndex(-1f)
-                .clickable { onClick() }
+                .clickable {
+                    onClick()
+                    intentId()
+                }
         ) {
             Box(
                 modifier = modifier

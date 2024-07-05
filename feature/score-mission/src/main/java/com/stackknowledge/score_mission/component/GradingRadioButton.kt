@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
-import enumdatatype.SolveStatus
 
 @Composable
 fun GradingRadioButton(
@@ -42,7 +42,8 @@ fun GradingRadioButton(
 
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
-            modifier = modifier.padding(horizontal = 16.dp)
+            modifier = modifier.padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ){
             Row(
                 modifier = modifier
@@ -75,8 +76,8 @@ fun GradingRadioButton(
                             .padding(end = 12.dp),
                     ) {
                         drawCircle(
-                            color = if (isSelected) colors.P1 else colors.G8,
-                            style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
+                            color = if (isSelected) colors.G8 else colors.P1,
+                            style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
                         )
                     }
 
@@ -101,8 +102,8 @@ fun GradingRadioButton(
                             .padding(end = 12.dp),
                     ) {
                         drawCircle(
-                            color = if (isSelected) colors.G8 else colors.P1,
-                            style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
+                            color = if (isSelected) colors.P1 else colors.G8,
+                            style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
                         )
                     }
                 }
@@ -117,7 +118,7 @@ fun GradingRadioButton(
                 onClick = onScoreMission
             )
 
-            Spacer(modifier = modifier.height(16.dp))
+            Spacer(modifier = modifier.height(72.dp))
 
         }
     }

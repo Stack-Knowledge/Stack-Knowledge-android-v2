@@ -19,14 +19,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import remote.request.user.ScoreRequestModel
+import remote.response.user.GetSolveMissionListModel
 import remote.response.user.GetSolveMissionResponseModel
 import java.util.UUID
 
 @Composable
 fun SolvedMissionList(
     modifier: Modifier = Modifier,
-    scoreMission: List<GetSolveMissionResponseModel>,
-    onClick: (Int) -> Unit,
+    scoreMission: GetSolveMissionResponseModel,
+    onClick: () -> Unit,
+    intentId: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
@@ -44,13 +46,14 @@ fun SolvedMissionList(
                     top = 16.dp,
                 ),
             ) {
-                itemsIndexed(scoreMission) {index, item ->
+                itemsIndexed(scoreMission.response) {_, item ->
                     Box {
                         SolvedMissionItem(
                             name = item.user.name,
                             title = item.title,
                             point = item.point,
-                            onClick = { onClick(index) }
+                            onClick = { onClick() },
+                            intentId = { intentId(item.solveId) }
                         )
                     }
                 }

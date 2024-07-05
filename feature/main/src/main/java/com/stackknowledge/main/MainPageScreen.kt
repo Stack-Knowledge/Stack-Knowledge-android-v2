@@ -36,7 +36,7 @@ internal fun MainPageRoute(
     onNavigate: (Authority, String) -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
+    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
     val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
 

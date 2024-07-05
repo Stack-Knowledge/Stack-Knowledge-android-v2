@@ -1,5 +1,6 @@
 package com.stackknowledge.score_mission
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -30,7 +31,6 @@ import com.stackknowledge.score_mission.component.SolvedMissionTitle
 import com.stackknowledge.score_mission.viewmodel.ScoreMissionViewModel
 import com.stackknowledge.score_mission.viewmodel.uistate.DetailScoreMissionUiState
 import enumdatatype.Authority
-import enumdatatype.SolveStatus
 import remote.request.user.ScoreRequestModel
 
 @Composable
@@ -40,39 +40,20 @@ internal fun GradingAnswerRoute(
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val detailSolveMissionUiState by viewModel.detailScoreMissionUiState.collectAsStateWithLifecycle()
-    lateinit var solveStatus: SolveStatus
 
     GradingAnswerScreen(
         role = role,
+        solveId = viewModel.solveId.value,
         onNavigate = { navType -> onNavigate(role, navType) },
-        onAnswer = {
-            solveStatus = SolveStatus.CORRECT_ANSWER
-        },
-        onWrongAnswer = {
-            solveStatus = SolveStatus.WRONG_ANSWER
-        },
+        onAnswer = { viewModel.onSolveStatus(it) },
+        onWrongAnswer = { viewModel.onSolveStatus(it) },
         onSolveMission = {
-            when (solveStatus) {
-                SolveStatus.CORRECT_ANSWER -> {
-                    viewModel.scoreMission(
-                        solveId = viewModel.solveId,
-                        body = ScoreRequestModel(
-                            SolveStatus.CORRECT_ANSWER
-                        )
-                    )
-                }
-
-                SolveStatus.WRONG_ANSWER -> {
-                    viewModel.scoreMission(
-                        solveId = viewModel.solveId,
-                        body = ScoreRequestModel(
-                            SolveStatus.WRONG_ANSWER
-                        )
-                    )
-                }
-            }
+            viewModel.scoreMission(
+                solveId = viewModel.solveId.value,
+                body = ScoreRequestModel(viewModel.solveStatus.value)
+            )
         },
-        getDetailSolveMission = { viewModel.detailScoreMission(viewModel.solveId) },
+        getDetailSolveMission = viewModel::detailScoreMission,
         detailSolveMissionUiState = detailSolveMissionUiState,
     )
 }
@@ -81,19 +62,22 @@ internal fun GradingAnswerRoute(
 private fun GradingAnswerScreen(
     modifier: Modifier = Modifier,
     role: Authority,
+    solveId: String,
     onNavigate: (String) -> Unit,
-    onAnswer: () -> Unit,
-    onWrongAnswer: () -> Unit,
+    onAnswer: (String) -> Unit,
+    onWrongAnswer: (String) -> Unit,
     onSolveMission: () -> Unit,
-    getDetailSolveMission: () -> Unit,
+    getDetailSolveMission: (String) -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
 ) {
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
     val (selectedIncorrect, setSelectedIncorrect) = remember { mutableStateOf(false) }
 
     LaunchedEffect(true) {
-        getDetailSolveMission()
+        getDetailSolveMission(solveId)
     }
+
+    Log.e("DetailSolveMission", detailSolveMissionUiState.toString())
 
     StackKnowledgeAndroidTheme { colors, _ ->
         Box {
@@ -124,8 +108,8 @@ private fun GradingAnswerScreen(
                         setSelectedCorrect(!selectedCorrect)
                         setSelectedIncorrect(false)
                     },
-                    onAnswer = onAnswer,
-                    onWrongAnswer = onWrongAnswer,
+                    onAnswer = { onAnswer("CORRECT_ANSWER") },
+                    onWrongAnswer = { onWrongAnswer("WRONG_ANSWER") },
                     onScoreMission = onSolveMission,
                 )
             }

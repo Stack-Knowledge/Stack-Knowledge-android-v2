@@ -1,5 +1,6 @@
 package com.stackknowledge.score_mission
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -39,8 +40,8 @@ internal fun SolvedMissionRoute(
         role = role,
         onNavigate = { navType -> onNavigate(role, navType) },
         onItemClick = onItemClick,
+        intentId = { viewModel.onSolveId(it) },
         getScoreMission = { viewModel.getScoreMissionList() },
-        onSolveId = { viewModel.onSolveId(it) },
         scoreMissionListUiState = scoreMissionListUiState,
     )
 }
@@ -51,42 +52,39 @@ private fun SolvedMissionScreen(
     role: Authority,
     onNavigate: (String) -> Unit,
     onItemClick: () -> Unit,
+    intentId: (String) -> Unit,
     getScoreMission: () -> Unit,
-    onSolveId: (String) -> Unit,
     scoreMissionListUiState: GetScoreMissionListUiState,
 ) {
     LaunchedEffect(true) {
         getScoreMission()
     }
-
-    if (scoreMissionListUiState is GetScoreMissionListUiState.Success) {
-        val scoreMission = scoreMissionListUiState.getSolveMissionResponseModel
-
-        StackKnowledgeAndroidTheme { colors, _ ->
-            Box {
-                Column(
-                    modifier = modifier
-                        .background(color = colors.WHITE)
-                        .fillMaxSize()
-                ) {
-                    StackKnowledgeTopBar()
+    StackKnowledgeAndroidTheme { colors, _ ->
+        Box {
+            Column(
+                modifier = modifier
+                    .background(color = colors.WHITE)
+                    .fillMaxSize()
+            ) {
+                StackKnowledgeTopBar()
+                if (scoreMissionListUiState is GetScoreMissionListUiState.Success) {
+                    val scoreMission = scoreMissionListUiState.getSolveMissionResponseModel
                     SolvedMissionList(
                         scoreMission = scoreMission,
-                        onClick = {
-                            onItemClick()
-                            onSolveId(it.toString())
-                        }
+                        onClick = { onItemClick() },
+                        intentId = { intentId(it) }
                     )
+                    Log.e("ScoreMissionListScreen", scoreMission.toString())
                 }
-                Box(
-                    modifier = Modifier.align(alignment = Alignment.BottomCenter),
+            }
+            Box(
+                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+            ) {
+                StackKnowledgeBottomNavigation(
+                    modifier = Modifier,
+                    role = role
                 ) {
-                    StackKnowledgeBottomNavigation(
-                        modifier = Modifier,
-                        role = role
-                    ) {
-                        onNavigate(it)
-                    }
+                    onNavigate(it)
                 }
             }
         }

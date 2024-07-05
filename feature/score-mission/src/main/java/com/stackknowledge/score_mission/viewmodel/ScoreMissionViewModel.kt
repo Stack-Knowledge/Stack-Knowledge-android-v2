@@ -1,5 +1,6 @@
 package com.stackknowledge.score_mission.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -39,8 +40,11 @@ class ScoreMissionViewModel @Inject constructor(
         MutableStateFlow<ScoreMissionUiState>(ScoreMissionUiState.Loading)
     internal val scoreMissionUiState = _scoreMissionUiState.asStateFlow()
 
-    private var _solveId = ""
+    private var _solveId = mutableStateOf("")
     internal val solveId = _solveId
+
+    private var _solveStatus = mutableStateOf("CORRECT_ANSWER")
+    internal val solveStatus = _solveStatus
 
     internal fun getScoreMissionList() = viewModelScope.launch {
         getScoreMissionUseCase()
@@ -90,6 +94,11 @@ class ScoreMissionViewModel @Inject constructor(
     }
 
     internal fun onSolveId(value: String) {
-        _solveId = value
+        _solveId.value = value
+    }
+
+    internal fun onSolveStatus(value: String) {
+        _solveStatus.value = value
+        Log.e("testt", solveStatus.value)
     }
 }
