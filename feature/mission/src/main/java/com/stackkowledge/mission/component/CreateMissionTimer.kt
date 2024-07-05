@@ -45,11 +45,11 @@ import com.stackknowledge.design_system.theme.pretendard
 @Composable
 fun CreateMissionTimer(
     modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit,
+    minute: Int,
+    second: Int,
+    onMinuteValueChange: (String) -> Unit,
+    onSecondValueChange: (String) -> Unit,
 ) {
-    var minute by remember { mutableStateOf("") }
-    var second by remember { mutableStateOf("") }
-
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier
@@ -68,28 +68,18 @@ fun CreateMissionTimer(
             )
             Row {
                 Box {
-                    if (minute.isNullOrEmpty()) {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.BLACK,
-                        )
-                    } else {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.WHITE
-                        )
-                    }
+                    Text(
+                        modifier = modifier.align(Alignment.Center),
+                        text = "00",
+                        style = typography.headlineLarge,
+                        color = if (minute.toString().isEmpty()) colors.BLACK else colors.WHITE
+                    )
 
                     TextField(
-                        value = minute,
+                        value = "$minute",
                         onValueChange = {
-                            if (minute.length <= 2) {
-                                minute = it
-                                onValueChange(it)
+                            if (minute.toString().length <= 2) {
+                                onMinuteValueChange(it)
                             }
                         },
                         keyboardOptions = KeyboardOptions.Default.copy(
@@ -99,8 +89,7 @@ fun CreateMissionTimer(
                             .width(80.dp)
                             .height(95.dp)
                             .background(color = Color.Transparent)
-                            .align(Alignment.Center)
-                        ,
+                            .align(Alignment.Center),
                         colors = TextFieldDefaults.textFieldColors(
                             containerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
@@ -126,27 +115,18 @@ fun CreateMissionTimer(
                     color = colors.BLACK
                 )
                 Box {
-                    if (second.isNullOrEmpty()) {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.BLACK
-                        )
-                    } else {
-                        Text(
-                            modifier = modifier.align(Alignment.Center),
-                            text = "00",
-                            style = typography.headlineLarge,
-                            color = colors.WHITE
-                        )
-                    }
+                    Text(
+                        modifier = modifier.align(Alignment.Center),
+                        text = "00",
+                        style = typography.headlineLarge,
+                        color = if (second.toString().isEmpty()) colors.BLACK else colors.WHITE
+                    )
+
                     TextField(
-                        value = second,
+                        value = "$second",
                         onValueChange = {
-                            if (second.length <= 2) {
-                                second = it
-                                onValueChange(it)
+                            if (second.toString().length <= 2) {
+                                onSecondValueChange(it)
                             }
                         },
                         keyboardOptions = KeyboardOptions.Default.copy(
@@ -177,12 +157,4 @@ fun CreateMissionTimer(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun CreateMissionTimerPre() {
-    CreateMissionTimer(
-        onValueChange = {}
-    )
 }

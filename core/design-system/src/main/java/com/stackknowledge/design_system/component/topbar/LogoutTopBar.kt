@@ -2,6 +2,7 @@ package com.stackknowledge.design_system.component.topbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 @Composable
 fun LogoutTopBar(
     modifier: Modifier = Modifier,
+    onLogout: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Row(
@@ -47,7 +49,9 @@ fun LogoutTopBar(
                 modifier = modifier.padding(top = 7.dp, bottom = 7.dp)
             )
             Box(
-                modifier = modifier.fillMaxWidth(),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onLogout),
                 contentAlignment = Alignment.CenterEnd
             ) {
                 Image(
@@ -63,5 +67,5 @@ fun LogoutTopBar(
 @Preview
 @Composable
 fun LogoutTopBarPre() {
-    LogoutTopBar()
+    LogoutTopBar(onLogout = {})
 }

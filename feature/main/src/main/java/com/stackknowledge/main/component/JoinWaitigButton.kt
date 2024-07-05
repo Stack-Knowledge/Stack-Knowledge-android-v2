@@ -1,6 +1,7 @@
 package com.stackknowledge.main.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -12,7 +13,8 @@ import com.stackknowledge.design_system.R
 
 @Composable
 fun JoinWaitingButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     Image(
         painter = painterResource(R.drawable.join_waiting),
@@ -20,6 +22,7 @@ fun JoinWaitingButton(
         modifier = modifier
             .width(60.dp)
             .height(60.dp)
+            .clickable(onClick = onClick)
     )
 
 }
@@ -27,5 +30,5 @@ fun JoinWaitingButton(
 @Preview
 @Composable
 fun JoinWaitingButtonPre() {
-    JoinWaitingButton()
+    JoinWaitingButton() {}
 }

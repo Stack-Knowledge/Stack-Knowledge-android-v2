@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DetailMissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository
 ) {
-    suspend operator fun invoke(missionId: DetailMissionRequestModel) = runCatching {
+    operator fun invoke(missionId: DetailMissionRequestModel) = runCatching {
         missionRepository.detailMission(missionId = missionId)
     }
 }
