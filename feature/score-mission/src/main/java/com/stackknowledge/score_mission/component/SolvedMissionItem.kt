@@ -108,13 +108,3 @@ fun SolvedMissionItem(
         }
     }
 }
-
-@Preview
-@Composable
-fun SolvedMissionItemPre(
-    modifier: Modifier = Modifier,
-) {
-//    SolvedMissionItem(
-//        onClick = {}
-//    )
-}

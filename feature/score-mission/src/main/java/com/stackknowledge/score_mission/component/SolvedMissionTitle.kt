@@ -49,9 +49,3 @@ fun SolvedMissionTitle(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun SolvedMissionTitlePre() {
-//    SolvedMissionTitle()
-//}

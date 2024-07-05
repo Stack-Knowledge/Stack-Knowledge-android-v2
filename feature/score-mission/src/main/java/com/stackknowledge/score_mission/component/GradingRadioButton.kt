@@ -122,19 +122,3 @@ fun GradingRadioButton(
         }
     }
 }
-
-
-//@Preview
-//@Composable
-//fun GradingRadioButtonPre() {
-//    val selected = remember{ mutableStateOf("0") }
-//    Column(
-//        modifier = Modifier
-//            .background(Color.White)
-//            .fillMaxSize()
-//    ) {
-//        GradingRadioButton(isSelected = selected.value == "0", onClick = { selected.value = "0" })
-//        Spacer(modifier = Modifier.height(15.dp))
-//        GradingRadioButton(isSelected = selected.value == "1", onClick = { selected.value = "1" })
-//    }
-//}

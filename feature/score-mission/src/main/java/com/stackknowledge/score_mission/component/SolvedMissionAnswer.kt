@@ -67,9 +67,3 @@ fun SolvedMissionAnswer(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun SolvedMissionAnswerPre() {
-//    SolvedMissionAnswer()
-//}

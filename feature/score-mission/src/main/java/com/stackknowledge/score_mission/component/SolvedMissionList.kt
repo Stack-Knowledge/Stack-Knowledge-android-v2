@@ -58,11 +58,3 @@ fun SolvedMissionList(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun SolvedMissionListPre() {
-//    SolvedMissionList(
-//        onClick = {}
-//    )
-//}
