@@ -1,5 +1,6 @@
 package com.stackkowledge.mission.component
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,17 +9,25 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackkowledge.mission.viewmodel.MissionViewModel
+import remote.response.mission.MissionResponseModel
 
 @Composable
 fun EntireMissionList(
     modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit
+    missionList: List<MissionResponseModel>,
+    onClick: (Int) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -37,14 +46,19 @@ fun EntireMissionList(
                     top = 16.dp,
                 ),
             ) {
-                items(10) { index ->
+                itemsIndexed(missionList) { index, item ->
+
                     Box(
                         contentAlignment = Alignment.Center
                     ) {
                         EntireMissionItem(
+                            name = item.user.name,
+                            title = item.title,
+                            point = item.point,
                             onClick = { onClick(index) }
                         )
                     }
+
                 }
             }
         }
