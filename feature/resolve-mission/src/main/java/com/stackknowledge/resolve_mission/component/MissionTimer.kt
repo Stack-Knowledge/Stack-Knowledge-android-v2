@@ -22,11 +22,11 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun MissionTimer(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    minute: String,
+    second: String,
+    time: @Composable () -> Unit,
 ) {
-    var minute by remember { mutableStateOf("13") }
-    var second by remember { mutableStateOf("00") }
-
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier
@@ -50,10 +50,16 @@ fun MissionTimer(
             )
         }
     }
+    if (minute == "0" && second == "0") {
+        time()
+    }
 }
 
-@Preview
-@Composable
-fun MissionTimerPre() {
-    MissionTimer()
-}
+//@Preview
+//@Composable
+//fun MissionTimerPre() {
+//    MissionTimer(
+//        minute = "13",
+//        second = "00"
+//    )
+//}

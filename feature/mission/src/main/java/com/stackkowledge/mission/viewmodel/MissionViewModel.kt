@@ -20,22 +20,16 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import remote.request.mission.CreateMissionRequestModel
-import remote.request.mission.DetailMissionRequestModel
 import remote.response.mission.DetailMissionResponseModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MissionViewModel @Inject constructor(
     private val getMissionUseCase: GetMissionUseCase,
-    private val detailMissionUseCase: DetailMissionUseCase,
     private val createMissionUseCase: CreateMissionUseCase,
 ) : ViewModel() {
     private val _missionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
     internal val missionUiState = _missionUiState.asStateFlow()
-
-    private val _detailMissionRequest =
-        MutableStateFlow<Event<DetailMissionResponseModel>>(Event.Loading)
-    internal val detailMissionRequest = _detailMissionRequest.asStateFlow()
 
     private val _createMissionUiState = MutableStateFlow<CreateMissionUiState>(CreateMissionUiState.Loading)
     internal val createMissionUiState = _createMissionUiState.asStateFlow()
@@ -64,20 +58,6 @@ class MissionViewModel @Inject constructor(
                     is Result.Success -> _missionUiState.value = GetMissionUiState.Success(result.data)
                     is Result.Error -> _missionUiState.value = GetMissionUiState.Error(result.exception)
                 }
-            }
-    }
-
-    internal fun detailMission(missionId: DetailMissionRequestModel) = viewModelScope.launch {
-        detailMissionUseCase(missionId = missionId)
-            .onSuccess {
-                it.catch { remoteError ->
-                    _detailMissionRequest.value = remoteError.errorHandling()
-                }.collect { response ->
-                    _detailMissionRequest.value = Event.Success(data = response)
-                }
-            }
-            .onFailure {
-                _detailMissionRequest.value = it.errorHandling()
             }
     }
 

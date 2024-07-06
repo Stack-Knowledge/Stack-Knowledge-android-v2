@@ -21,6 +21,9 @@ import com.stackknowledge.design_system.component.textfield.StackKnowledgeTextFi
 @Composable
 fun InputAnswer(
     modifier: Modifier = Modifier,
+    answer: String,
+    onAnswerValueChange: (String) -> Unit,
+    openDialog: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -43,14 +46,15 @@ fun InputAnswer(
                         .fillMaxWidth()
                         .height(180.dp)
                         .padding(bottom = 32.dp),
-                    onValueChange = {}
+                    value = answer,
+                    onValueChange = { onAnswerValueChange(it) }
                 )
 
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.submit),
                     modifier = modifier
                         .height(60.dp),
-                    onClick = {}
+                    onClick = openDialog
                 )
 
                 Spacer(modifier.height(28.dp))
@@ -58,9 +62,9 @@ fun InputAnswer(
         }
     }
 }
-
-@Preview
-@Composable
-fun InputAnswerPre() {
-    InputAnswer()
-}
+//
+//@Preview
+//@Composable
+//fun InputAnswerPre() {
+//    InputAnswer()
+//}

@@ -18,7 +18,8 @@ import com.stackknowledge.design_system.R
 
 @Composable
 fun Mission(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    missionContent: String,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -37,7 +38,7 @@ fun Mission(
                 )
 
                 Text(
-                    text = "북학파에 대한 배경을 적고 일이 일어난 순서를 알맞게 서술하시오.",
+                    text = missionContent,
                     style = typography.bodyMedium,
                     color = colors.G2
                 )
@@ -51,5 +52,7 @@ fun Mission(
 @Preview
 @Composable
 fun MissionPre() {
-    Mission()
+    Mission(
+        missionContent = ""
+    )
 }
