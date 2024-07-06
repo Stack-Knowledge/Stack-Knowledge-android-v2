@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SolveDataSourceImpl @Inject constructor(
     private val solveAPI: SolveAPI
 ): SolveDataSource {
-    override fun solveMission(missionId: UUID, solution: SolveRequest): Flow<Unit> = flow {
+    override fun solveMission(missionId: String, solution: SolveRequest): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { solveAPI.solveMission(missionId = missionId, solution = solution) }

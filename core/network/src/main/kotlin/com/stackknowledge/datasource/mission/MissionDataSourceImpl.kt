@@ -3,7 +3,6 @@ package com.stackknowledge.datasource.mission
 import android.util.Log
 import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.dto.request.mission.CreateMissionRequest
-import com.stackknowledge.dto.request.mission.DetailMissionRequest
 import com.stackknowledge.dto.response.mission.DetailMissionResponse
 import com.stackknowledge.dto.response.mission.MissionResponse
 import com.stackknowledge.util.StackKnowledgeApiHandler
@@ -24,7 +23,7 @@ class MissionDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun detailMission(missionId: DetailMissionRequest): Flow<DetailMissionResponse> = flow {
+    override fun detailMission(missionId: String): Flow<DetailMissionResponse> = flow {
         emit(
             StackKnowledgeApiHandler<DetailMissionResponse>()
                 .httpRequest { missionAPI.getDetailMission(missionId = missionId) }

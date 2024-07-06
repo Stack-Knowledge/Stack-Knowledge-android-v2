@@ -5,5 +5,5 @@ import remote.request.solve.SolveRequestModel
 import java.util.UUID
 
 interface SolveRepository {
-    fun solveMission(missionId: UUID, solution: SolveRequestModel): Flow<Unit>
+    fun solveMission(missionId: String, solution: SolveRequestModel): Flow<Unit>
 }

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
 interface SolveDataSource {
-    fun solveMission(missionId: UUID, solution: SolveRequest): Flow<Unit>
+    fun solveMission(missionId: String, solution: SolveRequest): Flow<Unit>
 }
