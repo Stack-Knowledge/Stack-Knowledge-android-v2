@@ -7,7 +7,3 @@ plugins {
 android {
     namespace = "com.stackknowledge.mission"
 }
-
-dependencies {
-    add("implementation", project(":feature:resolve-mission"))
-}

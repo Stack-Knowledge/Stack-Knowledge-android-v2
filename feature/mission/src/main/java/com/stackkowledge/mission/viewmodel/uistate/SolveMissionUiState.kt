@@ -1,4 +1,4 @@
-package com.stackknowledge.resolve_mission.viewmodel.uistate
+package com.stackkowledge.mission.viewmodel.uistate
 
 sealed interface SolveMissionUiState {
     object Loading : SolveMissionUiState

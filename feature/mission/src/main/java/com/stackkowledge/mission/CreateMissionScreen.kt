@@ -31,7 +31,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.CreateMissionTimer
 import com.stackkowledge.mission.component.InputMission
 import com.stackkowledge.mission.component.InputTitle
-import com.stackkowledge.mission.uistate.CreateMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.CreateMissionUiState
 import com.stackkowledge.mission.util.isValidNumber
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import enumdatatype.Authority

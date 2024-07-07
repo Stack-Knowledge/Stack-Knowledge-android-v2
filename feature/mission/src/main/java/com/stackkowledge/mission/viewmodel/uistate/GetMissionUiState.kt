@@ -1,4 +1,4 @@
-package com.stackkowledge.mission.uistate
+package com.stackkowledge.mission.viewmodel.uistate
 
 import remote.response.mission.MissionResponseModel
 

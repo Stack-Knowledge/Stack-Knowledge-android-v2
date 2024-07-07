@@ -11,8 +11,11 @@ import com.example.common.util.errorHandling
 import com.stackknowledge.usecase.mission.CreateMissionUseCase
 import com.stackknowledge.usecase.mission.DetailMissionUseCase
 import com.stackknowledge.usecase.mission.GetMissionUseCase
-import com.stackkowledge.mission.uistate.CreateMissionUiState
-import com.stackkowledge.mission.uistate.GetMissionUiState
+import com.stackknowledge.usecase.solve.SolveUseCase
+import com.stackkowledge.mission.viewmodel.uistate.CreateMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.DetailMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.SolveMissionUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import remote.request.mission.CreateMissionRequestModel
+import remote.request.solve.SolveRequestModel
 import remote.response.mission.DetailMissionResponseModel
 import javax.inject.Inject
 
@@ -27,12 +31,22 @@ import javax.inject.Inject
 class MissionViewModel @Inject constructor(
     private val getMissionUseCase: GetMissionUseCase,
     private val createMissionUseCase: CreateMissionUseCase,
+    private val solveUseCase: SolveUseCase,
+    private val detailMissionUseCase: DetailMissionUseCase,
 ) : ViewModel() {
     private val _missionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
     internal val missionUiState = _missionUiState.asStateFlow()
 
     private val _createMissionUiState = MutableStateFlow<CreateMissionUiState>(CreateMissionUiState.Loading)
     internal val createMissionUiState = _createMissionUiState.asStateFlow()
+
+    private val _solveMissionUiState = MutableStateFlow<SolveMissionUiState>(
+        SolveMissionUiState.Loading)
+    internal val solveMissionUiState = _solveMissionUiState.asStateFlow()
+
+    private val _detailMissionUiState =
+        MutableStateFlow<DetailMissionUiState>(DetailMissionUiState.Loading)
+    internal val detailMissionUiState = _detailMissionUiState.asStateFlow()
 
     private val _title = mutableStateOf("")
     internal val title = _title
@@ -48,6 +62,12 @@ class MissionViewModel @Inject constructor(
 
     private val _timeLimit = mutableIntStateOf(0)
     internal val timeLimit = _timeLimit
+
+    private val _answer = mutableStateOf("")
+    internal val answer = _answer
+
+    private val _missionId = mutableStateOf("")
+    internal val missionId = _missionId
 
     internal fun getMission() = viewModelScope.launch {
         getMissionUseCase()
@@ -73,6 +93,30 @@ class MissionViewModel @Inject constructor(
             }
     }
 
+    internal fun solveMission(missionId: String, solution: SolveRequestModel) = viewModelScope.launch {
+        solveUseCase(missionId = missionId, solution = solution)
+            .asResult()
+            .collectLatest {
+                when(it) {
+                    is Result.Loading -> _solveMissionUiState.value = SolveMissionUiState.Loading
+                    is Result.Success -> _solveMissionUiState.value = SolveMissionUiState.Success
+                    is Result.Error -> _solveMissionUiState.value = SolveMissionUiState.Error(it.exception)
+                }
+            }
+    }
+
+    internal fun detailMission(missionId: String) = viewModelScope.launch {
+        detailMissionUseCase(missionId = missionId)
+            .asResult()
+            .collectLatest { result ->
+                when(result) {
+                    is Result.Loading -> _detailMissionUiState.value = DetailMissionUiState.Loading
+                    is Result.Success -> _detailMissionUiState.value = DetailMissionUiState.Success(result.data)
+                    is Result.Error -> _detailMissionUiState.value = DetailMissionUiState.Error(result.exception)
+                }
+            }
+    }
+
     internal fun onTitle(value: String) {
         _title.value = value
     }
@@ -91,5 +135,13 @@ class MissionViewModel @Inject constructor(
 
     internal fun onTimeLimit() {
         _timeLimit.intValue = (minute.intValue * 60) + second.intValue
+    }
+
+    internal fun onAnswer(value: String) {
+        _answer.value = value
+    }
+
+    internal fun onMissionId(value: String) {
+        _missionId.value = value
     }
 }

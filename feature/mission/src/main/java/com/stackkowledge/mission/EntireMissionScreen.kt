@@ -19,16 +19,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.resolve_mission.viewmodel.SolveViewModel
 import com.stackkowledge.mission.component.EntireMissionList
-import com.stackkowledge.mission.uistate.GetMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import enumdatatype.Authority
 
 @Composable
 internal fun EntireMissionRoute(
     missionViewModel: MissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
-    solveViewModel: SolveViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
     onNavigate: (Authority, String) -> Unit,
     onItemClick: () -> Unit,
 ) {
@@ -40,7 +38,7 @@ internal fun EntireMissionRoute(
         onNavigate = { navType -> onNavigate(role, navType) },
         onItemClick = onItemClick,
         getMission = { missionViewModel.getMission() },
-        intentId = { solveViewModel.onMissionId(it) },
+        intentId = { missionViewModel.onMissionId(it) },
         missionUiState = missionUiState
     )
 }

@@ -1,4 +1,4 @@
-package com.stackknowledge.resolve_mission.component
+package com.stackkowledge.mission.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
