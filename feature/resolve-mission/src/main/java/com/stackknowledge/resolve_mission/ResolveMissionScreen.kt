@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.common.toast.makeToast
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -92,6 +94,8 @@ private fun ResolveMissionScreen(
     val context = LocalContext.current
     var openDialog by remember { mutableStateOf(false) }
     var finishTimeDialog by remember { mutableStateOf(false) }
+    var autoSubmitDialog by remember { mutableStateOf(false) }
+    var dismissDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(true) {
         getSolveMission(missionId)
@@ -123,6 +127,28 @@ private fun ResolveMissionScreen(
             },
             openDialog = finishTimeDialog,
             onStateChange = { finishTimeDialog = it }
+        )
+    }
+
+    if (autoSubmitDialog) {
+        StackKnowledgeDialog(
+            content = stringResource(id = R.string.auto_submit_mission),
+            onConfirm = {
+                submit()
+                autoSubmitDialog = false
+                dismissDialog = false
+            },
+            onDismiss = {
+                autoSubmitDialog = false
+                dismissDialog = true
+                onTimeLimit(0)
+                onAnswer("")
+            },
+            openDialog = autoSubmitDialog,
+            onStateChange = {
+                autoSubmitDialog = it
+                dismissDialog = false
+            }
         )
     }
 
@@ -182,7 +208,12 @@ private fun ResolveMissionScreen(
                     modifier = Modifier,
                     role = role
                 ) {
-                    onNavigate(it)
+                    if (!autoSubmitDialog) {
+                        autoSubmitDialog = true
+                        if (!dismissDialog) {
+                            onNavigate(it)
+                        }
+                    }
                 }
             }
         }
