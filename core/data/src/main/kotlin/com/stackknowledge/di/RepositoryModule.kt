@@ -10,6 +10,8 @@ import com.stackknowledge.repository.solve.SolveRepository
 import com.stackknowledge.repository.solve.SolveRepositoryImpl
 import com.stackknowledge.repository.student.StudentRepository
 import com.stackknowledge.repository.student.StudentRepositoryImpl
+import com.stackknowledge.repository.user.UserRepository
+import com.stackknowledge.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -42,4 +44,9 @@ abstract class RepositoryModule {
     abstract fun bindSolveRepository(
         solveRepositoryImpl: SolveRepositoryImpl
     ): SolveRepository
+
+    @Binds
+    abstract fun bindUserRepository(
+        userRepositoryImpl: UserRepositoryImpl
+    ): UserRepository
 }

@@ -15,9 +15,13 @@ fun NavController.navigateToGradingAnswer(navOptions: NavOptions? = null) {
     this.navigate(gradingAnswerRoute, navOptions)
 }
 
-fun NavGraphBuilder.gradingAnswerScreen() {
+fun NavGraphBuilder.gradingAnswerScreen(
+    onNavigate: (Authority, String) -> Unit,
+) {
     composable(route = gradingAnswerRoute) {
-        GradingAnswerRoute()
+        GradingAnswerRoute(
+            onNavigate = onNavigate,
+        )
     }
 }
 
