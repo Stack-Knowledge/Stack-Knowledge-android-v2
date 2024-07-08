@@ -48,7 +48,7 @@ fun StackKnowledgeNavHost(
         )
         createMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
-            navigateToMain = navController::navigateToMain
+            createMissionSuccess = navController::navigateToMain
         )
         entireMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
@@ -63,7 +63,7 @@ fun StackKnowledgeNavHost(
         resolveMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
             onBackClick = navController::popBackStack,
-            navigateToMain = navController::navigateToMain,
+            solveMissionSuccess = navController::navigateToMain,
         )
         gradingAnswerScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },

@@ -46,7 +46,7 @@ import remote.request.solve.SolveRequestModel
 internal fun ResolveMissionRoute(
     onNavigate: (Authority, String) -> Unit,
     onBackClick: () -> Unit,
-    navigateToMain: () -> Unit,
+    solveMissionSuccess: () -> Unit,
     missionViewModel: MissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
     solveViewModel: SolveMissionViewModel = hiltViewModel()
 ) {
@@ -61,7 +61,7 @@ internal fun ResolveMissionRoute(
         onAnswer = { missionViewModel.onAnswer(it) },
         onNavigate = { navType -> onNavigate(role, navType) },
         onBackClick = onBackClick,
-        navigateToMain = navigateToMain,
+        onSuccess = solveMissionSuccess,
         getSolveMission = missionViewModel::detailMission,
         submit = {
             solveViewModel.solveMission(
@@ -85,7 +85,7 @@ private fun ResolveMissionScreen(
     onAnswer: (String) -> Unit,
     onNavigate: (String) -> Unit,
     onBackClick: () -> Unit,
-    navigateToMain: () -> Unit,
+    onSuccess: () -> Unit,
     getSolveMission: (String) -> Unit,
     submit: () -> Unit,
     detailMissionUiState: DetailMissionUiState,
@@ -173,7 +173,7 @@ private fun ResolveMissionScreen(
     if (solveMissionUiState is SolveMissionUiState.Success) {
         val toastMessage = SuccessToastMessage(context)
         toastMessage.MakeText(message = stringResource(id = R.string.success_solve_mission))
-        navigateToMain()
+        onSuccess()
     }
 
     StackKnowledgeAndroidTheme { colors, typography ->
