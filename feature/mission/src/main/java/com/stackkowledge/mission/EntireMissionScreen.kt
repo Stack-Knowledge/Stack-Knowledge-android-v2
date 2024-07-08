@@ -38,9 +38,11 @@ internal fun EntireMissionRoute(
     EntireMissionScreen(
         role = role,
         onNavigate = { navType -> onNavigate(role, navType) },
-        onItemClick = onItemClick,
+        onItemClick = {
+            onItemClick()
+            missionViewModel.onMissionId(it)
+        },
         getMission = { missionViewModel.getMission() },
-        intentId = { missionViewModel.onMissionId(it) },
         missionUiState = missionUiState
     )
 }
@@ -50,9 +52,8 @@ private fun EntireMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    onItemClick: () -> Unit,
+    onItemClick: (String) -> Unit,
     getMission: () -> Unit,
-    intentId: (String) -> Unit,
     missionUiState: GetMissionUiState,
 ) {
     LaunchedEffect(true) {
@@ -71,8 +72,7 @@ private fun EntireMissionScreen(
                     val mission = missionUiState.missionResponseModel
                     EntireMissionList(
                         missionList = mission,
-                        onClick = { onItemClick() },
-                        intentId = { intentId(it) },
+                        onClick = { onItemClick(it) },
                     )
                 }
                 Log.e("testt", missionUiState.toString())

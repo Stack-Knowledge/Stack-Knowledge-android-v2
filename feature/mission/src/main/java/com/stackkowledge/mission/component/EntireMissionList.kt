@@ -27,8 +27,7 @@ import remote.response.mission.MissionResponseModel
 fun EntireMissionList(
     modifier: Modifier = Modifier,
     missionList: List<MissionResponseModel>,
-    onClick: () -> Unit,
-    intentId: (String) -> Unit
+    onClick: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -56,8 +55,7 @@ fun EntireMissionList(
                             name = item.user.name,
                             title = item.title,
                             point = item.point,
-                            onClick = { onClick() },
-                            intentId = { intentId(item.id) }
+                            onClick = { onClick(item.id) },
                         )
                     }
 
