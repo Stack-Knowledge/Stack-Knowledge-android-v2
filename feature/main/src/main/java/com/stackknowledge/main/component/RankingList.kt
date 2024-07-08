@@ -66,7 +66,11 @@ fun RankingList(
                             items(list.size) { index ->
                                 Box {
                                     Box(modifier = modifier.padding(4.dp)) {
-                                        RankingListItem()
+                                        RankingListItem(
+                                            profileImage = list[index].user.profileImage,
+                                            name = list[index].user.name,
+                                            point = list[index].cumulatePoint.toString()
+                                        )
                                     }
                                     if (index < 3) {
                                         rankingNumbers[index]()
