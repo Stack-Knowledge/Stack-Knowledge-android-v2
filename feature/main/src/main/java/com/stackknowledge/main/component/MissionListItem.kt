@@ -20,7 +20,10 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun MissionListItem(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    teacherName: String,
+    title: String,
+    point: String,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -37,13 +40,13 @@ fun MissionListItem(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "미소쌤",
+                    text = teacherName,
                     style = typography.bodyMedium,
                     color = colors.BLACK
                 )
                 Spacer(modifier = modifier.height(12.dp))
                 Text(
-                    text = "북학파의 배경",
+                    text = title,
                     style = typography.bodySmall,
                     color = colors.G2
                 )
@@ -52,7 +55,7 @@ fun MissionListItem(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "1000",
+                        text = point,
                         style = typography.bodyMedium,
                         color = colors.BLACK
                     )
@@ -71,5 +74,9 @@ fun MissionListItem(
 @Preview
 @Composable
 fun MissionListItemPre() {
-    MissionListItem()
+    MissionListItem(
+        teacherName = "미소쌤",
+        title = "북학파의 배경",
+        point = "1000"
+    )
 }
