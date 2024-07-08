@@ -40,6 +40,7 @@
     <string name="submit_mission">문제를 제출하시겠습니까?</string>
     <string name="finish_time_of_submit_mission">시간이 종료되었습니다!\n 문제가 자동으로 제출됩니다.</string>
     <string name="auto_submit_mission">페이지를 이동하면 문제가 자동으로 제출 됩니다. 이동하시겠습니까?</string>
+    <string name="success_solve_mission">문제 제출이 완료되었습니다!</string>
     <string name="finish_score_mission">문제 채점이 끝나셨습니까?</string>
     <string name="success_score_mission">문제 채점이 완료되었습니다!</string>
 </resources>

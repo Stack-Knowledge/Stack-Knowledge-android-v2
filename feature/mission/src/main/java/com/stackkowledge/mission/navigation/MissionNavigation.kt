@@ -19,10 +19,12 @@ fun NavController.navigateToCreateMission(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.createMissionScreen(
     onNavigate: (Authority, String) -> Unit,
+    onToMain: () -> Unit,
 ) {
     composable(route = createMissionRoute) {
         CreateMissionRoute(
-            onNavigate = onNavigate
+            onNavigate = onNavigate,
+            onToMain = onToMain
         )
     }
 }
@@ -49,10 +51,14 @@ fun NavController.navigateToResolveMission(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.resolveMissionScreen(
     onNavigate: (Authority, String) -> Unit,
+    onBackClick: () -> Unit,
+    onToMain: () -> Unit,
 ) {
     composable(route = resolveMissionRoute) {
         ResolveMissionRoute(
-            onNavigate = onNavigate
+            onNavigate = onNavigate,
+            onBackClick = onBackClick,
+            onToMain = onToMain
         )
     }
 }

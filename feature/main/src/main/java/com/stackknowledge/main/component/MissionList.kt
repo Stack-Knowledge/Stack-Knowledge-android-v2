@@ -67,7 +67,9 @@ fun MissionList(
                     is GetMissionUiState.Success -> {
                         val list = getMissionUiState.getItemResponseModel
                         LazyRow(
-                            modifier = modifier.padding(16.dp)
+                            modifier = modifier
+                                .fillMaxSize()
+                                .padding(16.dp)
                         ) {
                             items(list.size) {
                                 MissionListItem()

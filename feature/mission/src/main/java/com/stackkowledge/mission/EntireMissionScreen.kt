@@ -1,5 +1,6 @@
 package com.stackkowledge.mission
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,6 +24,7 @@ import com.stackkowledge.mission.component.EntireMissionList
 import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import enumdatatype.Authority
+import java.util.UUID
 
 @Composable
 internal fun EntireMissionRoute(
@@ -57,32 +59,32 @@ private fun EntireMissionScreen(
         getMission()
     }
 
-    if (missionUiState is GetMissionUiState.Success) {
-        val mission = missionUiState.missionResponseModel
-
-        StackKnowledgeAndroidTheme { colors, _ ->
-            Box {
-                Column(
-                    modifier = modifier
-                        .background(color = colors.WHITE)
-                        .fillMaxSize()
-                ) {
-                    StackKnowledgeTopBar()
+    StackKnowledgeAndroidTheme { colors, _ ->
+        Box {
+            Column(
+                modifier = modifier
+                    .background(color = colors.WHITE)
+                    .fillMaxSize()
+            ) {
+                StackKnowledgeTopBar()
+                if (missionUiState is GetMissionUiState.Success) {
+                    val mission = missionUiState.missionResponseModel
                     EntireMissionList(
                         missionList = mission,
                         onClick = { onItemClick() },
                         intentId = { intentId(it) },
                     )
                 }
-                Box(
-                    modifier = Modifier.align(alignment = Alignment.BottomCenter),
+                Log.e("testt", missionUiState.toString())
+            }
+            Box(
+                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+            ) {
+                StackKnowledgeBottomNavigation(
+                    modifier = Modifier,
+                    role = role
                 ) {
-                    StackKnowledgeBottomNavigation(
-                        modifier = Modifier,
-                        role = role
-                    ) {
-                        onNavigate(it)
-                    }
+                    onNavigate(it)
                 }
             }
         }

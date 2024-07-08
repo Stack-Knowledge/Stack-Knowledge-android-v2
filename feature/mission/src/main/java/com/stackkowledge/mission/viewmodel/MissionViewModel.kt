@@ -31,7 +31,6 @@ import javax.inject.Inject
 class MissionViewModel @Inject constructor(
     private val getMissionUseCase: GetMissionUseCase,
     private val createMissionUseCase: CreateMissionUseCase,
-    private val solveUseCase: SolveUseCase,
     private val detailMissionUseCase: DetailMissionUseCase,
 ) : ViewModel() {
     private val _missionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
@@ -39,10 +38,6 @@ class MissionViewModel @Inject constructor(
 
     private val _createMissionUiState = MutableStateFlow<CreateMissionUiState>(CreateMissionUiState.Loading)
     internal val createMissionUiState = _createMissionUiState.asStateFlow()
-
-    private val _solveMissionUiState = MutableStateFlow<SolveMissionUiState>(
-        SolveMissionUiState.Loading)
-    internal val solveMissionUiState = _solveMissionUiState.asStateFlow()
 
     private val _detailMissionUiState =
         MutableStateFlow<DetailMissionUiState>(DetailMissionUiState.Loading)
@@ -89,18 +84,6 @@ class MissionViewModel @Inject constructor(
                     is Result.Loading -> _createMissionUiState.value = CreateMissionUiState.Loading
                     is Result.Success -> _createMissionUiState.value = CreateMissionUiState.Success
                     is Result.Error -> _createMissionUiState.value = CreateMissionUiState.Error(it.exception)
-                }
-            }
-    }
-
-    internal fun solveMission(missionId: String, solution: SolveRequestModel) = viewModelScope.launch {
-        solveUseCase(missionId = missionId, solution = solution)
-            .asResult()
-            .collectLatest {
-                when(it) {
-                    is Result.Loading -> _solveMissionUiState.value = SolveMissionUiState.Loading
-                    is Result.Success -> _solveMissionUiState.value = SolveMissionUiState.Success
-                    is Result.Error -> _solveMissionUiState.value = SolveMissionUiState.Error(it.exception)
                 }
             }
     }

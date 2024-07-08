@@ -1,5 +1,6 @@
 package com.stackkowledge.mission
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -30,38 +31,48 @@ import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import enumdatatype.Authority
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.toast.SuccessToastMessage
 import com.stackkowledge.mission.component.InputAnswer
 import com.stackkowledge.mission.component.Mission
 import com.stackkowledge.mission.component.MissionTimer
 import com.stackkowledge.mission.viewmodel.MissionViewModel
+import com.stackkowledge.mission.viewmodel.SolveMissionViewModel
 import com.stackkowledge.mission.viewmodel.uistate.DetailMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.SolveMissionUiState
 import kotlinx.coroutines.delay
 import remote.request.solve.SolveRequestModel
 
 @Composable
 internal fun ResolveMissionRoute(
     onNavigate: (Authority, String) -> Unit,
-    viewModel: MissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
+    onBackClick: () -> Unit,
+    onToMain: () -> Unit,
+    missionViewModel: MissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
+    solveViewModel: SolveMissionViewModel = hiltViewModel()
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
-    val detailMissionUiState by viewModel.detailMissionUiState.collectAsStateWithLifecycle()
+    val detailMissionUiState by missionViewModel.detailMissionUiState.collectAsStateWithLifecycle()
+    val solveMissionUiState by solveViewModel.solveMissionUiState.collectAsStateWithLifecycle()
 
     ResolveMissionScreen(
         role = role,
-        missionId = viewModel.missionId.value,
-        answer = viewModel.answer.value,
-        onAnswer = { viewModel.onAnswer(it) },
+        missionId = missionViewModel.missionId.value,
+        answer = missionViewModel.answer.value,
+        onAnswer = { missionViewModel.onAnswer(it) },
         onNavigate = { navType -> onNavigate(role, navType) },
-        getSolveMission = viewModel::detailMission,
+        onBackClick = onBackClick,
+        onToMain = onToMain,
+        getSolveMission = missionViewModel::detailMission,
         submit = {
-            viewModel.solveMission(
-                missionId = viewModel.missionId.value,
+            solveViewModel.solveMission(
+                missionId = missionViewModel.missionId.value,
                 SolveRequestModel(
-                    solution = viewModel.answer.value
+                    solution = missionViewModel.answer.value
                 )
             )
         },
-        detailMissionUiState = detailMissionUiState
+        detailMissionUiState = detailMissionUiState,
+        solveMissionUiState = solveMissionUiState,
     )
 }
 
@@ -73,22 +84,37 @@ private fun ResolveMissionScreen(
     answer: String,
     onAnswer: (String) -> Unit,
     onNavigate: (String) -> Unit,
+    onBackClick: () -> Unit,
+    onToMain: () -> Unit,
     getSolveMission: (String) -> Unit,
     submit: () -> Unit,
     detailMissionUiState: DetailMissionUiState,
+    solveMissionUiState: SolveMissionUiState,
 ) {
     val context = LocalContext.current
     var openDialog by remember { mutableStateOf(false) }
     var finishTimeDialog by remember { mutableStateOf(false) }
     var autoSubmitDialog by remember { mutableStateOf(false) }
     var notNavigate by remember { mutableStateOf(false) }
+    var isBackHandler by remember { mutableStateOf(false) }
+    var onNavigateState by remember { mutableStateOf("") }
 
     LaunchedEffect(true) {
         getSolveMission(missionId)
     }
 
-    BackHandler(enabled = !autoSubmitDialog && !notNavigate) {
+    LaunchedEffect(autoSubmitDialog, notNavigate, isBackHandler) {
+        if (!autoSubmitDialog && !notNavigate) {
+            onNavigate(onNavigateState)
+        }
+        if (!autoSubmitDialog && !notNavigate && isBackHandler) {
+            onBackClick()
+        }
+    }
+
+    BackHandler {
         autoSubmitDialog = true
+        isBackHandler = true
     }
 
     if (openDialog) {
@@ -97,6 +123,7 @@ private fun ResolveMissionScreen(
             onConfirm = {
                 submit()
                 openDialog = false
+                onAnswer("")
             },
             onDismiss = { openDialog = false },
             openDialog = openDialog,
@@ -109,9 +136,14 @@ private fun ResolveMissionScreen(
             content = stringResource(id = R.string.finish_time_of_submit_mission),
             onConfirm = {
                 finishTimeDialog = false
+                submit()
+                onAnswer("")
             },
             onDismiss = {
                 makeToast(context, "취소 해도 문제가 자동으로 제출됩니다.")
+                finishTimeDialog = false
+                submit()
+                onAnswer("")
             },
             openDialog = finishTimeDialog,
             onStateChange = { finishTimeDialog = it }
@@ -122,9 +154,10 @@ private fun ResolveMissionScreen(
         StackKnowledgeDialog(
             content = stringResource(id = R.string.auto_submit_mission),
             onConfirm = {
-                submit()
                 autoSubmitDialog = false
                 notNavigate = false
+                submit()
+                onAnswer("")
             },
             onDismiss = {
                 autoSubmitDialog = false
@@ -135,6 +168,12 @@ private fun ResolveMissionScreen(
                 autoSubmitDialog = it
             }
         )
+    }
+
+    if (solveMissionUiState is SolveMissionUiState.Success) {
+        val toastMessage = SuccessToastMessage(context)
+        toastMessage.MakeText(message = stringResource(id = R.string.success_solve_mission))
+        onToMain()
     }
 
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -162,7 +201,6 @@ private fun ResolveMissionScreen(
                             minute = timeLimit / 60
                             second = timeLimit % 60
                         } else {
-                            submit()
                             finishTimeDialog = true
                         }
                     }
@@ -186,7 +224,13 @@ private fun ResolveMissionScreen(
                 InputAnswer(
                     answer = answer,
                     onAnswerValueChange = { onAnswer(it) },
-                    openDialog = { openDialog = true }
+                    openDialog = {
+                        if (answer == "") {
+                            makeToast(context, "정답을 입력 해주세요")
+                        } else {
+                            openDialog = true
+                        }
+                    }
                 )
             }
             Box(
@@ -196,9 +240,7 @@ private fun ResolveMissionScreen(
                     modifier = Modifier,
                     role = role
                 ) {
-                    if (!autoSubmitDialog && !notNavigate) {
-                        onNavigate(it)
-                    }
+                    onNavigateState = it
                     autoSubmitDialog = true
                 }
             }
