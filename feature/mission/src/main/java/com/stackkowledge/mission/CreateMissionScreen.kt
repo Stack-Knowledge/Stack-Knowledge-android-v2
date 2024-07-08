@@ -41,7 +41,7 @@ import remote.request.mission.CreateMissionRequestModel
 internal fun CreateMissionRoute(
     viewModel: MissionViewModel = hiltViewModel(),
     onNavigate: (Authority, String) -> Unit,
-    onToMain: () -> Unit,
+    navigateToMain: () -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val createMissionUiState by viewModel.createMissionUiState.collectAsStateWithLifecycle()
@@ -66,7 +66,7 @@ internal fun CreateMissionRoute(
         resetMinute = { viewModel.minute.intValue = it },
         resetSecond = { viewModel.second.intValue = it },
         resetTimeLimit = { viewModel.timeLimit.intValue = it },
-        onToMain = onToMain
+        navigateToMain = navigateToMain
     )
 }
 
@@ -92,7 +92,7 @@ private fun CreateMissionScreen(
     resetMinute: (Int) -> Unit,
     resetSecond: (Int) -> Unit,
     resetTimeLimit: (Int) -> Unit,
-    onToMain: () -> Unit,
+    navigateToMain: () -> Unit,
 ) {
     val context = LocalContext.current
     var createMissionOpenDialog by remember { mutableStateOf(false) }
@@ -139,7 +139,7 @@ private fun CreateMissionScreen(
 
     if (createMissionUiState is CreateMissionUiState.Success) {
         successCreateMissionToast = true
-        onToMain()
+        navigateToMain()
     }
 
     if (successCreateMissionToast) {
