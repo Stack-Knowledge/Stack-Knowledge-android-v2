@@ -44,18 +44,9 @@ class RankingViewModel @Inject constructor(
             .asResult()
             .collectLatest { result ->
                 when(result) {
-                    is Result.Loading -> {
-                        Log.d("testt","load")
-                        _getMyInformationUiState.value = GetMyInformationUiState.Loading
-                    }
-                    is Result.Success -> {
-                        Log.d("testt","suc")
-                        _getMyInformationUiState.value = GetMyInformationUiState.Success(result.data)
-                    }
-                    is Result.Error -> {
-                        Log.d("testt",result.exception.toString())
-                        _getMyInformationUiState.value = GetMyInformationUiState.Error(result.exception)
-                    }
+                    is Result.Loading -> _getMyInformationUiState.value = GetMyInformationUiState.Loading
+                    is Result.Success -> _getMyInformationUiState.value = GetMyInformationUiState.Success(result.data)
+                    is Result.Error -> _getMyInformationUiState.value = GetMyInformationUiState.Error(result.exception)
                 }
             }
     }
