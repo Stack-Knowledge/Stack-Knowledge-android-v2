@@ -119,8 +119,8 @@ private fun MainPageScreen(
         if (openLogoutDialog) {
             StackKnowledgeDialog(
                 content = "로그아웃 하시겠습니까?",
-                onConfirm = {},
-                onDismiss = {},
+                onConfirm = { openLogoutDialog = false },
+                onDismiss = { openLogoutDialog = false },
                 onStateChange = { openLogoutDialog = it },
                 openDialog = openLogoutDialog,
             )
