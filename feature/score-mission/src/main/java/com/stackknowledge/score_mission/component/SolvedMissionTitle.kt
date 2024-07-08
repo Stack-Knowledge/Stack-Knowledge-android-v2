@@ -15,10 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import remote.response.user.DetailSolveMissionResponseModel
 
 @Composable
 fun SolvedMissionTitle(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    solveMissionTitle: String,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -37,7 +39,7 @@ fun SolvedMissionTitle(
                 )
 
                 Text(
-                    text = "북학파에 대한 배경을 적고 일이 일어난 순서를 알맞게 서술하시오.",
+                    text = solveMissionTitle,
                     style = typography.bodyMedium,
                     color = colors.G2
                 )
@@ -46,10 +48,4 @@ fun SolvedMissionTitle(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun SolvedMissionTitlePre() {
-    SolvedMissionTitle()
 }

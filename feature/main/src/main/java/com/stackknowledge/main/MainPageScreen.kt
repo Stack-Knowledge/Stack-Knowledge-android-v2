@@ -1,12 +1,15 @@
 package com.stackknowledge.main
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.JoinWaitingDialog
+import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.LogoutTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.main.component.JoinWaitingButton
@@ -36,7 +40,7 @@ internal fun MainPageRoute(
     onNavigate: (Authority, String) -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
+    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
     val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
 
@@ -63,6 +67,8 @@ private fun MainPageScreen(
     onNavigate: (String) -> Unit,
     initMain: () -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+
     var openDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
     LaunchedEffect("initMain") {
@@ -79,21 +85,25 @@ private fun MainPageScreen(
                 LogoutTopBar(
                     onLogout = { openLogoutDialog = true }
                 )
-                StackKnowledgePager()
-                Spacer(modifier = modifier.height(28.dp))
-                MissionList(
-                    getMissionUiState = getMissionUiState
-                )
-                Spacer(modifier = modifier.height(20.dp))
-                RankingList(
-                    getRankingUiState = getRankingUiState
-                )
-                Box(modifier = Modifier.align(alignment = Alignment.End)) {
-                    JoinWaitingButton(
-                        modifier = modifier.padding(top = 80.dp, end = 8.dp),
-                        onClick = { openDialog = true }
+                Column(
+                    modifier = modifier.verticalScroll(scrollState)
+                ) {
+                    StackKnowledgePager()
+                    Spacer(modifier = modifier.height(28.dp))
+                    MissionList(
+                        getMissionUiState = getMissionUiState
+                    )
+                    Spacer(modifier = modifier.height(20.dp))
+                    RankingList(
+                        getRankingUiState = getRankingUiState
                     )
                 }
+            }
+            Box(modifier = Modifier.align(alignment = Alignment.BottomEnd)) {
+                JoinWaitingButton(
+                    modifier = modifier.padding(bottom = 96.dp, end = 8.dp),
+                    onClick = { openDialog = true }
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
@@ -105,6 +115,15 @@ private fun MainPageScreen(
                     onNavigate(it)
                 }
             }
+        }
+        if (openLogoutDialog) {
+            StackKnowledgeDialog(
+                content = "로그아웃 하시겠습니까?",
+                onConfirm = { openLogoutDialog = false },
+                onDismiss = { openLogoutDialog = false },
+                onStateChange = { openLogoutDialog = it },
+                openDialog = openLogoutDialog,
+            )
         }
         if (openDialog) {
             JoinWaitingDialog(

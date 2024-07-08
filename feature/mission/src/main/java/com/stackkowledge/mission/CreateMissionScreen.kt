@@ -31,7 +31,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.CreateMissionTimer
 import com.stackkowledge.mission.component.InputMission
 import com.stackkowledge.mission.component.InputTitle
-import com.stackkowledge.mission.uistate.CreateMissionUiState
+import com.stackkowledge.mission.viewmodel.uistate.CreateMissionUiState
 import com.stackkowledge.mission.util.isValidNumber
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import enumdatatype.Authority
@@ -41,6 +41,7 @@ import remote.request.mission.CreateMissionRequestModel
 internal fun CreateMissionRoute(
     viewModel: MissionViewModel = hiltViewModel(),
     onNavigate: (Authority, String) -> Unit,
+    createMissionSuccess: () -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val createMissionUiState by viewModel.createMissionUiState.collectAsStateWithLifecycle()
@@ -65,6 +66,7 @@ internal fun CreateMissionRoute(
         resetMinute = { viewModel.minute.intValue = it },
         resetSecond = { viewModel.second.intValue = it },
         resetTimeLimit = { viewModel.timeLimit.intValue = it },
+        onSuccess = createMissionSuccess
     )
 }
 
@@ -90,6 +92,7 @@ private fun CreateMissionScreen(
     resetMinute: (Int) -> Unit,
     resetSecond: (Int) -> Unit,
     resetTimeLimit: (Int) -> Unit,
+    onSuccess: () -> Unit,
 ) {
     val context = LocalContext.current
     var createMissionOpenDialog by remember { mutableStateOf(false) }
@@ -136,6 +139,7 @@ private fun CreateMissionScreen(
 
     if (createMissionUiState is CreateMissionUiState.Success) {
         successCreateMissionToast = true
+        onSuccess()
     }
 
     if (successCreateMissionToast) {

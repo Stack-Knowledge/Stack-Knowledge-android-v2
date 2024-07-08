@@ -12,16 +12,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import remote.request.user.ScoreRequestModel
+import remote.response.user.GetSolveMissionListModel
+import remote.response.user.GetSolveMissionResponseModel
+import java.util.UUID
 
 @Composable
 fun SolvedMissionList(
     modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit,
+    scoreMission: GetSolveMissionResponseModel,
+    onClick: () -> Unit,
+    intentId: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
@@ -39,22 +46,18 @@ fun SolvedMissionList(
                     top = 16.dp,
                 ),
             ) {
-                items(10) {index ->
+                itemsIndexed(scoreMission.response) {_, item ->
                     Box {
                         SolvedMissionItem(
-                            onClick = { onClick(index) }
+                            name = item.user.name,
+                            title = item.title,
+                            point = item.point,
+                            onClick = { onClick() },
+                            intentId = { intentId(item.solveId) }
                         )
                     }
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun SolvedMissionListPre() {
-    SolvedMissionList(
-        onClick = {}
-    )
 }

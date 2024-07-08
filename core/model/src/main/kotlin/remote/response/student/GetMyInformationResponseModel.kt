@@ -7,5 +7,6 @@ data class GetMyInformationResponseModel(
     val id: String,
     val currentPoint: Int,
     val cumulatePoint: Int,
+    val ranking: Int,
     val user: UserModel,
 )

@@ -10,6 +10,8 @@ import com.stackknowledge.datasource.solve.SolveDataSource
 import com.stackknowledge.datasource.solve.SolveDataSourceImpl
 import com.stackknowledge.datasource.student.StudentDataSource
 import com.stackknowledge.datasource.student.StudentDataSourceImpl
+import com.stackknowledge.datasource.user.UserDataSource
+import com.stackknowledge.datasource.user.UserDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -48,4 +50,10 @@ abstract class RemoteDataSourceModule {
     abstract fun bindSolveDataSource(
         solveDataSourceImpl: SolveDataSourceImpl
     ): SolveDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindUserDataSource(
+        userDataSourceImpl: UserDataSourceImpl
+    ): UserDataSource
 }

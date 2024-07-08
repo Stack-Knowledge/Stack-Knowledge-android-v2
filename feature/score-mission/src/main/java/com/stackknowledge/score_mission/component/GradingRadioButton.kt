@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,13 +33,17 @@ import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 fun GradingRadioButton(
     isSelected: Boolean,
     onClick: (() -> Unit)?,
+    onAnswer: () -> Unit,
+    onWrongAnswer: () -> Unit,
+    openDialog: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val interactionSource = remember { mutableStateOf(MutableInteractionSource()) }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
-            modifier = modifier.padding(horizontal = 16.dp)
+            modifier = modifier.padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ){
             Row(
                 modifier = modifier
@@ -66,12 +71,13 @@ fun GradingRadioButton(
                                 indication = rememberRipple(bounded = false)
                             ) {
                                 onClick?.invoke()
+                                onAnswer()
                             }
                             .padding(end = 12.dp),
                     ) {
                         drawCircle(
-                            color = if (isSelected) colors.P1 else colors.G8,
-                            style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
+                            color = if (isSelected) colors.G8 else colors.P1,
+                            style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
                         )
                     }
 
@@ -91,12 +97,13 @@ fun GradingRadioButton(
                                 indication = rememberRipple(bounded = false)
                             ) {
                                 onClick?.invoke()
+                                onWrongAnswer()
                             }
                             .padding(end = 12.dp),
                     ) {
                         drawCircle(
-                            color = if (isSelected) colors.G8 else colors.P1,
-                            style = if (isSelected) Stroke(width = 2.dp.toPx()) else Stroke(width = 3.dp.toPx())
+                            color = if (isSelected) colors.P1 else colors.G8,
+                            style = if (isSelected) Stroke(width = 3.dp.toPx()) else Stroke(width = 2.dp.toPx())
                         )
                     }
                 }
@@ -108,27 +115,11 @@ fun GradingRadioButton(
                 text = stringResource(id = R.string.submit),
                 modifier = modifier
                     .height(60.dp),
-                onClick = {}
+                onClick = openDialog
             )
 
-            Spacer(modifier = modifier.height(16.dp))
+            Spacer(modifier = modifier.height(72.dp))
 
         }
-    }
-}
-
-
-@Preview
-@Composable
-fun GradingRadioButtonPre() {
-    val selected = remember{ mutableStateOf("0") }
-    Column(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
-    ) {
-        GradingRadioButton(isSelected = selected.value == "0", onClick = { selected.value = "0" })
-        Spacer(modifier = Modifier.height(15.dp))
-        GradingRadioButton(isSelected = selected.value == "1", onClick = { selected.value = "1" })
     }
 }
