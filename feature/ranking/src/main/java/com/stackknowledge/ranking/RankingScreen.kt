@@ -34,7 +34,7 @@ import enumdatatype.Authority
 @Composable
 internal fun RankingRoute(
     onNavigate: (Authority, String) -> Unit,
-    viewModel: RankingViewModel = hiltViewModel()
+    viewModel: RankingViewModel = hiltViewModel(),
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
