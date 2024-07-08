@@ -62,9 +62,13 @@ fun InputAnswer(
         }
     }
 }
-//
-//@Preview
-//@Composable
-//fun InputAnswerPre() {
-//    InputAnswer()
-//}
+
+@Preview
+@Composable
+fun InputAnswerPre() {
+    InputAnswer(
+        answer = "1번",
+        onAnswerValueChange = {  },
+        openDialog = {  },
+    )
+}

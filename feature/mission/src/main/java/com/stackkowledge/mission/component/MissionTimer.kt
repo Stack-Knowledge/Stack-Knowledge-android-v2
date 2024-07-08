@@ -51,11 +51,11 @@ fun MissionTimer(
     }
 }
 
-//@Preview
-//@Composable
-//fun MissionTimerPre() {
-//    MissionTimer(
-//        minute = "13",
-//        second = "00"
-//    )
-//}
+@Preview
+@Composable
+fun MissionTimerPre() {
+    MissionTimer(
+        minute = "13",
+        second = "00"
+    )
+}
