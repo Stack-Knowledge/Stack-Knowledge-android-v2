@@ -25,6 +25,9 @@ import com.stackknowledge.design_system.R
 fun RankingItem(
     modifier: Modifier = Modifier,
     rankingNum: String,
+    name: String,
+    point: String,
+    profileImage: String?,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Row(
@@ -54,13 +57,13 @@ fun RankingItem(
             )
             Spacer(modifier = modifier.width(8.dp))
             Text(
-                text = "이동욱",
+                text = name,
                 style = typography.bodyMedium,
                 color = colors.BLACK
             )
             Spacer(modifier = modifier.weight(1f))
             Text(
-                text = "1000",
+                text = point,
                 style = typography.bodyMedium,
                 color = colors.BLACK
             )
@@ -78,6 +81,9 @@ fun RankingItem(
 @Composable
 fun RankingItemPre() {
     RankingItem(
-        rankingNum = "1"
+        rankingNum = "1",
+        name = "이동욱",
+        point = "1000",
+        profileImage = ""
     )
 }

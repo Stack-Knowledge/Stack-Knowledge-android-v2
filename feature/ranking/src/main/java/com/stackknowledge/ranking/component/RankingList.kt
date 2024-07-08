@@ -61,37 +61,25 @@ fun RankingList(
                                             .height(54.dp),
                                         contentScale = ContentScale.FillBounds
                                     )
-                                    Column(
-                                        modifier = modifier.fillMaxWidth()
-                                    ) {
-                                        RankingItem(
-                                            rankingNum = "${index + 1}"
-                                        )
-                                        Spacer(modifier = modifier.height(5.dp))
-                                        Spacer(
-                                            modifier = modifier
-                                                .height(1.dp)
-                                                .fillMaxWidth()
-                                                .background(color = colors.G1)
-                                        )
-                                    }
+                                    RankingListItem(
+                                        modifier = modifier,
+                                        ranking = index,
+                                        name = getRankingUiState.getItemResponseModel[index].user.name,
+                                        point = getRankingUiState.getItemResponseModel[index].cumulatePoint.toString(),
+                                        profileImage = getRankingUiState.getItemResponseModel[index].user.profileImage
+                                    )
                                 }
                             } else {
                                 Column(
                                     modifier = modifier.fillMaxWidth()
                                 ) {
-                                    RankingItem(
-                                        rankingNum = "${index + 1}"
+                                    RankingListItem(
+                                        modifier = modifier,
+                                        ranking = index,
+                                        name = getRankingUiState.getItemResponseModel[index].user.name,
+                                        point = getRankingUiState.getItemResponseModel[index].cumulatePoint.toString(),
+                                        profileImage = getRankingUiState.getItemResponseModel[index].user.profileImage
                                     )
-                                    Spacer(modifier = modifier.height(5.dp))
-                                    if (index < getRankingUiState.getItemResponseModel.size - 1) {
-                                        Spacer(
-                                            modifier = modifier
-                                                .height(1.dp)
-                                                .fillMaxWidth()
-                                                .background(color = colors.G1)
-                                        )
-                                    }
                                 }
                             }
                         }
@@ -100,6 +88,35 @@ fun RankingList(
 
                 is GetRankingUiState.Error -> {}
             }
+        }
+    }
+}
+
+@Composable
+fun RankingListItem(
+    modifier: Modifier,
+    ranking: Int,
+    name: String,
+    point: String,
+    profileImage: String?
+) {
+    StackKnowledgeAndroidTheme { colors, typography ->
+        Column(
+            modifier = modifier.fillMaxWidth()
+        ) {
+            RankingItem(
+                rankingNum = "${ranking + 1}",
+                name = name,
+                point = point,
+                profileImage = profileImage
+            )
+            Spacer(modifier = modifier.height(5.dp))
+            Spacer(
+                modifier = modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(color = colors.G1)
+            )
         }
     }
 }
