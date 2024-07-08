@@ -10,5 +10,5 @@ fun GetMyInformationResponse.toModel(): GetMyInformationResponseModel =
         currentPoint = this.currentPoint,
         cumulatePoint = this.cumulatePoint,
         ranking = this.ranking,
-        user = this.user.toModel()
+        user = this.user.toModel(),
     )
