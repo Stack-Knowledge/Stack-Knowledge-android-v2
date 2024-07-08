@@ -9,7 +9,7 @@ import java.util.UUID
 interface SolveAPI {
     @POST("/solve/{mission_id}")
     suspend fun solveMission(
-        @Path ("mission_id") missionId: UUID,
+        @Path ("mission_id") missionId: String,
         @Body solution: SolveRequest,
     )
 }

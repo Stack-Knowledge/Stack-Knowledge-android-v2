@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SolveRepositoryImpl @Inject constructor(
     private val solveDataSource: SolveDataSource
 ): SolveRepository {
-    override fun solveMission(missionId: UUID, solution: SolveRequestModel): Flow<Unit> {
+    override fun solveMission(missionId: String, solution: SolveRequestModel): Flow<Unit> {
         return solveDataSource.solveMission(missionId = missionId, solution = solution.toDto())
     }
 }

@@ -1,7 +1,6 @@
 package com.stackknowledge.api
 
 import com.stackknowledge.dto.request.mission.CreateMissionRequest
-import com.stackknowledge.dto.request.mission.DetailMissionRequest
 import com.stackknowledge.dto.response.mission.DetailMissionResponse
 import com.stackknowledge.dto.response.mission.MissionResponse
 import retrofit2.http.Body
@@ -15,7 +14,7 @@ interface MissionAPI {
 
     @GET("/mission/{mission_id}")
     suspend fun getDetailMission(
-        @Path("mission_id") missionId: DetailMissionRequest,
+        @Path("mission_id") missionId: String,
     ): DetailMissionResponse
 
     @POST("/mission")

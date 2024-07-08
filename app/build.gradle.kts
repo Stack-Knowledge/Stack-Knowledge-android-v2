@@ -23,7 +23,6 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:main"))
     implementation(project(":feature:mission"))
-    implementation(project(":feature:resolve-mission"))
     implementation(project(":feature:ranking"))
     implementation(project(":feature:score-mission"))
     implementation(project(":feature:shop"))

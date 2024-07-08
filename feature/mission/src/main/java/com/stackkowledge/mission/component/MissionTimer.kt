@@ -1,4 +1,4 @@
-package com.stackknowledge.resolve_mission.component
+package com.stackkowledge.mission.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,11 +22,10 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun MissionTimer(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    minute: String,
+    second: String,
 ) {
-    var minute by remember { mutableStateOf("13") }
-    var second by remember { mutableStateOf("00") }
-
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
             modifier = modifier
@@ -55,5 +54,8 @@ fun MissionTimer(
 @Preview
 @Composable
 fun MissionTimerPre() {
-    MissionTimer()
+    MissionTimer(
+        minute = "13",
+        second = "00"
+    )
 }

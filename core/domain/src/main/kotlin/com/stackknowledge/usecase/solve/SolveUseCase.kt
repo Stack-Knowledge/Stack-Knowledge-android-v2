@@ -8,7 +8,6 @@ import javax.inject.Inject
 class SolveUseCase @Inject constructor(
     private val solveRepository: SolveRepository
 ) {
-    operator fun invoke(missionId: UUID, solution: SolveRequestModel) = runCatching {
+    operator fun invoke(missionId: String, solution: SolveRequestModel) =
         solveRepository.solveMission(missionId = missionId, solution = solution)
-    }
 }
