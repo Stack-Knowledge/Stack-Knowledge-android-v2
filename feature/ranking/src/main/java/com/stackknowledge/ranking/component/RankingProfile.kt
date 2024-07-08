@@ -45,16 +45,16 @@ fun RankingProfile(
                             painter = painterResource(R.drawable.img_profile),
                             contentDescription = "Profile",
                             modifier = modifier
-                                .width(40.dp)
-                                .height(40.dp)
+                                .width(110.dp)
+                                .height(110.dp)
                         )
                     } else {
                         AsyncImage(
                             model = getMyInformationUiState.getMyInformationResponseModel.user.profileImage,
                             contentDescription = "Profile",
                             modifier = modifier
-                                .width(40.dp)
-                                .height(40.dp)
+                                .width(110.dp)
+                                .height(110.dp)
                         )
                     }
                     Spacer(modifier = modifier.height(12.dp))
@@ -63,7 +63,7 @@ fun RankingProfile(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        ProfileText(text = "1등", style = typography.bodyMedium, color = colors.BLACK)
+                        ProfileText(text = getMyInformationUiState.getMyInformationResponseModel.ranking.toString() + "등", style = typography.bodyMedium, color = colors.BLACK)
                         DividerText()
                         ProfileText(text = getMyInformationUiState.getMyInformationResponseModel.user.name, style = typography.bodyMedium, color = colors.BLACK)
                         DividerText()
