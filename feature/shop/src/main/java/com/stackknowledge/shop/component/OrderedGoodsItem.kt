@@ -1,13 +1,11 @@
 package com.stackknowledge.shop.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,19 +14,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.utils.shadow
 import remote.item.ItemModel
+import remote.response.order.ViewAllOrderResponseModel
+import remote.user.UserModel
 
 @Composable
 fun OrderedGoodsItem(
     modifier: Modifier = Modifier,
+    orderedItemData: ViewAllOrderResponseModel,
+    onItemClick: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -40,6 +39,9 @@ fun OrderedGoodsItem(
                     blurRadius = 20.dp,
                 )
                 .zIndex(-1f)
+                .clickable {
+                    onItemClick(orderedItemData.id)
+                }
         ) {
             Box(
                 modifier = modifier
@@ -71,13 +73,13 @@ fun OrderedGoodsItem(
                         modifier = modifier.padding(
                             start = 8.dp, end = 83.dp
                         ),
-                        text = "정찬교",
+                        text = orderedItemData.user.name,
                         color = colors.BLACK,
                         style = typography.bodyMedium
                     )
 
                     Text(
-                        text = "3개",
+                        text = "${orderedItemData.count}개",
                         color = colors.BLACK,
                         style = typography.bodyMedium
                     )
@@ -95,7 +97,7 @@ fun OrderedGoodsItem(
 
                     Text(
                         modifier = modifier.padding(start = 8.dp, end = 56.dp),
-                        text = "외출권",
+                        text = orderedItemData.item.name,
                         color = colors.BLACK,
                         style = typography.displayMedium,
                     )
@@ -106,7 +108,7 @@ fun OrderedGoodsItem(
 
                         Text(
                             modifier = modifier.padding(end = 2.dp),
-                            text = "1,000",
+                            text = "${orderedItemData.item.price}",
                             style = typography.bodyMedium,
                             color = colors.BLACK
                         )
@@ -126,5 +128,24 @@ fun OrderedGoodsItem(
 @Preview
 @Composable
 fun OrderedGoodsItemPre() {
-    OrderedGoodsItem()
+    OrderedGoodsItem(
+        onItemClick = {},
+        orderedItemData = ViewAllOrderResponseModel(
+            id = "",
+            item = ItemModel(
+                id = "",
+                name = "상품 이름",
+                price = 1000,
+                image = "https://image.com"
+            ),
+            count = 1,
+            price = 1000,
+            user = UserModel(
+                id = "",
+                name = "유저 이름",
+                profileImage = "https://image.com"
+            )
+
+        )
+    )
 }

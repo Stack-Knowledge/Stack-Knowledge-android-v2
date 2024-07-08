@@ -19,7 +19,7 @@ interface OrderAPI {
     )
 
     @GET("/order")
-    suspend fun viewAllOrder(): ViewAllOrderResponse
+    suspend fun viewAllOrder(): List<ViewAllOrderResponse>
 
     @PATCH("/order")
     suspend fun changeOrderStatus(

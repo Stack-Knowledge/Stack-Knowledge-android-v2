@@ -70,10 +70,12 @@ fun GoodsList(
                                 GoodsItem(
                                     itemData = item,
                                     onItemCheckButtonClick = { selectedItem ->
-                                        selectedDisplayItemList.add(
-                                            itemList.indexOf(selectedItem),
-                                            selectedItem
-                                        )
+                                        selectedDisplayItemList.add(selectedItem)
+                                    },
+                                    onItemUnCheckButtonClick = { unselectedItem ->
+                                        selectedDisplayItemList.removeAll { selectedItemListElement ->
+                                            selectedItemListElement.id == unselectedItem.id
+                                        }
                                     }
                                 )
                             }
@@ -82,25 +84,25 @@ fun GoodsList(
                 }
 
                 is GetItemUiState.Error -> {
-//                    Box(
-//                        modifier = Modifier.fillMaxSize(),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = "상품이 존재하지 않아요!"
-//                        )
-//                    }
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "상품이 존재하지 않아요!"
+                        )
+                    }
                 }
 
                 is GetItemUiState.Loading -> {
-//                    Box(
-//                        modifier = Modifier.fillMaxSize(),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = "상품을 불러오는 중.."
-//                        )
-//                    }
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "상품을 불러오는 중.."
+                        )
+                    }
                 }
             }
 

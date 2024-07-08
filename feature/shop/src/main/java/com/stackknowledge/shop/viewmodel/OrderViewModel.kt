@@ -2,24 +2,23 @@ package com.stackknowledge.shop.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.result.asResult
+import com.example.common.result.Result
 import com.example.common.util.Event
 import com.example.common.util.errorHandling
 import com.stackknowledge.shop.data.SelectedItemData
+import com.stackknowledge.shop.viewmodel.uistate.GetOrderListUiState
 import com.stackknowledge.usecase.order.ChangeOrderStatusUseCase
 import com.stackknowledge.usecase.order.OrderUseCase
 import com.stackknowledge.usecase.order.ViewAllOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import remote.item.ItemModel
 import remote.request.order.ChangeOrderStatusRequestModel
 import remote.request.order.OrderRequestModel
-import remote.request.order.OrdersModel
 import remote.response.item.GetItemResponseModel
-import remote.response.order.ViewAllOrderResponseModel
-import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,9 +30,8 @@ class OrderViewModel @Inject constructor(
     private val _orderResponse = MutableStateFlow<Event<Nothing>>(Event.Loading)
     internal val orderResponse = _orderResponse.asStateFlow()
 
-    private val _viewAllOrderRequest =
-        MutableStateFlow<Event<ViewAllOrderResponseModel>>(Event.Loading)
-    internal val viewAllOrderRequest = _viewAllOrderRequest.asStateFlow()
+    private val _getOrderListUiState = MutableStateFlow<GetOrderListUiState>(GetOrderListUiState.Loading)
+    internal val getOrderListUiState = _getOrderListUiState.asStateFlow()
 
     private val _changeOrderStatusRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
     internal val changeOrderStatusRequest = _changeOrderStatusRequest.asStateFlow()
@@ -47,7 +45,8 @@ class OrderViewModel @Inject constructor(
         )
     }
 
-    fun setOrderDataList(selectedItemList: List<GetItemResponseModel>) {
+
+    internal fun setOrderDataList(selectedItemList: List<GetItemResponseModel>) {
         this.selectedItemList.clear()
         selectedItemList.forEach { itemModel ->
             val selectedItem = SelectedItemData(
@@ -60,7 +59,7 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    fun order() = viewModelScope.launch {
+    internal fun order() = viewModelScope.launch {
         orderUseCase(
             body = orderRequest
         ).onSuccess {
@@ -70,21 +69,20 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    fun viewAllOrder() = viewModelScope.launch {
+    internal fun viewAllOrder() = viewModelScope.launch {
         viewAllOrderUseCase()
-            .onSuccess {
-                it.catch { remoteError ->
-                    _viewAllOrderRequest.value = remoteError.errorHandling()
-                }.collect { response ->
-                    _viewAllOrderRequest.value = Event.Success(data = response)
+            .asResult()
+            .collectLatest { result ->
+                when (result) {
+                    is Result.Loading -> _getOrderListUiState.value = GetOrderListUiState.Loading
+                    is Result.Success -> _getOrderListUiState.value = GetOrderListUiState.Success(result.data)
+                    is Result.Error -> _getOrderListUiState.value = GetOrderListUiState.Error(result.exception)
                 }
             }
-            .onFailure {
-                _viewAllOrderRequest.value = it.errorHandling()
-            }
+
     }
 
-    fun changeOrderStatus(body: ChangeOrderStatusRequestModel) = viewModelScope.launch {
+    internal fun changeOrderStatus(body: ChangeOrderStatusRequestModel) = viewModelScope.launch {
         changeOrderStatusUseCase(body = body)
             .onSuccess {
                 _changeOrderStatusRequest.value = Event.Success()

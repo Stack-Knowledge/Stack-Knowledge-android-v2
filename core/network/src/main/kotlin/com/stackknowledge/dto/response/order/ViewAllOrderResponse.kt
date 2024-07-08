@@ -8,7 +8,7 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class ViewAllOrderResponse (
-    @Json(name = "id") val id: UUID,
+    @Json(name = "id") val id: String,
     @Json(name = "count") val count: Int,
     @Json(name = "price") val price: Int,
     @Json(name = "item") val item: Item,

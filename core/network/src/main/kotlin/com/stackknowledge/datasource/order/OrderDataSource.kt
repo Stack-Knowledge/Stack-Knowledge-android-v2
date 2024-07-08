@@ -11,7 +11,7 @@ import remote.response.order.ViewAllOrderResponseModel
 interface OrderDataSource {
     fun order(body: List<OrderRequest>): Flow<Unit>
 
-    fun viewAllOrder(): Flow<ViewAllOrderResponse>
+    fun viewAllOrder(): Flow<List<ViewAllOrderResponse>>
 
     fun changeOrderStatus(body: ChangeOrderStatusRequest): Flow<Unit>
 }

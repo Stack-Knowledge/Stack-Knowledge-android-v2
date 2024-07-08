@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -81,6 +80,7 @@ private fun ShopScreen(
     LaunchedEffect(true) {
         initShop()
     }
+
     StackKnowledgeAndroidTheme { colors, _ ->
         Box(
             modifier = modifier.fillMaxSize()
@@ -103,7 +103,7 @@ private fun ShopScreen(
                     },
                     selectedItemList = selectedItemList,
                     onOrderButtonClick = { orderItemList ->
-                        isDialogVisible
+                        isDialogVisible.value = true
                         onOrderButtonClick(orderItemList)
                     }
                 )

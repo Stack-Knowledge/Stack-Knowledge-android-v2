@@ -2,6 +2,7 @@ package com.stackknowledge.repository.order
 
 import com.stackknowledge.datasource.order.OrderDataSource
 import com.stackknowledge.mapper.request.order.toDto
+import com.stackknowledge.mapper.response.item.toModel
 import com.stackknowledge.mapper.response.order.toModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,8 +18,8 @@ class OrderRepositoryImpl @Inject constructor(
         return orderDataSource.order(body = body.map { it.toDto() })
     }
 
-    override fun viewAllOrder(): Flow<ViewAllOrderResponseModel> {
-        return orderDataSource.viewAllOrder().map { it.toModel() }
+    override fun viewAllOrder(): Flow<List<ViewAllOrderResponseModel>> {
+        return orderDataSource.viewAllOrder().map { list -> list.map { it.toModel() } }
     }
 
     override fun  changeOrderStatus(body: ChangeOrderStatusRequestModel): Flow<Unit> {

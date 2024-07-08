@@ -4,6 +4,6 @@ import java.util.UUID
 
 
 data class OrderRequestModel (
-    val itemId: UUID,
+    val itemId: String,
     val count: Int,
 )

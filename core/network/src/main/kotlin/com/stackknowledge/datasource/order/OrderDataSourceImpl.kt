@@ -23,9 +23,9 @@ class OrderDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun viewAllOrder(): Flow<ViewAllOrderResponse> = flow {
+    override fun viewAllOrder(): Flow<List<ViewAllOrderResponse>> = flow {
         emit(
-            StackKnowledgeApiHandler<ViewAllOrderResponse>()
+            StackKnowledgeApiHandler<List<ViewAllOrderResponse>>()
                 .httpRequest { orderAPI.viewAllOrder() }
                 .sendRequest()
         )

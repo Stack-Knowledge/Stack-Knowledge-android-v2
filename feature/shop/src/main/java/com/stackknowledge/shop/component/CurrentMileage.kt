@@ -19,7 +19,7 @@ import com.stackknowledge.design_system.R
 
 @Composable
 fun CurrentMileage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->  
         Column(

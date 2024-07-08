@@ -20,7 +20,7 @@ class ItemViewModel @Inject constructor(
     private val _getItemUiState = MutableStateFlow<GetItemUiState>(GetItemUiState.Loading)
     internal val getItemUiState = _getItemUiState.asStateFlow()
 
-    fun getItem() = viewModelScope.launch {
+    internal fun getItem() = viewModelScope.launch {
         getItemUseCase()
             .asResult()
             .collectLatest { result ->
