@@ -5,7 +5,7 @@ import remote.user.UserModel
 
 fun User.toModel(): UserModel =
     UserModel(
-        id = this.id,
+        userId = this.userId,
         name = this.name,
         profileImage = this.profileImage,
     )
