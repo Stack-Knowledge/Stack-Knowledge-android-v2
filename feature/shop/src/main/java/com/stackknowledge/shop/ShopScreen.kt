@@ -1,9 +1,5 @@
 package com.stackknowledge.shop
 
-import com.stackknowledge.shop.data.SelectedItemData
-import com.stackknowledge.shop.viewmodel.ItemViewModel
-import com.stackknowledge.shop.viewmodel.OrderViewModel
-import remote.response.item.GetItemResponseModel
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,27 +8,32 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
+import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.OrderDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.component.CurrentMileage
 import com.stackknowledge.shop.component.GoodsList
+import com.stackknowledge.shop.data.SelectedItemData
+import com.stackknowledge.shop.viewmodel.ItemViewModel
+import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetItemUiState
+import com.stackknowledge.shop.viewmodel.uistate.GetMyInformationUiState
 import enumdatatype.Authority
-import com.stackknowledge.design_system.R
+import remote.response.item.GetItemResponseModel
 
 @Composable
 internal fun ShopRoute(
@@ -42,15 +43,14 @@ internal fun ShopRoute(
 ) {
     val role by remember { mutableStateOf(Authority.ROLE_STUDENT) } //로그인 로직 적용후 변경
     val getItemUiState by itemViewModel.getItemUiState.collectAsStateWithLifecycle()
+    val getMyInformationUiState by itemViewModel.getMyInformationUiState.collectAsStateWithLifecycle()
 
     ShopScreen(
         role = role,
         getItemUiState = getItemUiState,
+        getMyInformationUiState = getMyInformationUiState,
         onSelectButtonClick = { selectedItemList ->
             orderViewModel.setOrderDataList(selectedItemList)
-        },
-        onOrderButtonClick = { orderItemList ->
-            orderViewModel.selectedItemList.addAll(orderItemList)
         },
         selectedItemList = orderViewModel.selectedItemList,
         onOrderDialogButtonClick = {
@@ -59,6 +59,7 @@ internal fun ShopRoute(
         onNavigate = { navType -> onNavigate(role, navType) },
         initShop = {
             itemViewModel.getItem()
+            itemViewModel.getMyInformation()
         }
     )
 }
@@ -68,8 +69,8 @@ private fun ShopScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     getItemUiState: GetItemUiState,
+    getMyInformationUiState: GetMyInformationUiState,
     onSelectButtonClick: (List<GetItemResponseModel>) -> Unit,
-    onOrderButtonClick: (List<SelectedItemData>) -> Unit,
     onOrderDialogButtonClick: () -> Unit,
     selectedItemList: MutableList<SelectedItemData>,
     onNavigate: (String) -> Unit,
@@ -92,7 +93,9 @@ private fun ShopScreen(
 
                 Spacer(modifier = modifier.height(47.dp))
 
-                CurrentMileage()
+                CurrentMileage(
+                    getMyInformationUiState = getMyInformationUiState
+                )
 
                 Spacer(modifier = modifier.height(60.dp))
 
@@ -102,9 +105,8 @@ private fun ShopScreen(
                         onSelectButtonClick(selectedItemList)
                     },
                     selectedItemList = selectedItemList,
-                    onOrderButtonClick = { orderItemList ->
+                    onOrderButtonClick = {
                         isDialogVisible.value = true
-                        onOrderButtonClick(orderItemList)
                     }
                 )
             }
@@ -139,9 +141,9 @@ private fun ShopScreen(
 fun ShopScreenPre() {
     ShopScreen(
         role = Authority.ROLE_STUDENT,
-        getItemUiState = GetItemUiState.Success(listOf()),
+        getItemUiState = GetItemUiState.Loading,
+        getMyInformationUiState = GetMyInformationUiState.Loading,
         onSelectButtonClick = {},
-        onOrderButtonClick = {},
         onOrderDialogButtonClick = {},
         onNavigate = {},
         selectedItemList = mutableListOf(),
