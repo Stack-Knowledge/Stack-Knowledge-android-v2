@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.OrderDialog
+import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.component.CurrentMileage
@@ -33,6 +34,7 @@ import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetItemUiState
 import com.stackknowledge.shop.viewmodel.uistate.GetMyInformationUiState
 import enumdatatype.Authority
+import remote.request.order.ChangeOrderStatusRequestModel
 import remote.response.item.GetItemResponseModel
 
 @Composable
@@ -122,15 +124,16 @@ private fun ShopScreen(
                 }
             }
 
-            OrderDialog(
+            StackKnowledgeDialog(
                 content = stringResource(id = R.string.order_dialog_text),
-                isVisible = isDialogVisible.value,
-                onQuit = {
-                    isDialogVisible.value = it
+                openDialog = isDialogVisible.value,
+                onDismiss = {
+                    isDialogVisible.value = false
                 },
-                onOrderDialogButtonClick = {
+                onConfirm = {
                     onOrderDialogButtonClick()
                 },
+                onStateChange = { isDialogVisible.value = it }
             )
         }
     }

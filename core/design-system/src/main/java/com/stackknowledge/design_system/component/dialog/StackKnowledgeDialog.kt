@@ -41,11 +41,9 @@ fun StackKnowledgeDialog(
     openDialog: Boolean,
     onStateChange: (Boolean) -> Unit,
 ) {
-    var openDialog by remember { mutableStateOf(openDialog) }
-
     if (openDialog) {
         StackKnowledgeAndroidTheme { colors, typography ->
-            Dialog(onDismissRequest = { openDialog = false } )  {
+            Dialog(onDismissRequest = { onStateChange(false) } )  {
                 Column(
                     modifier = modifier
                         .width(280.dp)

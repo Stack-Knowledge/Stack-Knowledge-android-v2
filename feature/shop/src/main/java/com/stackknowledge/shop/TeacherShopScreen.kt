@@ -1,5 +1,6 @@
 package com.stackknowledge.shop
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -43,8 +44,8 @@ internal fun TeacherShopRoute(
             initTeacherShop = {
                 viewAllOrder()
             },
-            onItemClick = { clickedItemId ->
-                changeOrderStatus(ChangeOrderStatusRequestModel(clickedItemId, 1))
+            onDiscountClick = { changeOrderStatusRequest ->
+                changeOrderStatus(changeOrderStatusRequest)
             }
         )
     }
@@ -55,12 +56,12 @@ private fun TeacherShopScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    onItemClick: (String) -> Unit,
+    onDiscountClick: (ChangeOrderStatusRequestModel) -> Unit,
     getOrderListUiState: GetOrderListUiState,
     initTeacherShop: () -> Unit,
 ) {
     val isDialogVisible = remember { mutableStateOf(false) }
-    val itemIdSaved = remember { mutableStateOf("") }
+    val itemId = remember { mutableStateOf("") }
 
     LaunchedEffect(true) {
         initTeacherShop()
@@ -80,10 +81,13 @@ private fun TeacherShopScreen(
                 OrderedGoodsList(
                     getOrderListUiState = getOrderListUiState,
                     onItemClick = { clickedItemId ->
-                        itemIdSaved.value = clickedItemId
+                        isDialogVisible.value = true
+                        itemId.value = clickedItemId
+                        Log.e("click event", isDialogVisible.value.toString())
                     }
                 )
             }
+
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
             ) {
@@ -94,18 +98,24 @@ private fun TeacherShopScreen(
                     onNavigate(it)
                 }
             }
-        }
 
-        StackKnowledgeDialog(
-            content = stringResource(id = R.string.discount_ordered_item),
-            onConfirm = {
-                onItemClick(itemIdSaved.value)
-            },
-            onDismiss = {
-                isDialogVisible.value = false
-            },
-            openDialog = isDialogVisible.value,
-            onStateChange = { isDialogVisible.value = it }
-        )
+            StackKnowledgeDialog(
+                content = stringResource(id = R.string.discount_ordered_item),
+                onConfirm = {
+                    isDialogVisible.value = false
+                    onDiscountClick(
+                        ChangeOrderStatusRequestModel(
+                            orderId = itemId.value,
+                            count = 1
+                        )
+                    )
+                },
+                onDismiss = {
+                    isDialogVisible.value = false
+                },
+                openDialog = isDialogVisible.value,
+                onStateChange = { isDialogVisible.value = it }
+            )
+        }
     }
 }

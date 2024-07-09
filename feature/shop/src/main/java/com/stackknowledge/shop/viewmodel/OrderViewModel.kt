@@ -83,8 +83,11 @@ class OrderViewModel @Inject constructor(
             .collectLatest { result ->
                 when (result) {
                     is Result.Loading -> _getOrderListUiState.value = GetOrderListUiState.Loading
-                    is Result.Success -> _getOrderListUiState.value = GetOrderListUiState.Success(result.data)
-                    is Result.Error -> _getOrderListUiState.value = GetOrderListUiState.Error(result.exception)
+                    is Result.Success -> _getOrderListUiState.value =
+                        GetOrderListUiState.Success(result.data)
+
+                    is Result.Error -> _getOrderListUiState.value =
+                        GetOrderListUiState.Error(result.exception)
                 }
             }
     }
@@ -92,7 +95,11 @@ class OrderViewModel @Inject constructor(
     internal fun changeOrderStatus(body: ChangeOrderStatusRequestModel) = viewModelScope.launch {
         changeOrderStatusUseCase(body = body)
             .onSuccess {
-                _changeOrderStatusRequest.value = Event.Success()
+                it.catch { remoteError ->
+                    _changeOrderStatusRequest.value = remoteError.errorHandling()
+                }.collect {
+                    _changeOrderStatusRequest.value = Event.Success()
+                }
             }
             .onFailure {
                 _changeOrderStatusRequest.value = it.errorHandling()
