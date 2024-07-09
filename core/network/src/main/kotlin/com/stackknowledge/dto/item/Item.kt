@@ -6,7 +6,7 @@ import java.util.UUID
 
 @JsonClass(generateAdapter = true)
 data class Item (
-    @Json(name= "id") val id: String,
+    @Json(name= "itemId") val itemId: String,
     @Json(name = "name") val name: String,
     @Json(name = "price") val price: Int,
     @Json(name = "image") val image: String,
