@@ -43,6 +43,7 @@ import remote.request.user.ScoreRequestModel
 internal fun GradingAnswerRoute(
     viewModel: ScoreMissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
     onNavigate: (Authority, String) -> Unit,
+    scoreMissionSuccess: () -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val detailSolveMissionUiState by viewModel.detailScoreMissionUiState.collectAsStateWithLifecycle()
@@ -63,6 +64,7 @@ internal fun GradingAnswerRoute(
         getDetailSolveMission = viewModel::detailScoreMission,
         detailSolveMissionUiState = detailSolveMissionUiState,
         scoreMissionUiState = scoreMissionUiState,
+        onSuccess = scoreMissionSuccess,
     )
 }
 
@@ -78,6 +80,7 @@ private fun GradingAnswerScreen(
     getDetailSolveMission: (String) -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
     scoreMissionUiState: Event<Nothing>,
+    onSuccess: () -> Unit,
 ) {
     val context = LocalContext.current
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
@@ -104,6 +107,7 @@ private fun GradingAnswerScreen(
 
     if (scoreMissionUiState is Event.Success) {
         successScoreMissionToast = true
+        onSuccess()
     }
 
     if (successScoreMissionToast) {
