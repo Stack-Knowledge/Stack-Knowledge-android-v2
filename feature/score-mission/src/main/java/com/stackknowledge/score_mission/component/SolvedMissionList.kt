@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,7 +48,9 @@ fun SolvedMissionList(
                 ),
             ) {
                 itemsIndexed(scoreMission.response) {_, item ->
-                    Box {
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
                         SolvedMissionItem(
                             name = item.user.name,
                             title = item.title,
