@@ -17,10 +17,12 @@ fun NavController.navigateToGradingAnswer(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.gradingAnswerScreen(
     onNavigate: (Authority, String) -> Unit,
+    scoreMissionSuccess: () -> Unit,
 ) {
     composable(route = gradingAnswerRoute) {
         GradingAnswerRoute(
             onNavigate = onNavigate,
+            scoreMissionSuccess = scoreMissionSuccess
         )
     }
 }

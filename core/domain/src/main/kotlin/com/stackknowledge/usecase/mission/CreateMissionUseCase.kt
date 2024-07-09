@@ -7,6 +7,7 @@ import javax.inject.Inject
 class CreateMissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository
 ) {
-    operator fun invoke(body: CreateMissionRequestModel) =
+    operator fun invoke(body: CreateMissionRequestModel) = kotlin.runCatching {
         missionRepository.createMission(body = body)
+    }
 }

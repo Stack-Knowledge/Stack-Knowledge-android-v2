@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.util.Event
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -42,6 +43,7 @@ import remote.request.user.ScoreRequestModel
 internal fun GradingAnswerRoute(
     viewModel: ScoreMissionViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
     onNavigate: (Authority, String) -> Unit,
+    scoreMissionSuccess: () -> Unit,
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
     val detailSolveMissionUiState by viewModel.detailScoreMissionUiState.collectAsStateWithLifecycle()
@@ -62,6 +64,7 @@ internal fun GradingAnswerRoute(
         getDetailSolveMission = viewModel::detailScoreMission,
         detailSolveMissionUiState = detailSolveMissionUiState,
         scoreMissionUiState = scoreMissionUiState,
+        onSuccess = scoreMissionSuccess,
     )
 }
 
@@ -76,7 +79,8 @@ private fun GradingAnswerScreen(
     onSolveMission: () -> Unit,
     getDetailSolveMission: (String) -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
-    scoreMissionUiState: ScoreMissionUiState,
+    scoreMissionUiState: Event<Nothing>,
+    onSuccess: () -> Unit,
 ) {
     val context = LocalContext.current
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
@@ -101,8 +105,9 @@ private fun GradingAnswerScreen(
         )
     }
 
-    if (scoreMissionUiState is ScoreMissionUiState.Success) {
+    if (scoreMissionUiState is Event.Success) {
         successScoreMissionToast = true
+        onSuccess()
     }
 
     if (successScoreMissionToast) {
