@@ -32,7 +32,7 @@ import com.stackkowledge.mission.navigation.resolveMissionScreen
 fun StackKnowledgeNavHost(
     appState: StackKnowledgeAppState,
     modifier: Modifier = Modifier,
-    startDestination: String = teacherShopRoute,
+    startDestination: String = roleCheckRoute,
 ) {
     val navController = appState.navController
 
