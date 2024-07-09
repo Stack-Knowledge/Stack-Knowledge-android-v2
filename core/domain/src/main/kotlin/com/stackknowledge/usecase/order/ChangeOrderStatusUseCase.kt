@@ -7,7 +7,7 @@ import javax.inject.Inject
 class ChangeOrderStatusUseCase @Inject constructor(
     private val orderRepository: OrderRepository
 ) {
-    operator fun invoke(body: List<ChangeOrderStatusRequestModel>) = runCatching {
+    operator fun invoke(body: List<ChangeOrderStatusRequestModel>) = kotlin.runCatching {
         orderRepository.changeOrderStatus(body = body)
     }
 }
