@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.util.Event
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -76,7 +77,7 @@ private fun GradingAnswerScreen(
     onSolveMission: () -> Unit,
     getDetailSolveMission: (String) -> Unit,
     detailSolveMissionUiState: DetailScoreMissionUiState,
-    scoreMissionUiState: ScoreMissionUiState,
+    scoreMissionUiState: Event<Nothing>,
 ) {
     val context = LocalContext.current
     val (selectedCorrect, setSelectedCorrect) = remember { mutableStateOf(false) }
@@ -101,7 +102,7 @@ private fun GradingAnswerScreen(
         )
     }
 
-    if (scoreMissionUiState is ScoreMissionUiState.Success) {
+    if (scoreMissionUiState is Event.Success) {
         successScoreMissionToast = true
     }
 
