@@ -31,7 +31,7 @@ class OrderDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun changeOrderStatus(body: ChangeOrderStatusRequest): Flow<Unit> = flow {
+    override fun changeOrderStatus(body: List<ChangeOrderStatusRequest>): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { orderAPI.changeOrderStatus(body = body) }

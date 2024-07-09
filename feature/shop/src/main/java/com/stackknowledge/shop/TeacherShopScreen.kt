@@ -46,6 +46,7 @@ internal fun TeacherShopRoute(
             },
             onDiscountClick = { changeOrderStatusRequest ->
                 changeOrderStatus(changeOrderStatusRequest)
+                viewAllOrder()
             }
         )
     }
@@ -56,7 +57,7 @@ private fun TeacherShopScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    onDiscountClick: (ChangeOrderStatusRequestModel) -> Unit,
+    onDiscountClick: (List<ChangeOrderStatusRequestModel>) -> Unit,
     getOrderListUiState: GetOrderListUiState,
     initTeacherShop: () -> Unit,
 ) {
@@ -83,7 +84,6 @@ private fun TeacherShopScreen(
                     onItemClick = { clickedItemId ->
                         isDialogVisible.value = true
                         itemId.value = clickedItemId
-                        Log.e("click event", isDialogVisible.value.toString())
                     }
                 )
             }
@@ -104,9 +104,11 @@ private fun TeacherShopScreen(
                 onConfirm = {
                     isDialogVisible.value = false
                     onDiscountClick(
-                        ChangeOrderStatusRequestModel(
-                            orderId = itemId.value,
-                            count = 1
+                        listOf(
+                            ChangeOrderStatusRequestModel(
+                                orderId = itemId.value,
+                                count = 1
+                            )
                         )
                     )
                 },

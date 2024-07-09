@@ -10,5 +10,5 @@ interface OrderRepository {
 
     fun viewAllOrder(): Flow<List<ViewAllOrderResponseModel>>
 
-    fun changeOrderStatus(body: ChangeOrderStatusRequestModel): Flow<Unit>
+    fun changeOrderStatus(body: List<ChangeOrderStatusRequestModel>): Flow<Unit>
 }

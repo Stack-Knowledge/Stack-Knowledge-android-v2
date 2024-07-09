@@ -23,6 +23,6 @@ interface OrderAPI {
 
     @PATCH("/order")
     suspend fun changeOrderStatus(
-        @Body body: ChangeOrderStatusRequest,
+        @Body body: List<ChangeOrderStatusRequest>,
     )
 }

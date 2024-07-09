@@ -39,15 +39,6 @@ class OrderViewModel @Inject constructor(
 
     val selectedItemList: MutableList<SelectedItemData> = mutableListOf()
 
-    private fun convertToOrderRequest(): List<OrderRequestModel> {
-        return selectedItemList.map { selectedItemData ->
-            OrderRequestModel(
-                itemId = selectedItemData.id,
-                count = selectedItemData.count,
-            )
-        }
-    }
-
     internal fun setOrderDataList(selectedItemList: List<GetItemResponseModel>) {
         this.selectedItemList.clear()
         selectedItemList.forEach { itemModel ->
@@ -61,11 +52,9 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    internal fun order() = viewModelScope.launch {
-        val orderRequest = convertToOrderRequest()
-
+    internal fun order(body: List<OrderRequestModel>) = viewModelScope.launch {
         orderUseCase(
-            body = orderRequest
+            body = body
         ).onSuccess {
             it.catch { remoteError ->
                 _orderRequest.value = remoteError.errorHandling()
@@ -92,7 +81,7 @@ class OrderViewModel @Inject constructor(
             }
     }
 
-    internal fun changeOrderStatus(body: ChangeOrderStatusRequestModel) = viewModelScope.launch {
+    internal fun changeOrderStatus(body: List<ChangeOrderStatusRequestModel>) = viewModelScope.launch {
         changeOrderStatusUseCase(body = body)
             .onSuccess {
                 it.catch { remoteError ->

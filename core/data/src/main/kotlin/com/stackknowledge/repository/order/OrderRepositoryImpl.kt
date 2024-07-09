@@ -22,7 +22,7 @@ class OrderRepositoryImpl @Inject constructor(
         return orderDataSource.viewAllOrder().map { list -> list.map { it.toModel() } }
     }
 
-    override fun  changeOrderStatus(body: ChangeOrderStatusRequestModel): Flow<Unit> {
-        return orderDataSource.changeOrderStatus(body = body.toDto())
+    override fun  changeOrderStatus(body: List<ChangeOrderStatusRequestModel>): Flow<Unit> {
+        return orderDataSource.changeOrderStatus(body = body.map { it.toDto() })
     }
 }

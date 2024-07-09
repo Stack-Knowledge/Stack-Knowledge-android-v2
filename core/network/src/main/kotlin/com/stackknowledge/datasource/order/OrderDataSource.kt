@@ -13,5 +13,5 @@ interface OrderDataSource {
 
     fun viewAllOrder(): Flow<List<ViewAllOrderResponse>>
 
-    fun changeOrderStatus(body: ChangeOrderStatusRequest): Flow<Unit>
+    fun changeOrderStatus(body: List<ChangeOrderStatusRequest>): Flow<Unit>
 }
