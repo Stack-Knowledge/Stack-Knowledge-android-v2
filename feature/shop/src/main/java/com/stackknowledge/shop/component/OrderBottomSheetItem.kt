@@ -14,10 +14,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
@@ -28,7 +31,10 @@ fun OrderBottomSheetItem(
     modifier: Modifier = Modifier,
     item: SelectedItemData,
     selectedItemList: MutableList<SelectedItemData>,
+    onItemCountChanged: () -> Unit
 ) {
+    val itemCount = remember { mutableIntStateOf(item.count) }
+
     StackKnowledgeAndroidTheme { colors, typography ->
         Row(
             modifier = modifier
@@ -78,35 +84,43 @@ fun OrderBottomSheetItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    modifier = modifier.clickable{
+                    modifier = modifier.clickable {
+                        itemCount.intValue += 1
                         selectedItemList.replaceAll { selectedItem ->
-                            if(selectedItem.id == item.id) {
-                                selectedItem.copy(count = selectedItem.count - 1)
+                            if (selectedItem.id == item.id) {
+                                selectedItem.copy(count = selectedItem.count + 1)
                             } else {
                                 selectedItem
                             }
                         }
+                        onItemCountChanged()
                     },
                     painter = painterResource(R.drawable.plus_icon),
                     contentDescription = "Plus Icon"
                 )
+
                 Spacer(modifier = modifier.width(8.dp))
 
                 Text(
-                    text = "${item.count}",
+                    text = "${itemCount.intValue}",
                     style = typography.bodyMedium,
                     color = colors.BLACK
                 )
+
                 Spacer(modifier = modifier.width(8.dp))
 
                 Image(
-                    modifier = modifier.clickable{
-                        selectedItemList.replaceAll { selectedItem ->
-                            if(selectedItem.id == item.id) {
-                                selectedItem.copy(count = selectedItem.count - 1)
-                            } else {
-                                selectedItem
+                    modifier = modifier.clickable {
+                        if (itemCount.intValue > 1) {
+                            itemCount.intValue -= 1
+                            selectedItemList.replaceAll { selectedItem ->
+                                if (selectedItem.id == item.id) {
+                                    selectedItem.copy(count = selectedItem.count - 1)
+                                } else {
+                                    selectedItem
+                                }
                             }
+                            onItemCountChanged()
                         }
                     },
                     painter = painterResource(R.drawable.minus_icon),
@@ -117,9 +131,17 @@ fun OrderBottomSheetItem(
     }
 }
 
-
-//@Preview
-//@Composable
-//fun OrderBottomSheetItemPre() {
-//    OrderBottomSheetItem()
-//}
+@Preview
+@Composable
+fun OrderBottomSheetItemPre() {
+    OrderBottomSheetItem(
+        item = SelectedItemData(
+            id = "1",
+            name = "정영운 글러브",
+            price = 1000,
+            count = 1
+        ),
+        selectedItemList = mutableListOf(),
+        onItemCountChanged = {}
+    )
+}
