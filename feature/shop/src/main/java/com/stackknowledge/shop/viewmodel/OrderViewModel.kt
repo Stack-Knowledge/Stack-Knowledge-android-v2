@@ -29,8 +29,8 @@ class OrderViewModel @Inject constructor(
     private val viewAllOrderUseCase: ViewAllOrderUseCase,
     private val changeOrderStatusUseCase: ChangeOrderStatusUseCase,
 ) : ViewModel() {
-    private val _orderResponse = MutableStateFlow<Event<Nothing>>(Event.Loading)
-    internal val orderResponse = _orderResponse.asStateFlow()
+    private val _orderRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
+    internal val orderResponse = _orderRequest.asStateFlow()
 
     private val _getOrderListUiState = MutableStateFlow<GetOrderListUiState>(GetOrderListUiState.Loading)
     internal val getOrderListUiState = _getOrderListUiState.asStateFlow()
@@ -69,14 +69,14 @@ class OrderViewModel @Inject constructor(
             body = orderRequest
         ).onSuccess {
             it.catch { remoteError ->
-                _orderResponse.value = remoteError.errorHandling()
+                _orderRequest.value = remoteError.errorHandling()
                 Log.e("Order remoteError", remoteError.toString())
             }.collect {
-                _orderResponse.value = Event.Success()
+                _orderRequest.value = Event.Success()
                 Log.e("Order Success Block", "Order Success Block")
             }
         }.onFailure { error ->
-            _orderResponse.value = error.errorHandling()
+            _orderRequest.value = error.errorHandling()
             Log.e("Order Failure Block", error.toString())
         }
     }
