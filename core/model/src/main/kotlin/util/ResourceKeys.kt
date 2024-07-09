@@ -1,5 +1,5 @@
 package util
 
 object ResourceKeys {
-    const val BEARER = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2ZWI3NjU3ZC01MzdiLTQzNDMtODAwYS1kMDg4OTU1N2Q5YWIiLCJ0eXBlIjoiYWNjZXNzIiwiYXV0aG9yaXR5IjoiUk9MRV9URUFDSEVSIiwiaWF0IjoxNzIwNTA2MzQwLCJleHAiOjE3MjA2MDYzMzl9.daYRaTPSo9lMm_bp3rTMt4XH2ecNOFmg_ahZPpRXNb0"
+    const val BEARER = "Bearer "
 }
