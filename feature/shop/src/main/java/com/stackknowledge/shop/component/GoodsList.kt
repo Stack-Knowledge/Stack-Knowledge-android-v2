@@ -132,9 +132,7 @@ fun GoodsList(
                     isBottomSheetVisible.value = false
                 },
                 selectedItemList = selectedItemList,
-                onOrderButtonClick = {
-                    onOrderButtonClick()
-                }
+                onOrderButtonClick = onOrderButtonClick
             )
         }
     }
