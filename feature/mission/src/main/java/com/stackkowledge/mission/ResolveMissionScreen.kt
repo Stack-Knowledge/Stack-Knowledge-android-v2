@@ -31,6 +31,7 @@ import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import enumdatatype.Authority
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.dialog.EmptyButtonDialog
 import com.stackknowledge.design_system.component.toast.SuccessToastMessage
 import com.stackkowledge.mission.component.InputAnswer
 import com.stackkowledge.mission.component.Mission
@@ -40,6 +41,7 @@ import com.stackkowledge.mission.viewmodel.SolveMissionViewModel
 import com.stackkowledge.mission.viewmodel.uistate.DetailMissionUiState
 import com.stackkowledge.mission.viewmodel.uistate.SolveMissionUiState
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import remote.request.solve.SolveRequestModel
 
 @Composable
@@ -120,7 +122,6 @@ private fun ResolveMissionScreen(
     if (openDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.submit_mission),
-            isTimeOut = false,
             onConfirm = {
                 submit()
                 openDialog = false
@@ -133,28 +134,20 @@ private fun ResolveMissionScreen(
     }
 
     if (finishTimeDialog) {
-        StackKnowledgeDialog(
+        EmptyButtonDialog(
             content = stringResource(id = R.string.finish_time_of_submit_mission),
-            isTimeOut = true,
-            onConfirm = {
-                finishTimeDialog = false
-                submit()
-                onAnswer("")
-            },
+            openDialog = finishTimeDialog,
             onDismiss = {
                 finishTimeDialog = false
                 submit()
-                onAnswer("")
             },
-            openDialog = finishTimeDialog,
-            onStateChange = { finishTimeDialog = it }
+            onStateChange = { finishTimeDialog = it },
         )
     }
 
     if (autoSubmitDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.auto_submit_mission),
-            isTimeOut = false,
             onConfirm = {
                 autoSubmitDialog = false
                 notNavigate = false
