@@ -55,6 +55,7 @@ internal fun ShopRoute(
         selectedItemList = orderViewModel.selectedItemList,
         onOrderDialogButtonClick = {
             orderViewModel.order()
+            itemViewModel.getMyInformation()
         },
         onNavigate = { navType -> onNavigate(role, navType) },
         initShop = {
