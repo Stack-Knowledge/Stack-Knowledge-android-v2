@@ -120,7 +120,7 @@ private fun ResolveMissionScreen(
     if (openDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.submit_mission),
-            numberOfButton = 2,
+            isTimeOut = false,
             onConfirm = {
                 submit()
                 openDialog = false
@@ -135,14 +135,13 @@ private fun ResolveMissionScreen(
     if (finishTimeDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.finish_time_of_submit_mission),
-            numberOfButton = 1,
+            isTimeOut = true,
             onConfirm = {
                 finishTimeDialog = false
                 submit()
                 onAnswer("")
             },
             onDismiss = {
-                makeToast(context, "취소 해도 문제가 자동으로 제출됩니다.")
                 finishTimeDialog = false
                 submit()
                 onAnswer("")
@@ -155,7 +154,7 @@ private fun ResolveMissionScreen(
     if (autoSubmitDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.auto_submit_mission),
-            numberOfButton = 2,
+            isTimeOut = false,
             onConfirm = {
                 autoSubmitDialog = false
                 notNavigate = false

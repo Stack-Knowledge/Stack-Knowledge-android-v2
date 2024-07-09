@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,12 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import kotlinx.coroutines.delay
 
 @Composable
 fun StackKnowledgeDialog(
     modifier: Modifier = Modifier,
     content: String,
-    numberOfButton: Int,
+    isTimeOut: Boolean,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     openDialog: Boolean,
@@ -57,7 +59,7 @@ fun StackKnowledgeDialog(
                         )
                         .padding(vertical = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = if (isTimeOut) Arrangement.Center else Arrangement.SpaceBetween,
                 ) {
                     Spacer(modifier = modifier.height(4.dp))
                     Text(
@@ -69,27 +71,16 @@ fun StackKnowledgeDialog(
                             .wrapContentHeight(),
                         textAlign = TextAlign.Center
                     )
-                    when (numberOfButton) {
-                        1 -> {
-                            Button(
-                                modifier = modifier
-                                    .width(220.dp)
-                                    .height(40.dp),
-                                onClick = onDismiss,
-                                shape = RoundedCornerShape(10.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    colors.P1
-                                )
-                            ) {
-                                Text(
-                                    text = stringResource(R.string.check),
-                                    style = typography.bodyMedium,
-                                    color = colors.WHITE
-                                )
+                    when (isTimeOut) {
+                        true -> {
+                            LaunchedEffect(isTimeOut) {
+                                delay(2000L)
+                                onConfirm()
+                                onDismiss()
                             }
                         }
 
-                        2 -> {
+                        false -> {
                             Row() {
                                 Button(
                                     modifier = modifier
@@ -131,6 +122,7 @@ fun StackKnowledgeDialog(
                 }
             }
         }
+
     } else {
         onStateChange(openDialog)
     }
@@ -141,10 +133,10 @@ fun StackKnowledgeDialog(
 fun StackKnowledgeDialogPre() {
     StackKnowledgeDialog(
         content = "로그아웃 하시겠습니까?",
+        isTimeOut = true,
         onConfirm = {},
         onDismiss = {},
         openDialog = false,
         onStateChange = {},
-        numberOfButton = 1
     )
 }
