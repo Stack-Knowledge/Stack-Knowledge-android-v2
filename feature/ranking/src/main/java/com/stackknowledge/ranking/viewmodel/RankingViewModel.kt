@@ -1,4 +1,4 @@
-package com.stackknowledge.ranking.viewModel
+package com.stackknowledge.ranking.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

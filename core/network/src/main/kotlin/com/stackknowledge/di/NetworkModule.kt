@@ -7,11 +7,8 @@ import com.stackknowledge.api.MissionAPI
 import com.stackknowledge.api.OrderAPI
 import com.stackknowledge.api.SolveAPI
 import com.stackknowledge.api.StudentAPI
-<<<<<<< Updated upstream
 import com.stackknowledge.api.UserAPI
-=======
 import com.stackknowledge.util.AuthInterceptor
->>>>>>> Stashed changes
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

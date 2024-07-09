@@ -21,7 +21,7 @@ import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.ranking.component.RankingList
-import com.stackknowledge.ranking.viewModel.RankingViewModel
+import com.stackknowledge.ranking.viewmodel.RankingViewModel
 import com.stackknowledge.ranking.viewmodel.uistate.GetRankingUiState
 import enumdatatype.Authority
 
