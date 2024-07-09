@@ -89,7 +89,6 @@ private fun ShopScreen(
             modifier = modifier
                 .fillMaxSize()
                 .background(color = colors.WHITE)
-
         ) {
             Column {
                 StackKnowledgeTopBar()
