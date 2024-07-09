@@ -70,6 +70,7 @@ private fun SolvedMissionScreen(
                 if (scoreMissionListUiState is GetScoreMissionListUiState.Success) {
                     val scoreMission = scoreMissionListUiState.getSolveMissionResponseModel
                     SolvedMissionList(
+                        getScoreMissionListUiState = scoreMissionListUiState,
                         scoreMission = scoreMission,
                         onClick = { onItemClick() },
                         intentId = { intentId(it) }
