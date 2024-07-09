@@ -71,11 +71,11 @@ private fun EntireMissionScreen(
                 if (missionUiState is GetMissionUiState.Success) {
                     val mission = missionUiState.missionResponseModel
                     EntireMissionList(
+                        getMissionUiState = missionUiState,
                         missionList = mission,
                         onClick = { onItemClick(it) },
                     )
                 }
-                Log.e("testt", missionUiState.toString())
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
@@ -89,4 +89,5 @@ private fun EntireMissionScreen(
             }
         }
     }
+    Log.e("testt", missionUiState.toString())
 }

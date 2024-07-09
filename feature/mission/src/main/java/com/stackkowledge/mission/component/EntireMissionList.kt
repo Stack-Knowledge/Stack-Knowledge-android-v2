@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,11 +22,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.viewmodel.MissionViewModel
+import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 import remote.response.mission.MissionResponseModel
 
 @Composable
 fun EntireMissionList(
     modifier: Modifier = Modifier,
+    getMissionUiState: GetMissionUiState,
     missionList: List<MissionResponseModel>,
     onClick: (String) -> Unit,
 ) {
@@ -36,29 +39,55 @@ fun EntireMissionList(
                 .fillMaxSize()
                 .padding(bottom = 116.dp)
         ) {
-            LazyVerticalGrid(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = colors.WHITE),
-                columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    top = 16.dp,
-                ),
-            ) {
-                itemsIndexed(missionList) { _, item ->
+            when (getMissionUiState) {
+                is GetMissionUiState.Success -> {
+                    LazyVerticalGrid(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = colors.WHITE),
+                        columns = GridCells.Fixed(2),
+                        contentPadding = PaddingValues(
+                            start = 16.dp,
+                            top = 16.dp,
+                        ),
+                    ) {
+                        itemsIndexed(missionList) { _, item ->
 
+                            Box(
+                                contentAlignment = Alignment.Center
+                            ) {
+                                EntireMissionItem(
+                                    name = item.user.name,
+                                    title = item.title,
+                                    point = item.point,
+                                    onClick = { onClick(item.id) },
+                                )
+                            }
+
+                        }
+                    }
+                }
+
+                is GetMissionUiState.Error -> {
                     Box(
+                        modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        EntireMissionItem(
-                            name = item.user.name,
-                            title = item.title,
-                            point = item.point,
-                            onClick = { onClick(item.id) },
+                        Text(
+                            text = "문제가 존재하지 않아요!"
                         )
                     }
+                }
 
+                is GetMissionUiState.Loading -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "문제 리스트 불러오는 중.."
+                        )
+                    }
                 }
             }
         }
