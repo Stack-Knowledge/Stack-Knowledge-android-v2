@@ -119,7 +119,7 @@ private fun MainPageScreen(
         if (openLogoutDialog) {
             StackKnowledgeDialog(
                 content = "로그아웃 하시겠습니까?",
-                numberOfButton = 2,
+                isTimeOut = false,
                 onConfirm = { openLogoutDialog = false },
                 onDismiss = { openLogoutDialog = false },
                 onStateChange = { openLogoutDialog = it },
