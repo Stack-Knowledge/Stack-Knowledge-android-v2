@@ -36,7 +36,7 @@ class MissionViewModel @Inject constructor(
     private val _missionUiState = MutableStateFlow<GetMissionUiState>(GetMissionUiState.Loading)
     internal val missionUiState = _missionUiState.asStateFlow()
 
-    private val _createMissionUiState = MutableStateFlow<CreateMissionUiState>(CreateMissionUiState.Loading)
+    private val _createMissionUiState = MutableStateFlow<Event<Nothing>>(Event.Loading)
     internal val createMissionUiState = _createMissionUiState.asStateFlow()
 
     private val _detailMissionUiState =
@@ -77,17 +77,17 @@ class MissionViewModel @Inject constructor(
     }
 
     internal fun createMission(body: CreateMissionRequestModel) = viewModelScope.launch {
-        _createMissionUiState.value = CreateMissionUiState.Loading
+        _createMissionUiState.value = Event.Loading
         createMissionUseCase(body = body)
             .onSuccess {
                 it.catch { remoteError ->
-                    _createMissionUiState.value = CreateMissionUiState.Error(remoteError)
+                    _createMissionUiState.value = remoteError.errorHandling()
                 }.collect {
-                    _createMissionUiState.value = CreateMissionUiState.Success
+                    _createMissionUiState.value = Event.Success()
                 }
             }
             .onFailure {
-                _createMissionUiState.value = CreateMissionUiState.Error(it)
+                _createMissionUiState.value = it.errorHandling()
             }
     }
 
