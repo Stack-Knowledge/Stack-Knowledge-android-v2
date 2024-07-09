@@ -31,7 +31,6 @@ import java.util.UUID
 fun SolvedMissionList(
     modifier: Modifier = Modifier,
     getScoreMissionListUiState: GetScoreMissionListUiState,
-    scoreMission: GetSolveMissionResponseModel,
     onClick: () -> Unit,
     intentId: (String) -> Unit,
 ) {
@@ -45,6 +44,7 @@ fun SolvedMissionList(
         ) {
             when (getScoreMissionListUiState) {
                 is GetScoreMissionListUiState.Success -> {
+                    val scoreMissionList = getScoreMissionListUiState.getSolveMissionResponseModel
                     LazyVerticalGrid(
                         modifier = modifier.fillMaxSize(),
                         columns = GridCells.Fixed(2),
@@ -53,7 +53,7 @@ fun SolvedMissionList(
                             top = 16.dp,
                         ),
                     ) {
-                        itemsIndexed(scoreMission.response) { _, item ->
+                        itemsIndexed(scoreMissionList.response) { _, item ->
                             Box(
                                 contentAlignment = Alignment.Center
                             ) {

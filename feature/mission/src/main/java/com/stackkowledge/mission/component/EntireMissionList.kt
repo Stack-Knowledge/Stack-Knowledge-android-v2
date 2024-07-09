@@ -29,7 +29,6 @@ import remote.response.mission.MissionResponseModel
 fun EntireMissionList(
     modifier: Modifier = Modifier,
     getMissionUiState: GetMissionUiState,
-    missionList: List<MissionResponseModel>,
     onClick: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
@@ -41,6 +40,7 @@ fun EntireMissionList(
         ) {
             when (getMissionUiState) {
                 is GetMissionUiState.Success -> {
+                    val missionList = getMissionUiState.missionResponseModel
                     LazyVerticalGrid(
                         modifier = Modifier
                             .fillMaxSize()
@@ -51,16 +51,15 @@ fun EntireMissionList(
                             top = 16.dp,
                         ),
                     ) {
-                        itemsIndexed(missionList) { _, item ->
-
+                        items(missionList.size) { index ->
                             Box(
                                 contentAlignment = Alignment.Center
                             ) {
                                 EntireMissionItem(
-                                    name = item.user.name,
-                                    title = item.title,
-                                    point = item.point,
-                                    onClick = { onClick(item.id) },
+                                    name = missionList[index].user.name,
+                                    title = missionList[index].title,
+                                    point = missionList[index].point,
+                                    onClick = { onClick(missionList[index].id) },
                                 )
                             }
 
