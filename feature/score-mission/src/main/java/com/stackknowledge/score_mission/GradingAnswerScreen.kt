@@ -91,6 +91,7 @@ private fun GradingAnswerScreen(
     if (openDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = com.stackknowledge.design_system.R.string.finish_score_mission),
+            numberOfButton = 2,
             onConfirm = {
                 onSolveMission()
                 openDialog = false

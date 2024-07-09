@@ -102,6 +102,7 @@ private fun CreateMissionScreen(
     if (createMissionOpenDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.select_create_mission),
+            numberOfButton = 2,
             openDialog = createMissionOpenDialog,
             onStateChange = { createMissionOpenDialog = it },
             onConfirm = {
@@ -123,6 +124,7 @@ private fun CreateMissionScreen(
     if (cancelCreateMissionOpenDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.cancel_select_create_mission),
+            numberOfButton = 2,
             openDialog = cancelCreateMissionOpenDialog,
             onStateChange = { cancelCreateMissionOpenDialog = it },
             onConfirm = {

@@ -120,6 +120,7 @@ private fun ResolveMissionScreen(
     if (openDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.submit_mission),
+            numberOfButton = 2,
             onConfirm = {
                 submit()
                 openDialog = false
@@ -134,6 +135,7 @@ private fun ResolveMissionScreen(
     if (finishTimeDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.finish_time_of_submit_mission),
+            numberOfButton = 1,
             onConfirm = {
                 finishTimeDialog = false
                 submit()
@@ -153,6 +155,7 @@ private fun ResolveMissionScreen(
     if (autoSubmitDialog) {
         StackKnowledgeDialog(
             content = stringResource(id = R.string.auto_submit_mission),
+            numberOfButton = 2,
             onConfirm = {
                 autoSubmitDialog = false
                 notNavigate = false

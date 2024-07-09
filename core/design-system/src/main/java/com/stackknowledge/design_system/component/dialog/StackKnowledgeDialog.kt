@@ -36,6 +36,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 fun StackKnowledgeDialog(
     modifier: Modifier = Modifier,
     content: String,
+    numberOfButton: Int,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     openDialog: Boolean,
@@ -68,10 +69,48 @@ fun StackKnowledgeDialog(
                             .wrapContentHeight(),
                         textAlign = TextAlign.Center
                     )
-                    Row() {
+                    if (numberOfButton == 2) {
+                        Row() {
+                            Button(
+                                modifier = modifier
+                                    .width(116.dp)
+                                    .height(40.dp),
+                                onClick = onDismiss,
+                                shape = RoundedCornerShape(10.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    colors.P1
+                                )
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.cancel),
+                                    style = typography.bodyMedium,
+                                    color = colors.WHITE
+                                )
+                            }
+                            Spacer(modifier = modifier.width(16.dp))
+                            OutlinedButton(
+                                modifier = modifier
+                                    .width(116.dp)
+                                    .height(40.dp),
+                                onClick = onConfirm,
+                                shape = RoundedCornerShape(10.dp),
+                                border = BorderStroke(1.dp, colors.P1),
+                                colors = ButtonDefaults.buttonColors(
+                                    colors.WHITE
+                                )
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.check),
+                                    style = typography.bodyMedium,
+                                    color = colors.P1
+                                )
+                            }
+                        }
+                    }
+                    if (numberOfButton == 1) {
                         Button(
                             modifier = modifier
-                                .width(116.dp)
+                                .width(220.dp)
                                 .height(40.dp),
                             onClick = onDismiss,
                             shape = RoundedCornerShape(10.dp),
@@ -80,27 +119,9 @@ fun StackKnowledgeDialog(
                             )
                         ) {
                             Text(
-                                text = stringResource(R.string.cancel),
-                                style = typography.bodyMedium,
-                                color = colors.WHITE
-                            )
-                        }
-                        Spacer(modifier = modifier.width(16.dp))
-                        OutlinedButton(
-                            modifier = modifier
-                                .width(116.dp)
-                                .height(40.dp),
-                            onClick = onConfirm,
-                            shape = RoundedCornerShape(10.dp),
-                            border = BorderStroke(1.dp, colors.P1),
-                            colors = ButtonDefaults.buttonColors(
-                                colors.WHITE
-                            )
-                        ) {
-                            Text(
                                 text = stringResource(R.string.check),
                                 style = typography.bodyMedium,
-                                color = colors.P1
+                                color = colors.WHITE
                             )
                         }
                     }
@@ -120,6 +141,7 @@ fun StackKnowledgeDialogPre() {
         onConfirm = {},
         onDismiss = {},
         openDialog = false,
-        onStateChange = {}
+        onStateChange = {},
+        numberOfButton = 1
     )
 }
