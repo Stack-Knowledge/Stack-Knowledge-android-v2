@@ -74,7 +74,6 @@ private fun SolvedMissionScreen(
                         onClick = { onItemClick() },
                         intentId = { intentId(it) }
                     )
-                    Log.e("ScoreMissionListScreen", scoreMission.toString())
                 }
             }
             Box(

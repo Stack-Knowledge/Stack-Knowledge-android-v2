@@ -99,6 +99,5 @@ class ScoreMissionViewModel @Inject constructor(
 
     internal fun onSolveStatus(value: String) {
         _solveStatus.value = value
-        Log.e("testt", solveStatus.value)
     }
 }

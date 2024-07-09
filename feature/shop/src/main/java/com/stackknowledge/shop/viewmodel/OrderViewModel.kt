@@ -1,6 +1,5 @@
 package com.stackknowledge.shop.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.result.Result
@@ -70,14 +69,11 @@ class OrderViewModel @Inject constructor(
         ).onSuccess {
             it.catch { remoteError ->
                 _orderRequest.value = remoteError.errorHandling()
-                Log.e("Order remoteError", remoteError.toString())
             }.collect {
                 _orderRequest.value = Event.Success()
-                Log.e("Order Success Block", "Order Success Block")
             }
         }.onFailure { error ->
             _orderRequest.value = error.errorHandling()
-            Log.e("Order Failure Block", error.toString())
         }
     }
 

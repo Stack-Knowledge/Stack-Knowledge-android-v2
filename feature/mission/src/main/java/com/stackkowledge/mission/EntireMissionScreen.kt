@@ -75,7 +75,6 @@ private fun EntireMissionScreen(
                         onClick = { onItemClick(it) },
                     )
                 }
-                Log.e("testt", missionUiState.toString())
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
