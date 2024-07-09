@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -102,6 +103,8 @@ fun OrderedGoodsItem(
                         style = typography.displayMedium,
                     )
 
+                    Spacer(modifier = Modifier.weight(1f))
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -133,7 +136,7 @@ fun OrderedGoodsItemPre() {
         orderedItemData = ViewAllOrderResponseModel(
             id = "",
             item = ItemModel(
-                id = "",
+                itemId = "",
                 name = "상품 이름",
                 price = 1000,
                 image = "https://image.com"
