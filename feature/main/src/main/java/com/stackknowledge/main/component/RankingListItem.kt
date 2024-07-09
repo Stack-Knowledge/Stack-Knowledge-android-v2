@@ -2,6 +2,7 @@ package com.stackknowledge.main.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ fun RankingListItem(
     profileImage: String?,
     name: String,
     point: String,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -38,7 +40,8 @@ fun RankingListItem(
                 .background(
                     color = colors.WHITE,
                     shape = RoundedCornerShape(20.dp)
-                ),
+                )
+                .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -98,6 +101,7 @@ fun RankingListItemPre() {
     RankingListItem(
         profileImage = "",
         name = "미소쌤",
-        point = "1000"
+        point = "1000",
+        onClick = {}
     )
 }
