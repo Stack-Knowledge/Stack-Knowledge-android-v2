@@ -71,8 +71,12 @@ fun MissionList(
                                 .fillMaxSize()
                                 .padding(16.dp)
                         ) {
-                            items(list.size) {
-                                MissionListItem()
+                            items(list.size) {index ->
+                                MissionListItem(
+                                    teacherName = list[index].user.name,
+                                    title = list[index].title,
+                                    point = list[index].point.toString()
+                                )
                                 Spacer(modifier = modifier.width(16.dp))
                             }
                         }

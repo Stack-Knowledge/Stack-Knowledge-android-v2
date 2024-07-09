@@ -69,6 +69,7 @@ fun StackKnowledgeNavHost(
         )
         gradingAnswerScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            scoreMissionSuccess = navController::navigateToMain,
         )
         solvedMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },

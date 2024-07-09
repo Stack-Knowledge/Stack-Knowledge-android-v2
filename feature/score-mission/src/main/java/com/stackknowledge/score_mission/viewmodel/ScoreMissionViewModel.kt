@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.result.Result
 import com.example.common.result.asResult
+import com.example.common.util.Event
+import com.example.common.util.errorHandling
 import com.stackknowledge.score_mission.viewmodel.uistate.DetailScoreMissionUiState
 import com.stackknowledge.score_mission.viewmodel.uistate.GetScoreMissionListUiState
 import com.stackknowledge.score_mission.viewmodel.uistate.ScoreMissionUiState
@@ -16,6 +18,7 @@ import com.stackknowledge.usecase.user.ScoreMissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import remote.request.user.ScoreRequestModel
@@ -37,7 +40,7 @@ class ScoreMissionViewModel @Inject constructor(
     internal val detailScoreMissionUiState = _detailScoreMissionUiState.asStateFlow()
 
     private val _scoreMissionUiState =
-        MutableStateFlow<ScoreMissionUiState>(ScoreMissionUiState.Loading)
+        MutableStateFlow<Event<Nothing>>(Event.Loading)
     internal val scoreMissionUiState = _scoreMissionUiState.asStateFlow()
 
     private var _solveId = mutableStateOf("")
@@ -82,15 +85,15 @@ class ScoreMissionViewModel @Inject constructor(
         scoreMissionUseCase(
             solveId = solveId,
             body = body
-        )
-            .asResult()
-            .collectLatest {
-                when(it) {
-                    is Result.Loading -> _scoreMissionUiState.value = ScoreMissionUiState.Loading
-                    is Result.Success -> _scoreMissionUiState.value = ScoreMissionUiState.Success
-                    is Result.Error -> _scoreMissionUiState.value = ScoreMissionUiState.Error(it.exception)
-                }
+        ).onSuccess {
+            it.catch { remoteError ->
+                _scoreMissionUiState.value = remoteError.errorHandling()
+            }.collect {
+                _scoreMissionUiState.value = Event.Success()
             }
+        }.onFailure {
+            _scoreMissionUiState.value = it.errorHandling()
+        }
     }
 
     internal fun onSolveId(value: String) {
