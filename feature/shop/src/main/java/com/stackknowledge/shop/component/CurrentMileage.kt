@@ -14,14 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.shop.viewmodel.uistate.GetMyInformationUiState
 
 @Composable
 fun CurrentMileage(
     modifier: Modifier = Modifier,
+    getMyInformationUiState: GetMyInformationUiState,
 ) {
-    StackKnowledgeAndroidTheme { colors, typography ->  
+    StackKnowledgeAndroidTheme { colors, typography ->
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -35,21 +37,29 @@ fun CurrentMileage(
             )
 
             Spacer(modifier = modifier.height(16.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "1,000",
-                    style = typography.headlineLarge,
-                    color = colors.BLACK
-                )
 
-                Spacer(modifier = modifier.width(4.dp))
-                Text(
-                    text = stringResource(R.string.mileage),
-                    style = typography.headlineSmall,
-                    color = colors.BLACK
-                )
+            when (getMyInformationUiState) {
+                is GetMyInformationUiState.Loading -> {}
+                is GetMyInformationUiState.Success -> {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = getMyInformationUiState.getMyInformationResponseModel.currentPoint.toString(),
+                            style = typography.headlineLarge,
+                            color = colors.BLACK
+                        )
+
+                        Spacer(modifier = modifier.width(4.dp))
+                        Text(
+                            text = stringResource(R.string.mileage),
+                            style = typography.headlineSmall,
+                            color = colors.BLACK
+                        )
+                    }
+                }
+
+                is GetMyInformationUiState.Error -> {}
             }
         }
     }
@@ -58,5 +68,7 @@ fun CurrentMileage(
 @Preview
 @Composable
 fun CurrentMileagePre() {
-    CurrentMileage()
+    CurrentMileage(
+        getMyInformationUiState = GetMyInformationUiState.Loading
+    )
 }
