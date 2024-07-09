@@ -22,7 +22,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
-import com.stackknowledge.design_system.component.dialog.OrderDialog
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
@@ -34,7 +33,7 @@ import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetItemUiState
 import com.stackknowledge.shop.viewmodel.uistate.GetMyInformationUiState
 import enumdatatype.Authority
-import remote.request.order.ChangeOrderStatusRequestModel
+import remote.request.order.OrderRequestModel
 import remote.response.item.GetItemResponseModel
 
 @Composable
@@ -55,8 +54,8 @@ internal fun ShopRoute(
             orderViewModel.setOrderDataList(selectedItemList)
         },
         selectedItemList = orderViewModel.selectedItemList,
-        onOrderDialogButtonClick = {
-            orderViewModel.order()
+        onOrderDialogButtonClick = { orderRequest ->
+            orderViewModel.order(orderRequest)
             itemViewModel.getMyInformation()
         },
         onNavigate = { navType -> onNavigate(role, navType) },
@@ -74,10 +73,10 @@ private fun ShopScreen(
     getItemUiState: GetItemUiState,
     getMyInformationUiState: GetMyInformationUiState,
     onSelectButtonClick: (List<GetItemResponseModel>) -> Unit,
-    onOrderDialogButtonClick: () -> Unit,
+    onOrderDialogButtonClick: (List<OrderRequestModel>) -> Unit,
     selectedItemList: MutableList<SelectedItemData>,
     onNavigate: (String) -> Unit,
-    initShop: () -> Unit
+    initShop: () -> Unit,
 ) {
     val isDialogVisible = remember { mutableStateOf(false) }
 
@@ -87,7 +86,8 @@ private fun ShopScreen(
 
     StackKnowledgeAndroidTheme { colors, _ ->
         Box(
-            modifier = modifier.fillMaxSize()
+            modifier = modifier
+                .fillMaxSize()
                 .background(color = colors.WHITE)
 
         ) {
@@ -131,7 +131,15 @@ private fun ShopScreen(
                     isDialogVisible.value = false
                 },
                 onConfirm = {
-                    onOrderDialogButtonClick()
+                    val orderRequest = selectedItemList.map { selectedItemData ->
+                        OrderRequestModel(
+                            itemId = selectedItemData.id,
+                            count = selectedItemData.count,
+                        )
+                    }
+
+                    isDialogVisible.value = false
+                    onOrderDialogButtonClick(orderRequest)
                 },
                 onStateChange = { isDialogVisible.value = it }
             )
