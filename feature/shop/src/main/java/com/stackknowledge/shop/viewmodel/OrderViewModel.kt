@@ -1,9 +1,10 @@
 package com.stackknowledge.shop.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.result.asResult
 import com.example.common.result.Result
+import com.example.common.result.asResult
 import com.example.common.util.Event
 import com.example.common.util.errorHandling
 import com.stackknowledge.shop.data.SelectedItemData
@@ -14,6 +15,7 @@ import com.stackknowledge.usecase.order.ViewAllOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import remote.request.order.ChangeOrderStatusRequestModel
@@ -38,13 +40,14 @@ class OrderViewModel @Inject constructor(
 
     val selectedItemList: MutableList<SelectedItemData> = mutableListOf()
 
-    private val orderRequest = selectedItemList.map { selectedItemData ->
-        OrderRequestModel(
-            itemId = selectedItemData.id,
-            count = selectedItemData.count,
-        )
+    private fun convertToOrderRequest(): List<OrderRequestModel> {
+        return selectedItemList.map { selectedItemData ->
+            OrderRequestModel(
+                itemId = selectedItemData.id,
+                count = selectedItemData.count,
+            )
+        }
     }
-
 
     internal fun setOrderDataList(selectedItemList: List<GetItemResponseModel>) {
         this.selectedItemList.clear()
@@ -60,12 +63,21 @@ class OrderViewModel @Inject constructor(
     }
 
     internal fun order() = viewModelScope.launch {
+        val orderRequest = convertToOrderRequest()
+
         orderUseCase(
             body = orderRequest
         ).onSuccess {
-            _orderResponse.value = Event.Success()
-        }.onFailure {
-            _orderResponse.value = it.errorHandling()
+            it.catch { remoteError ->
+                _orderResponse.value = remoteError.errorHandling()
+                Log.e("Order remoteError", remoteError.toString())
+            }.collect {
+                _orderResponse.value = Event.Success()
+                Log.e("Order Success Block", "Order Success Block")
+            }
+        }.onFailure { error ->
+            _orderResponse.value = error.errorHandling()
+            Log.e("Order Failure Block", error.toString())
         }
     }
 
@@ -79,7 +91,6 @@ class OrderViewModel @Inject constructor(
                     is Result.Error -> _getOrderListUiState.value = GetOrderListUiState.Error(result.exception)
                 }
             }
-
     }
 
     internal fun changeOrderStatus(body: ChangeOrderStatusRequestModel) = viewModelScope.launch {

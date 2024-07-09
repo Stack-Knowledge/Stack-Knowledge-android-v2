@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
+import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
@@ -24,7 +25,6 @@ import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetOrderListUiState
 import enumdatatype.Authority
 import remote.request.order.ChangeOrderStatusRequestModel
-import com.stackknowledge.design_system.R
 
 @Composable
 internal fun TeacherShopRoute(

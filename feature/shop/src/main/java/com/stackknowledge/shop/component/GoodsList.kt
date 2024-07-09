@@ -33,7 +33,7 @@ fun GoodsList(
     getItemUiState: GetItemUiState,
     selectedItemList: MutableList<SelectedItemData>,
     onSelectButtonClick: (List<GetItemResponseModel>) -> Unit,
-    onOrderButtonClick: (List<SelectedItemData>) -> Unit,
+    onOrderButtonClick: () -> Unit,
 ) {
     val selectedDisplayItemList = remember { mutableListOf<GetItemResponseModel>() }
     val isBottomSheetVisible = remember { mutableStateOf(false) }
@@ -73,7 +73,7 @@ fun GoodsList(
                                         selectedDisplayItemList.add(selectedItem)
                                     },
                                     onItemUnCheckButtonClick = { unselectedItem ->
-                                        selectedDisplayItemList.removeAll { selectedItemListElement ->
+                                        selectedDisplayItemList.removeIf { selectedItemListElement ->
                                             selectedItemListElement.id == unselectedItem.id
                                         }
                                     }
@@ -132,8 +132,8 @@ fun GoodsList(
                     isBottomSheetVisible.value = false
                 },
                 selectedItemList = selectedItemList,
-                onOrderButtonClick = { orderItemList ->
-                    onOrderButtonClick(orderItemList)
+                onOrderButtonClick = {
+                    onOrderButtonClick()
                 }
             )
         }
