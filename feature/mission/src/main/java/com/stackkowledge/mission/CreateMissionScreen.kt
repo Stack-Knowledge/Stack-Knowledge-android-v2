@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.toast.makeToast
+import com.example.common.util.Event
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -75,7 +76,7 @@ private fun CreateMissionScreen(
     modifier: Modifier = Modifier,
     role: Authority,
     onNavigate: (String) -> Unit,
-    createMissionUiState: CreateMissionUiState,
+    createMissionUiState: Event<Nothing>,
     createMission: (CreateMissionRequestModel) -> Unit,
     title: String,
     content: String,
@@ -137,7 +138,7 @@ private fun CreateMissionScreen(
         )
     }
 
-    if (createMissionUiState is CreateMissionUiState.Success) {
+    if (createMissionUiState is Event.Success) {
         successCreateMissionToast = true
         onSuccess()
     }

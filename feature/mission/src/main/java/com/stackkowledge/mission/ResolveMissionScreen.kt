@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.toast.makeToast
+import com.example.common.util.Event
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
@@ -91,7 +92,7 @@ private fun ResolveMissionScreen(
     getSolveMission: (String) -> Unit,
     submit: () -> Unit,
     detailMissionUiState: DetailMissionUiState,
-    solveMissionUiState: SolveMissionUiState,
+    solveMissionUiState: Event<Nothing>,
 ) {
     val context = LocalContext.current
     var openDialog by remember { mutableStateOf(false) }
@@ -165,7 +166,7 @@ private fun ResolveMissionScreen(
         )
     }
 
-    if (solveMissionUiState is SolveMissionUiState.Success) {
+    if (solveMissionUiState is Event.Success) {
         val toastMessage = SuccessToastMessage(context)
         toastMessage.MakeText(message = stringResource(id = R.string.success_solve_mission))
         onSuccess()
