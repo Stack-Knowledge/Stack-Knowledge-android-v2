@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,14 +32,14 @@ internal fun TeacherShopRoute(
     onNavigate: (Authority, String) -> Unit,
     orderViewModel: OrderViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
 ) {
-    val role = remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
-    val getOrderListUiState = orderViewModel.getOrderListUiState.collectAsStateWithLifecycle()
+    val role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    val getOrderListUiState by orderViewModel.getOrderListUiState.collectAsStateWithLifecycle()
 
     with(orderViewModel) {
         TeacherShopScreen(
-            role = role.value,
-            onNavigate = { navType -> onNavigate(role.value, navType) },
-            getOrderListUiState = getOrderListUiState.value,
+            role = role,
+            onNavigate = { navType -> onNavigate(role, navType) },
+            getOrderListUiState = getOrderListUiState,
             initTeacherShop = {
                 viewAllOrder()
             },
