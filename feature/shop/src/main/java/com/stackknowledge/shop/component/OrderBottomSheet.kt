@@ -15,7 +15,9 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,7 +27,6 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.data.SelectedItemData
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,10 +34,14 @@ fun OrderBottomSheet(
     modifier: Modifier = Modifier,
     selectedItemList: MutableList<SelectedItemData>,
     onQuit: () -> Unit,
-    onOrderButtonClick: (List<SelectedItemData>) -> Unit,
+    onOrderButtonClick: () -> Unit,
 ) {
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val coroutineScope = rememberCoroutineScope()
+    var totalAmount = remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(selectedItemList) {
+        totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
+    }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         ModalBottomSheet(
@@ -53,7 +58,10 @@ fun OrderBottomSheet(
                     items(selectedItemList) { item ->
                         OrderBottomSheetItem(
                             item = item,
-                            selectedItemList = selectedItemList
+                            selectedItemList = selectedItemList,
+                            onItemCountChanged = {
+                                totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
+                            }
                         )
                         Spacer(modifier = modifier.height(10.dp))
                     }
@@ -68,9 +76,12 @@ fun OrderBottomSheet(
 
                 Spacer(modifier = modifier.height(8.dp))
                 Row(
-                    modifier = modifier.padding(start = 288.dp),
+                    modifier = modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+
+                    Spacer(modifier = modifier.weight(1f))
+
                     Text(
                         text = stringResource(R.string.total_amount),
                         style = typography.bodyMedium,
@@ -80,11 +91,7 @@ fun OrderBottomSheet(
                     Spacer(modifier = modifier.width(4.dp))
 
                     Text(
-                        text = "${
-                            selectedItemList.sumOf { selectedItemData ->
-                                selectedItemData.count * selectedItemData.price
-                            }
-                        }",
+                        text = "${totalAmount.intValue}",
                         style = typography.bodyMedium,
                         color = colors.BLACK
                     )
@@ -102,23 +109,29 @@ fun OrderBottomSheet(
                     modifier = modifier
                         .height(60.dp),
                     onClick = {
-                        onOrderButtonClick(selectedItemList)
-                        coroutineScope.launch {
-                            bottomSheetState.hide()
-                        }
+                        onOrderButtonClick()
                     }
                 )
 
                 Spacer(modifier = modifier.height(24.dp))
             }
         }
-
     }
 }
 
-
-//@Preview
-//@Composable
-//fun OrderBottomSheetPre() {
-//    OrderBottomSheet {}
-//}
+@Preview
+@Composable
+fun OrderBottomSheetPre() {
+    OrderBottomSheet(
+        onOrderButtonClick = {},
+        onQuit = {},
+        selectedItemList = mutableListOf(
+            SelectedItemData(
+                id = "1",
+                name = "정영운 글러브",
+                price = 1000,
+                count = 1
+            )
+        )
+    )
+}
