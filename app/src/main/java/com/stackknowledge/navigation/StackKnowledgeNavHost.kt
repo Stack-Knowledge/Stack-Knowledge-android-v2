@@ -18,6 +18,7 @@ import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
 import com.stackknowledge.score_mission.navigation.solvedMissionScreen
 import com.stackknowledge.shop.navigation.shopRoute
 import com.stackknowledge.shop.navigation.shopScreen
+import com.stackknowledge.shop.navigation.teacherShopRoute
 import com.stackknowledge.shop.navigation.teacherShopScreen
 import com.stackknowledge.ui.StackKnowledgeAppState
 import com.stackkowledge.mission.navigation.createMissionRoute
@@ -31,7 +32,7 @@ import com.stackkowledge.mission.navigation.resolveMissionScreen
 fun StackKnowledgeNavHost(
     appState: StackKnowledgeAppState,
     modifier: Modifier = Modifier,
-    startDestination: String = shopRoute,
+    startDestination: String = teacherShopRoute,
 ) {
     val navController = appState.navController
 

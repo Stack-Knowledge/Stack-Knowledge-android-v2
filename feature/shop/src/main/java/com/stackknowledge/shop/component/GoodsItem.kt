@@ -60,6 +60,7 @@ fun GoodsItem(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.height(150.dp).fillMaxWidth()
                 )
+
                 Box(
                     modifier = Modifier
                         .padding(start = 8.dp, top = 8.dp)
@@ -84,6 +85,7 @@ fun GoodsItem(
             }
 
             Spacer(modifier = Modifier.height(4.dp))
+
             Text(
                 text = itemData.name,
                 style = typography.bodyMedium,
@@ -91,6 +93,7 @@ fun GoodsItem(
             )
 
             Spacer(modifier = Modifier.height(4.dp))
+
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -101,6 +104,7 @@ fun GoodsItem(
                 )
 
                 Spacer(modifier = Modifier.width(2.dp))
+
                 Text(
                     text = stringResource(R.string.mileage),
                     style = typography.bodySmall,

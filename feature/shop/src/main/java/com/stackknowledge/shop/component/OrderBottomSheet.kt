@@ -37,7 +37,7 @@ fun OrderBottomSheet(
     onOrderButtonClick: () -> Unit,
 ) {
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    var totalAmount = remember { mutableIntStateOf(0) }
+    val totalAmount = remember { mutableIntStateOf(0) }
 
     LaunchedEffect(selectedItemList) {
         totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
@@ -63,6 +63,7 @@ fun OrderBottomSheet(
                                 totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
                             }
                         )
+
                         Spacer(modifier = modifier.height(10.dp))
                     }
                 }
@@ -75,6 +76,7 @@ fun OrderBottomSheet(
                 )
 
                 Spacer(modifier = modifier.height(8.dp))
+
                 Row(
                     modifier = modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -104,6 +106,7 @@ fun OrderBottomSheet(
                 }
 
                 Spacer(modifier = modifier.height(8.dp))
+
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.purchase),
                     modifier = modifier

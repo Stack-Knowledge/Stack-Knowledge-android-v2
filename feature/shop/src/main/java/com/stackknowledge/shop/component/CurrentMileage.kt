@@ -58,7 +58,6 @@ fun CurrentMileage(
                         )
                     }
                 }
-
                 is GetMyInformationUiState.Error -> {}
             }
         }
