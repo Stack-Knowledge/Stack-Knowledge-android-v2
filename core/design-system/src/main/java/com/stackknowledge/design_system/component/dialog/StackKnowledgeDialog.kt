@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import kotlinx.coroutines.delay
 
 @Composable
 fun StackKnowledgeDialog(
@@ -54,7 +56,7 @@ fun StackKnowledgeDialog(
                         )
                         .padding(vertical = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Spacer(modifier = modifier.height(4.dp))
                     Text(
@@ -66,6 +68,7 @@ fun StackKnowledgeDialog(
                             .wrapContentHeight(),
                         textAlign = TextAlign.Center
                     )
+
                     Row() {
                         Button(
                             modifier = modifier
@@ -116,6 +119,6 @@ fun StackKnowledgeDialogPre() {
         onConfirm = {},
         onDismiss = {},
         openDialog = false,
-        onStateChange = {}
+        onStateChange = {},
     )
 }
