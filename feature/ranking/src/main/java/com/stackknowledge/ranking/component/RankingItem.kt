@@ -8,16 +8,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
 
@@ -25,6 +29,9 @@ import com.stackknowledge.design_system.R
 fun RankingItem(
     modifier: Modifier = Modifier,
     rankingNum: String,
+    name: String,
+    point: String,
+    profileImage: String?,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Row(
@@ -45,22 +52,32 @@ fun RankingItem(
                 color = colors.BLACK
             )
             Spacer(modifier = modifier.width(8.dp))
-            Image(
-                painter = painterResource(R.drawable.img_profile),
-                contentDescription = "Profile",
-                modifier = modifier
-                    .width(40.dp)
-                    .height(40.dp)
-            )
+            if (profileImage.isNullOrEmpty()) {
+                Image(
+                    painter = painterResource(R.drawable.img_profile),
+                    contentDescription = "Profile",
+                    modifier = modifier
+                        .width(40.dp)
+                        .height(40.dp)
+                )
+            } else {
+                AsyncImage(
+                    model = profileImage,
+                    contentDescription = "Profile",
+                    modifier = modifier
+                        .width(40.dp)
+                        .height(40.dp)
+                )
+            }
             Spacer(modifier = modifier.width(8.dp))
             Text(
-                text = "이동욱",
+                text = name,
                 style = typography.bodyMedium,
                 color = colors.BLACK
             )
             Spacer(modifier = modifier.weight(1f))
             Text(
-                text = "1000",
+                text = point,
                 style = typography.bodyMedium,
                 color = colors.BLACK
             )
@@ -78,6 +95,9 @@ fun RankingItem(
 @Composable
 fun RankingItemPre() {
     RankingItem(
-        rankingNum = "1"
+        rankingNum = "1",
+        name = "이동욱",
+        point = "1000",
+        profileImage = ""
     )
 }

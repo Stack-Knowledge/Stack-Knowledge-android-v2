@@ -1,11 +1,8 @@
 package com.stackknowledge.api
 
-import remote.request.mission.CreateMissionRequestModel
-import remote.request.mission.DetailMissionRequestModel
-import remote.response.mission.DetailMissionResponseModel
-import remote.response.mission.MissionResponseModel
 import com.stackknowledge.dto.request.mission.CreateMissionRequest
-import com.stackknowledge.dto.response.mission.GetMissionListResponse
+import com.stackknowledge.dto.response.mission.DetailMissionResponse
+import com.stackknowledge.dto.response.mission.MissionResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -13,15 +10,15 @@ import retrofit2.http.Path
 
 interface MissionAPI {
     @GET("/mission")
-    suspend fun getMission(): MissionResponseModel
+    suspend fun getMission(): List<MissionResponse>
 
     @GET("/mission/{mission_id}")
     suspend fun getDetailMission(
-        @Path("mission_id") missionId: DetailMissionRequestModel,
-    ): DetailMissionResponseModel
+        @Path("mission_id") missionId: String,
+    ): DetailMissionResponse
 
     @POST("/mission")
     suspend fun createMission(
-        @Body body: CreateMissionRequestModel,
+        @Body body: CreateMissionRequest,
     )
 }

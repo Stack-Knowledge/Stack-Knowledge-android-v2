@@ -18,10 +18,15 @@ fun StackKnowledgeButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     text: String,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Button(
+<<<<<<< HEAD
             onClick = { onClick() },
+=======
+            onClick = onClick,
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
             modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(10.dp))
@@ -43,6 +48,7 @@ fun StackKnowledgeButton(
 @Composable
 fun StackKnowledgeButtonPre() {
     StackKnowledgeButton(
-        text = "제출하기"
+        text = "제출하기",
+        onClick = {}
     )
 }

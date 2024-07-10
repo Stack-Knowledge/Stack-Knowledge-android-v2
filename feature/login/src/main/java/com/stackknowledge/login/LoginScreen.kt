@@ -26,18 +26,16 @@ import com.stackknowledge.login.viewmodel.AuthViewModel
 import com.stackknowledge.login.viewmodel.util.Event
 
 @Composable
-fun LoginRoute(
+internal fun LoginRoute(
     onGoogleLoginButtonClicked: () -> Unit = {},
 ) {
     LoginScreen(
-        onGoogleLoginButtonClicked = {
-            onGoogleLoginButtonClicked()
-        }
+        onGoogleLoginButtonClicked = {}
     )
 }
 
 @Composable
-fun LoginScreen(
+private fun LoginScreen(
     modifier: Modifier = Modifier,
     onGoogleLoginButtonClicked: () -> Unit,
 ) {

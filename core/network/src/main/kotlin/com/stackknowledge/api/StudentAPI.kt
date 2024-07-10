@@ -1,9 +1,12 @@
 package com.stackknowledge.api
 
-import remote.request.student.UploadProfileImageRequest
-import remote.response.student.GetMyInformationResponse
-import remote.response.student.GetStudentPointRankingResponse
-import remote.response.student.UploadProfileImageResponse
+import com.stackknowledge.dto.response.student.GetMyInformationResponse
+import com.stackknowledge.dto.response.student.GetStudentPointRankingResponse
+import com.stackknowledge.dto.response.student.UploadProfileImageResponse
+import okhttp3.MultipartBody
+import remote.response.student.GetMyInformationResponseModel
+import remote.response.student.GetStudentPointRankingResponseModel
+import remote.response.student.UploadProfileImageResponseModel
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -17,6 +20,6 @@ interface StudentAPI {
 
     @POST("student/image")
     suspend fun uploadProfileImage(
-        @Body body: UploadProfileImageRequest
+        @Body image: MultipartBody.Part
     ): UploadProfileImageResponse
 }

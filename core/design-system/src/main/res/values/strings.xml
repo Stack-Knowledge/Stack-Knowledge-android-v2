@@ -15,6 +15,7 @@
     <string name="accept">수락</string>
     <string name="refusal">거절</string>
     <string name="mission">문제</string>
+    <string name="solved_mission">채점</string>
     <string name="submit">제출하기</string>
     <string name="input_answer">답안작성</string>
     <string name="ranking">랭킹</string>
@@ -33,4 +34,13 @@
     <string name="student">학생</string>
     <string name="teacher">선생님</string>
     <string name="select_role_text">사용자가 학생인지\n 선생님인지 선택해주세요.</string>
+    <string name="select_create_mission">문제를 제출하시겠습니까?</string>
+    <string name="cancel_select_create_mission">문제 제출을 취소하시겠습니까?\n 취소시 작성한 문제 내용들이 삭제됩니다.</string>
+    <string name="success_create_mission">문제 출제가 완료되었습니다!</string>
+    <string name="submit_mission">문제를 제출하시겠습니까?</string>
+    <string name="finish_time_of_submit_mission">시간이 종료되었습니다!\n 문제가 자동으로 제출됩니다.</string>
+    <string name="auto_submit_mission">페이지를 이동하면 문제가 자동으로 제출 됩니다. 이동하시겠습니까?</string>
+    <string name="success_solve_mission">문제 제출이 완료되었습니다!</string>
+    <string name="finish_score_mission">문제 채점이 끝나셨습니까?</string>
+    <string name="success_score_mission">문제 채점이 완료되었습니다!</string>
 </resources>

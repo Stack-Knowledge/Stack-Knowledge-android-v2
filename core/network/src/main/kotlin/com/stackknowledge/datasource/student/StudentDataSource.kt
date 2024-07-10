@@ -1,13 +1,16 @@
 package com.stackknowledge.datasource.student
 
-import remote.response.student.GetStudentPointRankingResponse
+import com.stackknowledge.dto.response.student.GetMyInformationResponse
+import com.stackknowledge.dto.response.student.GetStudentPointRankingResponse
+import com.stackknowledge.dto.response.student.UploadProfileImageResponse
 import kotlinx.coroutines.flow.Flow
-import remote.request.student.UploadProfileImageRequest
-import remote.response.student.GetMyInformationResponse
-import remote.response.student.UploadProfileImageResponse
+import okhttp3.MultipartBody
+import remote.response.student.GetMyInformationResponseModel
+import remote.response.student.GetStudentPointRankingResponseModel
+import remote.response.student.UploadProfileImageResponseModel
 
 interface StudentDataSource {
     fun getStudentPointRanking(): Flow<List<GetStudentPointRankingResponse>>
     fun getMyInformation(): Flow<GetMyInformationResponse>
-    fun uploadProfileImage(body: UploadProfileImageRequest): Flow<UploadProfileImageResponse>
+    fun uploadProfileImage(image: MultipartBody.Part): Flow<UploadProfileImageResponse>
 }

@@ -1,9 +1,18 @@
 package com.stackknowledge.di
 
+<<<<<<< HEAD
 import com.stackknowledge.datasource.auth.AuthDataSource
 import com.stackknowledge.datasource.auth.AuthDataSourceImpl
+=======
+import com.stackknowledge.datasource.item.ItemDataSource
+import com.stackknowledge.datasource.item.ItemDataSourceImpl
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 import com.stackknowledge.datasource.mission.MissionDataSource
 import com.stackknowledge.datasource.mission.MissionDataSourceImpl
+import com.stackknowledge.datasource.order.OrderDataSource
+import com.stackknowledge.datasource.order.OrderDataSourceImpl
+import com.stackknowledge.datasource.solve.SolveDataSource
+import com.stackknowledge.datasource.solve.SolveDataSourceImpl
 import com.stackknowledge.datasource.student.StudentDataSource
 import com.stackknowledge.datasource.student.StudentDataSourceImpl
 import com.stackknowledge.datasource.user.UserDataSource
@@ -37,6 +46,27 @@ abstract class RemoteDataSourceModule {
 
     @Binds
     @Singleton
+<<<<<<< HEAD
+=======
+    abstract fun bindOrderDataSource(
+        orderDataSourceImpl: OrderDataSourceImpl
+    ): OrderDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindItemDataSource(
+        itemDataSourceImpl: ItemDataSourceImpl
+    ): ItemDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindSolveDataSource(
+        solveDataSourceImpl: SolveDataSourceImpl
+    ): SolveDataSource
+
+    @Binds
+    @Singleton
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
     abstract fun bindUserDataSource(
         userDataSourceImpl: UserDataSourceImpl
     ): UserDataSource

@@ -41,9 +41,8 @@ internal fun RoleCheckRoute(
         }
     )
 }
-
 @Composable
-internal fun RoleCheckScreen(
+private fun RoleCheckScreen(
     modifier: Modifier = Modifier,
     onTeacherButtonClick: (Boolean) -> Unit,
     onStudentButtonClick: (Boolean) -> Unit,
@@ -81,7 +80,6 @@ internal fun RoleCheckScreen(
                         onClick = {
                             onStudentButtonClick(true)
                         }
-
                     )
 
                     Spacer(modifier = modifier.width(8.dp))
@@ -94,7 +92,6 @@ internal fun RoleCheckScreen(
                         onClick = {
                             onTeacherButtonClick(true)
                         }
-
                     )
                 }
 

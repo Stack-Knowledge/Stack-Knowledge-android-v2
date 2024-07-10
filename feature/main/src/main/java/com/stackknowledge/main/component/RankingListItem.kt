@@ -19,12 +19,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun RankingListItem(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    profileImage: String?,
+    name: String,
+    point: String,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -40,18 +44,30 @@ fun RankingListItem(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(R.drawable.img_profile),
-                    modifier = Modifier
-                        .width(60.dp)
-                        .height(60.dp)
-                        .clip(RoundedCornerShape(16.dp)),
-                    contentDescription = "Profile Image",
-                    contentScale = ContentScale.Crop
-                )
+                if (profileImage.isNullOrEmpty()) {
+                    Image(
+                        painter = painterResource(R.drawable.img_profile),
+                        modifier = Modifier
+                            .width(60.dp)
+                            .height(60.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        contentDescription = "Profile Image",
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    AsyncImage(
+                        model = profileImage,
+                        modifier = modifier
+                            .width(60.dp)
+                            .height(60.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        contentDescription = "Profile Image",
+                        contentScale = ContentScale.Crop
+                    )
+                }
                 Spacer(modifier = modifier.height(4.dp))
                 Text(
-                    text = "미소쌤",
+                    text = name,
                     style = typography.bodyMedium,
                     color = colors.BLACK
                 )
@@ -60,7 +76,7 @@ fun RankingListItem(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "1000",
+                        text = point,
                         style = typography.bodyMedium,
                         color = colors.BLACK
                     )
@@ -79,5 +95,9 @@ fun RankingListItem(
 @Preview
 @Composable
 fun RankingListItemPre() {
-    RankingListItem()
+    RankingListItem(
+        profileImage = "",
+        name = "미소쌤",
+        point = "1000"
+    )
 }

@@ -2,12 +2,21 @@ package com.stackknowledge.di
 
 import android.util.Log
 import com.squareup.moshi.Moshi
+<<<<<<< HEAD
 import com.stackknowledge.api.AuthAPI
+=======
+import com.stackknowledge.api.ItemAPI
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 import com.stackknowledge.api.MissionAPI
+import com.stackknowledge.api.OrderAPI
+import com.stackknowledge.api.SolveAPI
 import com.stackknowledge.api.StudentAPI
 import com.stackknowledge.api.UserAPI
+<<<<<<< HEAD
 import com.stackknowledge.network.BuildConfig
 import com.stackknowledge.util.AuthInterceptor
+=======
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,6 +93,25 @@ object NetworkModule {
 
     @Provides
     @Singleton
+<<<<<<< HEAD
     fun provideUserAPI(retrofit: Retrofit): UserAPI =
+=======
+    fun providesOrderAPI(retrofit: Retrofit): OrderAPI =
+        retrofit.create(OrderAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providesItemAPI(retrofit: Retrofit): ItemAPI =
+        retrofit.create(ItemAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providesSolveAPI(retrofit: Retrofit): SolveAPI =
+        retrofit.create(SolveAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providesUserAPI(retrofit: Retrofit): UserAPI =
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
         retrofit.create(UserAPI::class.java)
 }

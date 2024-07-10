@@ -13,8 +13,15 @@ fun StackKnowledgeApp(
     ),
 ) {
     StackKnowledgeAndroidTheme { _, _ ->
+<<<<<<< HEAD
         StackKnowledgeNavHost(
             appState = appState,
         )
+=======
+         StackKnowledgeNavHost(
+             appState = appState,
+             //startDestination = "" <- auth 작업후에 추가
+         )
+>>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
     }
 }
