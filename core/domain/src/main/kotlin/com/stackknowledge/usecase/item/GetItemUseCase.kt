@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetItemUseCase @Inject constructor(
     private val itemRepository: ItemRepository
 ) {
-    operator fun invoke(): Flow<GetItemResponseModel> =
+    operator fun invoke(): Flow<List<GetItemResponseModel>> =
         itemRepository.getItem()
 }

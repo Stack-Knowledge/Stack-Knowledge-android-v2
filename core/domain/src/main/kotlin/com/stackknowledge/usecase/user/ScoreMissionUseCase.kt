@@ -8,6 +8,7 @@ import javax.inject.Inject
 class ScoreMissionUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(solveId: String, body: ScoreRequestModel) =
+    operator fun invoke(solveId: String, body: ScoreRequestModel) = kotlin.runCatching {
         userRepository.scoreSolveMission(solveId = solveId, body = body)
+    }
 }

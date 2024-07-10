@@ -5,5 +5,6 @@ import remote.request.order.OrderRequestModel
 
 fun OrderRequestModel.toDto(): OrderRequest =
     OrderRequest(
-        orders = this.orders.toDto()
+        itemId = itemId,
+        count = count
     )

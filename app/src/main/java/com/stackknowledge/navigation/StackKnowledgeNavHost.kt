@@ -20,7 +20,9 @@ import com.stackknowledge.score_mission.navigation.gradingAnswerScreen
 import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
 import com.stackknowledge.score_mission.navigation.navigateToSolvedMission
 import com.stackknowledge.score_mission.navigation.solvedMissionScreen
+import com.stackknowledge.shop.navigation.shopRoute
 import com.stackknowledge.shop.navigation.shopScreen
+import com.stackknowledge.shop.navigation.teacherShopRoute
 import com.stackknowledge.shop.navigation.teacherShopScreen
 import com.stackknowledge.ui.StackKnowledgeAppState
 import com.stackkowledge.mission.navigation.createMissionRoute
@@ -83,6 +85,7 @@ fun StackKnowledgeNavHost(
         )
         gradingAnswerScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            scoreMissionSuccess = navController::navigateToMain,
         )
         solvedMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },

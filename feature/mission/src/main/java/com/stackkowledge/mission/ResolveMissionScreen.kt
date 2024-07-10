@@ -25,12 +25,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.toast.makeToast
+import com.example.common.util.Event
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import enumdatatype.Authority
 import com.stackknowledge.design_system.R
+import com.stackknowledge.design_system.component.dialog.EmptyButtonDialog
 import com.stackknowledge.design_system.component.toast.SuccessToastMessage
 import com.stackkowledge.mission.component.InputAnswer
 import com.stackkowledge.mission.component.Mission
@@ -40,6 +42,7 @@ import com.stackkowledge.mission.viewmodel.SolveMissionViewModel
 import com.stackkowledge.mission.viewmodel.uistate.DetailMissionUiState
 import com.stackkowledge.mission.viewmodel.uistate.SolveMissionUiState
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import remote.request.solve.SolveRequestModel
 
 @Composable
@@ -89,7 +92,7 @@ private fun ResolveMissionScreen(
     getSolveMission: (String) -> Unit,
     submit: () -> Unit,
     detailMissionUiState: DetailMissionUiState,
-    solveMissionUiState: SolveMissionUiState,
+    solveMissionUiState: Event<Nothing>,
 ) {
     val context = LocalContext.current
     var openDialog by remember { mutableStateOf(false) }
@@ -132,21 +135,14 @@ private fun ResolveMissionScreen(
     }
 
     if (finishTimeDialog) {
-        StackKnowledgeDialog(
+        EmptyButtonDialog(
             content = stringResource(id = R.string.finish_time_of_submit_mission),
-            onConfirm = {
-                finishTimeDialog = false
-                submit()
-                onAnswer("")
-            },
-            onDismiss = {
-                makeToast(context, "취소 해도 문제가 자동으로 제출됩니다.")
-                finishTimeDialog = false
-                submit()
-                onAnswer("")
-            },
             openDialog = finishTimeDialog,
-            onStateChange = { finishTimeDialog = it }
+            onDismiss = {
+                finishTimeDialog = false
+                submit()
+            },
+            onStateChange = { finishTimeDialog = it },
         )
     }
 
@@ -170,7 +166,7 @@ private fun ResolveMissionScreen(
         )
     }
 
-    if (solveMissionUiState is SolveMissionUiState.Success) {
+    if (solveMissionUiState is Event.Success) {
         val toastMessage = SuccessToastMessage(context)
         toastMessage.MakeText(message = stringResource(id = R.string.success_solve_mission))
         onSuccess()
