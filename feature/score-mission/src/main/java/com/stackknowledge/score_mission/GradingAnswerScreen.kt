@@ -116,8 +116,6 @@ private fun GradingAnswerScreen(
         successScoreMissionToast = false
     }
 
-    Log.e("DetailSolveMission", detailSolveMissionUiState.toString())
-
     StackKnowledgeAndroidTheme { colors, _ ->
         Box {
             Column(

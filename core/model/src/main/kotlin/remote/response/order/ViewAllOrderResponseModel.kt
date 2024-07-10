@@ -5,7 +5,7 @@ import remote.user.UserModel
 import java.util.UUID
 
 data class ViewAllOrderResponseModel(
-    val id: UUID,
+    val id: String,
     val count: Int,
     val price: Int,
     val item: ItemModel,

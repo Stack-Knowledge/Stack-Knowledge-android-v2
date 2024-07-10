@@ -66,6 +66,7 @@ private fun EntireMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
+
                 EntireMissionList(
                     getMissionUiState = missionUiState,
                     onClick = { onItemClick(it) },

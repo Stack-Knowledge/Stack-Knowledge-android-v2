@@ -1,4 +1,4 @@
-package com.stackknowledge.ranking.viewmodel.uistate
+package com.stackknowledge.shop.viewmodel.uistate
 
 import remote.response.student.GetMyInformationResponseModel
 

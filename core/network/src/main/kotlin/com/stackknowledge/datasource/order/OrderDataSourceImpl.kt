@@ -15,7 +15,7 @@ import javax.inject.Inject
 class OrderDataSourceImpl @Inject constructor(
     private val orderAPI: OrderAPI
 ): OrderDataSource {
-    override fun order(body: OrderRequest): Flow<Unit> = flow {
+    override fun order(body: List<OrderRequest>): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { orderAPI.order(body = body) }
@@ -23,15 +23,15 @@ class OrderDataSourceImpl @Inject constructor(
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun viewAllOrder(): Flow<ViewAllOrderResponse> = flow {
+    override fun viewAllOrder(): Flow<List<ViewAllOrderResponse>> = flow {
         emit(
-            StackKnowledgeApiHandler<ViewAllOrderResponse>()
+            StackKnowledgeApiHandler<List<ViewAllOrderResponse>>()
                 .httpRequest { orderAPI.viewAllOrder() }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)
 
-    override fun changeOrderStatus(body: ChangeOrderStatusRequest): Flow<Unit> = flow {
+    override fun changeOrderStatus(body: List<ChangeOrderStatusRequest>): Flow<Unit> = flow {
         emit(
             StackKnowledgeApiHandler<Unit>()
                 .httpRequest { orderAPI.changeOrderStatus(body = body) }

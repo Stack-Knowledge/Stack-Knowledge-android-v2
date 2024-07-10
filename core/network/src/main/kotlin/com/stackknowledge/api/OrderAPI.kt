@@ -15,14 +15,14 @@ import retrofit2.http.POST
 interface OrderAPI {
     @POST("/order")
     suspend fun order(
-        @Body body: OrderRequest,
+        @Body body: List<OrderRequest>,
     )
 
     @GET("/order")
-    suspend fun viewAllOrder(): ViewAllOrderResponse
+    suspend fun viewAllOrder(): List<ViewAllOrderResponse>
 
     @PATCH("/order")
     suspend fun changeOrderStatus(
-        @Body body: ChangeOrderStatusRequest,
+        @Body body: List<ChangeOrderStatusRequest>,
     )
 }

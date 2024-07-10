@@ -34,6 +34,7 @@
     <string name="student">학생</string>
     <string name="teacher">선생님</string>
     <string name="select_role_text">사용자가 학생인지\n 선생님인지 선택해주세요.</string>
+    <string name="order_dialog_text">해당 상품을 구매하시겠습니까?</string>
     <string name="select_create_mission">문제를 제출하시겠습니까?</string>
     <string name="cancel_select_create_mission">문제 제출을 취소하시겠습니까?\n 취소시 작성한 문제 내용들이 삭제됩니다.</string>
     <string name="success_create_mission">문제 출제가 완료되었습니다!</string>
@@ -43,4 +44,5 @@
     <string name="success_solve_mission">문제 제출이 완료되었습니다!</string>
     <string name="finish_score_mission">문제 채점이 끝나셨습니까?</string>
     <string name="success_score_mission">문제 채점이 완료되었습니다!</string>
+    <string name="discount_ordered_item">상품을 차감하시겠습니까?</string>
 </resources>

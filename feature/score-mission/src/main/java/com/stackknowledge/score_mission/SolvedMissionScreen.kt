@@ -64,6 +64,7 @@ private fun SolvedMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
+
                 SolvedMissionList(
                     getScoreMissionListUiState = scoreMissionListUiState,
                     onClick = { onItemClick() },
