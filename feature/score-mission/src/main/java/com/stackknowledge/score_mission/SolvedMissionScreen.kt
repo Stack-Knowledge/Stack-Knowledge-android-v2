@@ -1,12 +1,10 @@
 package com.stackknowledge.score_mission
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -16,7 +14,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
@@ -67,15 +64,11 @@ private fun SolvedMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-                if (scoreMissionListUiState is GetScoreMissionListUiState.Success) {
-                    val scoreMission = scoreMissionListUiState.getSolveMissionResponseModel
-                    SolvedMissionList(
-                        scoreMission = scoreMission,
-                        onClick = { onItemClick() },
-                        intentId = { intentId(it) }
-                    )
-                    Log.e("ScoreMissionListScreen", scoreMission.toString())
-                }
+                SolvedMissionList(
+                    getScoreMissionListUiState = scoreMissionListUiState,
+                    onClick = { onItemClick() },
+                    intentId = { intentId(it) }
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
