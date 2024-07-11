@@ -8,7 +8,6 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 
-
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -20,7 +19,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig {
-                    applicationId = "com.stackknowledge_android"
+                    applicationId = "com.kdn.stack_knowledge"
                     minSdk = 26
                     targetSdk = 34
                     versionCode = 1
@@ -48,8 +47,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", libs.findBundle("compose").get())
                 }
             }
-
         }
-
     }
 }
