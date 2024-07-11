@@ -25,10 +25,10 @@ class AuthViewModel @Inject constructor(
     private val saveTokenUseCase: SaveTokenUseCase,
 ) : ViewModel() {
     private val _saveTokenRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
-    val saveTokenRequest = _saveTokenRequest.asStateFlow()
+    internal val saveTokenRequest = _saveTokenRequest.asStateFlow()
 
-    private val _loginResponse = MutableStateFlow<Event<LoginResponse>>(Event.Loading)
-    val loginResponse = _loginResponse.asStateFlow()
+    private val _loginUiState = MutableStateFlow<LoginUiState>(LoginUiState.Loading)
+    internal val loginUiState = _loginUiState.asStateFlow()
 
     var isTeacher = mutableStateOf(false)
         private set
