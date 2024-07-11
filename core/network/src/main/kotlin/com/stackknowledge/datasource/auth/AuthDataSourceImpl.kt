@@ -2,13 +2,13 @@ package com.stackknowledge.datasource.auth
 
 import android.util.Log
 import com.stackknowledge.api.AuthAPI
+import com.stackknowledge.dto.request.auth.LoginRequest
+import com.stackknowledge.dto.response.auth.LoginResponse
 import com.stackknowledge.util.StackKnowledgeApiHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import remote.request.auth.LoginRequest
-import remote.response.auth.LoginResponse
 import javax.inject.Inject
 
 class AuthDataSourceImpl @Inject constructor(

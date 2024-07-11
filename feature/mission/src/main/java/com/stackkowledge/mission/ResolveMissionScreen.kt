@@ -30,7 +30,6 @@ import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import enumdatatype.Authority
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.EmptyButtonDialog
 import com.stackknowledge.design_system.component.toast.SuccessToastMessage
@@ -40,9 +39,8 @@ import com.stackkowledge.mission.component.MissionTimer
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import com.stackkowledge.mission.viewmodel.SolveMissionViewModel
 import com.stackkowledge.mission.viewmodel.uistate.DetailMissionUiState
-import com.stackkowledge.mission.viewmodel.uistate.SolveMissionUiState
+import enumdata.Authority
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import remote.request.solve.SolveRequestModel
 
 @Composable

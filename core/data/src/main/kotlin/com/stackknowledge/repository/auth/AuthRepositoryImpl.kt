@@ -1,11 +1,13 @@
 package com.stackknowledge.repository.auth
 
-import android.util.Log
 import com.stackknowledge.datasource.auth.AuthDataSource
 import com.stackknowledge.datastore.LocalAuthDataSource
+import com.stackknowledge.mapper.request.auth.toDto
+import com.stackknowledge.mapper.response.auth.toModel
 import kotlinx.coroutines.flow.Flow
-import remote.request.auth.LoginRequest
-import remote.response.auth.LoginResponse
+import kotlinx.coroutines.flow.map
+import remote.request.auth.LoginRequestModel
+import remote.response.auth.LoginResponseModel
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

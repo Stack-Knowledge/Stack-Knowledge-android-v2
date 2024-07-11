@@ -1,7 +1,7 @@
 package com.stackknowledge.usecase.auth
 
 import com.stackknowledge.repository.auth.AuthRepository
-import remote.response.auth.LoginResponse
+import remote.response.auth.LoginResponseModel
 import javax.inject.Inject
 
 class SaveTokenUseCase @Inject constructor(

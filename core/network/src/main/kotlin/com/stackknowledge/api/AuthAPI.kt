@@ -1,7 +1,7 @@
 package com.stackknowledge.api
 
-import remote.request.auth.LoginRequest
-import remote.response.auth.LoginResponse
+import com.stackknowledge.dto.request.auth.LoginRequest
+import com.stackknowledge.dto.response.auth.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.POST

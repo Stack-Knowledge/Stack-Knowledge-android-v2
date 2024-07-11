@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.main.MainPageRoute
-import enumdatatype.Authority
+import enumdata.Authority
 
 const val mainPageRoute = "main_page_route"
 

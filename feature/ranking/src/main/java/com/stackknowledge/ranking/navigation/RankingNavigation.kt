@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.ranking.RankingRoute
 import com.stackknowledge.ranking.TeacherRankingRoute
-import enumdatatype.Authority
+import enumdata.Authority
 
 const val rankingRoute = "ranking_route"
 const val teacherRankingRoute = "teacher_ranking_route"

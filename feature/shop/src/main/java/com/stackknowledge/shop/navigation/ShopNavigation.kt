@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.shop.ShopRoute
 import com.stackknowledge.shop.TeacherShopRoute
-import enumdatatype.Authority
+import enumdata.Authority
 
 const val shopRoute = "shop_route"
 const val teacherShopRoute = "teacher_shop_route"

@@ -23,8 +23,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.EntireMissionList
 import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 import com.stackkowledge.mission.viewmodel.MissionViewModel
-import enumdatatype.Authority
-import java.util.UUID
+import enumdata.Authority
 
 @Composable
 internal fun EntireMissionRoute(

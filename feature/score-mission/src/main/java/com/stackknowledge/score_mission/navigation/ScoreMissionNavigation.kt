@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.stackknowledge.score_mission.GradingAnswerRoute
 import com.stackknowledge.score_mission.SolvedMissionRoute
-import enumdatatype.Authority
+import enumdata.Authority
 
 const val gradingAnswerRoute = "grading_answer_route"
 const val solvedMissionRoute = "solved_mission_route"

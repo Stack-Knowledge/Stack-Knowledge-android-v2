@@ -1,7 +1,5 @@
 package com.minstone.ui.navigation
 
-import android.icu.text.TimeZoneNames.NameType
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import enumdatatype.Authority
+import enumdata.Authority
 
 enum class NavigateType(val value: String) {
     HOME("home"),
