@@ -1,6 +1,7 @@
 package com.stackknowledge.login
 
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import com.stackknowledge.design_system.R
 import androidx.compose.foundation.layout.Box
