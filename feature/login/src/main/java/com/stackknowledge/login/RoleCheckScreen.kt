@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
 import com.stackknowledge.login.viewmodel.AuthViewModel
@@ -79,6 +80,7 @@ private fun RoleCheckScreen(
                 ) {
                     StackKnowledgeButton(
                         text = stringResource(id = R.string.student),
+                        enable = ButtonState.ACTIVATE,
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f),
@@ -91,6 +93,7 @@ private fun RoleCheckScreen(
 
                     StackKnowledgeButton(
                         text = stringResource(id = R.string.teacher),
+                        enable = ButtonState.ACTIVATE,
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f),

@@ -23,6 +23,7 @@ import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
 fun RankingList(
     modifier: Modifier = Modifier,
     getRankingUiState: GetRankingUiState,
+    onClick: (Int) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, _ ->
         Column(
@@ -66,7 +67,8 @@ fun RankingList(
                                         RankingListItem(
                                             profileImage = list[index].user.profileImage,
                                             name = list[index].user.name,
-                                            point = list[index].cumulatePoint.toString()
+                                            point = list[index].cumulatePoint.toString(),
+                                            onClick =  { onClick(index) },
                                         )
                                     }
                                     if (index < 3) {

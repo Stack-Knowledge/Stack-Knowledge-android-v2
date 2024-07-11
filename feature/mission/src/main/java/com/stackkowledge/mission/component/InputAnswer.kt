@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.component.textfield.StackKnowledgeTextField
 
 @Composable
@@ -52,6 +53,7 @@ fun InputAnswer(
 
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.submit),
+                    enable = ButtonState.ACTIVATE,
                     modifier = modifier
                         .height(60.dp),
                     onClick = openDialog

@@ -5,7 +5,7 @@ import remote.item.ItemModel
 
 fun Item.toModel(): ItemModel =
     ItemModel(
-        id = this.id,
+        itemId = this.itemId,
         name = this.name,
         price = this.price,
         image = this.image,

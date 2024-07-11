@@ -1,6 +1,5 @@
 package com.stackknowledge.score_mission
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -65,15 +64,12 @@ private fun SolvedMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-                if (scoreMissionListUiState is GetScoreMissionListUiState.Success) {
-                    val scoreMission = scoreMissionListUiState.getSolveMissionResponseModel
-                    SolvedMissionList(
-                        scoreMission = scoreMission,
-                        onClick = { onItemClick() },
-                        intentId = { intentId(it) }
-                    )
-                    Log.e("ScoreMissionListScreen", scoreMission.toString())
-                }
+
+                SolvedMissionList(
+                    getScoreMissionListUiState = scoreMissionListUiState,
+                    onClick = { onItemClick() },
+                    intentId = { intentId(it) }
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),

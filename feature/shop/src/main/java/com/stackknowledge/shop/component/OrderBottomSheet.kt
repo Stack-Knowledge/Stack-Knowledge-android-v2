@@ -1,4 +1,4 @@
-package com.stackknowledge.design_system.component.bottomsheet
+package com.stackknowledge.shop.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -9,11 +9,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,14 +27,22 @@ import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.shop.data.SelectedItemData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StackKnowledgeBottomSheet(
+fun OrderBottomSheet(
     modifier: Modifier = Modifier,
+    selectedItemList: MutableList<SelectedItemData>,
     onQuit: () -> Unit,
+    onOrderButtonClick: () -> Unit,
 ) {
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val totalAmount = remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(selectedItemList) {
+        totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
+    }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         ModalBottomSheet(
@@ -43,9 +55,16 @@ fun StackKnowledgeBottomSheet(
                 modifier = modifier
                     .padding(horizontal = 16.dp)
             ) {
-                LazyColumn() {
-                    items(10) {
-                        BottomSheetItem()
+                LazyColumn {
+                    items(selectedItemList) { item ->
+                        OrderBottomSheetItem(
+                            item = item,
+                            selectedItemList = selectedItemList,
+                            onItemCountChanged = {
+                                totalAmount.intValue = selectedItemList.sumOf { it.count * it.price }
+                            }
+                        )
+
                         Spacer(modifier = modifier.height(10.dp))
                     }
                 }
@@ -58,10 +77,14 @@ fun StackKnowledgeBottomSheet(
                 )
 
                 Spacer(modifier = modifier.height(8.dp))
+
                 Row(
-                    modifier = modifier.padding(start = 288.dp),
+                    modifier = modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+
+                    Spacer(modifier = modifier.weight(1f))
+
                     Text(
                         text = stringResource(R.string.total_amount),
                         style = typography.bodyMedium,
@@ -71,7 +94,7 @@ fun StackKnowledgeBottomSheet(
                     Spacer(modifier = modifier.width(4.dp))
 
                     Text(
-                        text = "1,000",
+                        text = "${totalAmount.intValue}",
                         style = typography.bodyMedium,
                         color = colors.BLACK
                     )
@@ -84,22 +107,35 @@ fun StackKnowledgeBottomSheet(
                 }
 
                 Spacer(modifier = modifier.height(8.dp))
+
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.purchase),
                     enable = ButtonState.ACTIVATE,
                     modifier = modifier
-                        .height(60.dp),
-                ) {}
+                        .height(60.dp)
+                ) {
+                    onOrderButtonClick()
+                }
 
                 Spacer(modifier = modifier.height(24.dp))
             }
         }
-
     }
 }
 
 @Preview
 @Composable
-fun StackKnowledgeBottomSheetPre() {
-    StackKnowledgeBottomSheet {}
+fun OrderBottomSheetPre() {
+    OrderBottomSheet(
+        onOrderButtonClick = {},
+        onQuit = {},
+        selectedItemList = mutableListOf(
+            SelectedItemData(
+                id = "1",
+                name = "정영운 글러브",
+                price = 1000,
+                count = 1
+            )
+        )
+    )
 }

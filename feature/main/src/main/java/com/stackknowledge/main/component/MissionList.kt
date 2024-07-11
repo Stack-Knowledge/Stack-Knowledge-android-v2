@@ -31,6 +31,7 @@ import remote.response.mission.MissionResponseModel
 fun MissionList(
     modifier: Modifier = Modifier,
     getMissionUiState: GetMissionUiState,
+    onClick: (Int) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
@@ -75,7 +76,8 @@ fun MissionList(
                                 MissionListItem(
                                     teacherName = list[index].user.name,
                                     title = list[index].title,
-                                    point = list[index].point.toString()
+                                    point = list[index].point.toString(),
+                                    onClick = { onClick(index) },
                                 )
                                 Spacer(modifier = modifier.width(16.dp))
                             }

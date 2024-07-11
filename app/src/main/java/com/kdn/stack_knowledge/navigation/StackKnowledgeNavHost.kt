@@ -3,6 +3,7 @@ package com.kdn.stack_knowledge.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import com.minstone.ui.navigation.NavigateType
 import com.stackknowledge.login.navigation.loginScreen
 import com.stackknowledge.login.navigation.navigateToLogin
 import com.stackknowledge.login.navigation.roleCheckRoute
@@ -10,18 +11,25 @@ import com.stackknowledge.login.navigation.roleCheckScreen
 import com.stackknowledge.main.navigation.mainScreen
 import com.stackknowledge.main.navigation.navigateToMain
 import com.kdn.stack_knowledge.navigation.util.bottomNavigationNavigate
+import com.stackknowledge.ranking.navigation.navigateToRanking
+import com.stackknowledge.ranking.navigation.navigateToTeacherRanking
 import com.stackknowledge.ranking.navigation.rankingScreen
 import com.stackknowledge.ranking.navigation.teacherRankingScreen
 import com.stackknowledge.score_mission.navigation.gradingAnswerScreen
 import com.stackknowledge.score_mission.navigation.navigateToGradingAnswer
+import com.stackknowledge.score_mission.navigation.navigateToSolvedMission
 import com.stackknowledge.score_mission.navigation.solvedMissionScreen
+import com.stackknowledge.shop.navigation.shopRoute
 import com.stackknowledge.shop.navigation.shopScreen
+import com.stackknowledge.shop.navigation.teacherShopRoute
 import com.stackknowledge.shop.navigation.teacherShopScreen
 import com.kdn.stack_knowledge.ui.StackKnowledgeAppState
 import com.stackkowledge.mission.navigation.createMissionScreen
 import com.stackkowledge.mission.navigation.entireMissionScreen
+import com.stackkowledge.mission.navigation.navigateToEntireMission
 import com.stackkowledge.mission.navigation.navigateToResolveMission
 import com.stackkowledge.mission.navigation.resolveMissionScreen
+import enumdata.Authority
 
 @Composable
 fun StackKnowledgeNavHost(
@@ -45,7 +53,17 @@ fun StackKnowledgeNavHost(
             onRoleButtonClick = navController::navigateToLogin
         )
         mainScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
+            onNavigate = { role, navType, index ->
+                if (index != null) {
+                    if (navType == NavigateType.MISSION.value) {
+                        if (role == Authority.ROLE_STUDENT) navController.navigateToEntireMission()
+                        else navController.navigateToSolvedMission()
+                    } else {
+                        if (role == Authority.ROLE_STUDENT) navController.navigateToRanking()
+                        else navController.navigateToTeacherRanking()
+                    }
+                } else bottomNavigationNavigate(role, navController, navType)
+            },
         )
         createMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },

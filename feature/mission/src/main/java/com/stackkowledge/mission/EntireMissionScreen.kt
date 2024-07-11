@@ -1,6 +1,5 @@
 package com.stackkowledge.mission
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,9 +20,9 @@ import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.EntireMissionList
-import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 import com.stackkowledge.mission.viewmodel.MissionViewModel
 import enumdata.Authority
+import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
 
 @Composable
 internal fun EntireMissionRoute(
@@ -67,14 +66,11 @@ private fun EntireMissionScreen(
                     .fillMaxSize()
             ) {
                 StackKnowledgeTopBar()
-                if (missionUiState is GetMissionUiState.Success) {
-                    val mission = missionUiState.missionResponseModel
-                    EntireMissionList(
-                        missionList = mission,
-                        onClick = { onItemClick(it) },
-                    )
-                }
-                Log.e("testt", missionUiState.toString())
+
+                EntireMissionList(
+                    getMissionUiState = missionUiState,
+                    onClick = { onItemClick(it) },
+                )
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
