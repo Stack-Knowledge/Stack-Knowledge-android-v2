@@ -16,4 +16,5 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.moshi.converter)
+    implementation(libs.retrofit.moshi.codegen)
 }
