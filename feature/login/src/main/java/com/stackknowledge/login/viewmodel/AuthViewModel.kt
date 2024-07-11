@@ -1,6 +1,5 @@
 package com.stackknowledge.login.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,7 +39,6 @@ class AuthViewModel @Inject constructor(
         private set
 
     fun loginStudent(body: LoginRequestModel) = viewModelScope.launch {
-        Log.e("viewModel serverAuthCode", body.code)
         loginStudentUseCase(body = body)
             .asResult()
             .collectLatest { result ->
