@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.JoinWaitingDialog
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -37,7 +38,7 @@ import enumdatatype.Authority
 
 @Composable
 internal fun MainPageRoute(
-    onNavigate: (Authority, String) -> Unit,
+    onNavigate: (Authority, String, Int?) -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
@@ -48,7 +49,7 @@ internal fun MainPageRoute(
         role = role,
         getMissionUiState = getMissionUiState,
         getRankingUiState = getRankingUiState,
-        onNavigate = { navType -> onNavigate(role, navType) },
+        onNavigate = { navType, index -> onNavigate(role, navType, index) },
         initMain = {
             with(viewModel) {
                 getMission()
@@ -64,7 +65,7 @@ private fun MainPageScreen(
     role: Authority,
     getMissionUiState: GetMissionUiState,
     getRankingUiState: GetRankingUiState,
-    onNavigate: (String) -> Unit,
+    onNavigate: (String, Int?) -> Unit,
     initMain: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -91,11 +92,13 @@ private fun MainPageScreen(
                     StackKnowledgePager()
                     Spacer(modifier = modifier.height(28.dp))
                     MissionList(
-                        getMissionUiState = getMissionUiState
+                        getMissionUiState = getMissionUiState,
+                        onClick = { onNavigate(NavigateType.MISSION.value, it) }
                     )
                     Spacer(modifier = modifier.height(20.dp))
                     RankingList(
-                        getRankingUiState = getRankingUiState
+                        getRankingUiState = getRankingUiState,
+                        onClick = { onNavigate(NavigateType.RANKING.value, it) }
                     )
                 }
             }
@@ -112,7 +115,7 @@ private fun MainPageScreen(
                     modifier = Modifier,
                     role = role
                 ) {
-                    onNavigate(it)
+                    onNavigate(it, null)
                 }
             }
         }

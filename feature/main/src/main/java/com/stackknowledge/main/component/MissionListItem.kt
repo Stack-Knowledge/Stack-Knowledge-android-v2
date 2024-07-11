@@ -1,6 +1,7 @@
 package com.stackknowledge.main.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ fun MissionListItem(
     teacherName: String,
     title: String,
     point: String,
+    onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -33,7 +35,8 @@ fun MissionListItem(
                 .background(
                     color = colors.WHITE,
                     shape = RoundedCornerShape(20.dp)
-                ),
+                )
+                .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -77,6 +80,7 @@ fun MissionListItemPre() {
     MissionListItem(
         teacherName = "미소쌤",
         title = "북학파의 배경",
-        point = "1000"
+        point = "1000",
+        onClick = {}
     )
 }

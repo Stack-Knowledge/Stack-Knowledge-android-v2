@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,7 +57,7 @@ fun StackKnowledgeBottomNavigation(
                 )
 
                 navItems.forEachIndexed { index, (iconRes, navigateType, stringResId) ->
-                    if (index != 2 || role == Authority.ROLE_TEACHER) { // 로그인 로직 적용후 변경
+                    if (index != 2 || role == Authority.ROLE_TEACHER) {
                         BottomNavigationComponent(
                             modifier = modifier
                                 .weight(1f)
