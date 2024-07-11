@@ -5,15 +5,11 @@ import remote.request.auth.LoginRequestModel
 import remote.response.auth.LoginResponseModel
 
 interface AuthRepository {
-    fun loginStudent(
-        body: LoginRequest,
-    ): Flow<LoginResponse>
+    fun loginStudent(body: LoginRequestModel): Flow<LoginResponseModel>
 
-    fun loginTeacher(
-        body: LoginRequest,
-    ): Flow<LoginResponse>
+    fun loginTeacher(body: LoginRequestModel): Flow<LoginResponseModel>
 
-    suspend fun saveToken(token: LoginResponse)
+    suspend fun saveToken(token: LoginResponseModel)
 
     fun logout(): Flow<Unit>
 }
