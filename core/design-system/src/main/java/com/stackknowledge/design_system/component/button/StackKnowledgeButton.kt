@@ -11,23 +11,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @Composable
 fun StackKnowledgeButton(
     modifier: Modifier = Modifier,
     text: String,
+    enable: ButtonState,
     onClick: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
+        val color = when (enable) {
+            ButtonState.ACTIVATE -> {
+                colors.P1
+            }
+
+            ButtonState.DISABLED -> {
+                colors.G1
+            }
+        }
         Button(
-            onClick = { onClick() },
+            onClick = {
+                if (enable.buttonState) onClick()
+            },
             modifier = modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(10.dp))
-                .background(color = colors.P1),
+                .background(color = color),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colors.P1
+                containerColor = color
             )
         ) {
             Text(
@@ -44,6 +57,6 @@ fun StackKnowledgeButton(
 fun StackKnowledgeButtonPre() {
     StackKnowledgeButton(
         text = "제출하기",
-        onClick = {}
-    )
+        enable = ButtonState.ACTIVATE
+    ) {}
 }
