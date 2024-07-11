@@ -23,7 +23,7 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.score_mission.component.SolvedMissionList
 import com.stackknowledge.score_mission.viewmodel.ScoreMissionViewModel
 import com.stackknowledge.score_mission.viewmodel.uistate.GetScoreMissionListUiState
-import enumdatatype.Authority
+import enumdata.Authority
 
 @Composable
 internal fun SolvedMissionRoute(
