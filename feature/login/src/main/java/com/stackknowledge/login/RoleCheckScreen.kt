@@ -29,17 +29,21 @@ import com.stackknowledge.login.viewmodel.AuthViewModel
 
 @Composable
 internal fun RoleCheckRoute(
-    onTeacherButtonClick: (Boolean) -> Unit = {},
-    onStudentButtonClick: (Boolean) -> Unit = {},
+    onRoleButtonClick: () -> Unit,
+authViewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
 ) {
-    RoleCheckScreen(
-        onTeacherButtonClick = { isTeacher ->
-            onTeacherButtonClick(isTeacher)
-        },
-        onStudentButtonClick = { isStudent ->
-            onStudentButtonClick(isStudent)
-        }
-    )
+    with(authViewModel) {
+        RoleCheckScreen(
+            onTeacherButtonClick = { teacherRoleBoolean ->
+                onRoleButtonClick()
+                isTeacher.value = teacherRoleBoolean
+            },
+            onStudentButtonClick = { studentRoleBoolean ->
+                onRoleButtonClick()
+                isStudent.value = studentRoleBoolean
+            }
+        )
+    }
 }
 @Composable
 private fun RoleCheckScreen(
