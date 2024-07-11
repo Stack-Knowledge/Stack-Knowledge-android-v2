@@ -14,20 +14,15 @@ class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
     private val localDataSource: LocalAuthDataSource
 ): AuthRepository {
-    override fun loginStudent(body: LoginRequest): Flow<LoginResponse> {
-        Log.e("repository loginStudent", "loginStudent")
-        return authDataSource.loginStudent(
-            body = body,
-        )
+    override fun loginStudent(body: LoginRequestModel): Flow<LoginResponseModel> {
+        return authDataSource.loginStudent(body = body.toDto()).map { it.toModel() }
     }
 
-    override fun loginTeacher(body: LoginRequest): Flow<LoginResponse> {
-        return authDataSource.loginTeacher(
-            body = body,
-        )
+    override fun loginTeacher(body: LoginRequestModel): Flow<LoginResponseModel> {
+        return authDataSource.loginTeacher(body = body.toDto()).map { it.toModel() }
     }
 
-    override suspend fun saveToken(token: LoginResponse) {
+    override suspend fun saveToken(token: LoginResponseModel) {
         token.let {
             localDataSource.setAccessToken(it.accessToken)
             localDataSource.setAccessTime(it.expiredAt)
