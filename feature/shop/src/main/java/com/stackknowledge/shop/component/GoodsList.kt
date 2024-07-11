@@ -1,5 +1,6 @@
 package com.stackknowledge.shop.component
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,15 +14,18 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.data.SelectedItemData
 import com.stackknowledge.shop.viewmodel.uistate.GetItemUiState
@@ -37,6 +41,7 @@ fun GoodsList(
 ) {
     val selectedDisplayItemList = remember { mutableListOf<GetItemResponseModel>() }
     val isBottomSheetVisible = remember { mutableStateOf(false) }
+    val isButtonState = remember { mutableStateOf(ButtonState.DISABLED) }
 
     StackKnowledgeAndroidTheme { colors, typography ->
         Column(
@@ -71,10 +76,20 @@ fun GoodsList(
                                     itemData = item,
                                     onItemCheckButtonClick = { selectedItem ->
                                         selectedDisplayItemList.add(selectedItem)
+                                        isButtonState.value = if (selectedDisplayItemList.isEmpty()) {
+                                            ButtonState.DISABLED
+                                        } else {
+                                            ButtonState.ACTIVATE
+                                        }
                                     },
                                     onItemUnCheckButtonClick = { unselectedItem ->
                                         selectedDisplayItemList.removeIf { selectedItemListElement ->
                                             selectedItemListElement.id == unselectedItem.id
+                                        }
+                                        isButtonState.value = if (selectedDisplayItemList.isEmpty()) {
+                                            ButtonState.DISABLED
+                                        } else {
+                                            ButtonState.ACTIVATE
                                         }
                                     }
                                 )
@@ -106,24 +121,24 @@ fun GoodsList(
                 }
             }
 
-            Spacer(modifier = modifier.height(32.dp))
+            Spacer(modifier = modifier.height(80.dp))
 
             Box(
                 modifier = modifier
                     .padding(horizontal = 16.dp),
             ) {
                 StackKnowledgeButton(
-                    text = stringResource(id = R.string.select),
+                    text = stringResource(id = R.string.purchase),
                     modifier = modifier
                         .height(60.dp),
-                    onClick = {
-                        onSelectButtonClick(selectedDisplayItemList)
-                        isBottomSheetVisible.value = true
-                    }
-                )
+                    enable = isButtonState.value
+                ) {
+                    onSelectButtonClick(selectedDisplayItemList)
+                    isBottomSheetVisible.value = true
+                }
             }
 
-            Spacer(modifier = modifier.height(100.dp))
+            Spacer(modifier = modifier.height(28.dp))
         }
 
         if (isBottomSheetVisible.value) {

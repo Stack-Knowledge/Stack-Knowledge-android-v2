@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
+import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,10 +86,10 @@ fun StackKnowledgeBottomSheet(
                 Spacer(modifier = modifier.height(8.dp))
                 StackKnowledgeButton(
                     text = stringResource(id = R.string.purchase),
+                    enable = ButtonState.ACTIVATE,
                     modifier = modifier
                         .height(60.dp),
-                    onClick = {},
-                )
+                ) {}
 
                 Spacer(modifier = modifier.height(24.dp))
             }
