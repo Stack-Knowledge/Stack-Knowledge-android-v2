@@ -121,7 +121,7 @@ fun GoodsList(
                 }
             }
 
-            Spacer(modifier = modifier.height(32.dp))
+            Spacer(modifier = modifier.height(80.dp))
 
             Box(
                 modifier = modifier
@@ -138,7 +138,7 @@ fun GoodsList(
                 }
             }
 
-            Spacer(modifier = modifier.height(100.dp))
+            Spacer(modifier = modifier.height(28.dp))
         }
 
         if (isBottomSheetVisible.value) {
