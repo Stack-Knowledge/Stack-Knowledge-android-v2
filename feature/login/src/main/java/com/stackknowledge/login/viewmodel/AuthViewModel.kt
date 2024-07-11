@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.result.Result
 import com.example.common.result.asResult
+import com.example.common.util.Event
+import com.example.common.util.errorHandling
 import com.stackknowledge.login.viewmodel.uistate.LoginUiState
 import com.stackknowledge.usecase.auth.SaveTokenUseCase
 import com.stackknowledge.usecase.auth.LoginStudentUseCase
 import com.stackknowledge.usecase.auth.LoginTeacherUseCase
-import com.stackknowledge.login.viewmodel.util.Event
-import com.stackknowledge.login.viewmodel.util.errorHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
