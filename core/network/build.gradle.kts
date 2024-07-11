@@ -1,4 +1,5 @@
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -42,7 +43,10 @@ dependencies {
 
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")
+    if (!propFile.exists()) {
+        throw FileNotFoundException("local.properties file not found")
+    }
     val properties = Properties()
     properties.load(FileInputStream(propFile))
-    return properties.getProperty(propertyKey)
+    return properties.getProperty(propertyKey) ?: throw IllegalArgumentException("Property $propertyKey not found in local.properties file")
 }
