@@ -1,5 +1,7 @@
 package com.stackknowledge.main.component
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -27,6 +29,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+const val SCROLL_SPEED = 1000
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun StackKnowledgePager(
@@ -44,7 +48,13 @@ fun StackKnowledgePager(
                 delay(2000)
                 withContext(NonCancellable) {
                     if (pagerState.currentPage + 1 in 0..Int.MAX_VALUE) {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        pagerState.animateScrollToPage(
+                            page = pagerState.currentPage + 1,
+                            animationSpec = tween(
+                                durationMillis = SCROLL_SPEED,
+                                easing = LinearOutSlowInEasing
+                            )
+                        )
                     }
                 }
             }
@@ -57,7 +67,7 @@ fun StackKnowledgePager(
                 contentAlignment = Alignment.BottomCenter
             ) {
                 HorizontalPager(
-                    state = pagerState
+                    state = pagerState,
                 ) { page ->
 
                     when (page % 3) {
