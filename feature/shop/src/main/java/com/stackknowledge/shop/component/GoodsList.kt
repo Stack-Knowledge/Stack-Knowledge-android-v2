@@ -39,7 +39,6 @@ fun GoodsList(
     onSelectButtonClick: (List<GetItemResponseModel>) -> Unit,
     onOrderButtonClick: () -> Unit,
 ) {
-    val context = LocalContext.current
     val selectedDisplayItemList = remember { mutableListOf<GetItemResponseModel>() }
     val isBottomSheetVisible = remember { mutableStateOf(false) }
     val isButtonState = remember { mutableStateOf(ButtonState.DISABLED) }
