@@ -37,6 +37,7 @@ dependencies {
     implementation(libs.retrofit.moshi.converter)
     implementation(libs.moshi)
     implementation(libs.retrofit.moshi.codegen)
+    implementation(libs.moshi.kotlin)
 }
 
 fun getApiKey(propertyKey: String): String {
