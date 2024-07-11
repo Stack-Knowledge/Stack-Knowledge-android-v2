@@ -47,7 +47,17 @@ fun GoodsItem(
             modifier = modifier
                 .background(color = colors.WHITE)
         ) {
-            Box {
+            Box(
+                modifier = modifier
+                    .clickable {
+                        if (checked.value) {
+                            onItemCheckButtonClick(itemData)
+                        } else {
+                            onItemUnCheckButtonClick(itemData)
+                        }
+                        checked.value = !checked.value
+                    }
+            ) {
                 val imagePainter = if (itemData.image.isEmpty()) {
                     painterResource(id = R.drawable.goods_image)
                 } else {
@@ -58,7 +68,9 @@ fun GoodsItem(
                     painter = imagePainter,
                     contentDescription = "Goods Image",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(150.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .height(150.dp)
+                        .fillMaxWidth()
                 )
 
                 Box(
@@ -70,15 +82,7 @@ fun GoodsItem(
                         contentDescription = null,
                         modifier = Modifier
                             .width(16.dp)
-                            .height(16.dp)
-                            .clickable {
-                                if (checked.value) {
-                                    onItemCheckButtonClick(itemData)
-                                } else {
-                                    onItemUnCheckButtonClick(itemData)
-                                }
-                                checked.value = !checked.value
-                            },
+                            .height(16.dp),
                         contentScale = ContentScale.Crop
                     )
                 }
