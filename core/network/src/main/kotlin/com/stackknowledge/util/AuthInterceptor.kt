@@ -1,21 +1,17 @@
 package com.stackknowledge.util
 
-<<<<<<< HEAD
 import com.example.common.exception.NeedLoginException
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.stackknowledge.network.BuildConfig
 import com.stackknowledge.datastore.LocalAuthDataSource
 import kotlinx.coroutines.flow.first
-=======
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
-import util.ResourceKeys
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
@@ -35,7 +31,6 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val builder = request.newBuilder()
-<<<<<<< HEAD
         val currentTime = System.currentTimeMillis().toLocalDateTime()
         val ignorePath = listOf("/auth")
         val ignoreMethod = listOf("POST")
@@ -89,11 +84,6 @@ class AuthInterceptor @Inject constructor(
             }
             val accessToken = dataSource.getAccessToken().first().replace("\"", "")
             builder.addHeader("Authorization", "Bearer $accessToken")
-=======
-
-        runBlocking {
-            builder.addHeader("Authorization", "${ResourceKeys.BEARER} ")
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
         }
         return chain.proceed(builder.build())
     }

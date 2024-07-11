@@ -20,10 +20,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", project(":core:ui"))
                 add("implementation", project(":core:design-system"))
                 add("implementation", project(":core:domain"))
-<<<<<<< HEAD
-                add("implementation", project(":core:common"))
-=======
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 
                 add("implementation", libs.findLibrary("coil.kt").get())
 

@@ -1,12 +1,9 @@
 package com.stackknowledge.di
 
-<<<<<<< HEAD
 import com.stackknowledge.datasource.auth.AuthDataSource
 import com.stackknowledge.datasource.auth.AuthDataSourceImpl
-=======
 import com.stackknowledge.datasource.item.ItemDataSource
 import com.stackknowledge.datasource.item.ItemDataSourceImpl
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
 import com.stackknowledge.datasource.mission.MissionDataSource
 import com.stackknowledge.datasource.mission.MissionDataSourceImpl
 import com.stackknowledge.datasource.order.OrderDataSource
@@ -46,8 +43,6 @@ abstract class RemoteDataSourceModule {
 
     @Binds
     @Singleton
-<<<<<<< HEAD
-=======
     abstract fun bindOrderDataSource(
         orderDataSourceImpl: OrderDataSourceImpl
     ): OrderDataSource
@@ -66,7 +61,6 @@ abstract class RemoteDataSourceModule {
 
     @Binds
     @Singleton
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
     abstract fun bindUserDataSource(
         userDataSourceImpl: UserDataSourceImpl
     ): UserDataSource
