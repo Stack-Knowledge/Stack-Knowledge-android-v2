@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
+import com.stackknowledge.main.util.PagerScrollSpeed
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,7 +40,6 @@ fun StackKnowledgePager(
         pageCount = { Int.MAX_VALUE },
         initialPage = initialPage
     )
-    val pagerScrollSpeed = 1000
 
     LaunchedEffect(key1 = pagerState.currentPage) {
         launch {
@@ -50,7 +50,7 @@ fun StackKnowledgePager(
                         pagerState.animateScrollToPage(
                             page = pagerState.currentPage + 1,
                             animationSpec = tween(
-                                durationMillis = pagerScrollSpeed,
+                                durationMillis = PagerScrollSpeed.SCROLL_SPEED,
                                 easing = LinearOutSlowInEasing
                             )
                         )
