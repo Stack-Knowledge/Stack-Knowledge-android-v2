@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "322299804217",
+    "project_id": "stack-knowledge-v2",
+    "storage_bucket": "stack-knowledge-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322299804217:android:e15d7c6ad9b47cc65e2be8",
+        "android_client_info": {
+          "package_name": "com.kdn.stack_knowledge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxMjD7Mg9vzfBiuZVBzyR12Ubr-uEZ_hQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
