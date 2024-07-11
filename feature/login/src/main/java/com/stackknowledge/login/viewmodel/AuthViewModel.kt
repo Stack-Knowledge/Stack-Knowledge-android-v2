@@ -36,46 +36,33 @@ class AuthViewModel @Inject constructor(
     var isStudent = mutableStateOf(false)
         private set
 
-    var showLoginRoute = mutableStateOf(false)
-        private set
-
-
-    internal fun loginStudent(
-        body: LoginRequest,
-    ) = viewModelScope.launch {
-        loginStudentUseCase(
-            body = body,
-        ).onSuccess {
-            Log.e("viewModel loginStudent", "loginStudent")
-            it.catch { remoteError ->
-                _loginResponse.value = remoteError.errorHandling()
-            }.collect { response ->
-                _loginResponse.value = Event.Success(data = response)
+    fun loginStudent(body: LoginRequestModel) = viewModelScope.launch {
+        Log.e("viewModel serverAuthCode", body.code)
+        loginStudentUseCase(body = body)
+            .asResult()
+            .collectLatest { result ->
+                when (result) {
+                    is Result.Loading -> _loginUiState.value = LoginUiState.Loading
+                    is Result.Success -> _loginUiState.value = LoginUiState.Success(result.data)
+                    is Result.Error -> _loginUiState.value = LoginUiState.Error(result.exception)
+                }
             }
-        }.onFailure {
-            _loginResponse.value = it.errorHandling()
-        }
     }
 
-    internal fun loginTeacher(
-        body: LoginRequest,
-    ) = viewModelScope.launch {
-        loginTeacherUseCase(
-            body = body,
-        ).onSuccess {
-            it.catch { remoteError ->
-                _loginResponse.value = remoteError.errorHandling()
-            }.collect { response ->
-                _loginResponse.value = Event.Success(data = response)
+    fun loginTeacher(body: LoginRequestModel) = viewModelScope.launch {
+        loginTeacherUseCase(body = body)
+            .asResult()
+            .collectLatest { result ->
+                when (result) {
+                    is Result.Loading -> _loginUiState.value = LoginUiState.Loading
+                    is Result.Success -> _loginUiState.value = LoginUiState.Success(result.data)
+                    is Result.Error -> _loginUiState.value = LoginUiState.Error(result.exception)
+                }
+
             }
-        }.onFailure {
-            _loginResponse.value = it.errorHandling()
-        }
     }
 
-    internal fun saveToken(
-        token: LoginResponse,
-    ) = viewModelScope.launch {
+    internal fun saveToken(token: LoginResponseModel) = viewModelScope.launch {
         saveTokenUseCase(
             token = token
         ).onSuccess {
