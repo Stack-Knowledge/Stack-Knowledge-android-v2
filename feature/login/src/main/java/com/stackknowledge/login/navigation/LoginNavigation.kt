@@ -14,9 +14,15 @@ fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
     this.navigate(loginRoute, navOptions)
 }
 
-fun NavGraphBuilder.loginScreen() {
+fun NavGraphBuilder.loginScreen(
+    onSuccess: () -> Unit = {},
+    onLoginButtonClick: () -> Unit = {},
+) {
     composable(route = loginRoute) {
-        LoginRoute()
+        LoginRoute(
+            onSuccess = onSuccess,
+            onGoogleLoginButtonClicked = onLoginButtonClick
+        )
     }
 }
 
@@ -25,10 +31,11 @@ fun NavController.navigateToRoleCheck(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.roleCheckScreen(
+    onRoleButtonClick: () -> Unit,
 ) {
     composable(route = roleCheckRoute) {
         RoleCheckRoute(
-
+            onRoleButtonClick = onRoleButtonClick
         )
     }
 }
