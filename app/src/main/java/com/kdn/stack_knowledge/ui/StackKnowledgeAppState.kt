@@ -1,4 +1,4 @@
-package com.stackknowledge.ui
+package com.kdn.stack_knowledge.ui
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -6,13 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.stackknowledge.login.navigation.loginRoute
-import com.stackknowledge.navigation.TopLevelDestination
+import com.kdn.stack_knowledge.navigation.TopLevelDestination
+import com.stackknowledge.login.navigation.roleCheckRoute
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -46,7 +45,7 @@ class StackKnowledgeAppState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when(currentDestination?.route) {
-            loginRoute -> TopLevelDestination.LOGIN
+            roleCheckRoute -> TopLevelDestination.ROLE_CHECK
             else -> null
         }
 

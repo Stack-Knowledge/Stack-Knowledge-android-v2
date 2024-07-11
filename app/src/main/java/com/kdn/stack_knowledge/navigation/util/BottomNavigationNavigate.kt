@@ -1,4 +1,4 @@
-package com.stackknowledge.navigation.util
+package com.kdn.stack_knowledge.navigation.util
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -12,7 +12,7 @@ import com.stackknowledge.shop.navigation.navigateToShop
 import com.stackknowledge.shop.navigation.navigateToTeacherShop
 import com.stackkowledge.mission.navigation.navigateToCreateMission
 import com.stackkowledge.mission.navigation.navigateToEntireMission
-import enumdatatype.Authority
+import enumdata.Authority
 
 fun bottomNavigationNavigate(
     role: Authority,

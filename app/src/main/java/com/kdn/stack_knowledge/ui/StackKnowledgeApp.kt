@@ -1,9 +1,9 @@
-package com.stackknowledge.ui
+package com.kdn.stack_knowledge.ui
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
-import com.stackknowledge.navigation.StackKnowledgeNavHost
+import com.kdn.stack_knowledge.navigation.StackKnowledgeNavHost
 
 @Composable
 fun StackKnowledgeApp(
@@ -11,17 +11,12 @@ fun StackKnowledgeApp(
     appState: StackKnowledgeAppState = rememberStackKnowledgeAppState(
         windowSizeClass = windowSizeClass
     ),
+    onLoginButtonClick: () -> Unit = {},
 ) {
     StackKnowledgeAndroidTheme { _, _ ->
-<<<<<<< HEAD
         StackKnowledgeNavHost(
             appState = appState,
+            onLoginButtonClick = onLoginButtonClick
         )
-=======
-         StackKnowledgeNavHost(
-             appState = appState,
-             //startDestination = "" <- auth 작업후에 추가
-         )
->>>>>>> 7968c9bc41ecc66967c282ccfb3222e458eb598b
     }
 }
