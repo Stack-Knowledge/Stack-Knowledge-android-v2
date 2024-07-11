@@ -9,11 +9,7 @@ import javax.inject.Inject
 class LoginTeacherUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(
-        body: LoginRequest,
-    ) = runCatching {
-        authRepository.loginTeacher(
-            body = body,
-        )
-    }
+    operator fun invoke(body: LoginRequestModel): Flow<LoginResponseModel> =
+        authRepository.loginTeacher(body = body)
+
 }
