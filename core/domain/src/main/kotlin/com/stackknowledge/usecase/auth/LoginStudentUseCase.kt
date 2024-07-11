@@ -9,12 +9,6 @@ import javax.inject.Inject
 class LoginStudentUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(
-        body: LoginRequest,
-    ) = runCatching {
-        Log.e("useCase loginStudent", "loginStudent")
-        authRepository.loginStudent(
-            body = body,
-        )
-    }
+    operator fun invoke(body: LoginRequestModel): Flow<LoginResponseModel> =
+        authRepository.loginStudent(body = body)
 }
