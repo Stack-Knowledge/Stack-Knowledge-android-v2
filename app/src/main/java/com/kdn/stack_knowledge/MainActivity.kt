@@ -107,19 +107,14 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun handleGoogleSignInResult(task: Task<GoogleSignInAccount>) {
-        try {
-            val account = task.getResult(ApiException::class.java)
+        val account = task.getResult(ApiException::class.java)
 
-            with(viewModel) {
-                if (isStudent.value) {
-                    Log.e("serverAuthCode", account.serverAuthCode.toString())
-                    loginStudent(body = LoginRequestModel(code = account.serverAuthCode.toString()))
-                } else {
-                    loginTeacher(body = LoginRequestModel(code = account.serverAuthCode.toString()))
-                }
+        with(viewModel) {
+            if (isStudent.value) {
+                loginStudent(body = LoginRequestModel(code = account.serverAuthCode.toString()))
+            } else {
+                loginTeacher(body = LoginRequestModel(code = account.serverAuthCode.toString()))
             }
-        } catch (e: ApiException) {
-            Log.e("GoogleSignIn", "Google sign-in failed: ${e.statusCode}", e)
         }
     }
 }
