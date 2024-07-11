@@ -39,6 +39,7 @@ fun StackKnowledgePager(
         pageCount = { Int.MAX_VALUE },
         initialPage = initialPage
     )
+    val pagerScrollSpeed = 1000
 
     LaunchedEffect(key1 = pagerState.currentPage) {
         launch {
@@ -49,7 +50,7 @@ fun StackKnowledgePager(
                         pagerState.animateScrollToPage(
                             page = pagerState.currentPage + 1,
                             animationSpec = tween(
-                                durationMillis = 2000,
+                                durationMillis = pagerScrollSpeed,
                                 easing = LinearOutSlowInEasing
                             )
                         )
