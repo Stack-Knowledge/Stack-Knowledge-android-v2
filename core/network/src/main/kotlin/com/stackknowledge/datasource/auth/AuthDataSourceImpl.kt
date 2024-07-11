@@ -15,27 +15,17 @@ class AuthDataSourceImpl @Inject constructor(
     private val authAPI: AuthAPI
 ) : AuthDataSource {
     override fun loginStudent(body: LoginRequest): Flow<LoginResponse> = flow {
-        Log.e("dataSource loginStudent", "loginStudent")
         emit(
             StackKnowledgeApiHandler<LoginResponse>()
-                .httpRequest {
-                    authAPI.loginStudent(
-                        body = body,
-                    )
-                }
+                .httpRequest { authAPI.loginStudent(body = body) }
                 .sendRequest()
         )
-        Log.e("dataSource loginStudent", "loginStudent")
     }.flowOn(Dispatchers.IO)
 
     override fun loginTeacher(body: LoginRequest): Flow<LoginResponse> = flow {
         emit(
             StackKnowledgeApiHandler<LoginResponse>()
-                .httpRequest {
-                    authAPI.loginTeacher(
-                        body = body,
-                    )
-                }
+                .httpRequest { authAPI.loginTeacher(body = body) }
                 .sendRequest()
         )
     }.flowOn(Dispatchers.IO)
