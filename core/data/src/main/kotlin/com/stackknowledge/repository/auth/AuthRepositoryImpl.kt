@@ -32,6 +32,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getRole(): Flow<String> {
+        return localDataSource.getAuthorityInfo()
+    }
+
     override fun logout(): Flow<Unit> {
         return authDataSource.logout()
     }
