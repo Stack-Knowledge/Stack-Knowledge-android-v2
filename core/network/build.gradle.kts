@@ -16,7 +16,6 @@ android {
     defaultConfig {
         buildConfigField("String", "BASE_URL",  getApiKey("BASE_URL"))
         buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("GOOGLE_CLIENT_ID"))
-        buildConfigField("String", "REDIRECT_URI", getApiKey("REDIRECT_URI"))
         buildConfigField("String", "SCOPE", getApiKey("SCOPE"))
     }
 
@@ -43,9 +42,6 @@ dependencies {
 
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")
-    if (!propFile.exists()) {
-        throw FileNotFoundException("local.properties file not found")
-    }
     val properties = Properties()
     properties.load(FileInputStream(propFile))
     return properties.getProperty(propertyKey) ?: throw IllegalArgumentException("Property $propertyKey not found in local.properties file")
