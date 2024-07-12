@@ -95,7 +95,6 @@ private fun LoginScreen(
                             GoogleButton(
                                 modifier = modifier.height(60.dp),
                                 onClick = {
-                                    Log.e("onClick Success", "onClick Success")
                                     onGoogleLoginButtonClicked()
                                 }
                             )
