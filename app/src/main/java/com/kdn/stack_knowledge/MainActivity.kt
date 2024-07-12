@@ -12,6 +12,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import com.example.common.toast.makeToast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -85,7 +86,7 @@ class MainActivity : ComponentActivity() {
         } else {
             doubleBackToExitPressedOnce = true
             backPressedTimestamp = currentTime
-            Toast.makeText(this, getString(R.string.close_app), Toast.LENGTH_SHORT).show()
+            makeToast(this, getString(R.string.close_app), Toast.LENGTH_SHORT)
         }
     }
 
