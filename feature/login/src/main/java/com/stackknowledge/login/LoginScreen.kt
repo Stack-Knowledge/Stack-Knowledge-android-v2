@@ -104,7 +104,6 @@ private fun LoginScreen(
 
                 when(loginUiState) {
                     is LoginUiState.Success -> {
-                        Log.e("Login Success", "Login Success")
                         val tokenResponse = loginUiState.loginResponseModel
 
                         viewModel.saveToken(tokenResponse)
