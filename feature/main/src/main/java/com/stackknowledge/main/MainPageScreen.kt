@@ -34,7 +34,7 @@ import com.stackknowledge.main.component.StackKnowledgePager
 import com.stackknowledge.main.viewModel.MainViewModel
 import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
 import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
-import enumdatatype.Authority
+import enumdata.Authority
 
 @Composable
 internal fun MainPageRoute(

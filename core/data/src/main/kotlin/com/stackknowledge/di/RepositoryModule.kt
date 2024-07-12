@@ -1,5 +1,7 @@
 package com.stackknowledge.di
 
+import com.stackknowledge.repository.auth.AuthRepository
+import com.stackknowledge.repository.auth.AuthRepositoryImpl
 import com.stackknowledge.repository.item.ItemRepository
 import com.stackknowledge.repository.item.ItemRepositoryImpl
 import com.stackknowledge.repository.mission.MissionRepository
@@ -20,6 +22,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+    @Binds
+    abstract fun bindAuthRepository(
+        missionRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
+
     @Binds
     abstract fun bindMissionRepository(
         missionRepositoryImpl: MissionRepositoryImpl

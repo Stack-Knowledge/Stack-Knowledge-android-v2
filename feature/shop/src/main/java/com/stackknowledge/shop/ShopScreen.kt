@@ -27,12 +27,12 @@ import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.component.CurrentMileage
 import com.stackknowledge.shop.component.GoodsList
+import enumdata.Authority
 import com.stackknowledge.shop.data.SelectedItemData
 import com.stackknowledge.shop.viewmodel.ItemViewModel
 import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetItemUiState
 import com.stackknowledge.shop.viewmodel.uistate.GetMyInformationUiState
-import enumdatatype.Authority
 import remote.request.order.OrderRequestModel
 import remote.response.item.GetItemResponseModel
 

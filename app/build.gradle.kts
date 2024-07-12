@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":core:design-system"))
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
     implementation(project(":feature:login"))
     implementation(project(":feature:main"))
@@ -27,5 +28,7 @@ dependencies {
     implementation(project(":feature:score-mission"))
     implementation(project(":feature:shop"))
     implementation(libs.junit)
+    implementation(libs.google.services)
+    implementation(libs.play.services.auth)
     androidTestImplementation(libs.androidx.test.ext)
 }

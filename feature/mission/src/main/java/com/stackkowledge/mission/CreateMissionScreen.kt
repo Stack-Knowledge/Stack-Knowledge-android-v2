@@ -1,7 +1,5 @@
 package com.stackkowledge.mission
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,10 +30,9 @@ import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.CreateMissionTimer
 import com.stackkowledge.mission.component.InputMission
 import com.stackkowledge.mission.component.InputTitle
-import com.stackkowledge.mission.viewmodel.uistate.CreateMissionUiState
 import com.stackkowledge.mission.util.isValidNumber
 import com.stackkowledge.mission.viewmodel.MissionViewModel
-import enumdatatype.Authority
+import enumdata.Authority
 import remote.request.mission.CreateMissionRequestModel
 
 @Composable

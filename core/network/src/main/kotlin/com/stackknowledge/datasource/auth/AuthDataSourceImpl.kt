@@ -1,0 +1,40 @@
+package com.stackknowledge.datasource.auth
+
+import android.util.Log
+import com.stackknowledge.api.AuthAPI
+import com.stackknowledge.dto.request.auth.LoginRequest
+import com.stackknowledge.dto.response.auth.LoginResponse
+import com.stackknowledge.util.StackKnowledgeApiHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
+
+class AuthDataSourceImpl @Inject constructor(
+    private val authAPI: AuthAPI
+) : AuthDataSource {
+    override fun loginStudent(body: LoginRequest): Flow<LoginResponse> = flow {
+        emit(
+            StackKnowledgeApiHandler<LoginResponse>()
+                .httpRequest { authAPI.loginStudent(body = body) }
+                .sendRequest()
+        )
+    }.flowOn(Dispatchers.IO)
+
+    override fun loginTeacher(body: LoginRequest): Flow<LoginResponse> = flow {
+        emit(
+            StackKnowledgeApiHandler<LoginResponse>()
+                .httpRequest { authAPI.loginTeacher(body = body) }
+                .sendRequest()
+        )
+    }.flowOn(Dispatchers.IO)
+
+    override fun logout(): Flow<Unit> = flow {
+        emit(
+            StackKnowledgeApiHandler<Unit>()
+                .httpRequest { authAPI.logout() }
+                .sendRequest()
+        )
+    }.flowOn(Dispatchers.IO)
+}

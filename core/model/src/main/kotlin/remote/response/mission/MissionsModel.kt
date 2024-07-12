@@ -1,6 +1,6 @@
 package remote.response.mission
 
-import enumdatatype.MissionStatus
+import enumdata.MissionStatus
 import remote.user.UserModel
 import java.util.UUID
 

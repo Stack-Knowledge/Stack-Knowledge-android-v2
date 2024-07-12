@@ -1,4 +1,5 @@
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -14,9 +15,11 @@ android {
 
     defaultConfig {
         buildConfigField("String", "BASE_URL",  getApiKey("BASE_URL"))
+        buildConfigField("String", "GOOGLE_CLIENT_ID", getApiKey("GOOGLE_CLIENT_ID"))
+        buildConfigField("String", "SCOPE", getApiKey("SCOPE"))
     }
 
-    namespace = "com.msg.network"
+    namespace = "com.stackknowledge.network"
 }
 
 dependencies {
@@ -33,12 +36,13 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.retrofit.moshi.converter)
     implementation(libs.moshi)
-    ksp(libs.retrofit.moshi.codegen)
+    implementation(libs.retrofit.moshi.codegen)
+    implementation(libs.moshi.kotlin)
 }
 
 fun getApiKey(propertyKey: String): String {
     val propFile = rootProject.file("./local.properties")
     val properties = Properties()
     properties.load(FileInputStream(propFile))
-    return properties.getProperty(propertyKey)
+    return properties.getProperty(propertyKey) ?: throw IllegalArgumentException("Property $propertyKey not found in local.properties file")
 }

@@ -7,3 +7,8 @@ plugins {
 android {
     namespace = "com.stackknowledge.login"
 }
+
+dependencies {
+    implementation(libs.google.services)
+    implementation(libs.play.services.auth)
+}

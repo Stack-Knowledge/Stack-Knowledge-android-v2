@@ -23,9 +23,9 @@ import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.shop.component.OrderedGoodsList
+import enumdata.Authority
 import com.stackknowledge.shop.viewmodel.OrderViewModel
 import com.stackknowledge.shop.viewmodel.uistate.GetOrderListUiState
-import enumdatatype.Authority
 import remote.request.order.ChangeOrderStatusRequestModel
 
 @Composable

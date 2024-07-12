@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.stackkowledge.mission.ResolveMissionRoute
 import com.stackkowledge.mission.CreateMissionRoute
 import com.stackkowledge.mission.EntireMissionRoute
-import enumdatatype.Authority
+import enumdata.Authority
 
 const val createMissionRoute = "create_mission_route"
 const val entireMissionRoute = "entire_mission_route"

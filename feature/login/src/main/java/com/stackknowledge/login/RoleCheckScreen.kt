@@ -1,5 +1,7 @@
 package com.stackknowledge.login
 
+
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import com.stackknowledge.design_system.R
 import androidx.compose.foundation.layout.Box
@@ -15,28 +17,41 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.stackknowledge.design_system.component.button.StackKnowledgeButton
 import com.stackknowledge.design_system.component.button.enumclass.ButtonState
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackknowledge.login.background.LoginBackground
+import com.stackknowledge.login.viewmodel.AuthViewModel
 
 @Composable
-internal fun RoleCheckScreenRoute(
-    onRoleClick: () -> Unit,
+internal fun RoleCheckRoute(
+    onRoleButtonClick: () -> Unit,
+authViewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity)
 ) {
-    RoleCheckScreen(
-        onRoleClick = onRoleClick
-    )
+    with(authViewModel) {
+        RoleCheckScreen(
+            onTeacherButtonClick = { teacherRoleBoolean ->
+                onRoleButtonClick()
+                isTeacher.value = teacherRoleBoolean
+            },
+            onStudentButtonClick = { studentRoleBoolean ->
+                onRoleButtonClick()
+                isStudent.value = studentRoleBoolean
+            }
+        )
+    }
 }
-
 @Composable
 private fun RoleCheckScreen(
     modifier: Modifier = Modifier,
-    onRoleClick: () -> Unit,
+    onTeacherButtonClick: (Boolean) -> Unit,
+    onStudentButtonClick: (Boolean) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Box(
@@ -69,7 +84,9 @@ private fun RoleCheckScreen(
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f),
-                        onClick = onRoleClick
+                        onClick = {
+                            onStudentButtonClick(true)
+                        }
                     )
 
                     Spacer(modifier = modifier.width(8.dp))
@@ -80,7 +97,9 @@ private fun RoleCheckScreen(
                         modifier = modifier
                             .height(60.dp)
                             .weight(1f),
-                        onClick = onRoleClick
+                        onClick = {
+                            onTeacherButtonClick(true)
+                        }
                     )
                 }
 
@@ -94,6 +113,7 @@ private fun RoleCheckScreen(
 @Composable
 fun RoleCheckScreenPre() {
     RoleCheckScreen(
-        onRoleClick = {}
+        onTeacherButtonClick = {},
+        onStudentButtonClick = {},
     )
 }

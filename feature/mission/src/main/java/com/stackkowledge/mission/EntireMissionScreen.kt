@@ -21,8 +21,8 @@ import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
 import com.stackkowledge.mission.component.EntireMissionList
 import com.stackkowledge.mission.viewmodel.MissionViewModel
+import enumdata.Authority
 import com.stackkowledge.mission.viewmodel.uistate.GetMissionUiState
-import enumdatatype.Authority
 
 @Composable
 internal fun EntireMissionRoute(

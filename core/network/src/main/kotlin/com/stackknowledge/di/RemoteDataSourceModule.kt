@@ -1,5 +1,7 @@
 package com.stackknowledge.di
 
+import com.stackknowledge.datasource.auth.AuthDataSource
+import com.stackknowledge.datasource.auth.AuthDataSourceImpl
 import com.stackknowledge.datasource.item.ItemDataSource
 import com.stackknowledge.datasource.item.ItemDataSourceImpl
 import com.stackknowledge.datasource.mission.MissionDataSource
@@ -21,6 +23,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RemoteDataSourceModule {
+    @Binds
+    @Singleton
+    abstract fun bindAuthDataSource(
+        authDataSourceImpl: AuthDataSourceImpl
+    ): AuthDataSource
+
     @Binds
     @Singleton
     abstract fun bindMissionDataSource(
