@@ -9,5 +9,5 @@ data class LoginResponse(
     @Json(name = "accessToken") val accessToken: String,
     @Json(name = "refreshToken") val refreshToken: String,
     @Json(name = "expiredAt") val expiredAt: String,
-    @Json(name = "authority") val authority: Authority
+    @Json(name = "authority") val authority: Authority,
 )
