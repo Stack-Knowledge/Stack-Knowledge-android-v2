@@ -41,15 +41,15 @@ internal fun MainPageRoute(
     onNavigate: (Authority, String, Int?) -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    var role by remember { mutableStateOf(Authority.ROLE_TEACHER) } //로그인 로직 적용후 변경
+    val role by viewModel.role.collectAsStateWithLifecycle(initialValue = "")
     val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
     val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
 
     MainPageScreen(
-        role = role,
+        role = if (role.isNotBlank()) Authority.valueOf(role) else Authority.ROLE_TEACHER,
         getMissionUiState = getMissionUiState,
         getRankingUiState = getRankingUiState,
-        onNavigate = { navType, index -> onNavigate(role, navType, index) },
+        onNavigate = { navType, index -> onNavigate(Authority.valueOf(role), navType, index) },
         initMain = {
             with(viewModel) {
                 getMission()
