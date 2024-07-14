@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 const val SCROLL_SPEED = 1000
+const val BANNER_DELAY_TIME = 4000L
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,7 +46,7 @@ fun StackKnowledgePager(
     LaunchedEffect(key1 = pagerState.currentPage) {
         launch {
             while (true) {
-                delay(2000)
+                delay(BANNER_DELAY_TIME)
                 withContext(NonCancellable) {
                     if (pagerState.currentPage + 1 in 0..Int.MAX_VALUE) {
                         pagerState.animateScrollToPage(
