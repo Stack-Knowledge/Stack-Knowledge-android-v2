@@ -107,8 +107,8 @@ private fun MainPageScreen(
                     Authority.ROLE_STUDENT -> {}
                     Authority.ROLE_TEACHER -> {
                         JoinWaitingButton(
-                            modifier = modifier.padding(bottom = 96.dp, end = 8.dp),
-                            onClick = { openDialog = true }
+                            modifier = modifier.padding(bottom = 96.dp, end = 16.dp),
+                            onClick = { openDialog = true },
                         )
                     }
                 }
