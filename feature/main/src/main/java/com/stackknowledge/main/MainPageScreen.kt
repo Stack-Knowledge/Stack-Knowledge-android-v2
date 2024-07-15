@@ -113,6 +113,7 @@ private fun MainPageScreen(
             ) {
                 StackKnowledgeBottomNavigation(
                     modifier = Modifier,
+                    locate = NavigateType.HOME,
                     role = role
                 ) {
                     onNavigate(it, null)
