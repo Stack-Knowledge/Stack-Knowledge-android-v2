@@ -32,6 +32,13 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteToken() {
+        localDataSource.removeAccessToken()
+        localDataSource.removeRefreshToken()
+        localDataSource.removeAccessTime()
+        localDataSource.removeRefreshTime()
+    }
+
     override fun getRole(): Flow<String> {
         return localDataSource.getAuthorityInfo()
     }

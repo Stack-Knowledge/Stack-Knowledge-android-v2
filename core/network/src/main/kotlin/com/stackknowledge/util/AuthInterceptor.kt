@@ -45,6 +45,8 @@ class AuthInterceptor @Inject constructor(
         runBlocking {
             val refreshTime = dataSource.getRefreshTime().first().replace("\"", "")
             val accessTime = dataSource.getAccessTime().first().replace("\"", "")
+            val refreshToken = dataSource.getRefreshToken().first().replace("\"", "")
+            val accessToken = dataSource.getAccessToken().first().replace("\"", "")
 
             if (refreshTime == "") {
                 return@runBlocking
@@ -82,9 +84,15 @@ class AuthInterceptor @Inject constructor(
                     } else throw NeedLoginException()
                 }
             }
-            val accessToken = dataSource.getAccessToken().first().replace("\"", "")
+            if (method == "DELETE") {
+                builder.addHeader("RefreshToken", refreshToken)
+            }
             builder.addHeader("Authorization", "Bearer $accessToken")
         }
-        return chain.proceed(builder.build())
+        val response = chain.proceed(builder.build())
+        return when (response.code) {
+            204 -> response.newBuilder().code(200).build()
+            else -> response
+        }
     }
 }

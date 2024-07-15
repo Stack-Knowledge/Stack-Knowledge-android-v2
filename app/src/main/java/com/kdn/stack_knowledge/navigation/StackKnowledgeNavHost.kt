@@ -37,6 +37,7 @@ fun StackKnowledgeNavHost(
     startDestination: String = roleCheckRoute,
     modifier: Modifier = Modifier,
     onLoginButtonClick: () -> Unit = {},
+    onLogout: () -> Unit,
 ) {
     val navController = appState.navController
 
@@ -64,6 +65,7 @@ fun StackKnowledgeNavHost(
                     }
                 } else bottomNavigationNavigate(role, navController, navType)
             },
+            logoutSuccess = onLogout
         )
         createMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
