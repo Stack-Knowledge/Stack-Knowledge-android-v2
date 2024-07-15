@@ -44,7 +44,6 @@ import com.stackknowledge.design_system.R
 internal fun MainPageRoute(
     onNavigate: (Authority, String, Int?) -> Unit,
     logoutSuccess: () -> Unit,
-    onDeleteBackStack: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val role by viewModel.role.collectAsStateWithLifecycle(initialValue = "")
@@ -66,7 +65,6 @@ internal fun MainPageRoute(
         },
         logout = viewModel::logout,
         onSuccess = logoutSuccess,
-        onDeleteBackStack = onDeleteBackStack,
     )
 }
 
@@ -81,7 +79,6 @@ private fun MainPageScreen(
     initMain: () -> Unit,
     logout: () -> Unit,
     onSuccess: () -> Unit,
-    onDeleteBackStack: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -161,7 +158,6 @@ private fun MainPageScreen(
             is Event.Success -> {
                 onSuccess()
                 makeToast(context = context, message = stringResource(id = R.string.success_logout))
-                onDeleteBackStack()
             }
             else -> {
                 makeToast(context = context, message = stringResource(id = R.string.failure_logout))

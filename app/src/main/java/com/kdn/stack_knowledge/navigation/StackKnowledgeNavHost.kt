@@ -48,15 +48,10 @@ fun StackKnowledgeNavHost(
         modifier = modifier
     ) {
         loginScreen(
-            onSuccess = navController::navigateToMain,
+            onSuccess = {
+                appState.navigateToTopLevelDestination(TopLevelDestination.MAIN)
+            },
             onLoginButtonClick = onLoginButtonClick,
-            onDeleteBackStack = {
-                navController.navigate(mainPageRoute) {
-                    popUpTo(roleCheckRoute) {
-                        inclusive = true
-                    }
-                }
-            }
         )
         roleCheckScreen(
             onRoleButtonClick = navController::navigateToLogin
@@ -73,19 +68,29 @@ fun StackKnowledgeNavHost(
                     }
                 } else bottomNavigationNavigate(role, navController, navType)
             },
-            logoutSuccess = onLogout,
-            onDeleteBackStack = {
-                navController.navigate(mainPageRoute) {
-                    popUpTo(roleCheckRoute)
-                }
-            }
+            logoutSuccess = {
+                onLogout()
+                appState.navigateToTopLevelDestination(TopLevelDestination.ROLE_CHECK)
+            },
         )
         createMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onNavigate = { role, navType ->
+                bottomNavigationNavigate(
+                    role,
+                    navController,
+                    navType
+                )
+            },
             createMissionSuccess = navController::navigateToMain
         )
         entireMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onNavigate = { role, navType ->
+                bottomNavigationNavigate(
+                    role,
+                    navController,
+                    navType
+                )
+            },
             onItemClick = navController::navigateToResolveMission
         )
         rankingScreen(
@@ -95,16 +100,34 @@ fun StackKnowledgeNavHost(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) }
         )
         resolveMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onNavigate = { role, navType ->
+                bottomNavigationNavigate(
+                    role,
+                    navController,
+                    navType
+                )
+            },
             onBackClick = navController::popBackStack,
             solveMissionSuccess = navController::navigateToMain,
         )
         gradingAnswerScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onNavigate = { role, navType ->
+                bottomNavigationNavigate(
+                    role,
+                    navController,
+                    navType
+                )
+            },
             scoreMissionSuccess = navController::navigateToMain,
         )
         solvedMissionScreen(
-            onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },
+            onNavigate = { role, navType ->
+                bottomNavigationNavigate(
+                    role,
+                    navController,
+                    navType
+                )
+            },
             onItemClick = navController::navigateToGradingAnswer
         )
         shopScreen(

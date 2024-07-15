@@ -17,13 +17,11 @@ fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.loginScreen(
     onSuccess: () -> Unit = {},
     onLoginButtonClick: () -> Unit = {},
-    onDeleteBackStack: () -> Unit,
 ) {
     composable(route = loginRoute) {
         LoginRoute(
             onSuccess = onSuccess,
             onGoogleLoginButtonClicked = onLoginButtonClick,
-            onDeleteBackStack = onDeleteBackStack,
         )
     }
 }
