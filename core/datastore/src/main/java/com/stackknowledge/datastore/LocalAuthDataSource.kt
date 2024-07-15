@@ -35,4 +35,6 @@ interface LocalAuthDataSource {
     suspend fun setAuthorityInfo(authority: String)
 
     fun getAuthorityInfo(): Flow<String>
+
+    suspend fun removeAuthorityInfo()
 }

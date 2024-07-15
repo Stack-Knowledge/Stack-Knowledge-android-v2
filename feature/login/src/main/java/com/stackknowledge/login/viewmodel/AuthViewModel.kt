@@ -8,6 +8,7 @@ import com.example.common.result.asResult
 import com.example.common.util.Event
 import com.example.common.util.errorHandling
 import com.stackknowledge.login.viewmodel.uistate.LoginUiState
+import com.stackknowledge.repository.auth.AuthRepository
 import com.stackknowledge.usecase.auth.SaveTokenUseCase
 import com.stackknowledge.usecase.auth.LoginStudentUseCase
 import com.stackknowledge.usecase.auth.LoginTeacherUseCase
@@ -25,6 +26,7 @@ class AuthViewModel @Inject constructor(
     private val loginStudentUseCase: LoginStudentUseCase,
     private val loginTeacherUseCase: LoginTeacherUseCase,
     private val saveTokenUseCase: SaveTokenUseCase,
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
     private val _saveTokenRequest = MutableStateFlow<Event<Nothing>>(Event.Loading)
     internal val saveTokenRequest = _saveTokenRequest.asStateFlow()
@@ -71,5 +73,9 @@ class AuthViewModel @Inject constructor(
         }.onFailure {
             _saveTokenRequest.value = it.errorHandling()
         }
+    }
+
+    fun deleteToken() = viewModelScope.launch{
+        authRepository.deleteToken()
     }
 }

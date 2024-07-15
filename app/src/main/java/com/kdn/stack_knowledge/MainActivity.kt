@@ -1,5 +1,6 @@
 package com.kdn.stack_knowledge
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -25,6 +26,7 @@ import com.stackknowledge.login.viewmodel.AuthViewModel
 import com.kdn.stack_knowledge.ui.StackKnowledgeApp
 import com.stackknowledge.user.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import remote.request.auth.LoginRequestModel
 import javax.inject.Inject
 import javax.inject.Named
@@ -72,7 +74,8 @@ class MainActivity : ComponentActivity() {
                         windowSizeClass = calculateWindowSizeClass(this@MainActivity),
                         onLoginButtonClick = {
                             googleSocialLogin()
-                        }
+                        },
+                        onLogout = { logout() }
                     )
                 }
             }
@@ -117,5 +120,15 @@ class MainActivity : ComponentActivity() {
                 loginTeacher(body = LoginRequestModel(code = account.serverAuthCode.toString()))
             }
         }
+    }
+
+    private fun logout() {
+        runBlocking {
+            viewModel.deleteToken()
+        }
+        finish()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

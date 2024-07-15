@@ -43,7 +43,7 @@ internal fun LoginRoute(
         onGoogleLoginButtonClicked = onGoogleLoginButtonClicked,
         loginUiState = loginUiState,
         viewModel = viewModel,
-        onLoginSuccess = onSuccess
+        onLoginSuccess = onSuccess,
     )
 }
 
@@ -129,6 +129,6 @@ private fun LoginScreen(
 fun LoginScreenPre() {
     LoginScreen(
         onGoogleLoginButtonClicked = {},
-        loginUiState = LoginUiState.Loading
+        loginUiState = LoginUiState.Loading,
     )
 }

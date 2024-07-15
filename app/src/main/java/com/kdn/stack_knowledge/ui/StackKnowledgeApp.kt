@@ -12,11 +12,13 @@ fun StackKnowledgeApp(
         windowSizeClass = windowSizeClass
     ),
     onLoginButtonClick: () -> Unit = {},
+    onLogout: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { _, _ ->
         StackKnowledgeNavHost(
             appState = appState,
-            onLoginButtonClick = onLoginButtonClick
+            onLoginButtonClick = onLoginButtonClick,
+            onLogout = onLogout
         )
     }
 }

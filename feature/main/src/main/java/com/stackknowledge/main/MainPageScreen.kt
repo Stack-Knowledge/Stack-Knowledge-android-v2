@@ -1,7 +1,6 @@
 package com.stackknowledge.main
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,9 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.common.toast.makeToast
+import com.example.common.util.Event
 import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.JoinWaitingDialog
@@ -35,27 +38,33 @@ import com.stackknowledge.main.viewModel.MainViewModel
 import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
 import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
 import enumdata.Authority
+import com.stackknowledge.design_system.R
 
 @Composable
 internal fun MainPageRoute(
     onNavigate: (Authority, String, Int?) -> Unit,
+    logoutSuccess: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val role by viewModel.role.collectAsStateWithLifecycle(initialValue = "")
     val getMissionUiState by viewModel.getMissionUiState.collectAsStateWithLifecycle()
     val getRankingUiState by viewModel.getRankingUiState.collectAsStateWithLifecycle()
+    val logoutRequest by viewModel.logoutRequest.collectAsStateWithLifecycle()
 
     MainPageScreen(
         role = if (role.isNotBlank()) Authority.valueOf(role) else Authority.ROLE_TEACHER,
         getMissionUiState = getMissionUiState,
         getRankingUiState = getRankingUiState,
+        logoutRequest = logoutRequest,
         onNavigate = { navType, index -> onNavigate(Authority.valueOf(role), navType, index) },
         initMain = {
             with(viewModel) {
                 getMission()
                 getRanking()
             }
-        }
+        },
+        logout = viewModel::logout,
+        onSuccess = logoutSuccess,
     )
 }
 
@@ -65,10 +74,14 @@ private fun MainPageScreen(
     role: Authority,
     getMissionUiState: GetMissionUiState,
     getRankingUiState: GetRankingUiState,
+    logoutRequest: Event<Nothing>,
     onNavigate: (String, Int?) -> Unit,
     initMain: () -> Unit,
+    logout: () -> Unit,
+    onSuccess: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     var openDialog by remember { mutableStateOf(false) }
     var openLogoutDialog by remember { mutableStateOf(false) }
@@ -123,7 +136,10 @@ private fun MainPageScreen(
         if (openLogoutDialog) {
             StackKnowledgeDialog(
                 content = "로그아웃 하시겠습니까?",
-                onConfirm = { openLogoutDialog = false },
+                onConfirm = {
+                    openLogoutDialog = false
+                    logout()
+                },
                 onDismiss = { openLogoutDialog = false },
                 onStateChange = { openLogoutDialog = it },
                 openDialog = openLogoutDialog,
@@ -136,6 +152,17 @@ private fun MainPageScreen(
                 onAccept = {},
                 onRefuse = {}
             )
+        }
+
+        when (logoutRequest) {
+            is Event.Loading -> Unit
+            is Event.Success -> {
+                onSuccess()
+                makeToast(context = context, message = stringResource(id = R.string.success_logout))
+            }
+            else -> {
+                makeToast(context = context, message = stringResource(id = R.string.failure_logout))
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.navOptions
 import com.minstone.ui.navigation.NavigateType
+import com.stackknowledge.main.navigation.mainPageRoute
 import com.stackknowledge.main.navigation.navigateToMain
 import com.stackknowledge.ranking.navigation.navigateToRanking
 import com.stackknowledge.ranking.navigation.navigateToTeacherRanking
@@ -20,7 +21,7 @@ fun bottomNavigationNavigate(
     navType: String
 ) {
     val topLevelNavOptions = navOptions {
-        popUpTo(navController.graph.findStartDestination().id) {
+        popUpTo(mainPageRoute) {
             inclusive = false
         }
         launchSingleTop = true

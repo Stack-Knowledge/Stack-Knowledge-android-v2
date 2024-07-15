@@ -21,7 +21,7 @@ fun NavGraphBuilder.loginScreen(
     composable(route = loginRoute) {
         LoginRoute(
             onSuccess = onSuccess,
-            onGoogleLoginButtonClicked = onLoginButtonClick
+            onGoogleLoginButtonClicked = onLoginButtonClick,
         )
     }
 }
