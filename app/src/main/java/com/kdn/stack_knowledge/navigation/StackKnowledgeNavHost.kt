@@ -24,6 +24,7 @@ import com.stackknowledge.shop.navigation.shopScreen
 import com.stackknowledge.shop.navigation.teacherShopRoute
 import com.stackknowledge.shop.navigation.teacherShopScreen
 import com.kdn.stack_knowledge.ui.StackKnowledgeAppState
+import com.stackknowledge.main.navigation.mainPageRoute
 import com.stackkowledge.mission.navigation.createMissionScreen
 import com.stackkowledge.mission.navigation.entireMissionScreen
 import com.stackkowledge.mission.navigation.navigateToEntireMission
@@ -48,7 +49,14 @@ fun StackKnowledgeNavHost(
     ) {
         loginScreen(
             onSuccess = navController::navigateToMain,
-            onLoginButtonClick = onLoginButtonClick
+            onLoginButtonClick = onLoginButtonClick,
+            onDeleteBackStack = {
+                navController.navigate(mainPageRoute) {
+                    popUpTo(roleCheckRoute) {
+                        inclusive = true
+                    }
+                }
+            }
         )
         roleCheckScreen(
             onRoleButtonClick = navController::navigateToLogin

@@ -35,6 +35,7 @@ import com.stackknowledge.login.viewmodel.uistate.LoginUiState
 internal fun LoginRoute(
     onSuccess: () -> Unit,
     onGoogleLoginButtonClicked: () -> Unit,
+    onDeleteBackStack: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel(LocalContext.current as ComponentActivity),
 ) {
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
@@ -43,7 +44,8 @@ internal fun LoginRoute(
         onGoogleLoginButtonClicked = onGoogleLoginButtonClicked,
         loginUiState = loginUiState,
         viewModel = viewModel,
-        onLoginSuccess = onSuccess
+        onLoginSuccess = onSuccess,
+        onDeleteBackStack = onDeleteBackStack,
     )
 }
 
@@ -54,6 +56,7 @@ private fun LoginScreen(
     onGoogleLoginButtonClicked: () -> Unit = {},
     loginUiState: LoginUiState,
     onLoginSuccess: () -> Unit = {},
+    onDeleteBackStack: () -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
         Surface {
@@ -108,6 +111,7 @@ private fun LoginScreen(
 
                         viewModel.saveToken(tokenResponse)
                         onLoginSuccess()
+                        onDeleteBackStack()
                     }
                     is LoginUiState.Error -> {
                         // Login 실패 처리 (임의)
@@ -129,6 +133,7 @@ private fun LoginScreen(
 fun LoginScreenPre() {
     LoginScreen(
         onGoogleLoginButtonClicked = {},
-        loginUiState = LoginUiState.Loading
+        loginUiState = LoginUiState.Loading,
+        onDeleteBackStack = {}
     )
 }
