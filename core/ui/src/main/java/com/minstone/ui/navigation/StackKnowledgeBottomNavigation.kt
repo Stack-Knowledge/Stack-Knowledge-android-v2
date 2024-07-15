@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ enum class NavigateType(val value: String) {
 fun StackKnowledgeBottomNavigation(
     modifier: Modifier,
     role: Authority,
+    locate: NavigateType,
     onNavigate: (String) -> Unit,
 ) {
     StackKnowledgeAndroidTheme { colors, typography ->
@@ -69,9 +71,11 @@ fun StackKnowledgeBottomNavigation(
                                     .weight(1f)
                                     .height(56.dp),
                                 buttonText = stringResId,
+                                isLocate = locate.value == navigateType,
                                 buttonImage = {
                                     Image(
                                         painter = painterResource(iconRes),
+                                        colorFilter = if(locate.value == navigateType) ColorFilter.tint(colors.P1) else null,
                                         contentDescription = null
                                     )
                                 }
@@ -90,6 +94,7 @@ fun StackKnowledgeBottomNavigation(
 private fun BottomNavigationComponent(
     modifier: Modifier,
     buttonText: Int,
+    isLocate: Boolean,
     buttonImage: @Composable () -> Unit,
     onClick: () -> Unit
 ) {
@@ -104,7 +109,7 @@ private fun BottomNavigationComponent(
             Text(
                 text = stringResource(id = buttonText),
                 style = typography.bodySmall,
-                color = colors.BLACK
+                color = if (isLocate) colors.P1 else colors.BLACK
             )
         }
     }
