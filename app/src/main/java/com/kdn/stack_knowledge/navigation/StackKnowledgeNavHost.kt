@@ -75,10 +75,8 @@ fun StackKnowledgeNavHost(
             },
             logoutSuccess = onLogout,
             onDeleteBackStack = {
-                navController.navigate(roleCheckRoute) {
-                    popUpTo(navController.graph.id) {
-                        inclusive = true
-                    }
+                navController.navigate(mainPageRoute) {
+                    popUpTo(roleCheckRoute)
                 }
             }
         )

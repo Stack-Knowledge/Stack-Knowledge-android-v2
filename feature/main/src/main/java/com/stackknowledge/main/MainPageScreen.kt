@@ -81,7 +81,7 @@ private fun MainPageScreen(
     initMain: () -> Unit,
     logout: () -> Unit,
     onSuccess: () -> Unit,
-    onDeleteBackStack: () -> Unit
+    onDeleteBackStack: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
