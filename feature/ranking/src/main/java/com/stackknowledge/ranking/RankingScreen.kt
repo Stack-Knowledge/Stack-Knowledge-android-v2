@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
 import com.stackknowledge.design_system.theme.StackKnowledgeAndroidTheme
@@ -85,6 +86,7 @@ private fun RankingScreen(
             ) {
                 StackKnowledgeBottomNavigation(
                     modifier = Modifier,
+                    locate = NavigateType.RANKING,
                     role = role
                 ) {
                     onNavigate(it)

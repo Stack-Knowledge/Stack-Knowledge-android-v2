@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.util.Event
+import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -152,6 +153,7 @@ private fun GradingAnswerScreen(
             ) {
                 StackKnowledgeBottomNavigation(
                     modifier = Modifier,
+                    locate = NavigateType.MISSION,
                     role = role
                 ) {
                     onNavigate(it)

@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.common.toast.makeToast
 import com.example.common.util.Event
+import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
 import com.stackknowledge.design_system.component.topbar.StackKnowledgeTopBar
@@ -232,6 +233,7 @@ private fun ResolveMissionScreen(
             ) {
                 StackKnowledgeBottomNavigation(
                     modifier = Modifier,
+                    locate = NavigateType.MISSION,
                     role = role
                 ) {
                     onNavigateState = it

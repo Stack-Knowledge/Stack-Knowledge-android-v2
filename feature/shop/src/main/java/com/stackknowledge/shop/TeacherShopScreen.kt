@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.minstone.ui.navigation.NavigateType
 import com.minstone.ui.navigation.StackKnowledgeBottomNavigation
 import com.stackknowledge.design_system.R
 import com.stackknowledge.design_system.component.dialog.StackKnowledgeDialog
@@ -93,6 +94,7 @@ private fun TeacherShopScreen(
             ) {
                 StackKnowledgeBottomNavigation(
                     modifier = Modifier,
+                    locate = NavigateType.SHOP,
                     role = role
                 ) {
                     onNavigate(it)
