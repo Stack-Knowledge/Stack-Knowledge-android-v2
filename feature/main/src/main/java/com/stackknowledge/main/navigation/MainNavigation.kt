@@ -16,11 +16,13 @@ fun NavController.navigateToMain(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.mainScreen(
     onNavigate: (Authority, String, Int?) -> Unit,
     logoutSuccess: () -> Unit,
+    onDeleteBackStack: () -> Unit,
 ) {
     composable(route = mainPageRoute) {
         MainPageRoute(
             onNavigate = onNavigate,
             logoutSuccess = logoutSuccess,
+            onDeleteBackStack = onDeleteBackStack,
         )
     }
 }

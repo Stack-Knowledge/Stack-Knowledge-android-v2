@@ -65,7 +65,14 @@ fun StackKnowledgeNavHost(
                     }
                 } else bottomNavigationNavigate(role, navController, navType)
             },
-            logoutSuccess = onLogout
+            logoutSuccess = onLogout,
+            onDeleteBackStack = {
+                navController.navigate(roleCheckRoute) {
+                    popUpTo(navController.graph.id) {
+                        inclusive = true
+                    }
+                }
+            }
         )
         createMissionScreen(
             onNavigate = { role, navType -> bottomNavigationNavigate(role, navController, navType) },

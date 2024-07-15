@@ -84,4 +84,10 @@ class LocalAuthDataSourceImpl @Inject constructor(
             it[AuthPreferenceKey.AUTHORITY] = authority
         }
     }
+
+    override suspend fun removeAuthorityInfo() {
+        dataStore.edit {
+            it.remove(AuthPreferenceKey.AUTHORITY)
+        }
+    }
 }

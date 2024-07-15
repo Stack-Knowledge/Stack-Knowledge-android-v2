@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -37,11 +38,13 @@ import com.stackknowledge.main.viewModel.MainViewModel
 import com.stackknowledge.main.viewModel.uistate.GetMissionUiState
 import com.stackknowledge.main.viewModel.uistate.GetRankingUiState
 import enumdata.Authority
+import com.stackknowledge.design_system.R
 
 @Composable
 internal fun MainPageRoute(
     onNavigate: (Authority, String, Int?) -> Unit,
     logoutSuccess: () -> Unit,
+    onDeleteBackStack: () -> Unit,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val role by viewModel.role.collectAsStateWithLifecycle(initialValue = "")
@@ -62,7 +65,8 @@ internal fun MainPageRoute(
             }
         },
         logout = viewModel::logout,
-        onSuccess = logoutSuccess
+        onSuccess = logoutSuccess,
+        onDeleteBackStack = onDeleteBackStack,
     )
 }
 
@@ -77,6 +81,7 @@ private fun MainPageScreen(
     initMain: () -> Unit,
     logout: () -> Unit,
     onSuccess: () -> Unit,
+    onDeleteBackStack: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -155,9 +160,11 @@ private fun MainPageScreen(
             is Event.Loading -> Unit
             is Event.Success -> {
                 onSuccess()
+                makeToast(context = context, message = stringResource(id = R.string.success_logout))
+                onDeleteBackStack()
             }
             else -> {
-                makeToast(context = context, message = "로그아웃이 실패했습니다.")
+                makeToast(context = context, message = stringResource(id = R.string.failure_logout))
             }
         }
     }
