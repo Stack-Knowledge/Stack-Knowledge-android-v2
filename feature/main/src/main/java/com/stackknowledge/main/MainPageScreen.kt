@@ -116,10 +116,15 @@ private fun MainPageScreen(
                 }
             }
             Box(modifier = Modifier.align(alignment = Alignment.BottomEnd)) {
-                JoinWaitingButton(
-                    modifier = modifier.padding(bottom = 96.dp, end = 8.dp),
-                    onClick = { openDialog = true }
-                )
+                when (role) {
+                    Authority.ROLE_STUDENT -> {}
+                    Authority.ROLE_TEACHER -> {
+                        JoinWaitingButton(
+                            modifier = modifier.padding(bottom = 96.dp, end = 16.dp),
+                            onClick = { openDialog = true },
+                        )
+                    }
+                }
             }
             Box(
                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
